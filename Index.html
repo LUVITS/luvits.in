@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUVITS - Be the Arjun of Your Business</title>
+    <meta name="description" content="Empowering businesses with technology, creativity, and purpose. Digital solutions, eCommerce, IT, branding, and business growth services.">
+    <meta property="og:title" content="LUVITS - Digital Dharma for Your Business">
+    <meta property="og:description" content="Let Krishna guide your digital journey. Professional IT solutions, branding, and business growth services.">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-bg-gradient: linear-gradient(135deg, #081427 0%, #140065 50%, #081427 100%);
+        }
+
+        body {
+            box-sizing: border-box;
+            background: var(--brand-bg-gradient) !important;
+            color: white !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+        }
+        
+        .logo-text {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .premium-text {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+        
+        .body-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        .logo-gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00, #B8860B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        }
+
+        .brand-logo-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-logo-shell {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            isolation: isolate;
+        }
+
+        .brand-logo-shell::before,
+        .brand-logo-shell::after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .brand-logo-shell::before {
+            inset: 12% 6%;
+            background: radial-gradient(circle, rgba(255, 225, 145, 0.2) 0%, rgba(255, 204, 97, 0.1) 45%, rgba(255, 180, 69, 0.032) 72%, transparent 100%);
+            filter: blur(24px);
+            transform: scale(1.04);
+        }
+
+        .brand-logo-shell::after {
+            inset: -2% -1%;
+            background: radial-gradient(circle, rgba(255, 238, 188, 0.088) 0%, transparent 70%);
+            filter: blur(28px);
+            transform: scale(1.1, 0.9);
+        }
+
+        .brand-logo-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 0 12px rgba(255, 218, 102, 0.14));
+        }
+
+        .brand-logo-link:hover .brand-logo-image {
+            transform: translateY(-1px);
+            filter: drop-shadow(0 0 14px rgba(255, 220, 118, 0.18));
+        }
+
+        .header-logo {
+            width: clamp(8.5rem, 14vw, 12rem);
+        }
+
+        .hero-logo-wrap {
+            width: min(100%, 32rem);
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-logo-wrap .brand-logo-shell::before {
+            inset: 10% 4%;
+            background: radial-gradient(circle, rgba(255, 225, 145, 0.24) 0%, rgba(255, 205, 102, 0.12) 42%, rgba(255, 179, 58, 0.04) 72%, transparent 100%);
+            filter: blur(40px);
+            transform: scale(1.08);
+        }
+
+        .hero-logo-wrap .brand-logo-shell::after {
+            inset: -4% -2%;
+            filter: blur(48px);
+            transform: scale(1.16, 0.92);
+        }
+        
+        .tagline-gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00, #B8860B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        .hero-gradient {
+            background: var(--brand-bg-gradient) !important;
+        }
+        
+        .dark .hero-gradient {
+            background: var(--brand-bg-gradient) !important;
+        }
+        
+        .neon-blue {
+            color: #00ffff !important; /* Neon Blue */
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+        }
+        
+        .neon-blue:hover {
+            color: #66ffff !important;
+            text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff;
+        }
+        
+        .black-container {
+            background-color: #000000 !important;
+            border: 1px solid #333333;
+        }
+        
+        .black-button {
+            background-color: #000000 !important;
+            color: white !important;
+            border: 1px solid #333333;
+        }
+        
+        .black-button:hover {
+            background-color: #1a1a1a !important;
+            border-color: #555555;
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            background-color: #000000 !important;
+            border: 1px solid #333333;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,255,255,0.2);
+            border-color: #00ffff;
+        }
+        
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .testimonial-slider {
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            animation: slide 15s infinite linear;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Header -->
+    <header class="sticky top-0 bg-black/90 backdrop-blur-md z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="#home" class="brand-logo-link" aria-label="LUVITS home">
+                <span class="brand-logo-shell header-logo">
+                    <img src="assets/luvits-logo.png" alt="LUVITS logo" class="brand-logo-image">
+                </span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-white hover:neon-blue transition-colors">Home</a>
+                <a href="#about" class="nav-link text-white hover:neon-blue transition-colors">About</a>
+                <a href="#services" class="nav-link text-white hover:neon-blue transition-colors">Services</a>
+                <a href="#portfolio" class="nav-link text-white hover:neon-blue transition-colors">Portfolio</a>
+                <a href="#blog" class="nav-link text-white hover:neon-blue transition-colors">Blog</a>
+                <a href="#contact" class="nav-link text-white hover:neon-blue transition-colors">Contact</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="themeToggle" class="p-2 rounded-lg black-button">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button id="mobileMenu" class="md:hidden p-2 text-white">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenuPanel" class="hidden md:hidden black-container border-t border-gray-700">
+            <div class="container mx-auto px-4 py-4 space-y-4">
+                <a href="#home" class="block text-white hover:neon-blue">Home</a>
+                <a href="#about" class="block text-white hover:neon-blue">About</a>
+                <a href="#services" class="block text-white hover:neon-blue">Services</a>
+                <a href="#portfolio" class="block text-white hover:neon-blue">Portfolio</a>
+                <a href="#blog" class="block text-white hover:neon-blue">Blog</a>
+                <a href="#contact" class="block text-white hover:neon-blue">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/916359435595" target="_blank" rel="noopener noreferrer" class="floating-whatsapp">
+        <div class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </div>
+    </a>
+
+    <!-- Home Section -->
+    <section id="home" class="hero-gradient text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="fade-in">
+                <div class="hero-logo-wrap">
+                    <div class="brand-logo-shell">
+                        <img src="assets/luvits-logo.png" alt="LUVITS logo" class="brand-logo-image">
+                    </div>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 tagline-gold" style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.02em;">
+                    Be the Arjun of Your Business
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto tagline-gold premium-text">
+                    Let Krishna Guide Your Digital Dharma
+                </p>
+                <p class="text-lg mb-12 max-w-2xl mx-auto text-white body-text">
+                    Empowering businesses with technology, creativity, and purpose.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#services" class="black-button px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors premium-text">
+                        Explore Services
+                    </a>
+                    <a href="https://wa.me/916359435595?text=Hey%20I%20want%20to%20know%20more%20about%20LUVITS" target="_blank" rel="noopener noreferrer" class="black-button border-2 border-black px-8 py-4 rounded-lg font-semibold transition-colors premium-text">
+                        Let's Talk
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Service Highlights -->
+    <section class="py-16 hero-gradient">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Our Core Services</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-4 text-white">🛒</div>
+                    <h3 class="text-xl font-semibold mb-3 text-white">eCommerce Solutions</h3>
+                    <p class="text-white mb-4">Complete online store development and management</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20eCommerce%20Solutions" target="_blank" rel="noopener noreferrer" class="neon-blue px-4 py-2 rounded-lg transition-colors inline-block">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <div class="service-card p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-4 text-white">📈</div>
+                    <h3 class="text-xl font-semibold mb-3 text-white">Business Growth</h3>
+                    <p class="text-white mb-4">Strategic digital marketing and growth solutions</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Business%20Growth" target="_blank" rel="noopener noreferrer" class="neon-blue px-4 py-2 rounded-lg transition-colors inline-block">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <div class="service-card p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-4 text-white">🎨</div>
+                    <h3 class="text-xl font-semibold mb-3 text-white">Branding</h3>
+                    <p class="text-white mb-4">Create a powerful brand identity that resonates</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Branding" target="_blank" rel="noopener noreferrer" class="neon-blue px-4 py-2 rounded-lg transition-colors inline-block">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Preview -->
+    <section class="py-16 hero-gradient">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="portfolio-card black-container rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project1')">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-white">E-Commerce Platform</h3>
+                        <p class="text-white">Complete online store with payment integration</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card black-container rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project3')">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-white">Analytics Platform</h3>
+                        <p class="text-white">Business intelligence and growth tracking</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#portfolio" class="black-button px-8 py-3 rounded-lg transition-colors">
+                    View All Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 hero-gradient">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">What Our Clients Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-track">
+                    <div class="testimonial-item min-w-full md:min-w-1/2 px-4">
+                        <div class="black-container p-6 rounded-xl">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">R</div>
+                                <div class="ml-4">
+                                    <h4 class="font-semibold text-white">Rajesh Kumar</h4>
+                                    <p class="text-white">CEO, TechStart</p>
+                                </div>
+                            </div>
+                            <p class="text-white">"<span class="logo-gold">LUVITS</span> transformed our digital presence completely. Their approach is truly like having Krishna guide your business decisions."</p>
+                            <div class="flex text-yellow-500 mt-4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-item min-w-full md:min-w-1/2 px-4">
+                        <div class="black-container p-6 rounded-xl">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">P</div>
+                                <div class="ml-4">
+                                    <h4 class="font-semibold text-white">Priya Sharma</h4>
+                                    <p class="text-white">Founder, EcoStore</p>
+                                </div>
+                            </div>
+                            <p class="text-white">"The eCommerce solution they built increased our sales by 300%. Truly professional and dedicated team."</p>
+                            <div class="flex text-yellow-500 mt-4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 hero-gradient">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold mb-6 text-white">About <span class="logo-gold">LUVITS</span></h2>
+                <p class="text-xl text-white max-w-3xl mx-auto tagline-gold">
+                    "Just as Arjun needed Krishna's guidance in the battlefield of Kurukshetra, every business needs the right guidance in the digital battlefield."
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-white">Our Story</h3>
+                    <p class="text-white mb-4">
+                        <span class="logo-gold">LUVITS</span> was born from the belief that every business deserves to be the hero of its own story. We provide the strategic guidance, technical expertise, and creative vision that transforms businesses into digital leaders.
+                    </p>
+                    <p class="text-white">
+                        Our approach combines ancient wisdom with modern technology, ensuring that your business not only grows but thrives with purpose and integrity.
+                    </p>
+                </div>
+                <div class="fade-in">
+                    <div class="black-container p-8 rounded-xl text-white">
+                        <h4 class="text-xl font-bold mb-4">Our Mission</h4>
+                        <p class="mb-4">To empower businesses with technology, creativity, and purpose, guiding them to become the Arjun of their industry.</p>
+                        <div class="flex items-center">
+                            <i class="fas fa-quote-left text-2xl opacity-50 mr-3"></i>
+                            <span class="italic tagline-gold">"Be the Arjun of Your Business"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 black-container rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lightbulb text-2xl neon-blue"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">Innovation</h4>
+                    <p class="text-white">Cutting-edge solutions that push boundaries and create new possibilities.</p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 black-container rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-2xl neon-blue"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">Purpose</h4>
+                    <p class="text-white">Every solution is crafted with intention and aligned with your business values.</p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 black-container rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-2xl neon-blue"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">Partnership</h4>
+                    <p class="text-white">We don't just provide services; we become your trusted digital advisors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Our Services</h2>
+            
+            <!-- Service Filter Tabs -->
+            <div class="flex flex-wrap justify-center mb-12 gap-4">
+                <button class="service-filter active bg-blue-600 text-white px-6 py-3 rounded-lg" data-filter="all">All Services</button>
+                <button class="service-filter bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors" data-filter="ecommerce">eCommerce</button>
+                <button class="service-filter bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors" data-filter="growth">Business Growth</button>
+                <button class="service-filter bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors" data-filter="it">IT Solutions</button>
+                <button class="service-filter bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors" data-filter="branding">Branding</button>
+            </div>
+            
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="servicesGrid">
+                <!-- eCommerce Services -->
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="ecommerce">
+                    <div class="text-4xl mb-4">🛒</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Online Store Development</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Complete eCommerce solutions with payment integration, inventory management, and mobile optimization.</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Online%20Store%20Development" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="ecommerce">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Mobile Commerce</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Native mobile apps for iOS and Android with seamless shopping experiences.</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Mobile%20Commerce" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <!-- Business Growth Services -->
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="growth">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Digital Marketing</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">SEO, social media marketing, and paid advertising campaigns that drive results.</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Digital%20Marketing" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="growth">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Analytics & Insights</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Data-driven insights and business intelligence to guide your growth strategy.</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Analytics%20&%20Insights" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <!-- IT Solutions -->
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="it">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Web Development</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Custom websites and web applications built with modern technologies.</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Web%20Development" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="it">
+                    <div class="text-4xl mb-4">☁️</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Cloud Solutions</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Cloud migration, hosting, and infrastructure management services.</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Cloud%20Solutions" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <!-- Branding Services -->
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="branding">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Brand Identity</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Logo design, brand guidelines, and visual identity that tells your story.</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Brand%20Identity" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+                
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="branding">
+                    <div class="text-4xl mb-4">📝</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Content Strategy</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Compelling content that engages your audience and builds brand loyalty.</p>
+                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Content%20Strategy" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Quote Generator Button -->
+            <div class="text-center mt-12">
+                <button onclick="openQuoteModal()" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Get Custom Quote
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Our Portfolio</h2>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project1')">
+                    <div class="h-64 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">TechMart E-Commerce</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Complete online electronics store with advanced filtering, payment integration, and inventory management.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">eCommerce</span>
+                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">React</span>
+                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project3')">
+                    <div class="h-64 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">GrowthTracker Analytics</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Business intelligence platform with advanced analytics, reporting, and growth prediction models.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Analytics</span>
+                            <span class="bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 px-3 py-1 rounded-full text-sm">Vue.js</span>
+                            <span class="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">D3.js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project4')">
+                    <div class="h-64 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                        <i class="fas fa-palette text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Artisan Brand Identity</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Complete brand redesign for luxury handicraft company including logo, website, and marketing materials.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Branding</span>
+                            <span class="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">Design</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">WordPress</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project5')">
+                    <div class="h-64 bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">FoodieApp Mobile</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Food delivery mobile application with real-time tracking, payment integration, and restaurant management.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-3 py-1 rounded-full text-sm">Mobile App</span>
+                            <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-3 py-1 rounded-full text-sm">React Native</span>
+                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project6')">
+                    <div class="h-64 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+                        <i class="fas fa-cloud text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">CloudSync Enterprise</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Enterprise cloud migration and management solution with automated backup and scaling capabilities.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded-full text-sm">Cloud</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">AWS</span>
+                            <span class="bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm">DevOps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Latest Insights</h2>
+            
+            <!-- Search and Filter -->
+            <div class="flex flex-col md:flex-row gap-4 mb-12">
+                <div class="flex-1">
+                    <input type="text" id="blogSearch" placeholder="Search articles..." class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <select id="blogFilter" class="px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="all">All Categories</option>
+                    <option value="technology">Technology</option>
+                    <option value="business">Business</option>
+                    <option value="ecommerce">eCommerce</option>
+                    <option value="branding">Branding</option>
+                </select>
+            </div>
+            
+            <!-- Blog Grid -->
+            <div class="blog-grid" id="blogGrid">
+                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="technology" onclick="openBlogModal('blog1')">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Technology</span>
+                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 15, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">The Future of AI in Business</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Exploring how artificial intelligence is transforming business operations and creating new opportunities for growth.</p>
+                        <div class="flex items-center text-blue-600 dark:text-blue-400">
+                            <span class="text-sm font-medium">Read More</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="ecommerce" onclick="openBlogModal('blog3')">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">eCommerce</span>
+                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 10, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">E-commerce Trends to Watch in 2024</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Discover the latest trends shaping the e-commerce landscape and how to leverage them for your business.</p>
+                        <div class="flex items-center text-blue-600 dark:text-blue-400">
+                            <span class="text-sm font-medium">Read More</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="business" onclick="openBlogModal('blog4')">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Business</span>
+                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 8, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Digital Transformation Strategies</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Learn how to successfully navigate digital transformation and modernize your business operations.</p>
+                        <div class="flex items-center text-blue-600 dark:text-blue-400">
+                            <span class="text-sm font-medium">Read More</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="branding" onclick="openBlogModal('blog5')">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center">
+                        <i class="fas fa-palette text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Branding</span>
+                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 5, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Building a Strong Brand Identity</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Essential elements of creating a memorable brand that resonates with your target audience.</p>
+                        <div class="flex items-center text-blue-600 dark:text-blue-400">
+                            <span class="text-sm font-medium">Read More</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="technology" onclick="openBlogModal('blog6')">
+                    <div class="h-48 bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-cloud text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-3 py-1 rounded-full text-sm">Technology</span>
+                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 3, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Cloud Migration Best Practices</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A step-by-step guide to successfully migrating your business to the cloud with minimal disruption.</p>
+                        <div class="flex items-center text-blue-600 dark:text-blue-400">
+                            <span class="text-sm font-medium">Read More</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Get In Touch</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Send us a Message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Contact Information</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-whatsapp text-green-600 dark:text-green-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-white">WhatsApp</h4>
+                                <a href="https://wa.me/916359435595" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">+91 6359435595</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-blue-600 dark:text-blue-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-white">Email</h4>
+                                <a href="mailto:luvits.co@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">luvits.co@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-purple-600 dark:text-purple-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-white">Location</h4>
+                                <p class="text-gray-600 dark:text-gray-300">India</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Contact Buttons -->
+                    <div class="mt-8 space-y-4">
+                        <a href="https://wa.me/916359435595?text=Hello%20LUVITS,%20I%20would%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener noreferrer" class="block w-full bg-green-500 text-white text-center py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                            <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
+                        </a>
+                        <a href="mailto:luvits.co@gmail.com?subject=Project Inquiry&body=Hello LUVITS, I would like to discuss a project with you." class="block w-full bg-blue-500 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                            <i class="fas fa-envelope mr-2"></i>Send Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="py-16 hero-gradient text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 tagline-gold">Ready to Start Your Digital Journey?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto text-white">Let <span class="logo-gold">LUVITS</span> be your Krishna in the digital battlefield. Together, we'll make your business the Arjun of your industry.</p>
+            <a href="#contact" class="black-button px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
+                Start Your Journey with <span class="logo-gold">LUVITS</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold logo-gold mb-4 logo-text">LUVITS</h3>
+                    <p class="text-white mb-4 body-text">Empowering businesses with technology, creativity, and purpose.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://wa.me/916359435595" target="_blank" rel="noopener noreferrer" class="text-white hover:neon-blue transition-colors">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                        <a href="mailto:luvits.co@gmail.com" class="text-white hover:neon-blue transition-colors">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Services</h4>
+                    <ul class="space-y-2 text-white">
+                        <li><a href="#services" class="hover:neon-blue transition-colors">eCommerce Solutions</a></li>
+                        <li><a href="#services" class="hover:neon-blue transition-colors">Business Growth</a></li>
+                        <li><a href="#services" class="hover:neon-blue transition-colors">IT Solutions</a></li>
+                        <li><a href="#services" class="hover:neon-blue transition-colors">Branding</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Company</h4>
+                    <ul class="space-y-2 text-white">
+                        <li><a href="#about" class="hover:neon-blue transition-colors">About Us</a></li>
+                        <li><a href="#portfolio" class="hover:neon-blue transition-colors">Portfolio</a></li>
+                        <li><a href="#blog" class="hover:neon-blue transition-colors">Blog</a></li>
+                        <li><a href="#contact" class="hover:neon-blue transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Contact</h4>
+                    <ul class="space-y-2 text-white">
+                        <li>
+                            <i class="fab fa-whatsapp mr-2"></i>
+                            <a href="https://wa.me/916359435595" target="_blank" rel="noopener noreferrer" class="hover:neon-blue transition-colors">+91 6359435595</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:luvits.co@gmail.com" class="hover:neon-blue transition-colors">luvits.co@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-white">
+                <p>&copy; 2023 <span class="logo-gold">LUVITS</span>. All rights reserved. | <span class="tagline-gold">Be the Arjun of Your Business</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Get Custom Quote</h3>
+                <button onclick="closeQuoteModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="quoteForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Service Type</label>
+                    <select name="service" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select a service</option>
+                        <option value="ecommerce">eCommerce Solutions</option>
+                        <option value="growth">Business Growth</option>
+                        <option value="it">IT Solutions</option>
+                        <option value="branding">Branding</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name</label>
+                    <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Project Details</label>
+                    <textarea name="details" rows="3" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Get Quote
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal -->
+    <div id="portfolioModal" class="modal">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="portfolioTitle" class="text-2xl font-bold text-gray-800 dark:text-white"></h3>
+                <button onclick="closePortfolioModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="portfolioContent" class="text-gray-600 dark:text-gray-300">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Modal -->
+    <div id="blogModal" class="modal">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-3xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="blogTitle" class="text-2xl font-bold text-gray-800 dark:text-white"></h3>
+                <button onclick="closeBlogModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="blogContent" class="text-gray-600 dark:text-gray-300">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-600">
+                <h4 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Share this article</h4>
+                <div class="flex space-x-4">
+                    <button onclick="shareOnWhatsApp()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                    </button>
+                    <button onclick="shareOnTwitter()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                        <i class="fab fa-twitter mr-2"></i>Twitter
+                    </button>
+                    <button onclick="shareOnLinkedIn()" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                        <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Management
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Auto theme based on time
+        function setAutoTheme() {
+            const hour = new Date().getHours();
+            if (hour >= 22 || hour < 10) {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+        }
+        
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            if (savedTheme === 'dark') {
+                html.classList.add('dark');
+            }
+        } else {
+            setAutoTheme();
+        }
+        
+        // Theme toggle
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // Mobile menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuPanel = document.getElementById('mobileMenuPanel');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileMenuPanel.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenuPanel.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Service filter functionality
+        const serviceFilters = document.querySelectorAll('.service-filter');
+        const serviceCards = document.querySelectorAll('.service-card[data-category]');
+        
+        serviceFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                // Update active filter
+                serviceFilters.forEach(f => {
+                    f.classList.remove('active', 'bg-blue-600', 'text-white');
+                    f.classList.add('bg-white', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                });
+                filter.classList.add('active', 'bg-blue-600', 'text-white');
+                filter.classList.remove('bg-white', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                
+                // Filter services
+                const filterValue = filter.getAttribute('data-filter');
+                serviceCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Blog search and filter
+        const blogSearch = document.getElementById('blogSearch');
+        const blogFilter = document.getElementById('blogFilter');
+        const blogCards = document.querySelectorAll('.blog-card');
+        
+        function filterBlogs() {
+            const searchTerm = blogSearch.value.toLowerCase();
+            const filterValue = blogFilter.value;
+            
+            blogCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const content = card.querySelector('p').textContent.toLowerCase();
+                const category = card.getAttribute('data-category');
+                
+                const matchesSearch = title.includes(searchTerm) || content.includes(searchTerm);
+                const matchesFilter = filterValue === 'all' || category === filterValue;
+                
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        blogSearch.addEventListener('input', filterBlogs);
+        blogFilter.addEventListener('change', filterBlogs);
+        
+        // Contact form
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Simulate form submission
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+            
+            // In a real implementation, you would send this data to your server
+            console.log('Contact form submitted:', { name, email, message });
+        });
+        
+        // Quote form
+        const quoteForm = document.getElementById('quoteForm');
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const service = formData.get('service');
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const details = formData.get('details');
+            
+            // Create WhatsApp message
+            const message = `Hello LUVITS! I would like a quote for ${service}.\n\nName: ${name}\nEmail: ${email}\nProject Details: ${details}`;
+            const whatsappUrl = `https://wa.me/916359435595?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+            closeQuoteModal();
+            this.reset();
+        });
+        
+        // Modal functions
+        function openQuoteModal() {
+            document.getElementById('quoteModal').classList.add('active');
+        }
+        
+        function closeQuoteModal() {
+            document.getElementById('quoteModal').classList.remove('active');
+        }
+        
+        function openPortfolioModal(projectId) {
+            const modal = document.getElementById('portfolioModal');
+            const title = document.getElementById('portfolioTitle');
+            const content = document.getElementById('portfolioContent');
+            
+            const projects = {
+                project1: {
+                    title: 'TechMart E-Commerce Platform',
+                    content: `
+                        <div class="mb-6">
+                            <div class="h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-shopping-cart text-white text-6xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Project Overview</h4>
+                        <p class="mb-4">TechMart is a comprehensive e-commerce platform designed for electronics retailers. The platform features advanced product filtering, secure payment integration, real-time inventory management, and a responsive design that works seamlessly across all devices.</p>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Key Features</h4>
+                        <ul class="list-disc list-inside mb-4 space-y-2">
+                            <li>Advanced product search and filtering system</li>
+                            <li>Secure payment gateway integration</li>
+                            <li>Real-time inventory management</li>
+                            <li>Customer review and rating system</li>
+                            <li>Mobile-responsive design</li>
+                            <li>Admin dashboard for order management</li>
+                        </ul>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Technologies Used</h4>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">React</span>
+                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">Node.js</span>
+                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">MongoDB</span>
+                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded-full text-sm">Stripe API</span>
+                        </div>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Results</h4>
+                        <p class="mb-4">The platform increased the client's online sales by 250% within the first six months and improved customer satisfaction scores by 40%.</p>
+                    `
+                },
+                project3: {
+                    title: 'GrowthTracker Analytics Platform',
+                    content: `
+                        <div class="mb-6">
+                            <div class="h-64 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-chart-line text-white text-6xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Project Overview</h4>
+                        <p class="mb-4">GrowthTracker is a comprehensive business intelligence platform that provides advanced analytics, predictive modeling, and actionable insights to help businesses optimize their growth strategies.</p>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Key Features</h4>
+                        <ul class="list-disc list-inside mb-4 space-y-2">
+                            <li>Advanced data visualization and reporting</li>
+                            <li>Predictive analytics and forecasting</li>
+                            <li>Customer behavior analysis</li>
+                            <li>ROI tracking and optimization</li>
+                            <li>Custom dashboard creation</li>
+                            <li>API integrations with popular business tools</li>
+                        </ul>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Technologies Used</h4>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Vue.js</span>
+                            <span class="bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 px-3 py-1 rounded-full text-sm">D3.js</span>
+                            <span class="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">Python</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">AWS</span>
+                        </div>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Results</h4>
+                        <p class="mb-4">Clients using GrowthTracker saw an average increase of 180% in data-driven decision making and 45% improvement in campaign ROI.</p>
+                    `
+                }
+            };
+            
+            const project = projects[projectId] || projects.project1;
+            title.textContent = project.title;
+            content.innerHTML = project.content;
+            modal.classList.add('active');
+        }
+        
+        function closePortfolioModal() {
+            document.getElementById('portfolioModal').classList.remove('active');
+        }
+        
+        function openBlogModal(blogId) {
+            const modal = document.getElementById('blogModal');
+            const title = document.getElementById('blogTitle');
+            const content = document.getElementById('blogContent');
+            
+            const blogs = {
+                blog1: {
+                    title: 'The Future of AI in Business',
+                    content: `
+                        <div class="mb-6">
+                            <div class="h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-robot text-white text-6xl"></i>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Published on December 15, 2023 | Technology</p>
+                        </div>
+                        
+                        <p class="text-lg mb-6 text-gray-700 dark:text-gray-300">Artificial Intelligence is no longer a futuristic concept—it's here, and it's transforming how businesses operate across every industry. From automating routine tasks to providing deep insights into customer behavior, AI is becoming the Krishna that guides modern businesses toward success.</p>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">The Current State of AI in Business</h4>
+                        <p class="mb-4">Today's businesses are leveraging AI in various ways:</p>
+                        <ul class="list-disc list-inside mb-6 space-y-2">
+                            <li>Customer service chatbots that provide 24/7 support</li>
+                            <li>Predictive analytics for inventory management</li>
+                            <li>Personalized marketing campaigns</li>
+                            <li>Automated data analysis and reporting</li>
+                            <li>Fraud detection and prevention systems</li>
+                        </ul>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Emerging Trends to Watch</h4>
+                        <p class="mb-4">As we look toward the future, several AI trends are set to reshape the business landscape:</p>
+                        
+                        <h5 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">1. Generative AI for Content Creation</h5>
+                        <p class="mb-4">Businesses are increasingly using AI to generate marketing content, product descriptions, and even code. This technology is helping companies scale their content production while maintaining quality and consistency.</p>
+                        
+                        <h5 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">2. AI-Powered Decision Making</h5>
+                        <p class="mb-4">Advanced AI systems are beginning to make complex business decisions autonomously, from pricing strategies to supply chain optimization. This trend will accelerate as AI becomes more sophisticated and trustworthy.</p>
+                        
+                        <h5 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">3. Hyper-Personalization</h5>
+                        <p class="mb-4">AI will enable businesses to create truly personalized experiences for each customer, going beyond simple recommendations to anticipate needs and preferences in real-time.</p>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Preparing Your Business for the AI Future</h4>
+                        <p class="mb-4">To successfully integrate AI into your business strategy, consider these steps:</p>
+                        <ol class="list-decimal list-inside mb-6 space-y-2">
+                            <li>Start with clear objectives and use cases</li>
+                            <li>Invest in data quality and infrastructure</li>
+                            <li>Train your team on AI tools and concepts</li>
+                            <li>Begin with pilot projects to test and learn</li>
+                            <li>Partner with AI experts and consultants</li>
+                        </ol>
+                        
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">The LUVITS Approach to AI</h4>
+                        <p class="mb-4">At LUVITS, we believe in implementing AI solutions that align with your business dharma—your purpose and values. We don't just deploy technology; we ensure it serves your greater mission and enhances your ability to serve your customers.</p>
+                        
+                        <p class="text-lg font-medium text-blue-600 dark:text-blue-400 mb-4">Ready to explore how AI can transform your business? Let's discuss your AI strategy and create a roadmap for success.</p>
+                    `
+                }
+            };
+            
+            const blog = blogs[blogId] || blogs.blog1;
+            title.textContent = blog.title;
+            content.innerHTML = blog.content;
+            modal.classList.add('active');
+        }
+        
+        function closeBlogModal() {
+            document.getElementById('blogModal').classList.remove('active');
+        }
+        
+        // Share functions
+        function shareOnWhatsApp() {
+            const title = document.getElementById('blogTitle').textContent;
+            const url = window.location.href;
+            const message = `Check out this article: ${title} - ${url}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+        }
+        
+        function shareOnTwitter() {
+            const title = document.getElementById('blogTitle').textContent;
+            const url = window.location.href;
+            const message = `${title} - ${url} via @LUVITS`;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`, '_blank');
+        }
+        
+        function shareOnLinkedIn() {
+            const url = window.location.href;
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+        }
+        
+        // Close modals when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+        
+        // Auto-update theme every hour
+        setInterval(setAutoTheme, 3600000);
+        
+        // Initialize animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any additional initialization code here
+            console.log('LUVITS website loaded successfully!');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988bf806b7038a1e',t:'MTc1OTQ4OTU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
