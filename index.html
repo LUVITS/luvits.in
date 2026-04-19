@@ -684,50 +684,10 @@
         </div>
     </footer>
 
-    <!-- JARVIS Chatbot Widget -->
-    <div id="chatbot-container" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[60] flex flex-col items-end pointer-events-none">
-        
-        <!-- Chat Window -->
-        <div id="chat-window" class="glass-card w-[calc(100vw-2rem)] md:w-[350px] max-h-[75vh] h-[450px] md:h-[500px] mb-4 rounded-2xl flex flex-col overflow-hidden opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4 shadow-[0_0_30px_rgba(0,240,255,0.15)] border border-cyan-accent/20">
-            <!-- Header -->
-            <div class="bg-navy-900/95 p-3 md:p-4 border-b border-gray-800 flex justify-between items-center backdrop-blur-md shrink-0">
-                <div class="flex items-center gap-3">
-                    <div class="relative w-8 h-8 rounded-full bg-cyan-accent/10 flex items-center justify-center border border-cyan-accent/30">
-                        <i class="ph-fill ph-robot text-cyan-accent"></i>
-                        <span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-cyan-accent animate-pulse"></span>
-                    </div>
-                    <div>
-                        <h3 class="text-white font-display font-bold text-sm">JARVIS</h3>
-                        <p class="text-[10px] md:text-xs text-gray-400">LUVITS AI Assistant</p>
-                    </div>
-                </div>
-                <button id="close-chat" class="text-gray-400 hover:text-white transition-colors focus:outline-none p-2 -mr-2">
-                    <i class="ph ph-x text-lg"></i>
-                </button>
-            </div>
-            <!-- Messages -->
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
-                <!-- Initial Message -->
-                <div class="flex gap-2 w-max max-w-[85%]">
-                    <div class="bg-gray-800/80 text-gray-200 p-3 rounded-2xl rounded-tl-sm text-xs md:text-sm border border-gray-700 leading-relaxed shadow-sm">
-                        Greetings. I am JARVIS, the strategic AI assistant for LUVITS. How can I assist you with your digital growth today?
-                    </div>
-                </div>
-            </div>
-            <!-- Input -->
-            <div class="p-3 bg-navy-900/95 border-t border-gray-800 flex items-center gap-2 backdrop-blur-md shrink-0">
-                <input type="text" id="chat-input" class="flex-1 bg-navy-800 border border-gray-700 rounded-full px-4 py-2.5 text-xs md:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-accent focus:ring-1 focus:ring-cyan-accent transition-all" placeholder="Ask JARVIS...">
-                <button id="send-btn" class="w-10 h-10 rounded-full bg-cyan-accent text-navy-900 flex items-center justify-center hover:bg-cyan-400 transition-colors shadow-[0_0_15px_rgba(0,240,255,0.3)] shrink-0 focus:outline-none">
-                    <i class="ph-fill ph-paper-plane-right"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Toggle Button -->
-        <button id="chat-toggle" class="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full bg-cyan-accent text-navy-900 flex items-center justify-center text-xl md:text-2xl shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] md:hover:scale-105 transition-all focus:outline-none">
-            <i class="ph-fill ph-chat-teardrop-dots"></i>
-        </button>
-    </div>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/916359435595?text=Hey%20Jay%2C%0AI%20just%20checked%20your%20website%20and%20wanted%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[60] w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center text-2xl md:text-3xl shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:shadow-[0_0_30px_rgba(37,211,102,0.6)] md:hover:scale-105 transition-all focus:outline-none cursor-pointer">
+        <i class="ph-bold ph-whatsapp-logo"></i>
+    </a>
 
     <!-- Scripts -->
     <script>
@@ -808,10 +768,10 @@
                 });
             });
 
-            // 5. Shared Gemini API Function
+            // 5. Shared Gemini API Function for AI Solutions
             async function callGeminiAPI(message, systemContext) {
                 // Environment API Key enforcement - Environment secures the actual Key at runtime.
-                const apiKey = "AIzaSyDLYZxX3mFOFm8CLqVDXr-_AE4d5_pcJDM"; 
+                const apiKey = ""; 
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
                 
                 const payload = {
@@ -878,93 +838,6 @@
                 aiResultContent.innerHTML = formattedHtml;
                 aiSubmitBtn.disabled = false;
                 aiSubmitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            });
-
-            // 7. JARVIS Chatbot Logic
-            const chatToggle = document.getElementById('chat-toggle');
-            const chatWindow = document.getElementById('chat-window');
-            const closeChat = document.getElementById('close-chat');
-            const chatInput = document.getElementById('chat-input');
-            const sendBtn = document.getElementById('send-btn');
-            const chatMessages = document.getElementById('chat-messages');
-            let isChatOpen = false;
-
-            function toggleChat() {
-                isChatOpen = !isChatOpen;
-                if (isChatOpen) {
-                    chatWindow.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-                    chatWindow.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-                    // Prevent body scroll on mobile when chat is open
-                    if (window.innerWidth < 768) { document.body.style.overflow = 'hidden'; }
-                    setTimeout(() => chatInput.focus(), 100);
-                } else {
-                    chatWindow.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-                    chatWindow.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            chatToggle.addEventListener('click', toggleChat);
-            closeChat.addEventListener('click', toggleChat);
-
-            function appendChatMessage(text, sender) {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = `flex gap-2 w-max max-w-[85%] ${sender === 'user' ? 'ml-auto' : ''}`;
-                
-                const innerDiv = document.createElement('div');
-                if (sender === 'user') {
-                    innerDiv.className = 'bg-cyan-accent text-navy-900 p-3 rounded-2xl rounded-tr-sm text-xs md:text-sm font-medium leading-relaxed shadow-sm break-words';
-                } else {
-                    innerDiv.className = 'bg-gray-800/80 text-gray-200 p-3 rounded-2xl rounded-tl-sm text-xs md:text-sm border border-gray-700 leading-relaxed shadow-sm break-words';
-                }
-                
-                let formattedText = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                innerDiv.innerHTML = formattedText;
-                
-                msgDiv.appendChild(innerDiv);
-                chatMessages.appendChild(msgDiv);
-                // Ensure scroll happens after DOM updates
-                setTimeout(() => { chatMessages.scrollTop = chatMessages.scrollHeight; }, 10);
-                return msgDiv;
-            }
-
-            function appendChatLoading() {
-                const msgDiv = document.createElement('div');
-                msgDiv.id = 'typing-indicator';
-                msgDiv.className = 'flex gap-2 w-max max-w-[80%]';
-                msgDiv.innerHTML = `
-                    <div class="bg-gray-800/80 text-gray-400 p-3.5 rounded-2xl rounded-tl-sm text-sm border border-gray-700 flex items-center gap-1.5 shadow-sm">
-                        <div class="w-1.5 h-1.5 bg-cyan-accent/60 rounded-full animate-bounce" style="animation-delay: 0s"></div>
-                        <div class="w-1.5 h-1.5 bg-cyan-accent/60 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                        <div class="w-1.5 h-1.5 bg-cyan-accent/60 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
-                    </div>
-                `;
-                chatMessages.appendChild(msgDiv);
-                setTimeout(() => { chatMessages.scrollTop = chatMessages.scrollHeight; }, 10);
-                return msgDiv;
-            }
-
-            async function handleChatSend() {
-                const text = chatInput.value.trim();
-                if (!text) return;
-
-                chatInput.value = '';
-                appendChatMessage(text, 'user');
-                const loadingIndicator = appendChatLoading();
-
-                const systemPrompt = "You are JARVIS, the highly professional, strategic AI assistant for LUVITS. LUVITS is a high-end digital agency specializing in Business Consulting, eCommerce Management, Web Development, Graphics Design, and Brand Building. Keep your responses concise, intelligent, and aligned with a premium tech consulting brand. Use short paragraphs and avoid complex markdown.";
-                const responseText = await callGeminiAPI(text, systemPrompt);
-
-                loadingIndicator.remove();
-                appendChatMessage(responseText, 'bot');
-            }
-
-            sendBtn.addEventListener('click', handleChatSend);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault(); // Prevent default mobile keyboard submit behaviors
-                    handleChatSend();
-                }
             });
             
         });
