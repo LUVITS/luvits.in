@@ -1,1408 +1,956 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUVITS - Be the Arjun of Your Business</title>
-    <meta name="description" content="Empowering businesses with technology, creativity, and purpose. Digital solutions, eCommerce, IT, branding, and business growth services.">
-    <meta property="og:title" content="LUVITS - Digital Dharma for Your Business">
-    <meta property="og:description" content="Let Krishna guide your digital journey. Professional IT solutions, branding, and business growth services.">
-    <meta property="og:type" content="website">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>LUVITS | Strategic IT & Digital Authority</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@300;400;500;600&family=Limelight&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#030712',
+                            800: '#0b1120',
+                            700: '#111827',
+                        },
+                        cyan: {
+                            accent: '#00F0FF',
+                            glow: 'rgba(0, 240, 255, 0.4)',
+                        },
+                        gold: {
+                            accent: '#FFD700',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        decorative: ['"Cinzel Decorative"', 'serif'],
+                        logo: ['Limelight', 'cursive'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Premium Effects & Animations -->
     <style>
-        :root {
-            --brand-bg-gradient: linear-gradient(135deg, #081427 0%, #140065 50%, #081427 100%);
-        }
-
         body {
-            box-sizing: border-box;
-            background: var(--brand-bg-gradient) !important;
-            color: white !important;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 600;
-        }
-        
-        .logo-text {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        .premium-text {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-weight: 500;
-            letter-spacing: -0.01em;
-        }
-        
-        .body-text {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-        
-        .logo-gold {
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00, #B8860B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-            text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+            background-color: #030712;
+            color: #ffffff;
+            overflow-x: hidden;
         }
 
-        .brand-logo-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .brand-logo-shell {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            isolation: isolate;
-        }
-
-        .brand-logo-shell::before,
-        .brand-logo-shell::after {
-            content: "";
-            position: absolute;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .brand-logo-shell::before {
-            inset: 12% 6%;
-            background: radial-gradient(circle, rgba(255, 225, 145, 0.2) 0%, rgba(255, 204, 97, 0.1) 45%, rgba(255, 180, 69, 0.032) 72%, transparent 100%);
-            filter: blur(24px);
-            transform: scale(1.04);
-        }
-
-        .brand-logo-shell::after {
-            inset: -2% -1%;
-            background: radial-gradient(circle, rgba(255, 238, 188, 0.088) 0%, transparent 70%);
-            filter: blur(28px);
-            transform: scale(1.1, 0.9);
-        }
-
-        .brand-logo-image {
-            display: block;
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s ease, filter 0.3s ease;
-            filter: drop-shadow(0 0 12px rgba(255, 218, 102, 0.14));
-        }
-
-        .brand-logo-link:hover .brand-logo-image {
-            transform: translateY(-1px);
-            filter: drop-shadow(0 0 14px rgba(255, 220, 118, 0.18));
-        }
-
-        .header-logo {
-            width: clamp(8.5rem, 14vw, 12rem);
-        }
-
-        .hero-logo-wrap {
-            width: min(100%, 32rem);
-            margin: 0 auto 2.5rem;
-        }
-
-        .hero-logo-wrap .brand-logo-shell::before {
-            inset: 10% 4%;
-            background: radial-gradient(circle, rgba(255, 225, 145, 0.24) 0%, rgba(255, 205, 102, 0.12) 42%, rgba(255, 179, 58, 0.04) 72%, transparent 100%);
-            filter: blur(40px);
-            transform: scale(1.08);
-        }
-
-        .hero-logo-wrap .brand-logo-shell::after {
-            inset: -4% -2%;
-            filter: blur(48px);
-            transform: scale(1.16, 0.92);
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(11, 17, 32, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        .tagline-gold {
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00, #B8860B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-        }
-        
-        .hero-gradient {
-            background: var(--brand-bg-gradient) !important;
-        }
-        
-        .dark .hero-gradient {
-            background: var(--brand-bg-gradient) !important;
-        }
-        
-        .neon-blue {
-            color: #00ffff !important; /* Neon Blue */
-            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
-        }
-        
-        .neon-blue:hover {
-            color: #66ffff !important;
-            text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff;
-        }
-        
-        .black-container {
-            background-color: #000000 !important;
-            border: 1px solid #333333;
-        }
-        
-        .black-button {
-            background-color: #000000 !important;
-            color: white !important;
-            border: 1px solid #333333;
-        }
-        
-        .black-button:hover {
-            background-color: #1a1a1a !important;
-            border-color: #555555;
-        }
-        
-        .service-card {
-            transition: all 0.3s ease;
+        .glass-card {
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.6) 0%, rgba(3, 7, 18, 0.8) 100%);
             backdrop-filter: blur(10px);
-            background-color: #000000 !important;
-            border: 1px solid #333333;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
         }
         
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,255,255,0.2);
-            border-color: #00ffff;
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.15);
+        }
+
+        /* Glow Effects */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+        .box-glow {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
         }
         
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            animation: pulse 2s infinite;
+        /* Blurred Orbs for Background Depth */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.3;
+            pointer-events: none;
         }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .testimonial-slider {
-            overflow: hidden;
-        }
-        
-        .testimonial-track {
-            display: flex;
-            animation: slide 15s infinite linear;
-        }
-        
-        @keyframes slide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-        }
-        
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .fade-in {
+
+        /* Scroll Reveal Animations */
+        .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s ease;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        .fade-in.visible {
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
         
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        /* Staggered reveals for grids */
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Accordion Robust Transition */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
+            opacity: 0;
         }
+        .accordion-item.active .accordion-content {
+            max-height: 2000px; /* High max-height to ensure content always fits without JS calculations */
+            opacity: 1;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+
+        /* Loader */
+        .loader {
+            border: 3px solid rgba(0, 240, 255, 0.2);
+            border-top: 3px solid #00F0FF;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
+        /* AI Result Formatted Content */
+        .ai-formatted-result p { margin-bottom: 0.75rem; }
+        .ai-formatted-result ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 0.75rem; }
+        .ai-formatted-result strong { color: #00F0FF; font-weight: 600; }
     </style>
 </head>
-<body class="transition-colors duration-300">
-    <!-- Header -->
-    <header class="sticky top-0 bg-black/90 backdrop-blur-md z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="#home" class="brand-logo-link" aria-label="LUVITS home">
-                <span class="brand-logo-shell header-logo">
-                    <img src="assets/luvits-logo.png" alt="LUVITS logo" class="brand-logo-image">
-                </span>
+<body id="home" class="antialiased selection:bg-cyan-accent selection:text-navy-900">
+
+    <!-- Global Background Orbs -->
+    <div class="bg-orb bg-cyan-accent w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] top-[-5%] left-[-10%]"></div>
+    <div class="bg-orb bg-cyan-800 w-[70vw] h-[70vw] md:w-[50vw] md:h-[50vw] top-[40%] right-[-20%] opacity-20"></div>
+
+    <!-- 1. NAVBAR -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 md:py-5">
+        <div class="max-w-7xl mx-auto px-5 md:px-12 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#home" class="z-50 relative block">
+                <img src="assets/luvits-logo.png" alt="LUVITS Logo" class="h-8 md:h-10 w-auto object-contain">
             </a>
-            
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="nav-link text-white hover:neon-blue transition-colors">Home</a>
-                <a href="#about" class="nav-link text-white hover:neon-blue transition-colors">About</a>
-                <a href="#services" class="nav-link text-white hover:neon-blue transition-colors">Services</a>
-                <a href="#portfolio" class="nav-link text-white hover:neon-blue transition-colors">Portfolio</a>
-                <a href="#blog" class="nav-link text-white hover:neon-blue transition-colors">Blog</a>
-                <a href="#contact" class="nav-link text-white hover:neon-blue transition-colors">Contact</a>
-            </div>
-            
-            <div class="flex items-center space-x-4">
-                <button id="themeToggle" class="p-2 rounded-lg black-button">
-                    <i class="fas fa-sun"></i>
-                </button>
-                <button id="mobileMenu" class="md:hidden p-2 text-white">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </nav>
-        
-        <!-- Mobile Menu -->
-        <div id="mobileMenuPanel" class="hidden md:hidden black-container border-t border-gray-700">
-            <div class="container mx-auto px-4 py-4 space-y-4">
-                <a href="#home" class="block text-white hover:neon-blue">Home</a>
-                <a href="#about" class="block text-white hover:neon-blue">About</a>
-                <a href="#services" class="block text-white hover:neon-blue">Services</a>
-                <a href="#portfolio" class="block text-white hover:neon-blue">Portfolio</a>
-                <a href="#blog" class="block text-white hover:neon-blue">Blog</a>
-                <a href="#contact" class="block text-white hover:neon-blue">Contact</a>
-            </div>
-        </div>
-    </header>
 
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/916359435595" target="_blank" rel="noopener noreferrer" class="floating-whatsapp">
-        <div class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors">
-            <i class="fab fa-whatsapp text-2xl"></i>
-        </div>
-    </a>
-
-    <!-- Home Section -->
-    <section id="home" class="hero-gradient text-white py-20">
-        <div class="container mx-auto px-4 text-center">
-            <div class="fade-in">
-                <div class="hero-logo-wrap">
-                    <div class="brand-logo-shell">
-                        <img src="assets/luvits-logo.png" alt="LUVITS logo" class="brand-logo-image">
-                    </div>
-                </div>
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 tagline-gold" style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.02em;">
-                    Be the Arjun of Your Business
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto tagline-gold premium-text">
-                    Let Krishna Guide Your Digital Dharma
-                </p>
-                <p class="text-lg mb-12 max-w-2xl mx-auto text-white body-text">
-                    Empowering businesses with technology, creativity, and purpose.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#services" class="black-button px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors premium-text">
-                        Explore Services
-                    </a>
-                    <a href="https://wa.me/916359435595?text=Hey%20I%20want%20to%20know%20more%20about%20LUVITS" target="_blank" rel="noopener noreferrer" class="black-button border-2 border-black px-8 py-4 rounded-lg font-semibold transition-colors premium-text">
-                        Let's Talk
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quick Service Highlights -->
-    <section class="py-16 hero-gradient">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">Our Core Services</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card p-6 rounded-xl text-center">
-                    <div class="text-4xl mb-4 text-white">🛒</div>
-                    <h3 class="text-xl font-semibold mb-3 text-white">eCommerce Solutions</h3>
-                    <p class="text-white mb-4">Complete online store development and management</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20eCommerce%20Solutions" target="_blank" rel="noopener noreferrer" class="neon-blue px-4 py-2 rounded-lg transition-colors inline-block">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <div class="service-card p-6 rounded-xl text-center">
-                    <div class="text-4xl mb-4 text-white">📈</div>
-                    <h3 class="text-xl font-semibold mb-3 text-white">Business Growth</h3>
-                    <p class="text-white mb-4">Strategic digital marketing and growth solutions</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Business%20Growth" target="_blank" rel="noopener noreferrer" class="neon-blue px-4 py-2 rounded-lg transition-colors inline-block">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <div class="service-card p-6 rounded-xl text-center">
-                    <div class="text-4xl mb-4 text-white">🎨</div>
-                    <h3 class="text-xl font-semibold mb-3 text-white">Branding</h3>
-                    <p class="text-white mb-4">Create a powerful brand identity that resonates</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Branding" target="_blank" rel="noopener noreferrer" class="neon-blue px-4 py-2 rounded-lg transition-colors inline-block">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Preview -->
-    <section class="py-16 hero-gradient">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">Featured Projects</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="portfolio-card black-container rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project1')">
-                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-shopping-cart text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-white">E-Commerce Platform</h3>
-                        <p class="text-white">Complete online store with payment integration</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-card black-container rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project3')">
-                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-white">Analytics Platform</h3>
-                        <p class="text-white">Business intelligence and growth tracking</p>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-12">
-                <a href="#portfolio" class="black-button px-8 py-3 rounded-lg transition-colors">
-                    View All Projects
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="text-sm font-medium text-gray-300 hover:text-cyan-accent transition-colors">Home</a>
+                <a href="#services" class="text-sm font-medium text-gray-300 hover:text-cyan-accent transition-colors">Services</a>
+                <a href="#ai-solutions" class="text-sm font-medium text-cyan-accent/80 hover:text-cyan-accent transition-colors flex items-center gap-1">
+                    <i class="ph-fill ph-sparkle"></i> AI Solutions
+                </a>
+                <a href="#portfolio" class="text-sm font-medium text-gray-300 hover:text-cyan-accent transition-colors">Portfolio</a>
+                <a href="#contact" class="px-5 py-2 text-sm font-medium border border-cyan-accent text-cyan-accent hover:bg-cyan-accent hover:text-navy-900 transition-all rounded-sm shadow-[0_0_15px_rgba(0,240,255,0.1)] hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+                    Contact Us
                 </a>
             </div>
-        </div>
-    </section>
 
-    <!-- Testimonials -->
-    <section class="py-16 hero-gradient">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">What Our Clients Say</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-track">
-                    <div class="testimonial-item min-w-full md:min-w-1/2 px-4">
-                        <div class="black-container p-6 rounded-xl">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">R</div>
-                                <div class="ml-4">
-                                    <h4 class="font-semibold text-white">Rajesh Kumar</h4>
-                                    <p class="text-white">CEO, TechStart</p>
-                                </div>
-                            </div>
-                            <p class="text-white">"<span class="logo-gold">LUVITS</span> transformed our digital presence completely. Their approach is truly like having Krishna guide your business decisions."</p>
-                            <div class="flex text-yellow-500 mt-4">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-item min-w-full md:min-w-1/2 px-4">
-                        <div class="black-container p-6 rounded-xl">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">P</div>
-                                <div class="ml-4">
-                                    <h4 class="font-semibold text-white">Priya Sharma</h4>
-                                    <p class="text-white">Founder, EcoStore</p>
-                                </div>
-                            </div>
-                            <p class="text-white">"The eCommerce solution they built increased our sales by 300%. Truly professional and dedicated team."</p>
-                            <div class="flex text-yellow-500 mt-4">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Mobile Hamburger -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white z-50 relative focus:outline-none p-2">
+                <i class="ph ph-list text-2xl" id="menu-icon"></i>
+            </button>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 hero-gradient">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl font-bold mb-6 text-white">About <span class="logo-gold">LUVITS</span></h2>
-                <p class="text-xl text-white max-w-3xl mx-auto tagline-gold">
-                    "Just as Arjun needed Krishna's guidance in the battlefield of Kurukshetra, every business needs the right guidance in the digital battlefield."
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-                <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-6 text-white">Our Story</h3>
-                    <p class="text-white mb-4">
-                        <span class="logo-gold">LUVITS</span> was born from the belief that every business deserves to be the hero of its own story. We provide the strategic guidance, technical expertise, and creative vision that transforms businesses into digital leaders.
-                    </p>
-                    <p class="text-white">
-                        Our approach combines ancient wisdom with modern technology, ensuring that your business not only grows but thrives with purpose and integrity.
-                    </p>
-                </div>
-                <div class="fade-in">
-                    <div class="black-container p-8 rounded-xl text-white">
-                        <h4 class="text-xl font-bold mb-4">Our Mission</h4>
-                        <p class="mb-4">To empower businesses with technology, creativity, and purpose, guiding them to become the Arjun of their industry.</p>
-                        <div class="flex items-center">
-                            <i class="fas fa-quote-left text-2xl opacity-50 mr-3"></i>
-                            <span class="italic tagline-gold">"Be the Arjun of Your Business"</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center fade-in">
-                    <div class="w-20 h-20 black-container rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-lightbulb text-2xl neon-blue"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3 text-white">Innovation</h4>
-                    <p class="text-white">Cutting-edge solutions that push boundaries and create new possibilities.</p>
-                </div>
-                
-                <div class="text-center fade-in">
-                    <div class="w-20 h-20 black-container rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-heart text-2xl neon-blue"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3 text-white">Purpose</h4>
-                    <p class="text-white">Every solution is crafted with intention and aligned with your business values.</p>
-                </div>
-                
-                <div class="text-center fade-in">
-                    <div class="w-20 h-20 black-container rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-2xl neon-blue"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3 text-white">Partnership</h4>
-                    <p class="text-white">We don't just provide services; we become your trusted digital advisors.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Our Services</h2>
-            
-            <!-- Service Filter Tabs -->
-            <div class="flex flex-wrap justify-center mb-12 gap-4">
-                <button class="service-filter active bg-blue-600 text-white px-6 py-3 rounded-lg" data-filter="all">All Services</button>
-                <button class="service-filter bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors" data-filter="ecommerce">eCommerce</button>
-                <button class="service-filter bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors" data-filter="growth">Business Growth</button>
-                <button class="service-filter bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors" data-filter="it">IT Solutions</button>
-                <button class="service-filter bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors" data-filter="branding">Branding</button>
-            </div>
-            
-            <!-- Services Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="servicesGrid">
-                <!-- eCommerce Services -->
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="ecommerce">
-                    <div class="text-4xl mb-4">🛒</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Online Store Development</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Complete eCommerce solutions with payment integration, inventory management, and mobile optimization.</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Online%20Store%20Development" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="ecommerce">
-                    <div class="text-4xl mb-4">📱</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Mobile Commerce</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Native mobile apps for iOS and Android with seamless shopping experiences.</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Mobile%20Commerce" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <!-- Business Growth Services -->
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="growth">
-                    <div class="text-4xl mb-4">📈</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Digital Marketing</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">SEO, social media marketing, and paid advertising campaigns that drive results.</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Digital%20Marketing" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="growth">
-                    <div class="text-4xl mb-4">📊</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Analytics & Insights</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Data-driven insights and business intelligence to guide your growth strategy.</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Analytics%20&%20Insights" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <!-- IT Solutions -->
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="it">
-                    <div class="text-4xl mb-4">💻</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Web Development</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Custom websites and web applications built with modern technologies.</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Web%20Development" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="it">
-                    <div class="text-4xl mb-4">☁️</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Cloud Solutions</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Cloud migration, hosting, and infrastructure management services.</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Cloud%20Solutions" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <!-- Branding Services -->
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="branding">
-                    <div class="text-4xl mb-4">🎨</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Brand Identity</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Logo design, brand guidelines, and visual identity that tells your story.</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Brand%20Identity" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-                
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-xl" data-category="branding">
-                    <div class="text-4xl mb-4">📝</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Content Strategy</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Compelling content that engages your audience and builds brand loyalty.</p>
-                    <a href="https://wa.me/916359435595?text=Hey%20Jay,%20I%20want%20info%20on%20Content%20Strategy" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Get Quote
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Quote Generator Button -->
-            <div class="text-center mt-12">
-                <button onclick="openQuoteModal()" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
-                    Get Custom Quote
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-16 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Our Portfolio</h2>
-            
-            <div class="portfolio-grid">
-                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project1')">
-                    <div class="h-64 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-shopping-cart text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">TechMart E-Commerce</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Complete online electronics store with advanced filtering, payment integration, and inventory management.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">eCommerce</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">React</span>
-                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Node.js</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project3')">
-                    <div class="h-64 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">GrowthTracker Analytics</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Business intelligence platform with advanced analytics, reporting, and growth prediction models.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Analytics</span>
-                            <span class="bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 px-3 py-1 rounded-full text-sm">Vue.js</span>
-                            <span class="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">D3.js</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project4')">
-                    <div class="h-64 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
-                        <i class="fas fa-palette text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Artisan Brand Identity</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Complete brand redesign for luxury handicraft company including logo, website, and marketing materials.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Branding</span>
-                            <span class="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">Design</span>
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">WordPress</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project5')">
-                    <div class="h-64 bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center">
-                        <i class="fas fa-mobile-alt text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">FoodieApp Mobile</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Food delivery mobile application with real-time tracking, payment integration, and restaurant management.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-3 py-1 rounded-full text-sm">Mobile App</span>
-                            <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-3 py-1 rounded-full text-sm">React Native</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">Firebase</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-card bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" onclick="openPortfolioModal('project6')">
-                    <div class="h-64 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
-                        <i class="fas fa-cloud text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">CloudSync Enterprise</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Enterprise cloud migration and management solution with automated backup and scaling capabilities.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded-full text-sm">Cloud</span>
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">AWS</span>
-                            <span class="bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm">DevOps</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="py-16 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Latest Insights</h2>
-            
-            <!-- Search and Filter -->
-            <div class="flex flex-col md:flex-row gap-4 mb-12">
-                <div class="flex-1">
-                    <input type="text" id="blogSearch" placeholder="Search articles..." class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <select id="blogFilter" class="px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="all">All Categories</option>
-                    <option value="technology">Technology</option>
-                    <option value="business">Business</option>
-                    <option value="ecommerce">eCommerce</option>
-                    <option value="branding">Branding</option>
-                </select>
-            </div>
-            
-            <!-- Blog Grid -->
-            <div class="blog-grid" id="blogGrid">
-                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="technology" onclick="openBlogModal('blog1')">
-                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-robot text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-3">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Technology</span>
-                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 15, 2023</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">The Future of AI in Business</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Exploring how artificial intelligence is transforming business operations and creating new opportunities for growth.</p>
-                        <div class="flex items-center text-blue-600 dark:text-blue-400">
-                            <span class="text-sm font-medium">Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="ecommerce" onclick="openBlogModal('blog3')">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <i class="fas fa-shopping-cart text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-3">
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">eCommerce</span>
-                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 10, 2023</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">E-commerce Trends to Watch in 2024</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Discover the latest trends shaping the e-commerce landscape and how to leverage them for your business.</p>
-                        <div class="flex items-center text-blue-600 dark:text-blue-400">
-                            <span class="text-sm font-medium">Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="business" onclick="openBlogModal('blog4')">
-                    <div class="h-48 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-3">
-                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Business</span>
-                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 8, 2023</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Digital Transformation Strategies</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Learn how to successfully navigate digital transformation and modernize your business operations.</p>
-                        <div class="flex items-center text-blue-600 dark:text-blue-400">
-                            <span class="text-sm font-medium">Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="branding" onclick="openBlogModal('blog5')">
-                    <div class="h-48 bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center">
-                        <i class="fas fa-palette text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-3">
-                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Branding</span>
-                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 5, 2023</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Building a Strong Brand Identity</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Essential elements of creating a memorable brand that resonates with your target audience.</p>
-                        <div class="flex items-center text-blue-600 dark:text-blue-400">
-                            <span class="text-sm font-medium">Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="blog-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" data-category="technology" onclick="openBlogModal('blog6')">
-                    <div class="h-48 bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-                        <i class="fas fa-cloud text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-3">
-                            <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-3 py-1 rounded-full text-sm">Technology</span>
-                            <span class="text-gray-500 dark:text-gray-400 ml-auto text-sm">Dec 3, 2023</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Cloud Migration Best Practices</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">A step-by-step guide to successfully migrating your business to the cloud with minimal disruption.</p>
-                        <div class="flex items-center text-blue-600 dark:text-blue-400">
-                            <span class="text-sm font-medium">Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Get In Touch</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Contact Form -->
-                <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Send us a Message</h3>
-                    <form id="contactForm" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                            Send Message
-                        </button>
-                    </form>
-                </div>
-                
-                <!-- Contact Info -->
-                <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Contact Information</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-4">
-                                <i class="fab fa-whatsapp text-green-600 dark:text-green-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800 dark:text-white">WhatsApp</h4>
-                                <a href="https://wa.me/916359435595" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">+91 6359435595</a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-blue-600 dark:text-blue-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800 dark:text-white">Email</h4>
-                                <a href="mailto:luvits.co@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">luvits.co@gmail.com</a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-map-marker-alt text-purple-600 dark:text-purple-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800 dark:text-white">Location</h4>
-                                <p class="text-gray-600 dark:text-gray-300">India</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quick Contact Buttons -->
-                    <div class="mt-8 space-y-4">
-                        <a href="https://wa.me/916359435595?text=Hello%20LUVITS,%20I%20would%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener noreferrer" class="block w-full bg-green-500 text-white text-center py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">
-                            <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
-                        </a>
-                        <a href="mailto:luvits.co@gmail.com?subject=Project Inquiry&body=Hello LUVITS, I would like to discuss a project with you." class="block w-full bg-blue-500 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-                            <i class="fas fa-envelope mr-2"></i>Send Email
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer CTA -->
-    <section class="py-16 hero-gradient text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 tagline-gold">Ready to Start Your Digital Journey?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto text-white">Let <span class="logo-gold">LUVITS</span> be your Krishna in the digital battlefield. Together, we'll make your business the Arjun of your industry.</p>
-            <a href="#contact" class="black-button px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
-                Start Your Journey with <span class="logo-gold">LUVITS</span>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-navy-900/98 backdrop-blur-xl flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 z-40">
+            <a href="#home" class="mobile-link text-2xl font-display text-gray-300 hover:text-cyan-accent transition-colors">Home</a>
+            <a href="#services" class="mobile-link text-2xl font-display text-gray-300 hover:text-cyan-accent transition-colors">Services</a>
+            <a href="#ai-solutions" class="mobile-link text-2xl font-display text-cyan-accent hover:text-cyan-300 transition-colors flex items-center gap-2">
+                <i class="ph-fill ph-sparkle"></i> AI Solutions
             </a>
+            <a href="#portfolio" class="mobile-link text-2xl font-display text-gray-300 hover:text-cyan-accent transition-colors">Portfolio</a>
+            <a href="#contact" class="mobile-link mt-4 px-8 py-3 border border-cyan-accent text-cyan-accent hover:bg-cyan-accent hover:text-navy-900 transition-all rounded-sm text-xl font-display">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION -->
+    <section class="relative min-h-[90vh] md:min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-5 md:px-12 w-full z-10">
+            <div class="max-w-4xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-700 bg-gray-800/30 backdrop-blur-sm mb-6 reveal">
+                    <span class="w-2 h-2 rounded-full bg-cyan-accent animate-pulse"></span>
+                    <span class="text-[10px] md:text-xs font-medium tracking-wide text-gray-300 uppercase">Strategic Digital Authority</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] mb-6 reveal reveal-delay-1">
+                    Architecting <br class="hidden sm:block">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-accent to-blue-500 text-glow">Digital Growth</span> <br class="hidden sm:block">
+                    With Precision.
+                </h1>
+                
+                <p class="text-base sm:text-lg md:text-xl text-gray-400 font-sans max-w-2xl mb-8 md:mb-10 reveal reveal-delay-2 leading-relaxed">
+                    We empower enterprises through high-end web development, cybersecurity-driven eCommerce strategies, and unparalleled digital brand building.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 reveal reveal-delay-3 w-full sm:w-auto">
+                    <a href="#services" class="group relative px-6 md:px-8 py-3.5 md:py-4 bg-cyan-accent text-navy-900 font-semibold font-sans rounded-sm overflow-hidden text-center transition-all box-glow hover:shadow-[0_0_40px_rgba(0,240,255,0.4)]">
+                        <span class="relative z-10 flex items-center justify-center gap-2">
+                            Explore Services <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </a>
+                    <a href="#contact" class="px-6 md:px-8 py-3.5 md:py-4 bg-transparent text-white font-semibold font-sans border border-gray-600 hover:border-white rounded-sm text-center transition-all">
+                        Consult with Experts
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-2xl font-bold logo-gold mb-4 logo-text">LUVITS</h3>
-                    <p class="text-white mb-4 body-text">Empowering businesses with technology, creativity, and purpose.</p>
-                    <div class="flex space-x-4">
-                        <a href="https://wa.me/916359435595" target="_blank" rel="noopener noreferrer" class="text-white hover:neon-blue transition-colors">
-                            <i class="fab fa-whatsapp text-xl"></i>
-                        </a>
-                        <a href="mailto:luvits.co@gmail.com" class="text-white hover:neon-blue transition-colors">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
+    <!-- 3. TRUST / AUTHORITY STRIP -->
+    <div class="w-full border-y border-gray-800 bg-navy-800/20 backdrop-blur-sm py-4 md:py-6 relative z-10 reveal overflow-hidden">
+        <div class="max-w-7xl mx-auto px-5 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <p class="text-xs md:text-sm font-semibold text-gray-400 tracking-widest uppercase flex items-center gap-2 text-center md:text-left shrink-0">
+                <i class="ph-fill ph-shield-check text-cyan-accent text-lg"></i>
+                Managed by Cybersecurity Experts
+            </p>
+            <!-- Scrolling wrapper on mobile, flex on desktop -->
+            <div class="w-full md:w-auto overflow-x-auto pb-2 md:pb-0 scrollbar-hide flex items-center gap-6 md:gap-8 text-gray-500 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <span class="text-base md:text-lg font-bold tracking-tight shrink-0">amazon</span>
+                <span class="text-base md:text-lg font-bold tracking-tighter text-blue-500 shrink-0">eBay</span>
+                <span class="text-base md:text-lg font-bold italic text-yellow-500 shrink-0">Flipkart</span>
+                <span class="text-base md:text-lg font-bold tracking-tight text-green-500 shrink-0">Shopify</span>
+                <span class="text-base md:text-lg font-bold tracking-tight text-pink-500 shrink-0">Meesho</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. CORE SERVICES (PREVIEW GRID) -->
+    <section id="services-preview" class="py-16 lg:py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-5 md:px-12">
+            <h2 class="text-3xl md:text-5xl font-display font-bold mb-3 md:mb-4 reveal">Core Competencies</h2>
+            <p class="text-sm md:text-base text-gray-400 max-w-2xl mb-10 md:mb-16 reveal reveal-delay-1">Strategic solutions designed to establish market dominance and ensure operational security.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card p-6 md:p-8 rounded-xl reveal reveal-delay-1 group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-cyan-accent/10 rounded-lg flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-chart-line-up text-xl md:text-2xl text-cyan-accent"></i>
                     </div>
+                    <h3 class="text-lg md:text-xl font-display font-semibold mb-2 md:mb-3 text-white">Business Consulting</h3>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Strategic growth advisory and digital transformation for modern enterprises.</p>
                 </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-white">Services</h4>
-                    <ul class="space-y-2 text-white">
-                        <li><a href="#services" class="hover:neon-blue transition-colors">eCommerce Solutions</a></li>
-                        <li><a href="#services" class="hover:neon-blue transition-colors">Business Growth</a></li>
-                        <li><a href="#services" class="hover:neon-blue transition-colors">IT Solutions</a></li>
-                        <li><a href="#services" class="hover:neon-blue transition-colors">Branding</a></li>
-                    </ul>
+                <!-- Card 2 -->
+                <div class="glass-card p-6 md:p-8 rounded-xl reveal reveal-delay-2 group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-cyan-accent/10 rounded-lg flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-storefront text-xl md:text-2xl text-cyan-accent"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-display font-semibold mb-2 md:mb-3 text-white">eCommerce Mgmt</h3>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">End-to-end marketplace management across Amazon, eBay, and more.</p>
                 </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-white">Company</h4>
-                    <ul class="space-y-2 text-white">
-                        <li><a href="#about" class="hover:neon-blue transition-colors">About Us</a></li>
-                        <li><a href="#portfolio" class="hover:neon-blue transition-colors">Portfolio</a></li>
-                        <li><a href="#blog" class="hover:neon-blue transition-colors">Blog</a></li>
-                        <li><a href="#contact" class="hover:neon-blue transition-colors">Contact</a></li>
-                    </ul>
+                <!-- Card 3 -->
+                <div class="glass-card p-6 md:p-8 rounded-xl reveal reveal-delay-3 group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-cyan-accent/10 rounded-lg flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-code text-xl md:text-2xl text-cyan-accent"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-display font-semibold mb-2 md:mb-3 text-white">Web Development</h3>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">High-performance websites and online presence optimization.</p>
                 </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-white">Contact</h4>
-                    <ul class="space-y-2 text-white">
-                        <li>
-                            <i class="fab fa-whatsapp mr-2"></i>
-                            <a href="https://wa.me/916359435595" target="_blank" rel="noopener noreferrer" class="hover:neon-blue transition-colors">+91 6359435595</a>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope mr-2"></i>
-                            <a href="mailto:luvits.co@gmail.com" class="hover:neon-blue transition-colors">luvits.co@gmail.com</a>
-                        </li>
-                    </ul>
+                <!-- Card 4 -->
+                <div class="glass-card p-6 md:p-8 rounded-xl reveal reveal-delay-4 group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-cyan-accent/10 rounded-lg flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-bezier-curve text-xl md:text-2xl text-cyan-accent"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-display font-semibold mb-2 md:mb-3 text-white">Graphics & Branding</h3>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Premium visual identities, packaging, and catalog design.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- 5. FULL SERVICES (EXPANDABLE ACCORDION) -->
+    <section id="services" class="py-16 lg:py-24 bg-navy-800/30 border-y border-gray-800/50 relative z-10">
+        <div class="bg-orb bg-cyan-900/40 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] bottom-0 left-[-30%]"></div>
+        <div class="max-w-4xl mx-auto px-5 md:px-12">
+            <div class="text-center mb-10 md:mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-3 md:mb-4">Deep Dive Expertise</h2>
+                <p class="text-sm md:text-base text-gray-400">Comprehensive capabilities across the digital spectrum.</p>
+            </div>
+
+            <div class="flex flex-col gap-3 md:gap-4">
+                
+                <!-- Accordion Item 1 -->
+                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
+                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">01</span>
+                            <h3 class="text-lg md:text-2xl font-display font-semibold group-hover:text-cyan-accent transition-colors">Business Consulting</h3>
+                        </div>
+                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300"></i>
+                    </button>
+                    <!-- Robust Container -->
+                    <div class="accordion-content bg-navy-900/50">
+                        <div class="px-5 md:px-6 pb-6 pt-2">
+                            <p class="text-sm md:text-base text-gray-400 mb-4 leading-relaxed">We provide high-level strategy, growth modeling, and operational advisory to navigate complex digital landscapes. Our consulting bridges the gap between technical infrastructure and business objectives.</p>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                                <li class="flex items-start gap-2 text-sm text-gray-300"><i class="ph-fill ph-check-circle text-cyan-accent mt-0.5 shrink-0"></i> Digital Transformation Strategy</li>
+                                <li class="flex items-start gap-2 text-sm text-gray-300"><i class="ph-fill ph-check-circle text-cyan-accent mt-0.5 shrink-0"></i> Growth & Scaling Advisory</li>
+                                <li class="flex items-start gap-2 text-sm text-gray-300"><i class="ph-fill ph-check-circle text-cyan-accent mt-0.5 shrink-0"></i> Operational Efficiency Models</li>
+                                <li class="flex items-start gap-2 text-sm text-gray-300"><i class="ph-fill ph-check-circle text-cyan-accent mt-0.5 shrink-0"></i> Tech Stack Audits</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
+                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">02</span>
+                            <h3 class="text-lg md:text-2xl font-display font-semibold group-hover:text-cyan-accent transition-colors">eCommerce Marketplace Management</h3>
+                        </div>
+                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-navy-900/50">
+                        <div class="px-5 md:px-6 pb-6 pt-2">
+                            <div class="mb-5 md:mb-6">
+                                <h4 class="text-white text-sm md:text-base font-medium mb-2 md:mb-3">Supported Platforms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-gray-800 rounded text-xs text-gray-300">Amazon</span>
+                                    <span class="px-3 py-1 bg-gray-800 rounded text-xs text-gray-300">eBay</span>
+                                    <span class="px-3 py-1 bg-gray-800 rounded text-xs text-gray-300">Flipkart</span>
+                                    <span class="px-3 py-1 bg-gray-800 rounded text-xs text-gray-300">Meesho</span>
+                                    <span class="px-3 py-1 bg-gray-800 rounded text-xs text-gray-300">Walmart</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="text-white text-sm md:text-base font-medium mb-2 md:mb-3">Management Plans</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-5">
+                                <div class="p-3 md:p-4 border border-gray-700 rounded-lg">
+                                    <h5 class="text-cyan-accent text-sm md:text-base font-semibold mb-1">Platinum</h5>
+                                    <p class="text-xs text-gray-400">Complete A-Z full marketplace management.</p>
+                                </div>
+                                <div class="p-3 md:p-4 border border-gray-700 rounded-lg">
+                                    <h5 class="text-gold-accent text-sm md:text-base font-semibold mb-1">Gold</h5>
+                                    <p class="text-xs text-gray-400">Listing optimization & aggressive sales strategies.</p>
+                                </div>
+                                <div class="p-3 md:p-4 border border-gray-700 rounded-lg">
+                                    <h5 class="text-gray-300 text-sm md:text-base font-semibold mb-1">Silver</h5>
+                                    <p class="text-xs text-gray-400">Core sales and account health management.</p>
+                                </div>
+                            </div>
+
+                            <p class="text-xs md:text-sm text-gray-400 flex items-center gap-2 border-t border-gray-800 pt-4">
+                                <i class="ph-fill ph-speaker-hifi text-cyan-accent shrink-0"></i> Includes dedicated Voice of Customer (VoC) analytics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
+                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">03</span>
+                            <h3 class="text-lg md:text-2xl font-display font-semibold group-hover:text-cyan-accent transition-colors">Web Development & Presence</h3>
+                        </div>
+                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-navy-900/50">
+                        <div class="px-5 md:px-6 pb-6 pt-2">
+                            <p class="text-sm md:text-base text-gray-400 mb-5 leading-relaxed">Building secure, lightning-fast digital experiences that convert. We don't just build websites; we engineer complete online ecosystems.</p>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
+                                <li class="flex items-center gap-2 text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Website Architecture</li>
+                                <li class="flex items-center gap-2 text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> UX & Speed Optimization</li>
+                                <li class="flex items-center gap-2 text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Advanced SEO Services</li>
+                                <li class="flex items-center gap-2 text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Social Media Management</li>
+                                <li class="flex items-center gap-2 text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Brand Marketing</li>
+                                <li class="flex items-center gap-2 text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Targeted Ads Strategy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 4 -->
+                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
+                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">04</span>
+                            <h3 class="text-lg md:text-2xl font-display font-semibold group-hover:text-cyan-accent transition-colors">Graphics Designing</h3>
+                        </div>
+                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-navy-900/50">
+                        <div class="px-5 md:px-6 pb-6 pt-2">
+                            <p class="text-sm md:text-base text-gray-400 mb-5 leading-relaxed">Visual communication that demands authority. We handle all design types to ensure your brand looks premium across every touchpoint.</p>
+                            <div class="flex flex-wrap gap-2 md:gap-3">
+                                <span class="px-3 md:px-4 py-1.5 md:py-2 border border-gray-700 rounded-full text-xs text-gray-300 hover:border-cyan-accent transition-colors">Logo Design</span>
+                                <span class="px-3 md:px-4 py-1.5 md:py-2 border border-gray-700 rounded-full text-xs text-gray-300 hover:border-cyan-accent transition-colors">Catalogue</span>
+                                <span class="px-3 md:px-4 py-1.5 md:py-2 border border-gray-700 rounded-full text-xs text-gray-300 hover:border-cyan-accent transition-colors">Packaging</span>
+                                <span class="px-3 md:px-4 py-1.5 md:py-2 border border-gray-700 rounded-full text-xs text-gray-300 hover:border-cyan-accent transition-colors">Store Design</span>
+                                <span class="px-3 md:px-4 py-1.5 md:py-2 border border-gray-700 rounded-full text-xs text-gray-300 hover:border-cyan-accent transition-colors">Ad Banners</span>
+                                <span class="px-3 md:px-4 py-1.5 md:py-2 border border-gray-700 rounded-full text-xs text-gray-300 hover:border-cyan-accent transition-colors">Business Cards</span>
+                                <span class="px-3 md:px-4 py-1.5 md:py-2 border border-gray-700 rounded-full text-xs text-gray-300 hover:border-cyan-accent transition-colors">Social Creatives</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 5 -->
+                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
+                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">05</span>
+                            <h3 class="text-lg md:text-2xl font-display font-semibold group-hover:text-cyan-accent transition-colors">Brand Building</h3>
+                        </div>
+                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-navy-900/50">
+                        <div class="px-5 md:px-6 pb-6 pt-2">
+                            <p class="text-sm md:text-base text-gray-400 mb-5 leading-relaxed">Establishing a dominant market presence requires more than just aesthetics. It requires data-backed analysis and compliance.</p>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <li class="flex items-start gap-3">
+                                    <i class="ph ph-target text-cyan-accent mt-1 shrink-0"></i>
+                                    <div>
+                                        <h5 class="text-white text-sm font-medium">Niche & Market Analysis</h5>
+                                        <p class="text-xs text-gray-500 mt-1">Identifying gaps and opportunities in your sector.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph ph-cube text-cyan-accent mt-1 shrink-0"></i>
+                                    <div>
+                                        <h5 class="text-white text-sm font-medium">Product Analysis</h5>
+                                        <p class="text-xs text-gray-500 mt-1">Evaluating viability, margins, and positioning.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph ph-shield-check text-cyan-accent mt-1 shrink-0"></i>
+                                    <div>
+                                        <h5 class="text-white text-sm font-medium">Compliance Analysis</h5>
+                                        <p class="text-xs text-gray-500 mt-1">Ensuring marketplace and legal alignment.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph ph-crown text-cyan-accent mt-1 shrink-0"></i>
+                                    <div>
+                                        <h5 class="text-white text-sm font-medium">Full Brand Support</h5>
+                                        <p class="text-xs text-gray-500 mt-1">Continuous advisory to maintain brand equity.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. NEW: AI BUSINESS SOLUTIONS -->
+    <section id="ai-solutions" class="py-16 lg:py-24 relative z-10 overflow-hidden border-b border-gray-800/50">
+        <div class="max-w-4xl mx-auto px-5 md:px-12">
+            <div class="text-center mb-10 md:mb-12 reveal">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-cyan-accent/10 mb-4 border border-cyan-accent/30 box-glow">
+                    <i class="ph-fill ph-sparkle text-2xl text-cyan-accent"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-3 md:mb-4">AI Business Solutions</h2>
+                <p class="text-sm md:text-base text-gray-400">Describe your business challenge below, and our strategic AI engine will generate a customized, actionable roadmap.</p>
+            </div>
+
+            <div class="glass-card p-5 md:p-8 rounded-2xl reveal reveal-delay-1 relative border-cyan-accent/20 border">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs text-cyan-accent font-medium uppercase tracking-wider mb-2">Your Business Problem</label>
+                        <textarea id="ai-input" rows="4" class="w-full bg-navy-900/60 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-accent focus:ring-1 focus:ring-cyan-accent transition-all resize-none" placeholder="e.g., My eCommerce store is getting traffic but conversions are below 1%. How can I optimize it strategically?"></textarea>
+                    </div>
+                    <button id="ai-submit" class="w-full bg-transparent border border-cyan-accent text-cyan-accent hover:bg-cyan-accent hover:text-navy-900 font-bold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 group">
+                        <i class="ph-bold ph-magic-wand group-hover:animate-pulse"></i> Generate Strategic Solution
+                    </button>
+                </div>
+
+                <!-- AI Output Area -->
+                <div id="ai-result-container" class="mt-6 pt-6 border-t border-gray-800 hidden">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-cyan-accent flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.4)]">
+                            <i class="ph-bold ph-robot text-navy-900 text-lg"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-lg">Strategic Advisory</h4>
+                    </div>
+                    <div id="ai-result-content" class="bg-navy-900/80 rounded-xl p-5 border border-gray-700 text-sm md:text-base text-gray-300 leading-relaxed ai-formatted-result">
+                        <!-- Content injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PORTFOLIO SECTION (UPDATED) -->
+    <section id="portfolio" class="py-16 lg:py-24 bg-navy-800/20 relative z-10 border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-5 md:px-12 text-center">
+            <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 reveal">Featured Work</h2>
+            <p class="text-sm md:text-base text-gray-400 mb-10 md:mb-12 reveal reveal-delay-1 max-w-2xl mx-auto">A glimpse into our premium execution. Explore our latest brand transformations, design creatives, and technical architectures directly on our Instagram feed.</p>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-white">
-                <p>&copy; 2023 <span class="logo-gold">LUVITS</span>. All rights reserved. | <span class="tagline-gold">Be the Arjun of Your Business</span></p>
+            <div class="max-w-3xl mx-auto reveal reveal-delay-2">
+                <div class="glass-card p-10 md:p-14 rounded-2xl flex flex-col items-center justify-center border border-gray-800 hover:border-cyan-accent/30 transition-all group">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 flex items-center justify-center mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-500">
+                        <i class="ph ph-instagram-logo text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2">Follow Our Journey</h3>
+                    <p class="text-gray-400 mb-8 max-w-md mx-auto text-sm md:text-base">We constantly update our portfolio showcasing our digital artistry and business success stories.</p>
+                    
+                    <a href="https://instagram.com/luvits.in" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-4 bg-cyan-accent text-navy-900 font-bold rounded-lg hover:bg-cyan-400 transition-colors shadow-[0_0_20px_rgba(0,240,255,0.2)] hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] transform hover:-translate-y-1">
+                        <i class="ph-bold ph-instagram-logo text-xl"></i> Preview on Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. PROCESS SECTION -->
+    <section class="py-16 lg:py-24 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-5 md:px-12">
+            <h2 class="text-3xl md:text-5xl font-display font-bold mb-12 md:mb-16 text-center reveal">Our Methodology</h2>
+            
+            <div class="relative">
+                <!-- Desktop Connection Line -->
+                <div class="hidden md:block absolute top-[45px] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-transparent via-gray-700 to-transparent z-0"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center text-center reveal reveal-delay-1 relative">
+                        <div class="md:hidden absolute top-[80px] bottom-[-30px] left-1/2 w-[2px] bg-gray-800 -translate-x-1/2 z-[-1]"></div>
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full glass-card flex items-center justify-center mb-5 md:mb-6 border border-gray-700 shadow-lg relative group bg-navy-900">
+                            <span class="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-7 h-7 md:w-8 md:h-8 rounded-full bg-navy-900 border border-gold-accent text-gold-accent flex items-center justify-center text-xs md:text-sm font-bold font-mono">1</span>
+                            <i class="ph ph-magnifying-glass text-2xl md:text-3xl text-white group-hover:text-cyan-accent transition-colors"></i>
+                        </div>
+                        <h3 class="text-base md:text-lg font-display font-bold mb-2">Understanding Business</h3>
+                        <p class="text-xs md:text-sm text-gray-400 px-4 md:px-0">Deep-dive into your core objectives, pain points, and target market dynamics.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center text-center reveal reveal-delay-2 relative">
+                        <div class="md:hidden absolute top-[80px] bottom-[-30px] left-1/2 w-[2px] bg-gray-800 -translate-x-1/2 z-[-1]"></div>
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full glass-card flex items-center justify-center mb-5 md:mb-6 border border-gray-700 shadow-lg relative group bg-navy-900">
+                            <span class="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-7 h-7 md:w-8 md:h-8 rounded-full bg-navy-900 border border-gold-accent text-gold-accent flex items-center justify-center text-xs md:text-sm font-bold font-mono">2</span>
+                            <i class="ph ph-strategy text-2xl md:text-3xl text-white group-hover:text-cyan-accent transition-colors"></i>
+                        </div>
+                        <h3 class="text-base md:text-lg font-display font-bold mb-2">Strategy Planning</h3>
+                        <p class="text-xs md:text-sm text-gray-400 px-4 md:px-0">Architecting a bespoke, data-driven roadmap to secure competitive advantage.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center text-center reveal reveal-delay-3 relative">
+                        <div class="md:hidden absolute top-[80px] bottom-[-30px] left-1/2 w-[2px] bg-gray-800 -translate-x-1/2 z-[-1]"></div>
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full glass-card flex items-center justify-center mb-5 md:mb-6 border border-gray-700 shadow-lg relative group bg-navy-900">
+                            <span class="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-7 h-7 md:w-8 md:h-8 rounded-full bg-navy-900 border border-gold-accent text-gold-accent flex items-center justify-center text-xs md:text-sm font-bold font-mono">3</span>
+                            <i class="ph ph-rocket-launch text-2xl md:text-3xl text-white group-hover:text-cyan-accent transition-colors"></i>
+                        </div>
+                        <h3 class="text-base md:text-lg font-display font-bold mb-2">Execution</h3>
+                        <p class="text-xs md:text-sm text-gray-400 px-4 md:px-0">Flawless deployment of tech, design, and marketplace strategies.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col items-center text-center reveal reveal-delay-4 relative">
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full glass-card flex items-center justify-center mb-5 md:mb-6 border border-gray-700 shadow-lg relative group bg-navy-900">
+                            <span class="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-7 h-7 md:w-8 md:h-8 rounded-full bg-navy-900 border border-gold-accent text-gold-accent flex items-center justify-center text-xs md:text-sm font-bold font-mono">4</span>
+                            <i class="ph ph-trend-up text-2xl md:text-3xl text-white group-hover:text-cyan-accent transition-colors"></i>
+                        </div>
+                        <h3 class="text-base md:text-lg font-display font-bold mb-2">Scaling & Opt.</h3>
+                        <p class="text-xs md:text-sm text-gray-400 px-4 md:px-0">Continuous monitoring, a/b testing, and iterative improvements for scale.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. CONTACT SECTION -->
+    <section id="contact" class="py-16 lg:py-24 relative z-10 border-t border-gray-800/50">
+        <div class="bg-orb bg-cyan-900/30 w-[60vw] h-[60vw] top-[20%] right-[-10%] md:w-[40vw] md:h-[40vw]"></div>
+        
+        <div class="max-w-7xl mx-auto px-5 md:px-12 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+            <!-- Left: Info (Span 2 cols on Desktop) -->
+            <div class="reveal lg:col-span-2 flex flex-col justify-center">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-5 md:mb-6">Let's Build <br class="hidden lg:block"><span class="text-cyan-accent">Greatness.</span></h2>
+                <p class="text-sm md:text-base text-gray-400 mb-10 max-w-md">Ready to scale your digital presence with authority? Reach out to our experts to discuss strategy and execution.</p>
+                
+                <div class="space-y-6 md:space-y-8">
+                    <!-- Location -->
+                    <div class="flex items-start gap-4 group">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-cyan-accent transition-colors shrink-0 mt-1">
+                            <i class="ph ph-map-pin text-xl text-gray-300 group-hover:text-cyan-accent"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Headquarters</p>
+                            <p class="text-base md:text-lg font-medium text-white leading-snug max-w-[250px]">Nikol, Ahmedabad,<br>Gujarat, India - 382415</p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-cyan-accent transition-colors shrink-0">
+                            <i class="ph ph-envelope-simple text-xl text-gray-300 group-hover:text-cyan-accent"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Email</p>
+                            <a href="mailto:luvits.co@gmail.com" class="text-base md:text-lg font-medium text-white hover:text-cyan-accent transition-colors">luvits.co@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Phone -->
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-cyan-accent transition-colors shrink-0">
+                            <i class="ph ph-phone text-xl text-gray-300 group-hover:text-cyan-accent"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Phone</p>
+                            <a href="tel:+916359435595" class="text-base md:text-lg font-medium text-white hover:text-cyan-accent transition-colors">+91 6359435595</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Instagram -->
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-cyan-accent transition-colors shrink-0">
+                            <i class="ph ph-instagram-logo text-xl text-gray-300 group-hover:text-cyan-accent"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Instagram</p>
+                            <a href="https://instagram.com/luvits.in" target="_blank" rel="noopener noreferrer" class="text-base md:text-lg font-medium text-white hover:text-cyan-accent transition-colors">@luvits.in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Google Form Embed (Span 3 cols on Desktop) -->
+            <div class="glass-card rounded-2xl reveal reveal-delay-2 relative overflow-hidden h-[650px] md:h-[700px] lg:col-span-3 border border-gray-800 p-1 md:p-2 bg-white/5">
+                <!-- Using embedded Google Form -->
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf1L1D_S1DsKCV2xYelXYbJIwwjuJmPO0vB5djv7cBfOmeGCA/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" class="w-full h-full rounded-xl bg-transparent" title="Contact Form">Loading…</iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FOOTER -->
+    <footer class="bg-[#020408] border-t border-gray-800 py-12 md:py-16 relative z-10">
+        <div class="max-w-7xl mx-auto px-5 md:px-12 flex flex-col items-center">
+            
+            <a href="#home" class="mb-6 block">
+                <img src="assets/luvits-logo.png" alt="LUVITS Logo" class="h-12 md:h-16 w-auto object-contain">
+            </a>
+
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-10 md:mb-12 text-xs md:text-sm font-medium text-gray-400">
+                <a href="#home" class="hover:text-cyan-accent transition-colors">Home</a>
+                <a href="#services" class="hover:text-cyan-accent transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-cyan-accent transition-colors">Portfolio</a>
+                <a href="#contact" class="hover:text-cyan-accent transition-colors">Contact</a>
+                <a href="#" class="hover:text-cyan-accent transition-colors">Privacy Policy</a>
+            </div>
+
+            <!-- Specific required quote with Decorative font -->
+            <p class="font-decorative text-xl md:text-3xl text-gold-accent mb-12 tracking-wide text-center px-4 max-w-3xl leading-relaxed">
+                Be The Arjuna Of Your Business, Let Krishna Guide You Digital Dharma
+            </p>
+
+            <div class="w-full flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800/50 text-[10px] md:text-xs text-gray-500 text-center md:text-left gap-3">
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> LUVITS. All rights reserved. | Nikol, Ahmedabad, Gujarat</p>
+                <p>Designed for Digital Authority.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Modals -->
-    <!-- Quote Modal -->
-    <div id="quoteModal" class="modal">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Get Custom Quote</h3>
-                <button onclick="closeQuoteModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                    <i class="fas fa-times text-xl"></i>
+    <!-- JARVIS Chatbot Widget -->
+    <div id="chatbot-container" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[60] flex flex-col items-end">
+        <!-- Chat Window -->
+        <div id="chat-window" class="glass-card w-[calc(100vw-2rem)] md:w-[350px] h-[450px] md:h-[500px] mb-4 rounded-2xl flex flex-col overflow-hidden opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4 shadow-[0_0_30px_rgba(0,240,255,0.15)] border border-cyan-accent/20">
+            <!-- Header -->
+            <div class="bg-navy-900/90 p-3 md:p-4 border-b border-gray-800 flex justify-between items-center backdrop-blur-md">
+                <div class="flex items-center gap-3">
+                    <div class="relative w-8 h-8 rounded-full bg-cyan-accent/10 flex items-center justify-center border border-cyan-accent/30">
+                        <i class="ph-fill ph-robot text-cyan-accent"></i>
+                        <span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-cyan-accent animate-pulse"></span>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-display font-bold text-sm">JARVIS</h3>
+                        <p class="text-[10px] md:text-xs text-gray-400">LUVITS AI Assistant</p>
+                    </div>
+                </div>
+                <button id="close-chat" class="text-gray-400 hover:text-white transition-colors focus:outline-none p-1">
+                    <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
-            <form id="quoteForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Service Type</label>
-                    <select name="service" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select a service</option>
-                        <option value="ecommerce">eCommerce Solutions</option>
-                        <option value="growth">Business Growth</option>
-                        <option value="it">IT Solutions</option>
-                        <option value="branding">Branding</option>
-                    </select>
+            <!-- Messages -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
+                <!-- Initial Message -->
+                <div class="flex gap-2 w-max max-w-[85%]">
+                    <div class="bg-gray-800/80 text-gray-200 p-3 rounded-2xl rounded-tl-sm text-xs md:text-sm border border-gray-700 leading-relaxed">
+                        Greetings. I am JARVIS, the strategic AI assistant for LUVITS. How can I assist you with your digital growth today?
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name</label>
-                    <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
-                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Project Details</label>
-                    <textarea name="details" rows="3" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                    Get Quote
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal -->
-    <div id="portfolioModal" class="modal">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="portfolioTitle" class="text-2xl font-bold text-gray-800 dark:text-white"></h3>
-                <button onclick="closePortfolioModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
             </div>
-            <div id="portfolioContent" class="text-gray-600 dark:text-gray-300">
-                <!-- Content will be populated by JavaScript -->
+            <!-- Input -->
+            <div class="p-3 bg-navy-900/90 border-t border-gray-800 flex items-center gap-2 backdrop-blur-md">
+                <input type="text" id="chat-input" class="flex-1 bg-navy-800 border border-gray-700 rounded-full px-4 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-accent focus:ring-1 focus:ring-cyan-accent transition-all" placeholder="Ask JARVIS...">
+                <button id="send-btn" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-cyan-accent text-navy-900 flex items-center justify-center hover:bg-cyan-400 transition-colors shadow-[0_0_15px_rgba(0,240,255,0.3)] shrink-0 focus:outline-none">
+                    <i class="ph-fill ph-paper-plane-right"></i>
+                </button>
             </div>
         </div>
+
+        <!-- Toggle Button -->
+        <button id="chat-toggle" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-cyan-accent text-navy-900 flex items-center justify-center text-xl md:text-2xl shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] hover:scale-105 transition-all z-50 focus:outline-none">
+            <i class="ph-fill ph-chat-teardrop-dots"></i>
+        </button>
     </div>
 
-    <!-- Blog Modal -->
-    <div id="blogModal" class="modal">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-3xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="blogTitle" class="text-2xl font-bold text-gray-800 dark:text-white"></h3>
-                <button onclick="closeBlogModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div id="blogContent" class="text-gray-600 dark:text-gray-300">
-                <!-- Content will be populated by JavaScript -->
-            </div>
-            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-600">
-                <h4 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Share this article</h4>
-                <div class="flex space-x-4">
-                    <button onclick="shareOnWhatsApp()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
-                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp
-                    </button>
-                    <button onclick="shareOnTwitter()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
-                        <i class="fab fa-twitter mr-2"></i>Twitter
-                    </button>
-                    <button onclick="shareOnLinkedIn()" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
-                        <i class="fab fa-linkedin mr-2"></i>LinkedIn
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Scripts -->
     <script>
-        // Theme Management
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        // Auto theme based on time
-        function setAutoTheme() {
-            const hour = new Date().getHours();
-            if (hour >= 22 || hour < 10) {
-                html.classList.add('dark');
-            } else {
-                html.classList.remove('dark');
-            }
-        }
-        
-        // Initialize theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            if (savedTheme === 'dark') {
-                html.classList.add('dark');
-            }
-        } else {
-            setAutoTheme();
-        }
-        
-        // Theme toggle
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-        });
-        
-        // Mobile menu
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuPanel = document.getElementById('mobileMenuPanel');
-        
-        mobileMenu.addEventListener('click', () => {
-            mobileMenuPanel.classList.toggle('hidden');
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu if open
-                    mobileMenuPanel.classList.add('hidden');
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Navbar Glass Effect on Scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('glass');
+                    navbar.classList.remove('py-4', 'md:py-5');
+                    navbar.classList.add('py-3');
+                } else {
+                    navbar.classList.remove('glass');
+                    navbar.classList.add('py-4', 'md:py-5');
+                    navbar.classList.remove('py-3');
                 }
             });
-        });
-        
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+
+            // 2. Mobile Menu Toggle
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const menuIcon = document.getElementById('menu-icon');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                    menuIcon.classList.replace('ph-list', 'ph-x');
+                    document.body.style.overflow = 'hidden'; 
+                } else {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                    menuIcon.classList.replace('ph-x', 'ph-list');
+                    document.body.style.overflow = '';
                 }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Service filter functionality
-        const serviceFilters = document.querySelectorAll('.service-filter');
-        const serviceCards = document.querySelectorAll('.service-card[data-category]');
-        
-        serviceFilters.forEach(filter => {
-            filter.addEventListener('click', () => {
-                // Update active filter
-                serviceFilters.forEach(f => {
-                    f.classList.remove('active', 'bg-blue-600', 'text-white');
-                    f.classList.add('bg-white', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+            }
+
+            menuBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) toggleMenu();
                 });
-                filter.classList.add('active', 'bg-blue-600', 'text-white');
-                filter.classList.remove('bg-white', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
-                
-                // Filter services
-                const filterValue = filter.getAttribute('data-filter');
-                serviceCards.forEach(card => {
-                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
+            });
+
+            // 3. Scroll Reveal Animation using Intersection Observer
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const revealObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                });
+            }, revealOptions);
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 4. Accordion Logic (Robust Pure CSS Max-Height toggle)
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const isActive = item.classList.contains('active');
+
+                    // Close all others
+                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                        otherItem.classList.remove('active', 'border-cyan-accent/30');
+                        otherItem.classList.add('border-gray-800');
+                    });
+
+                    // Toggle clicked item
+                    if (!isActive) {
+                        item.classList.add('active');
+                        item.classList.remove('border-gray-800');
+                        item.classList.add('border-cyan-accent/30');
                     }
                 });
             });
-        });
-        
-        // Blog search and filter
-        const blogSearch = document.getElementById('blogSearch');
-        const blogFilter = document.getElementById('blogFilter');
-        const blogCards = document.querySelectorAll('.blog-card');
-        
-        function filterBlogs() {
-            const searchTerm = blogSearch.value.toLowerCase();
-            const filterValue = blogFilter.value;
-            
-            blogCards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const content = card.querySelector('p').textContent.toLowerCase();
-                const category = card.getAttribute('data-category');
+
+            // 5. Shared Gemini API Function
+            async function callGeminiAPI(message, systemContext) {
+                const apiKey = ""; // Execution environment injects this
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
                 
-                const matchesSearch = title.includes(searchTerm) || content.includes(searchTerm);
-                const matchesFilter = filterValue === 'all' || category === filterValue;
+                const payload = {
+                    contents: [{ parts: [{ text: message }] }],
+                    systemInstruction: { parts: [{ text: systemContext }] }
+                };
+
+                let retries = 5; let delay = 1000;
+                while (retries > 0) {
+                    try {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                        const data = await response.json();
+                        return data.candidates?.[0]?.content?.parts?.[0]?.text || "Unable to process request.";
+                    } catch (error) {
+                        retries--;
+                        if (retries === 0) {
+                            console.error("Gemini API Error:", error);
+                            return "Error connecting to AI servers. Please try again later.";
+                        }
+                        await new Promise(res => setTimeout(res, delay));
+                        delay *= 2;
+                    }
+                }
+            }
+
+            // 6. AI Business Solutions Logic
+            const aiSubmitBtn = document.getElementById('ai-submit');
+            const aiInput = document.getElementById('ai-input');
+            const aiResultContainer = document.getElementById('ai-result-container');
+            const aiResultContent = document.getElementById('ai-result-content');
+
+            aiSubmitBtn.addEventListener('click', async () => {
+                const problemText = aiInput.value.trim();
+                if(!problemText) return;
+
+                // UI Update
+                aiResultContainer.classList.remove('hidden');
+                aiResultContent.innerHTML = `<div class="flex items-center gap-3"><div class="loader"></div><span class="text-cyan-accent text-sm">Analyzing parameters & generating strategy...</span></div>`;
+                aiSubmitBtn.disabled = true;
+                aiSubmitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+                const systemPrompt = "You are LUVITS AI, an elite digital business strategist. A client has provided a business/digital problem. Provide a concise, actionable, and highly strategic solution. Format your response cleanly using minimal markdown (use bullet points and bold text where necessary, do NOT use markdown code blocks). Keep it under 200 words. Focus on eCommerce, Web, or Branding depending on context.";
                 
-                if (matchesSearch && matchesFilter) {
-                    card.style.display = 'block';
+                const response = await callGeminiAPI(problemText, systemPrompt);
+
+                // Format response (convert markdown bold and bullets to basic HTML for styling)
+                let formattedHtml = response
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italics
+                    .replace(/\n\n/g, '</p><p>') // Paragraphs
+                    .replace(/\n- (.*?)(?=\n|$)/g, '<li>$1</li>') // List items
+                    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>'); // Wrap lists
+                
+                if (!formattedHtml.startsWith('<p>') && !formattedHtml.startsWith('<ul>')) {
+                    formattedHtml = `<p>${formattedHtml}</p>`;
+                }
+
+                aiResultContent.innerHTML = formattedHtml;
+                aiSubmitBtn.disabled = false;
+                aiSubmitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            });
+
+            // 7. JARVIS Chatbot Logic
+            const chatToggle = document.getElementById('chat-toggle');
+            const chatWindow = document.getElementById('chat-window');
+            const closeChat = document.getElementById('close-chat');
+            const chatInput = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const chatMessages = document.getElementById('chat-messages');
+            let isChatOpen = false;
+
+            function toggleChat() {
+                isChatOpen = !isChatOpen;
+                if (isChatOpen) {
+                    chatWindow.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    chatWindow.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    setTimeout(() => chatInput.focus(), 100);
                 } else {
-                    card.style.display = 'none';
+                    chatWindow.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    chatWindow.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
                 }
+            }
+
+            chatToggle.addEventListener('click', toggleChat);
+            closeChat.addEventListener('click', toggleChat);
+
+            function appendChatMessage(text, sender) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex gap-2 w-max max-w-[85%] ${sender === 'user' ? 'ml-auto' : ''}`;
+                
+                const innerDiv = document.createElement('div');
+                if (sender === 'user') {
+                    innerDiv.className = 'bg-cyan-accent text-navy-900 p-3 rounded-2xl rounded-tr-sm text-xs md:text-sm font-medium leading-relaxed';
+                } else {
+                    innerDiv.className = 'bg-gray-800/80 text-gray-200 p-3 rounded-2xl rounded-tl-sm text-xs md:text-sm border border-gray-700 leading-relaxed';
+                }
+                
+                let formattedText = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                innerDiv.innerHTML = formattedText;
+                
+                msgDiv.appendChild(innerDiv);
+                chatMessages.appendChild(msgDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return msgDiv;
+            }
+
+            function appendChatLoading() {
+                const msgDiv = document.createElement('div');
+                msgDiv.id = 'typing-indicator';
+                msgDiv.className = 'flex gap-2 w-max max-w-[80%]';
+                msgDiv.innerHTML = `
+                    <div class="bg-gray-800/80 text-gray-400 p-4 rounded-2xl rounded-tl-sm text-sm border border-gray-700 flex items-center gap-1.5">
+                        <div class="w-1.5 h-1.5 bg-cyan-accent/60 rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                        <div class="w-1.5 h-1.5 bg-cyan-accent/60 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                        <div class="w-1.5 h-1.5 bg-cyan-accent/60 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                    </div>
+                `;
+                chatMessages.appendChild(msgDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return msgDiv;
+            }
+
+            async function handleChatSend() {
+                const text = chatInput.value.trim();
+                if (!text) return;
+
+                chatInput.value = '';
+                appendChatMessage(text, 'user');
+                const loadingIndicator = appendChatLoading();
+
+                const systemPrompt = "You are JARVIS, the highly professional, strategic AI assistant for LUVITS. LUVITS is a high-end digital agency specializing in Business Consulting, eCommerce Management, Web Development, Graphics Design, and Brand Building. Keep your responses concise, intelligent, and aligned with a premium tech consulting brand. Use short paragraphs and avoid complex markdown.";
+                const responseText = await callGeminiAPI(text, systemPrompt);
+
+                loadingIndicator.remove();
+                appendChatMessage(responseText, 'bot');
+            }
+
+            sendBtn.addEventListener('click', handleChatSend);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleChatSend();
             });
-        }
-        
-        blogSearch.addEventListener('input', filterBlogs);
-        blogFilter.addEventListener('change', filterBlogs);
-        
-        // Contact form
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
             
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            // Simulate form submission
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
-            
-            // In a real implementation, you would send this data to your server
-            console.log('Contact form submitted:', { name, email, message });
-        });
-        
-        // Quote form
-        const quoteForm = document.getElementById('quoteForm');
-        quoteForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const service = formData.get('service');
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const details = formData.get('details');
-            
-            // Create WhatsApp message
-            const message = `Hello LUVITS! I would like a quote for ${service}.\n\nName: ${name}\nEmail: ${email}\nProject Details: ${details}`;
-            const whatsappUrl = `https://wa.me/916359435595?text=${encodeURIComponent(message)}`;
-            
-            window.open(whatsappUrl, '_blank');
-            closeQuoteModal();
-            this.reset();
-        });
-        
-        // Modal functions
-        function openQuoteModal() {
-            document.getElementById('quoteModal').classList.add('active');
-        }
-        
-        function closeQuoteModal() {
-            document.getElementById('quoteModal').classList.remove('active');
-        }
-        
-        function openPortfolioModal(projectId) {
-            const modal = document.getElementById('portfolioModal');
-            const title = document.getElementById('portfolioTitle');
-            const content = document.getElementById('portfolioContent');
-            
-            const projects = {
-                project1: {
-                    title: 'TechMart E-Commerce Platform',
-                    content: `
-                        <div class="mb-6">
-                            <div class="h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
-                                <i class="fas fa-shopping-cart text-white text-6xl"></i>
-                            </div>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Project Overview</h4>
-                        <p class="mb-4">TechMart is a comprehensive e-commerce platform designed for electronics retailers. The platform features advanced product filtering, secure payment integration, real-time inventory management, and a responsive design that works seamlessly across all devices.</p>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Key Features</h4>
-                        <ul class="list-disc list-inside mb-4 space-y-2">
-                            <li>Advanced product search and filtering system</li>
-                            <li>Secure payment gateway integration</li>
-                            <li>Real-time inventory management</li>
-                            <li>Customer review and rating system</li>
-                            <li>Mobile-responsive design</li>
-                            <li>Admin dashboard for order management</li>
-                        </ul>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Technologies Used</h4>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">React</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">Node.js</span>
-                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">MongoDB</span>
-                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded-full text-sm">Stripe API</span>
-                        </div>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Results</h4>
-                        <p class="mb-4">The platform increased the client's online sales by 250% within the first six months and improved customer satisfaction scores by 40%.</p>
-                    `
-                },
-                project3: {
-                    title: 'GrowthTracker Analytics Platform',
-                    content: `
-                        <div class="mb-6">
-                            <div class="h-64 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mb-4">
-                                <i class="fas fa-chart-line text-white text-6xl"></i>
-                            </div>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Project Overview</h4>
-                        <p class="mb-4">GrowthTracker is a comprehensive business intelligence platform that provides advanced analytics, predictive modeling, and actionable insights to help businesses optimize their growth strategies.</p>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Key Features</h4>
-                        <ul class="list-disc list-inside mb-4 space-y-2">
-                            <li>Advanced data visualization and reporting</li>
-                            <li>Predictive analytics and forecasting</li>
-                            <li>Customer behavior analysis</li>
-                            <li>ROI tracking and optimization</li>
-                            <li>Custom dashboard creation</li>
-                            <li>API integrations with popular business tools</li>
-                        </ul>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Technologies Used</h4>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Vue.js</span>
-                            <span class="bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 px-3 py-1 rounded-full text-sm">D3.js</span>
-                            <span class="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">Python</span>
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">AWS</span>
-                        </div>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Results</h4>
-                        <p class="mb-4">Clients using GrowthTracker saw an average increase of 180% in data-driven decision making and 45% improvement in campaign ROI.</p>
-                    `
-                }
-            };
-            
-            const project = projects[projectId] || projects.project1;
-            title.textContent = project.title;
-            content.innerHTML = project.content;
-            modal.classList.add('active');
-        }
-        
-        function closePortfolioModal() {
-            document.getElementById('portfolioModal').classList.remove('active');
-        }
-        
-        function openBlogModal(blogId) {
-            const modal = document.getElementById('blogModal');
-            const title = document.getElementById('blogTitle');
-            const content = document.getElementById('blogContent');
-            
-            const blogs = {
-                blog1: {
-                    title: 'The Future of AI in Business',
-                    content: `
-                        <div class="mb-6">
-                            <div class="h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
-                                <i class="fas fa-robot text-white text-6xl"></i>
-                            </div>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">Published on December 15, 2023 | Technology</p>
-                        </div>
-                        
-                        <p class="text-lg mb-6 text-gray-700 dark:text-gray-300">Artificial Intelligence is no longer a futuristic concept—it's here, and it's transforming how businesses operate across every industry. From automating routine tasks to providing deep insights into customer behavior, AI is becoming the Krishna that guides modern businesses toward success.</p>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">The Current State of AI in Business</h4>
-                        <p class="mb-4">Today's businesses are leveraging AI in various ways:</p>
-                        <ul class="list-disc list-inside mb-6 space-y-2">
-                            <li>Customer service chatbots that provide 24/7 support</li>
-                            <li>Predictive analytics for inventory management</li>
-                            <li>Personalized marketing campaigns</li>
-                            <li>Automated data analysis and reporting</li>
-                            <li>Fraud detection and prevention systems</li>
-                        </ul>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Emerging Trends to Watch</h4>
-                        <p class="mb-4">As we look toward the future, several AI trends are set to reshape the business landscape:</p>
-                        
-                        <h5 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">1. Generative AI for Content Creation</h5>
-                        <p class="mb-4">Businesses are increasingly using AI to generate marketing content, product descriptions, and even code. This technology is helping companies scale their content production while maintaining quality and consistency.</p>
-                        
-                        <h5 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">2. AI-Powered Decision Making</h5>
-                        <p class="mb-4">Advanced AI systems are beginning to make complex business decisions autonomously, from pricing strategies to supply chain optimization. This trend will accelerate as AI becomes more sophisticated and trustworthy.</p>
-                        
-                        <h5 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">3. Hyper-Personalization</h5>
-                        <p class="mb-4">AI will enable businesses to create truly personalized experiences for each customer, going beyond simple recommendations to anticipate needs and preferences in real-time.</p>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Preparing Your Business for the AI Future</h4>
-                        <p class="mb-4">To successfully integrate AI into your business strategy, consider these steps:</p>
-                        <ol class="list-decimal list-inside mb-6 space-y-2">
-                            <li>Start with clear objectives and use cases</li>
-                            <li>Invest in data quality and infrastructure</li>
-                            <li>Train your team on AI tools and concepts</li>
-                            <li>Begin with pilot projects to test and learn</li>
-                            <li>Partner with AI experts and consultants</li>
-                        </ol>
-                        
-                        <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">The LUVITS Approach to AI</h4>
-                        <p class="mb-4">At LUVITS, we believe in implementing AI solutions that align with your business dharma—your purpose and values. We don't just deploy technology; we ensure it serves your greater mission and enhances your ability to serve your customers.</p>
-                        
-                        <p class="text-lg font-medium text-blue-600 dark:text-blue-400 mb-4">Ready to explore how AI can transform your business? Let's discuss your AI strategy and create a roadmap for success.</p>
-                    `
-                }
-            };
-            
-            const blog = blogs[blogId] || blogs.blog1;
-            title.textContent = blog.title;
-            content.innerHTML = blog.content;
-            modal.classList.add('active');
-        }
-        
-        function closeBlogModal() {
-            document.getElementById('blogModal').classList.remove('active');
-        }
-        
-        // Share functions
-        function shareOnWhatsApp() {
-            const title = document.getElementById('blogTitle').textContent;
-            const url = window.location.href;
-            const message = `Check out this article: ${title} - ${url}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
-        }
-        
-        function shareOnTwitter() {
-            const title = document.getElementById('blogTitle').textContent;
-            const url = window.location.href;
-            const message = `${title} - ${url} via @LUVITS`;
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`, '_blank');
-        }
-        
-        function shareOnLinkedIn() {
-            const url = window.location.href;
-            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
-        }
-        
-        // Close modals when clicking outside
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                }
-            });
-        });
-        
-        // Auto-update theme every hour
-        setInterval(setAutoTheme, 3600000);
-        
-        // Initialize animations and interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add any additional initialization code here
-            console.log('LUVITS website loaded successfully!');
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988bf806b7038a1e',t:'MTc1OTQ4OTU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
