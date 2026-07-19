@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUVITS WorkFlow — Om Enterprise</title>
+<style>:root{
+  --navy-900:#0E2A47;
+  --navy-800:#153A5C;
+  --navy-700:#1F4E78;
+  --gold-500:#C08A2E;
+  --gold-600:#A8781F;
+  --gold-100:#F6ECD8;
+  --teal-500:#1D7874;
+  --teal-600:#166460;
+  --paper:#F5F6F5;
+  --surface:#FFFFFF;
+  --ink-900:#12202B;
+  --ink-600:#4C5D66;
+  --ink-400:#8A9AA1;
+  --line:#E1E6E8;
+  --danger:#B3261E;
+  --danger-bg:#FBE9E7;
+  --radius-sm:8px;
+  --radius-md:14px;
+  --radius-lg:20px;
+  --shadow-sm:0 1px 2px rgba(14,42,71,.08);
+  --shadow-md:0 12px 28px rgba(14,42,71,.14);
+  --font-display:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,"SF Mono",Consolas,"Liberation Mono",monospace;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--navy-900);
+  font-family:var(--font-body);
+  color:var(--ink-900);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,p{ margin:0; }
+button{ font:inherit; }
+input{ font:inherit; }
+select{ font:inherit; }
+a{ color:inherit; }
+*:focus-visible{ outline:2px solid var(--gold-500); outline-offset:2px; }
+.hidden{ display:none !important; }
+
+/* ---------- Login screen ---------- */
+.login-screen{
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  background:
+    radial-gradient(circle at 15% 8%, rgba(192,138,46,.18), transparent 45%),
+    linear-gradient(160deg, var(--navy-900), var(--navy-800) 60%, var(--navy-700));
+}
+.login-card{
+  width:100%; max-width:392px;
+  background:var(--surface);
+  border-radius:var(--radius-lg);
+  padding:32px 28px 26px;
+  box-shadow:var(--shadow-md);
+  animation:riseIn .5s ease both;
+}
+@keyframes riseIn{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.brand{ display:flex; align-items:center; gap:12px; margin-bottom:26px; }
+.brand-mark{
+  width:44px; height:44px; flex:0 0 auto;
+  border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,var(--gold-500),var(--gold-600));
+  color:var(--navy-900);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-weight:800; font-size:16px; letter-spacing:-.5px;
+}
+.brand-name{ font-family:var(--font-display); font-weight:800; font-size:17px; letter-spacing:-.2px; color:var(--ink-900); }
+.brand-tag{ font-size:12px; color:var(--ink-600); margin-top:2px; }
+.field{ display:block; margin-bottom:16px; }
+.field-label{
+  display:block; font-family:var(--font-mono); font-size:11px; font-weight:600;
+  text-transform:uppercase; letter-spacing:.06em; color:var(--ink-600); margin-bottom:6px;
+}
+.field input{
+  width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:var(--radius-sm);
+  background:var(--paper); font-size:15px; color:var(--ink-900);
+}
+.field input:focus{ background:var(--surface); border-color:var(--gold-500); }
+.password-row{ display:flex; align-items:stretch; gap:8px; }
+.password-row input{ flex:1; min-width:0; }
+.pw-toggle{
+  flex:0 0 auto; width:44px; border:1px solid var(--line); border-radius:var(--radius-sm);
+  background:var(--paper); cursor:pointer; font-size:16px; color:var(--ink-600);
+}
+.login-error{
+  display:none; background:var(--danger-bg); color:var(--danger); font-size:13px; font-weight:600;
+  border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:14px;
+}
+.login-error.shown{ display:block; }
+.login-error.shake{ animation:shake .45s ease; }
+@keyframes shake{
+  10%,90%{ transform:translateX(-1px); } 20%,80%{ transform:translateX(2px); }
+  30%,50%,70%{ transform:translateX(-4px); } 40%,60%{ transform:translateX(4px); }
+}
+.offline-note{
+  margin-top:18px; text-align:center; font-family:var(--font-mono); font-size:11px;
+  color:var(--ink-400); letter-spacing:.02em;
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:block; width:100%; padding:14px 18px; border:none; border-radius:var(--radius-md);
+  font-weight:700; font-size:15px; text-align:center; text-decoration:none; cursor:pointer;
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.btn:active{ transform:scale(.98); }
+.btn-primary{ background:var(--navy-900); color:#fff; }
+.btn-primary:hover{ background:var(--navy-800); }
+.btn-cta{
+  background:linear-gradient(135deg,var(--gold-500),var(--gold-600)); color:var(--navy-900);
+  box-shadow:var(--shadow-sm); margin-bottom:24px;
+}
+.btn-go{ background:var(--teal-500); color:#fff; }
+.btn-go:hover{ background:var(--teal-600); }
+.btn[disabled]{ opacity:.5; cursor:not-allowed; }
+.text-btn{ background:none; border:none; color:var(--navy-700); font-weight:700; font-size:13.5px; cursor:pointer; padding:6px 0; }
+.icon-btn{
+  background:none; border:1px solid var(--line); border-radius:999px; width:38px; height:38px;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--ink-600); font-size:15px;
+}
+
+/* ---------- App shell ---------- */
+.app{ min-height:100vh; background:var(--paper); }
+.view{ max-width:600px; margin:0 auto; min-height:100vh; background:var(--paper); display:flex; flex-direction:column; }
+.topbar{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:14px 20px; background:var(--surface); border-bottom:1px solid var(--line);
+  position:sticky; top:0; z-index:5;
+}
+.brand-sm{ margin:0; gap:10px; }
+.brand-mark-sm{ width:34px; height:34px; font-size:13px; background:var(--navy-900); color:var(--gold-500); }
+.brand-name-sm{ font-family:var(--font-display); font-weight:800; font-size:14.5px; color:var(--ink-900); }
+.brand-tag-sm{ font-size:11px; color:var(--ink-600); margin-top:1px; }
+.content{ padding:22px 20px 40px; flex:1; }
+
+/* ---------- Work Flow Board ---------- */
+.section-title{ font-family:var(--font-display); font-weight:800; font-size:21px; letter-spacing:-.3px; color:var(--ink-900); }
+.section-sub{ display:block; color:var(--ink-600); font-size:13.5px; margin-top:5px; margin-bottom:22px; }
+.timeline{ position:relative; padding-left:34px; }
+.timeline::before{ content:""; position:absolute; left:15px; top:6px; bottom:6px; width:2px; background:var(--line); }
+.timeline-item{ position:relative; margin-bottom:16px; }
+.timeline-item:last-child{ margin-bottom:0; }
+.timeline-node{
+  position:absolute; left:-34px; top:2px; width:30px; height:30px; border-radius:999px;
+  background:var(--navy-900); color:#fff; display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-weight:700; font-size:11px; box-shadow:0 0 0 4px var(--paper);
+}
+.timeline-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:13px 15px; box-shadow:var(--shadow-sm); }
+.timeline-card-head{ display:flex; align-items:center; gap:8px; margin-bottom:9px; }
+.timeline-icon{ font-size:17px; line-height:1; }
+.timeline-title{ font-weight:700; font-size:14.5px; color:var(--ink-900); }
+.assignees{ display:flex; gap:6px; flex-wrap:wrap; }
+.chip{
+  background:var(--gold-100); color:var(--gold-600); font-size:11.5px; font-weight:700;
+  padding:4px 10px; border-radius:999px; font-family:var(--font-mono);
+}
+
+/* ---------- Wizard ---------- */
+.wizard-step{ margin-bottom:18px; }
+.select{
+  width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:var(--radius-sm);
+  background:var(--surface); color:var(--ink-900); font-size:15px;
+}
+.select:disabled{ background:var(--paper); color:var(--ink-400); cursor:not-allowed; }
+.select:not(:disabled):focus{ border-color:var(--gold-500); }
+.empty-note{
+  margin-top:9px; font-size:13px; color:var(--ink-600); background:var(--surface);
+  border:1px dashed var(--line); border-radius:var(--radius-sm); padding:10px 12px;
+}
+.result-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:20px; box-shadow:var(--shadow-md); margin-top:6px; animation:riseIn .35s ease both;
+}
+.result-eyebrow{
+  font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--ink-400); margin-bottom:5px;
+}
+.result-title{ font-family:var(--font-display); font-weight:800; font-size:19px; color:var(--ink-900); margin-bottom:16px; }
+.result-actions{ display:flex; align-items:center; justify-content:space-between; margin-top:12px; }
+
+@media (max-width:380px){
+  .content{ padding:18px 16px 34px; }
+  .login-card{ padding:26px 20px 22px; }
+}
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+}</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="brand">
+      <div class="brand-mark">LW</div>
+      <div>
+        <p class="brand-name">LUVITS WorkFlow</p>
+        <p class="brand-tag">Om Enterprise &middot; Offline Ops Portal</p>
+      </div>
+    </div>
+    <form id="loginForm" autocomplete="off" novalidate>
+      <label class="field">
+        <span class="field-label">Username</span>
+        <input type="text" id="username" autocomplete="off" spellcheck="false">
+      </label>
+      <label class="field">
+        <span class="field-label">Password</span>
+        <div class="password-row">
+          <input type="password" id="password" autocomplete="off">
+          <button type="button" id="togglePw" class="pw-toggle" aria-label="Show password">&#128065;</button>
+        </div>
+      </label>
+      <p id="loginError" class="login-error" role="alert"></p>
+      <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+    <p class="offline-note">Runs 100% offline &middot; No data leaves this device</p>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+
+  <div id="dashboardView" class="view">
+    <header class="topbar">
+      <div class="brand brand-sm">
+        <div class="brand-mark brand-mark-sm">LW</div>
+        <div>
+          <p class="brand-name-sm">LUVITS WorkFlow</p>
+          <p class="brand-tag-sm">Om Enterprise</p>
+        </div>
+      </div>
+      <button id="logoutBtn" class="icon-btn" aria-label="Sign out" title="Sign out">&#9211;</button>
+    </header>
+    <main class="content">
+      <button id="startWizardBtn" class="btn btn-cta">&#128640; Start A Menu Page</button>
+      <section>
+        <h1 class="section-title">Work Flow Board</h1>
+        <span class="section-sub">Product research to business scaling &mdash; who owns each phase.</span>
+        <div id="boardTimeline" class="timeline"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="wizardView" class="view hidden">
+    <header class="topbar">
+      <button id="backToBoardBtn" class="text-btn">&larr; Back to Dashboard</button>
+    </header>
+    <main class="content">
+      <section>
+        <h1 class="section-title">Tool Finder</h1>
+        <span class="section-sub">Answer four quick questions to get the exact link you need.</span>
+
+        <div class="wizard-step">
+          <label class="field-label" for="selName">1 &middot; Your name</label>
+          <select id="selName" class="select">
+            <option value="">Choose your name</option>
+          </select>
+        </div>
+
+        <div class="wizard-step">
+          <label class="field-label" for="selTag">2 &middot; Workflow phase</label>
+          <select id="selTag" class="select" disabled>
+            <option value="">Select a name first</option>
+          </select>
+        </div>
+
+        <div class="wizard-step">
+          <label class="field-label" for="selCat">3 &middot; Category</label>
+          <select id="selCat" class="select" disabled>
+            <option value="">Select a workflow phase first</option>
+          </select>
+          <p id="emptyCatNote" class="empty-note hidden"></p>
+        </div>
+
+        <div class="wizard-step">
+          <label class="field-label" for="selPurpose">4 &middot; Tool</label>
+          <select id="selPurpose" class="select" disabled>
+            <option value="">Select a category first</option>
+          </select>
+        </div>
+
+        <button id="wizardStartBtn" class="btn btn-go hidden">&#128640; Start</button>
+
+        <div id="resultCard" class="result-card hidden">
+          <p class="result-eyebrow" id="resultBreadcrumb"></p>
+          <p class="result-title" id="resultPurpose"></p>
+          <a id="resultLink" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Open tool &#8599;</a>
+          <div class="result-actions">
+            <button id="copyLinkBtn" class="text-btn">Copy link</button>
+            <button id="resetWizardBtn" class="text-btn">Start over</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   HARDCODED DATA — DO NOT ALTER, TRUNCATE, OR REMOVE ANY ROWS.
+   Sourced verbatim from Om_Enterprise.xlsx ("Work Flow" and
+   "Softwares & Websites For Work" sheets). See project brief
+   section 5, "Strict Instructions for AI Modification".
+   ============================================================ */
+const flowBoardData = [{"tag":"Product Research","a1":"Rajeshbhai","a2":"Mike"},{"tag":"Supplier Selection","a1":"Rajeshbhai","a2":"Rakeshbhai"},{"tag":"Sample Approval","a1":"Rakeshbhai","a2":"Jay"},{"tag":"Manufacturing","a1":"Rakeshbhai","a2":"Rajeshbhai"},{"tag":"Quality Inspection","a1":"Jay","a2":"Rakeshbhai"},{"tag":"India Launch","a1":"Jay","a2":"Jay"},{"tag":"Export","a1":"Jay","a2":"Rakeshbhai"},{"tag":"USA Warehouse","a1":"Mike","a2":"Rajeshbhai"},{"tag":"Amazon USA Launch","a1":"Jay","a2":"Mike"},{"tag":"Business Scaling","a1":"Jay","a2":"Mike"}];
+const websiteDatabase = [{"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon Best Sellers","link":"https://www.amazon.com/Best-Sellers/zgbs"},{"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon Movers & Shakers","link":"https://www.amazon.com/gp/movers-and-shakers"},{"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon New Releases","link":"https://www.amazon.com/gp/new-releases"},{"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon Most Wished For","link":"https://www.amazon.com/gp/most-wished-for"},{"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon Customer Reviews","link":"https://www.amazon.com/product-reviews"},{"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon Search Results","link":"https://www.amazon.com"},{"tag":"Product Research","cat":"Product Research","purpose":"Helium 10","link":"https://www.helium10.com"},{"tag":"Product Research","cat":"Product Research","purpose":"Jungle Scout","link":"https://www.junglescout.com"},{"tag":"Product Research","cat":"Product Research","purpose":"Keepa","link":"https://keepa.com"},{"tag":"Product Research","cat":"Product Research","purpose":"SellerAmp SAS","link":"https://sas.selleramp.com"},{"tag":"Product Research","cat":"Product Research","purpose":"DataDive","link":"https://datadive.tools"},{"tag":"Product Research","cat":"Product Research","purpose":"SmartScout","link":"https://www.smartscout.com"},{"tag":"Product Research","cat":"Product Research","purpose":"AMZScout","link":"https://amzscout.net"},{"tag":"Product Research","cat":"Keyword Research","purpose":"Google Trends","link":"https://trends.google.com"},{"tag":"Product Research","cat":"Keyword Research","purpose":"Google Keyword Planner","link":"https://ads.google.com/home/tools/keyword-planner/"},{"tag":"Product Research","cat":"Keyword Research","purpose":"Keyword Tool","link":"https://keywordtool.io"},{"tag":"Product Research","cat":"Keyword Research","purpose":"AnswerThePublic","link":"https://answerthepublic.com"},{"tag":"Product Research","cat":"Keyword Research","purpose":"Ubersuggest","link":"https://neilpatel.com/ubersuggest/"},{"tag":"Product Research","cat":"Trend Research","purpose":"Exploding Topics","link":"https://explodingtopics.com"},{"tag":"Product Research","cat":"Trend Research","purpose":"TikTok Creative Center","link":"https://ads.tiktok.com/business/creativecenter"},{"tag":"Product Research","cat":"Trend Research","purpose":"Pinterest Trends","link":"https://trends.pinterest.com"},{"tag":"Product Research","cat":"Trend Research","purpose":"Trend Hunter","link":"https://www.trendhunter.com"},{"tag":"Product Research","cat":"Trend Research","purpose":"Etsy","link":"https://www.etsy.com"},{"tag":"Product Research","cat":"Trend Research","purpose":"Google Shopping","link":"https://shopping.google.com"},{"tag":"Product Research","cat":"Trend Research","purpose":"Reddit","link":"https://www.reddit.com"},{"tag":"Product Research","cat":"Trend Research","purpose":"Instagram","link":"https://www.instagram.com"},{"tag":"Product Research","cat":"Trend Research","purpose":"Facebook Marketplace","link":"https://www.facebook.com/marketplace"},{"tag":"Product Research","cat":"Competitor Analysis","purpose":"CamelCamelCamel","link":"https://camelcamelcamel.com"},{"tag":"Product Research","cat":"Competitor Analysis","purpose":"ReviewMeta","link":"https://reviewmeta.com"},{"tag":"Product Research","cat":"Competitor Analysis","purpose":"Fakespot","link":"https://www.fakespot.com"},{"tag":"Product Research","cat":"Competitor Analysis","purpose":"Pricearchive","link":"https://pricearchive.org"},{"tag":"Product Research","cat":"Market Intelligence","purpose":"Statista","link":"https://www.statista.com"},{"tag":"Product Research","cat":"Market Intelligence","purpose":"World Bank Data","link":"https://data.worldbank.org"},{"tag":"Product Research","cat":"Market Intelligence","purpose":"Trading Economics","link":"https://tradingeconomics.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Alibaba","link":"https://www.alibaba.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"1688","link":"https://www.1688.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Global Sources","link":"https://www.globalsources.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Made-in-China","link":"https://www.made-in-china.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"IndiaMART","link":"https://www.indiamart.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"TradeIndia","link":"https://www.tradeindia.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"ExportersIndia","link":"https://www.exportersindia.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Thomasnet","link":"https://www.thomasnet.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Kompass","link":"https://www.kompass.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"EC21","link":"https://www.ec21.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"DHgate","link":"https://www.dhgate.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"AliExpress","link":"https://www.aliexpress.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"OpenCorporates","link":"https://opencorporates.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"Google Maps","link":"https://maps.google.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"LinkedIn","link":"https://www.linkedin.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"Google Search","link":"https://www.google.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"WHOIS Lookup","link":"https://who.is"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"Archive.org","link":"https://archive.org"},{"tag":"Supplier Selection","cat":"Supplier Background","purpose":"Panjiva","link":"https://panjiva.com"},{"tag":"Supplier Selection","cat":"Supplier Background","purpose":"ImportYeti","link":"https://www.importyeti.com"},{"tag":"Supplier Selection","cat":"Supplier Background","purpose":"Volza","link":"https://www.volza.com"},{"tag":"Supplier Selection","cat":"Supplier Background","purpose":"ImportGenius","link":"https://www.importgenius.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"SGS","link":"https://www.sgs.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"Intertek","link":"https://www.intertek.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"QIMA","link":"https://www.qima.com"},{"tag":"Supplier Selection","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Supplier Selection","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},{"tag":"Supplier Selection","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Supplier Selection","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Supplier Selection","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"Supplier Selection","cat":"Documents","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Supplier Selection","cat":"Documents","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Supplier Selection","cat":"Documents","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Supplier Selection","cat":"Documents","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Supplier Selection","cat":"Documents","purpose":"OneDrive","link":"https://onedrive.live.com"},{"tag":"Supplier Selection","cat":"Currency","purpose":"XE Currency Converter","link":"https://www.xe.com"},{"tag":"Supplier Selection","cat":"Currency","purpose":"OANDA Currency Converter","link":"https://www.oanda.com/currency-converter"},{"tag":"Sample Approval","cat":"AI","purpose":"ChatGPT","link":"https://chatgpt.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Alibaba","link":"https://www.alibaba.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"1688","link":"https://www.1688.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Global Sources","link":"https://www.globalsources.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Made-in-China","link":"https://www.made-in-china.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"IndiaMART","link":"https://www.indiamart.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"TradeIndia","link":"https://www.tradeindia.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Thomasnet","link":"https://www.thomasnet.com"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Uline","link":"https://www.uline.com"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Packlane","link":"https://www.packlane.com"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Noissue","link":"https://www.noissue.co"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"SwissPac","link":"https://www.swisspac.com"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Packhelp","link":"https://packhelp.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"CPSC","link":"https://www.cpsc.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FDA","link":"https://www.fda.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"EPA","link":"https://www.epa.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FCC","link":"https://www.fcc.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FTC","link":"https://www.ftc.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"USDA","link":"https://www.usda.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"European Commission Product Safety","link":"https://ec.europa.eu/safety-gate"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"UK GOV Product Safety","link":"https://www.gov.uk/product-safety-for-businesses"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"BIS India","link":"https://www.bis.gov.in"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"Bureau of Indian Standards CRS","link":"https://www.crsbis.in"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"ISO","link":"https://www.iso.org"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"ASTM International","link":"https://www.astm.org"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"UL Solutions","link":"https://www.ul.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"RoHS","link":"https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"REACH","link":"https://echa.europa.eu/regulations/reach"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"OEKO-TEX","link":"https://www.oeko-tex.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"GOTS","link":"https://global-standard.org"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"Sedex","link":"https://www.sedex.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"BSCI amfori","link":"https://www.amfori.org"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"SGS","link":"https://www.sgs.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Intertek","link":"https://www.intertek.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"QIMA","link":"https://www.qima.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"TÜV Rheinland","link":"https://www.tuv.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Eurofins","link":"https://www.eurofins.com"},{"tag":"Manufacturing","cat":"Lab Testing","purpose":"UL Solutions Testing","link":"https://www.ul.com/services/testing"},{"tag":"Manufacturing","cat":"Lab Testing","purpose":"TUV Testing Services","link":"https://www.tuvsud.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"QIMA Factory Audit","link":"https://www.qima.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"SGS Factory Audit","link":"https://www.sgs.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"Intertek Factory Audit","link":"https://www.intertek.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Manufacturing","cat":"Project Management","purpose":"Notion","link":"https://www.notion.so"},{"tag":"Manufacturing","cat":"Project Management","purpose":"Trello","link":"https://trello.com"},{"tag":"Manufacturing","cat":"Project Management","purpose":"ClickUp","link":"https://clickup.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Manufacturing","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"SGS","link":"https://www.sgs.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Intertek","link":"https://www.intertek.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"QIMA","link":"https://www.qima.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"TÜV Rheinland","link":"https://www.tuv.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Eurofins","link":"https://www.eurofins.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Cotecna","link":"https://www.cotecna.com"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"AQL Calculator","link":"https://www.aqltable.com"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ANSI/ASQ Z1.4","link":"https://asq.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ISO","link":"https://www.iso.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ASTM International","link":"https://www.astm.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"IEC","link":"https://www.iec.ch"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"SGS Testing Services","link":"https://www.sgs.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"Intertek Testing","link":"https://www.intertek.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"Eurofins Laboratories","link":"https://www.eurofins.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"UL Solutions Testing","link":"https://www.ul.com/services/testing"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"CPSC","link":"https://www.cpsc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FDA","link":"https://www.fda.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"EPA","link":"https://www.epa.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FCC","link":"https://www.fcc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FTC","link":"https://www.ftc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"OEKO-TEX","link":"https://www.oeko-tex.com"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"GOTS","link":"https://global-standard.org"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"REACH","link":"https://echa.europa.eu/regulations/reach"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"RoHS","link":"https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Quality Inspection","cat":"Image Documentation","purpose":"Google Photos","link":"https://photos.google.com"},{"tag":"Quality Inspection","cat":"Image Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"Export","cat":"Export Documentation","purpose":"DGFT (India)","link":"https://www.dgft.gov.in"},{"tag":"Export","cat":"Export Documentation","purpose":"ICEGATE","link":"https://www.icegate.gov.in"},{"tag":"Export","cat":"Export Documentation","purpose":"Indian Trade Portal","link":"https://www.indiantradeportal.in"},{"tag":"Export","cat":"Export Documentation","purpose":"FIEO","link":"https://www.fieo.org"},{"tag":"Export","cat":"Export Documentation","purpose":"GST Portal","link":"https://www.gst.gov.in"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"Indian Customs Tariff","link":"https://www.cbic.gov.in"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"USITC HTS Search","link":"https://hts.usitc.gov"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"WCO HS Database","link":"https://www.wcoomd.org"},{"tag":"Export","cat":"Customs & Regulations","purpose":"CBP (US Customs)","link":"https://www.cbp.gov"},{"tag":"Export","cat":"Customs & Regulations","purpose":"US Customs Rulings","link":"https://rulings.cbp.gov"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Freightos","link":"https://www.freightos.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Flexport","link":"https://www.flexport.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Maersk","link":"https://www.maersk.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"MSC","link":"https://www.msc.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"CMA CGM","link":"https://www.cma-cgm.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Hapag-Lloyd","link":"https://www.hapag-lloyd.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Evergreen Line","link":"https://www.evergreen-marine.com"},{"tag":"Export","cat":"Courier & Express","purpose":"DHL Express","link":"https://www.dhl.com"},{"tag":"Export","cat":"Courier & Express","purpose":"FedEx","link":"https://www.fedex.com"},{"tag":"Export","cat":"Courier & Express","purpose":"UPS","link":"https://www.ups.com"},{"tag":"Export","cat":"Courier & Express","purpose":"Aramex","link":"https://www.aramex.com"},{"tag":"Export","cat":"Container Tracking","purpose":"SeaRates","link":"https://www.searates.com"},{"tag":"Export","cat":"Container Tracking","purpose":"MarineTraffic","link":"https://www.marinetraffic.com"},{"tag":"Export","cat":"Container Tracking","purpose":"VesselFinder","link":"https://www.vesselfinder.com"},{"tag":"Export","cat":"Cargo Insurance","purpose":"Allianz Trade","link":"https://www.allianz-trade.com"},{"tag":"Export","cat":"Cargo Insurance","purpose":"Marsh","link":"https://www.marsh.com"},{"tag":"Export","cat":"Trade Compliance","purpose":"Export Genius","link":"https://www.exportgenius.in"},{"tag":"Export","cat":"Trade Compliance","purpose":"Volza","link":"https://www.volza.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Export","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Export","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Export","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Export","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"Flexe","link":"https://www.flexe.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"WareSpace","link":"https://www.warespace.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"LoopNet","link":"https://www.loopnet.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"CommercialCafe","link":"https://www.commercialcafe.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"Prologis","link":"https://www.prologis.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"ReadySpaces","link":"https://www.readyspaces.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"ShipBob","link":"https://www.shipbob.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"ShipHero","link":"https://shiphero.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"Red Stag Fulfillment","link":"https://redstagfulfillment.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"Extensiv","link":"https://www.extensiv.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"uShip","link":"https://www.uship.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"Freightos","link":"https://www.freightos.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"GoShare","link":"https://goshare.co"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"Roadie","link":"https://www.roadie.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"U-Haul","link":"https://www.uhaul.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Penske Truck Rental","link":"https://www.pensketruckrental.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Budget Truck Rental","link":"https://www.budgettruck.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Enterprise Truck Rental","link":"https://www.enterprisetrucks.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Ryder Truck Rental","link":"https://www.ryder.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Two Men and a Truck","link":"https://twomenandatruck.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"PODS","link":"https://www.pods.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Bellhop","link":"https://www.getbellhops.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Moving Help","link":"https://www.movinghelp.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"HireAHelper","link":"https://www.hireahelper.com"},{"tag":"USA Warehouse","cat":"Pallet Supplier","purpose":"CHEP","link":"https://www.chep.com"},{"tag":"USA Warehouse","cat":"Pallet Supplier","purpose":"PECO Pallet","link":"https://www.pecopallet.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Uline","link":"https://www.uline.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Grainger","link":"https://www.grainger.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Global Industrial","link":"https://www.globalindustrial.com"},{"tag":"USA Warehouse","cat":"Forklift Rental","purpose":"United Rentals","link":"https://www.unitedrentals.com"},{"tag":"USA Warehouse","cat":"Forklift Rental","purpose":"Sunbelt Rentals","link":"https://www.sunbeltrentals.com"},{"tag":"USA Warehouse","cat":"Equipment Rental","purpose":"Herc Rentals","link":"https://www.hercrentals.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"Public Storage","link":"https://www.publicstorage.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"Extra Space Storage","link":"https://www.extraspace.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"CubeSmart","link":"https://www.cubesmart.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"PeopleReady","link":"https://www.peopleready.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"Instawork","link":"https://www.instawork.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"Wonolo","link":"https://www.wonolo.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"UPS","link":"https://www.ups.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"FedEx","link":"https://www.fedex.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"USPS","link":"https://www.usps.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"DHL","link":"https://www.dhl.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Yelp","link":"https://www.yelp.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Google Maps","link":"https://maps.google.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Yellow Pages","link":"https://www.yellowpages.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Seller Central","link":"https://sellercentral.amazon.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Brand Registry","link":"https://brandservices.amazon.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon FBA","link":"https://sell.amazon.com/fulfillment-by-amazon"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Partnered Carrier","link":"https://sellercentral.amazon.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"MyFBAPrep","link":"https://myfbaprep.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"AMZ Prep","link":"https://amzprep.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"ShipBob","link":"https://www.shipbob.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"Prep Ninjas","link":"https://prepninjas.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"West Coast Prep","link":"https://westcoastprep.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Packlane","link":"https://www.packlane.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Noissue","link":"https://www.noissue.co"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Uline","link":"https://www.uline.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Packhelp","link":"https://packhelp.com"},{"tag":"Amazon USA Launch","cat":"Packaging Supplies","purpose":"Grainger","link":"https://www.grainger.com"},{"tag":"Amazon USA Launch","cat":"Packaging Supplies","purpose":"Global Industrial","link":"https://www.globalindustrial.com"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Staples Print & Marketing","link":"https://www.staples.com/services/printing"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Office Depot Print","link":"https://www.officedepot.com/print"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"The UPS Store Printing","link":"https://www.theupsstore.com/print"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"FedEx Office","link":"https://www.office.fedex.com"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Vistaprint","link":"https://www.vistaprint.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"Zebra Technologies","link":"https://www.zebra.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"BarTender","link":"https://www.seagullscientific.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"Loftware","link":"https://www.loftware.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Fiverr","link":"https://www.fiverr.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Upwork","link":"https://www.upwork.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Freelancer","link":"https://www.freelancer.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"PeoplePerHour","link":"https://www.peopleperhour.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Instawork","link":"https://www.instawork.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Wonolo","link":"https://www.wonolo.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"PeopleReady","link":"https://www.peopleready.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Veryable","link":"https://www.veryableops.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Bluecrew","link":"https://www.bluecrewjobs.com"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Amazon Imaging","link":"https://amazonimaging.com"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Soona","link":"https://soona.co"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Squareshot","link":"https://www.squareshot.com"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"Helium 10","link":"https://www.helium10.com"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"DataDive","link":"https://datadive.tools"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"Jungle Scout","link":"https://www.junglescout.com"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Amazon Ads","link":"https://advertising.amazon.com"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Perpetua","link":"https://perpetua.io"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Pacvue","link":"https://pacvue.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Seller Central Business Reports","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Brand Analytics","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Product Opportunity Explorer","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Helium 10","link":"https://www.helium10.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Jungle Scout","link":"https://www.junglescout.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"DataDive","link":"https://datadive.tools"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Keepa","link":"https://keepa.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"Amazon Reviews","link":"https://www.amazon.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"FeedbackWhiz","link":"https://www.feedbackwhiz.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"Helium 10 Follow-Up","link":"https://www.helium10.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"SmartScout","link":"https://www.smartscout.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"SellerAmp SAS","link":"https://sas.selleramp.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"Google Shopping","link":"https://shopping.google.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"Sellerboard","link":"https://sellerboard.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"Shopkeeper","link":"https://shopkeeper.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"ManageByStats","link":"https://managebystats.com"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Amazon Ads","link":"https://advertising.amazon.com"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Perpetua","link":"https://perpetua.io"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Pacvue","link":"https://pacvue.com"},{"tag":"Business Scaling","cat":"Email & CRM","purpose":"HubSpot","link":"https://www.hubspot.com"},{"tag":"Business Scaling","cat":"Email & CRM","purpose":"Mailchimp","link":"https://mailchimp.com"},{"tag":"Business Scaling","cat":"Surveys","purpose":"Typeform","link":"https://www.typeform.com"},{"tag":"Business Scaling","cat":"Surveys","purpose":"Google Forms","link":"https://forms.google.com"},{"tag":"Business Scaling","cat":"Project Management","purpose":"Notion","link":"https://www.notion.so"},{"tag":"Business Scaling","cat":"Project Management","purpose":"ClickUp","link":"https://clickup.com"},{"tag":"Business Scaling","cat":"Project Management","purpose":"Asana","link":"https://asana.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"Zapier","link":"https://zapier.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"Make","link":"https://www.make.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"n8n","link":"https://n8n.io"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Looker Studio","link":"https://lookerstudio.google.com"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Power BI","link":"https://powerbi.microsoft.com"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Tableau","link":"https://www.tableau.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Fiverr","link":"https://www.fiverr.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Upwork","link":"https://www.upwork.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Toptal","link":"https://www.toptal.com"},{"tag":"Business Scaling","cat":"Patent & Trademark","purpose":"USPTO","link":"https://www.uspto.gov"},{"tag":"Business Scaling","cat":"Patent & Trademark","purpose":"WIPO","link":"https://www.wipo.int"}];
+
+const workflowIcons = {
+  "Product Research":"\u{1F50D}",
+  "Supplier Selection":"\u{1F91D}",
+  "Sample Approval":"\u2705",
+  "Manufacturing":"\u{1F3ED}",
+  "Quality Inspection":"\u{1F9EA}",
+  "India Launch":"\u{1F1EE}\u{1F1F3}",
+  "Export":"\u{1F6A2}",
+  "USA Warehouse":"\u{1F3EC}",
+  "Amazon USA Launch":"\u{1F4E6}",
+  "Business Scaling":"\u{1F4C8}"
+};
+
+const VALID_USERNAME = "Admin";
+const VALID_PASSWORD = "112233";
+
+/* ---------- helpers ---------- */
+function escapeHtml(str){
+  const d = document.createElement("div");
+  d.textContent = str;
+  return d.innerHTML;
+}
+function clearSelect(sel, placeholder){
+  sel.innerHTML = '<option value="">' + placeholder + "</option>";
+  sel.disabled = true;
+  sel.value = "";
+}
+function hostnameOf(url){
+  try{ return new URL(url).hostname.replace(/^www\./,""); }
+  catch(e){ return url; }
+}
+
+/* ---------- element refs ---------- */
+const loginScreen = document.getElementById("loginScreen");
+const loginForm = document.getElementById("loginForm");
+const loginError = document.getElementById("loginError");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const appEl = document.getElementById("app");
+const dashboardView = document.getElementById("dashboardView");
+const wizardView = document.getElementById("wizardView");
+const boardTimeline = document.getElementById("boardTimeline");
+const selName = document.getElementById("selName");
+const selTag = document.getElementById("selTag");
+const selCat = document.getElementById("selCat");
+const selPurpose = document.getElementById("selPurpose");
+const emptyCatNote = document.getElementById("emptyCatNote");
+const wizardStartBtn = document.getElementById("wizardStartBtn");
+const resultCard = document.getElementById("resultCard");
+
+/* ---------- Phase 1: Authentication ---------- */
+loginForm.addEventListener("submit", function(e){
+  e.preventDefault();
+  const u = usernameInput.value.trim();
+  const p = passwordInput.value;
+  if(u === VALID_USERNAME && p === VALID_PASSWORD){
+    loginError.classList.remove("shown","shake");
+    loginScreen.classList.add("hidden");
+    appEl.classList.remove("hidden");
+    initDashboard();
+  } else {
+    showLoginError();
+  }
+});
+
+function showLoginError(){
+  loginError.textContent = "Invalid Credentials. Access Denied";
+  loginError.classList.add("shown");
+  loginError.classList.remove("shake");
+  void loginError.offsetWidth;
+  loginError.classList.add("shake");
+  passwordInput.value = "";
+  passwordInput.focus();
+}
+
+document.getElementById("togglePw").addEventListener("click", function(){
+  const isPw = passwordInput.type === "password";
+  passwordInput.type = isPw ? "text" : "password";
+  this.innerHTML = isPw ? "&#128584;" : "&#128065;";
+  this.setAttribute("aria-label", isPw ? "Hide password" : "Show password");
+});
+
+document.getElementById("logoutBtn").addEventListener("click", function(){
+  appEl.classList.add("hidden");
+  loginScreen.classList.remove("hidden");
+  usernameInput.value = "";
+  passwordInput.value = "";
+  loginError.classList.remove("shown","shake");
+  resetWizard();
+  showDashboardView();
+  usernameInput.focus();
+});
+
+/* ---------- Phase 2: Dashboard ---------- */
+function initDashboard(){
+  renderBoard();
+  populateNameSelect();
+}
+
+function renderBoard(){
+  boardTimeline.innerHTML = flowBoardData.map(function(item, idx){
+    const num = String(idx + 1).padStart(2, "0");
+    const icon = workflowIcons[item.tag] || "\u2022";
+    return (
+      '<div class="timeline-item">' +
+        '<div class="timeline-node">' + num + "</div>" +
+        '<div class="timeline-card">' +
+          '<div class="timeline-card-head">' +
+            '<span class="timeline-icon">' + icon + "</span>" +
+            '<span class="timeline-title">' + escapeHtml(item.tag) + "</span>" +
+          "</div>" +
+          '<div class="assignees">' +
+            '<span class="chip">' + escapeHtml(item.a1) + "</span>" +
+            '<span class="chip">' + escapeHtml(item.a2) + "</span>" +
+          "</div>" +
+        "</div>" +
+      "</div>"
+    );
+  }).join("");
+}
+
+/* ---------- View switching ---------- */
+document.getElementById("startWizardBtn").addEventListener("click", showWizardView);
+document.getElementById("backToBoardBtn").addEventListener("click", showDashboardView);
+
+function showWizardView(){
+  dashboardView.classList.add("hidden");
+  wizardView.classList.remove("hidden");
+}
+function showDashboardView(){
+  wizardView.classList.add("hidden");
+  dashboardView.classList.remove("hidden");
+}
+
+/* ---------- Phase 3: Interactive Wizard ---------- */
+function populateNameSelect(){
+  const names = [...new Set(flowBoardData.flatMap(function(f){ return [f.a1, f.a2]; }))].sort();
+  selName.innerHTML = '<option value="">Choose your name</option>' +
+    names.map(function(n){ return '<option value="' + escapeHtml(n) + '">' + escapeHtml(n) + "</option>"; }).join("");
+}
+
+selName.addEventListener("change", function(){
+  clearSelect(selTag, "Select a name first");
+  clearSelect(selCat, "Select a workflow phase first");
+  clearSelect(selPurpose, "Select a category first");
+  emptyCatNote.classList.add("hidden");
+  wizardStartBtn.classList.add("hidden");
+  hideResult();
+  if(!selName.value) return;
+
+  const tags = [...new Set(flowBoardData.map(function(f){ return f.tag; }))];
+  selTag.innerHTML = '<option value="">Choose a workflow phase</option>' +
+    tags.map(function(t){ return '<option value="' + escapeHtml(t) + '">' + escapeHtml(t) + "</option>"; }).join("");
+  selTag.disabled = false;
+});
+
+selTag.addEventListener("change", function(){
+  clearSelect(selCat, "Select a workflow phase first");
+  clearSelect(selPurpose, "Select a category first");
+  emptyCatNote.classList.add("hidden");
+  wizardStartBtn.classList.add("hidden");
+  hideResult();
+  if(!selTag.value) return;
+
+  const cats = [...new Set(
+    websiteDatabase.filter(function(w){ return w.tag === selTag.value; }).map(function(w){ return w.cat; })
+  )];
+
+  if(cats.length === 0){
+    selCat.innerHTML = '<option value="">No categories available</option>';
+    selCat.disabled = true;
+    emptyCatNote.textContent = 'No tools have been mapped for "' + selTag.value + '" yet. Ask an admin to add some.';
+    emptyCatNote.classList.remove("hidden");
+    return;
+  }
+  selCat.innerHTML = '<option value="">Choose a category</option>' +
+    cats.map(function(c){ return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + "</option>"; }).join("");
+  selCat.disabled = false;
+});
+
+selCat.addEventListener("change", function(){
+  clearSelect(selPurpose, "Select a category first");
+  wizardStartBtn.classList.add("hidden");
+  hideResult();
+  if(!selCat.value) return;
+
+  const purposes = websiteDatabase.filter(function(w){
+    return w.tag === selTag.value && w.cat === selCat.value;
+  });
+  selPurpose.innerHTML = '<option value="">Choose a tool</option>' +
+    purposes.map(function(p){ return '<option value="' + escapeHtml(p.purpose) + '">' + escapeHtml(p.purpose) + "</option>"; }).join("");
+  selPurpose.disabled = false;
+});
+
+selPurpose.addEventListener("change", function(){
+  hideResult();
+  wizardStartBtn.classList.toggle("hidden", !selPurpose.value);
+});
+
+wizardStartBtn.addEventListener("click", function(){
+  const tag = selTag.value, cat = selCat.value, purpose = selPurpose.value;
+  const match = websiteDatabase.find(function(w){
+    return w.tag === tag && w.cat === cat && w.purpose === purpose;
+  });
+  if(!match) return;
+
+  document.getElementById("resultBreadcrumb").textContent = tag + " \u203A " + cat;
+  document.getElementById("resultPurpose").textContent = match.purpose;
+  const link = document.getElementById("resultLink");
+  link.href = match.link;
+  link.textContent = "Open " + hostnameOf(match.link) + " \u2197";
+
+  wizardStartBtn.classList.add("hidden");
+  resultCard.classList.remove("hidden");
+  resultCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+
+function hideResult(){
+  resultCard.classList.add("hidden");
+}
+
+document.getElementById("copyLinkBtn").addEventListener("click", function(){
+  copyText(document.getElementById("resultLink").href, this);
+});
+
+function copyText(text, btn){
+  const done = function(){
+    const original = btn.textContent;
+    btn.textContent = "Copied \u2713";
+    setTimeout(function(){ btn.textContent = original; }, 1500);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(function(){ legacyCopy(text, done); });
+  } else {
+    legacyCopy(text, done);
+  }
+}
+
+function legacyCopy(text, cb){
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand("copy"); } catch(e){}
+  document.body.removeChild(ta);
+  cb();
+}
+
+document.getElementById("resetWizardBtn").addEventListener("click", resetWizard);
+
+function resetWizard(){
+  selName.value = "";
+  clearSelect(selTag, "Select a name first");
+  clearSelect(selCat, "Select a workflow phase first");
+  clearSelect(selPurpose, "Select a category first");
+  emptyCatNote.classList.add("hidden");
+  wizardStartBtn.classList.add("hidden");
+  hideResult();
+  showDashboardView();
+}
+</script>
+</body>
+</html>
