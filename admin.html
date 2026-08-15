@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Console | LUVITS — Secure Management Portal</title>
+  <meta name="description" content="Secure LUVITS Administrator Console for user account management, access control, and prescribed tools directory." />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .admin-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    .admin-kpi-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      transition: all var(--transition-fast);
+    }
+    .admin-kpi-card:hover {
+      border-color: var(--border-gold-subtle);
+      background: rgba(212, 175, 55, 0.03);
+      transform: translateY(-2px);
+    }
+    .admin-kpi-num {
+      font-family: var(--font-display);
+      font-size: var(--fs-3xl);
+      font-weight: 800;
+      color: var(--gold-light);
+      line-height: 1.1;
+      margin-top: 6px;
+    }
+    .admin-tabs-nav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-medium);
+      margin-bottom: var(--space-lg);
+      padding-bottom: 4px;
+    }
+    .admin-tab-btn {
+      padding: 10px 18px;
+      font-family: var(--font-display);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .admin-tab-btn.is-active {
+      color: var(--gold-light);
+      border-bottom-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.08);
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+    .admin-table-wrap {
+      overflow-x: auto;
+      background: rgba(18, 18, 22, 0.95);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--fs-xs);
+      text-align: left;
+    }
+    .admin-table th {
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border-medium);
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .admin-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+    .admin-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .status-active {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+    }
+    .status-suspended {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+    }
+    .role-badge {
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .role-admin {
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid var(--border-gold-subtle);
+      color: var(--gold-light);
+    }
+    .role-user {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: var(--z-modal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-dialog {
+      background: #141419;
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      max-width: 560px;
+      width: 100%;
+      box-shadow: var(--shadow-luxury);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body class="admin-page">
+  <div data-global-header></div>
+
+  <main id="main-content" style="padding-top: calc(var(--header-height) + var(--space-lg)); padding-bottom: var(--space-3xl); min-height: 85vh;">
+    <div class="container" style="max-width: 1180px;">
+
+      <!-- Access Verification Loading State -->
+      <div id="admin-auth-loading" class="luxury-card text-center" style="padding: var(--space-3xl) var(--space-lg); margin-top: var(--space-xl);">
+        <div class="spinner" style="width: 32px; height: 32px; border: 3px solid rgba(212,175,55,0.2); border-top-color: var(--gold-primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;"></div>
+        <h2 style="font-size: var(--fs-xl); color: var(--gold-light);">Verifying Administrator Credentials...</h2>
+        <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 6px;">Validating database role and permissions via Supabase RLS.</p>
+      </div>
+
+      <!-- Authenticated Admin Content Section -->
+      <div id="admin-main-section" class="hidden">
+        
+        <!-- Header Banner Card -->
+        <div class="luxury-card anime-reveal" style="padding: var(--space-lg) var(--space-xl); margin-bottom: var(--space-xl);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px;">RESTRICTED AREA</span>
+                <span id="admin-user-tag" style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 700;">ADMINISTRATOR CONSOLE</span>
+              </div>
+              <h1 style="font-size: var(--fs-3xl); margin-top: 2px; letter-spacing: -0.01em;">LUVITS ADMIN CONSOLE</h1>
+              <p style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; max-width: 600px;">
+                Manage verified user accounts, access controls, and prescribed software directory.
+              </p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <a href="LUVITS_WorkFlow.html" class="btn btn-gold btn-sm" title="View Tool Finder as Member">
+                ⚡ Open Tool Finder
+              </a>
+              <button id="admin-logout-btn" class="btn btn-outline btn-sm" title="Sign out">
+                Sign Out ⎋
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Global Alert Message Box -->
+        <div id="admin-alert" class="hidden" style="padding: 12px 16px; border-radius: var(--radius-sm); font-size: var(--fs-xs); margin-bottom: var(--space-lg);"></div>
+
+        <!-- Summary KPI Metric Cards -->
+        <div class="admin-kpi-grid">
+          <div class="admin-kpi-card">
+            <span class="input-label" style="font-size: 0.7rem;">Total Registered Users</span>
+            <div class="admin-kpi-num" id="kpi-total-users">--</div>
+            <span style="font-size: var(--fs-xs); color: var(--text-muted);">Verified Member Profiles</span>
+          </div>
+          <div class="admin-kpi-card">
+            <span class="input-label" style="font-size: 0.7rem;">Active / Suspended</span>
+            <div class="admin-kpi-num" id="kpi-active-suspended">-- / --</div>
+            <span style="font-size: var(--fs-xs); color: var(--text-muted);" id="kpi-active-sub">Accounts in Good Standing</span>
+          </div>
+          <div class="admin-kpi-card">
+            <span class="input-label" style="font-size: 0.7rem;">Saved Preferences</span>
+            <div class="admin-kpi-num" id="kpi-total-prefs">--</div>
+            <span style="font-size: var(--fs-xs); color: var(--text-muted);">Active Tool Selections</span>
+          </div>
+          <div class="admin-kpi-card">
+            <span class="input-label" style="font-size: 0.7rem;">Prescribed Tools</span>
+            <div class="admin-kpi-num" id="kpi-total-tools">--</div>
+            <span style="font-size: var(--fs-xs); color: var(--text-muted);" id="kpi-tools-sub">Active Catalog Tools</span>
+          </div>
+        </div>
+
+        <!-- Admin Navigation Tabs -->
+        <div class="admin-tabs-nav" role="tablist">
+          <button class="admin-tab-btn is-active" id="tab-users-btn" role="tab" aria-selected="true" aria-controls="tab-pane-users">
+            <span>👥</span>
+            <span>User Accounts &amp; Access</span>
+          </button>
+          <button class="admin-tab-btn" id="tab-tools-btn" role="tab" aria-selected="false" aria-controls="tab-pane-tools">
+            <span>🛠️</span>
+            <span>Prescribed Tools Directory</span>
+          </button>
+        </div>
+
+        <!-- ====================================================
+             TAB PANE 1: USER ACCOUNTS MANAGEMENT
+             ==================================================== -->
+        <div id="tab-pane-users" role="tabpanel" class="anime-reveal">
+          
+          <div class="luxury-card" style="padding: var(--space-lg) var(--space-xl);">
+            
+            <!-- Filters Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md);">
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; flex: 1;">
+                <input type="text" id="user-search-input" class="luxury-input" placeholder="🔍 Search by name, email, business, or city..." style="max-width: 380px; padding: 0.75rem 1rem;" />
+                <select id="user-status-filter" class="luxury-select" style="max-width: 180px; padding: 0.75rem 1rem;">
+                  <option value="ALL">All Account Statuses</option>
+                  <option value="active">Active Only</option>
+                  <option value="suspended">Suspended Only</option>
+                </select>
+              </div>
+              <button id="refresh-users-btn" class="btn btn-outline btn-sm">
+                🔄 Refresh Users
+              </button>
+            </div>
+
+            <!-- Users Data Table -->
+            <div class="admin-table-wrap">
+              <table class="admin-table" id="users-table">
+                <thead>
+                  <tr>
+                    <th>User &amp; Email</th>
+                    <th>Business</th>
+                    <th>Location</th>
+                    <th>Role</th>
+                    <th>Saved Tool</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="users-table-body">
+                  <tr>
+                    <td colspan="7" class="text-center" style="padding: 2rem; color: var(--text-muted);">
+                      Loading users from Supabase...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ====================================================
+             TAB PANE 2: PRESCRIBED TOOLS DIRECTORY MANAGEMENT
+             ==================================================== -->
+        <div id="tab-pane-tools" role="tabpanel" class="hidden anime-reveal">
+          
+          <div class="luxury-card" style="padding: var(--space-lg) var(--space-xl);">
+            
+            <!-- Tools Action Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md);">
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; flex: 1;">
+                <input type="text" id="tool-search-input" class="luxury-input" placeholder="🔍 Search tool name, category, or phase..." style="max-width: 340px; padding: 0.75rem 1rem;" />
+                <select id="tool-phase-filter" class="luxury-select" style="max-width: 240px; padding: 0.75rem 1rem;">
+                  <option value="ALL">All Operational Phases</option>
+                  <option value="Product Research">Product Research</option>
+                  <option value="Supplier Selection">Supplier Selection</option>
+                  <option value="Sample Approval">Sample Approval</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Quality Inspection">Quality Inspection</option>
+                  <option value="Export">Export</option>
+                  <option value="USA Warehouse">USA Warehouse</option>
+                  <option value="Amazon USA Launch">Amazon USA Launch</option>
+                  <option value="Business Scaling">Business Scaling</option>
+                </select>
+              </div>
+              <button id="add-tool-btn" class="btn btn-gold btn-sm">
+                ➕ Add New Tool
+              </button>
+            </div>
+
+            <!-- Tools Data Table -->
+            <div class="admin-table-wrap">
+              <table class="admin-table" id="tools-table">
+                <thead>
+                  <tr>
+                    <th>Tool / Software</th>
+                    <th>Operational Phase</th>
+                    <th>Category</th>
+                    <th>URL Link</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tools-table-body">
+                  <tr>
+                    <td colspan="6" class="text-center" style="padding: 2rem; color: var(--text-muted);">
+                      Loading tools from Supabase...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ====================================================
+       MODAL 1: USER DETAILS MODAL (NON-SENSITIVE)
+       ==================================================== -->
+  <div id="user-detail-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        <h3 style="font-size: var(--fs-lg); color: var(--gold-light); font-family: var(--font-display);">User Account Profile</h3>
+        <button type="button" class="btn btn-outline btn-sm" id="close-user-modal-btn" style="padding: 4px 8px;">✕</button>
+      </div>
+
+      <div id="user-modal-content" style="display: flex; flex-direction: column; gap: 12px; font-size: var(--fs-xs);">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       MODAL 2: ADD / EDIT TOOL MODAL
+       ==================================================== -->
+  <div id="tool-form-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        <h3 id="tool-modal-title" style="font-size: var(--fs-lg); color: var(--gold-light); font-family: var(--font-display);">Add New Prescribed Tool</h3>
+        <button type="button" class="btn btn-outline btn-sm" id="close-tool-modal-btn" style="padding: 4px 8px;">✕</button>
+      </div>
+
+      <form id="tool-edit-form" novalidate>
+        <input type="hidden" id="tool-form-id" value="" />
+
+        <div class="form-group">
+          <label for="tool-form-tag" class="input-label">Operational Phase *</label>
+          <select id="tool-form-tag" class="luxury-select" required>
+            <option value="Product Research">Product Research</option>
+            <option value="Supplier Selection">Supplier Selection</option>
+            <option value="Sample Approval">Sample Approval</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Quality Inspection">Quality Inspection</option>
+            <option value="Export">Export</option>
+            <option value="USA Warehouse">USA Warehouse</option>
+            <option value="Amazon USA Launch">Amazon USA Launch</option>
+            <option value="Business Scaling">Business Scaling</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tool-form-cat" class="input-label">Category / Department *</label>
+          <input type="text" id="tool-form-cat" class="luxury-input" placeholder="e.g. Amazon Research, Supplier Sourcing" required />
+        </div>
+
+        <div class="form-group">
+          <label for="tool-form-purpose" class="input-label">Tool / Software Name *</label>
+          <input type="text" id="tool-form-purpose" class="luxury-input" placeholder="e.g. Helium 10, Alibaba" required />
+        </div>
+
+        <div class="form-group">
+          <label for="tool-form-link" class="input-label">Target URL *</label>
+          <input type="url" id="tool-form-link" class="luxury-input" placeholder="https://example.com" required />
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+          <input type="checkbox" id="tool-form-active" checked style="accent-color: var(--gold-primary); width: 16px; height: 16px;" />
+          <label for="tool-form-active" style="font-size: var(--fs-xs); color: var(--text-primary); cursor: pointer;">Active &amp; Available in Tool Finder</label>
+        </div>
+
+        <button type="submit" id="save-tool-submit-btn" class="btn btn-gold" style="width: 100%; margin-top: var(--space-sm);">
+          Save Tool Entry →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div data-global-footer></div>
+
+  <script type="module" src="assets/js/app.js"></script>
+  <script type="module">
+    import { authStore } from './assets/js/auth-store.js';
+    import {
+      supabase,
+      supabaseCheckIsAdmin,
+      supabaseGetAllUsers,
+      supabaseSetUserStatus,
+      supabaseGetTools,
+      supabaseCreateTool,
+      supabaseUpdateTool,
+      supabaseToggleToolStatus
+    } from './assets/js/supabase-config.js';
+
+    /* ---------- State ---------- */
+    let currentAdminUser = null;
+    let cachedUsers = [];
+    let cachedTools = [];
+
+    const loadingSection = document.getElementById('admin-auth-loading');
+    const mainSection = document.getElementById('admin-main-section');
+    const adminAlert = document.getElementById('admin-alert');
+
+    /* ============================================================
+       1. STRICT ROUTE & ROLE GUARD
+       ============================================================ */
+    async function verifyAdminAccess() {
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        const session = sessionData?.session;
+
+        // Unauthenticated -> redirect to auth.html
+        if (!session || !session.user) {
+          window.location.replace('auth.html');
+          return;
+        }
+
+        const user = session.user;
+        const userEmail = (user.email || '').toLowerCase();
+
+        // Check if caller is admin via secure method / email fallback
+        const isAdmin = await supabaseCheckIsAdmin(user.id) || (userEmail === 'jayavaghela005@gmail.com');
+
+        if (!isAdmin) {
+          console.warn('Access denied: User is not an administrator.');
+          window.location.replace('LUVITS_WorkFlow.html');
+          return;
+        }
+
+        currentAdminUser = user;
+        document.getElementById('admin-user-tag').textContent = `ADMIN: ${userEmail.toUpperCase()}`;
+
+        loadingSection.classList.add('hidden');
+        mainSection.classList.remove('hidden');
+
+        // Load dashboard datasets
+        await Promise.all([loadUsersData(), loadToolsData()]);
+      } catch (err) {
+        console.error('Admin verification error:', err);
+        window.location.replace('auth.html');
+      }
+    }
+
+    /* ---------- Notification Helper ---------- */
+    function showAdminAlert(msg, isSuccess = true) {
+      adminAlert.textContent = msg;
+      adminAlert.style.display = 'block';
+      adminAlert.className = isSuccess
+        ? 'status-active'
+        : 'status-suspended';
+      adminAlert.style.padding = '12px 16px';
+      adminAlert.style.borderRadius = 'var(--radius-sm)';
+      adminAlert.style.marginBottom = 'var(--space-lg)';
+      setTimeout(() => { adminAlert.style.display = 'none'; }, 4000);
+    }
+
+    function escapeHtml(str) {
+      const d = document.createElement('div');
+      d.textContent = str || '';
+      return d.innerHTML;
+    }
+
+    /* ============================================================
+       2. USER ACCOUNTS MANAGEMENT
+       ============================================================ */
+    async function loadUsersData() {
+      cachedUsers = await supabaseGetAllUsers();
+      renderKPIs();
+      renderUsersTable();
+    }
+
+    function renderKPIs() {
+      const totalUsers = cachedUsers.length;
+      const activeCount = cachedUsers.filter(u => u.status !== 'suspended').length;
+      const suspendedCount = totalUsers - activeCount;
+      const prefCount = cachedUsers.filter(u => u.preference && u.preference.tool).length;
+      const totalTools = cachedTools.length;
+      const activeTools = cachedTools.filter(t => t.is_active).length;
+
+      document.getElementById('kpi-total-users').textContent = totalUsers;
+      document.getElementById('kpi-active-suspended').textContent = `${activeCount} / ${suspendedCount}`;
+      document.getElementById('kpi-active-sub').textContent = `${activeCount} Active • ${suspendedCount} Suspended`;
+      document.getElementById('kpi-total-prefs').textContent = prefCount;
+      document.getElementById('kpi-total-tools').textContent = totalTools;
+      document.getElementById('kpi-tools-sub').textContent = `${activeTools} Active in Tool Finder`;
+    }
+
+    function renderUsersTable() {
+      const query = (document.getElementById('user-search-input').value || '').trim().toLowerCase();
+      const statusFilter = document.getElementById('user-status-filter').value;
+      const tbody = document.getElementById('users-table-body');
+
+      let filtered = cachedUsers.filter(u => {
+        const matchesQuery = !query ||
+          (u.full_name || '').toLowerCase().includes(query) ||
+          (u.email || '').toLowerCase().includes(query) ||
+          (u.business_name || '').toLowerCase().includes(query) ||
+          (u.business_city || '').toLowerCase().includes(query);
+
+        const matchesStatus = statusFilter === 'ALL' || u.status === statusFilter;
+        return matchesQuery && matchesStatus;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center" style="padding: 2rem; color: var(--text-muted);">
+              No user accounts found matching your filters.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(u => {
+        const isSuspended = u.status === 'suspended';
+        const role = u.role || 'user';
+        const prefTool = u.preference?.tool || '<span style="color: var(--text-muted);">None</span>';
+        const location = [u.business_city, u.business_state, u.business_country].filter(Boolean).join(', ') || 'India';
+
+        return `
+          <tr>
+            <td>
+              <div style="font-weight: 700; color: #FFFFFF;">${escapeHtml(u.full_name || 'Member')}</div>
+              <div style="color: var(--text-muted); font-size: 0.72rem;">${escapeHtml(u.email || 'No email')}</div>
+            </td>
+            <td>${escapeHtml(u.business_name || 'LUVITS Client')}</td>
+            <td>${escapeHtml(location)}</td>
+            <td>
+              <span class="role-badge ${role === 'admin' ? 'role-admin' : 'role-user'}">${role}</span>
+            </td>
+            <td>${prefTool}</td>
+            <td>
+              <span class="status-badge ${isSuspended ? 'status-suspended' : 'status-active'}">
+                ${isSuspended ? '⛔ Suspended' : '✓ Active'}
+              </span>
+            </td>
+            <td style="text-align: right; white-space: nowrap;">
+              <button class="btn btn-outline btn-sm view-user-btn" data-user-id="${u.id}" style="padding: 4px 8px; font-size: 0.7rem; margin-right: 4px;">
+                🔍 Details
+              </button>
+              ${u.id !== currentAdminUser.id ? `
+              <button class="btn ${isSuspended ? 'btn-gold' : 'btn-outline'} btn-sm toggle-status-btn" data-user-id="${u.id}" data-current-status="${u.status}" style="padding: 4px 8px; font-size: 0.7rem; color: ${isSuspended ? '#000' : '#ff8888'};">
+                ${isSuspended ? 'Reactivate' : 'Suspend'}
+              </button>
+              ` : ''}
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // Bind actions
+      tbody.querySelectorAll('.view-user-btn').forEach(btn => {
+        btn.addEventListener('click', () => openUserDetails(btn.getAttribute('data-user-id')));
+      });
+
+      tbody.querySelectorAll('.toggle-status-btn').forEach(btn => {
+        btn.addEventListener('click', () => handleToggleUserStatus(
+          btn.getAttribute('data-user-id'),
+          btn.getAttribute('data-current-status')
+        ));
+      });
+    }
+
+    async function handleToggleUserStatus(userId, currentStatus) {
+      const newStatus = currentStatus === 'suspended' ? 'active' : 'suspended';
+      const actionName = newStatus === 'suspended' ? 'suspend' : 'reactivate';
+
+      if (!confirm(`Are you sure you want to ${actionName} this user account?`)) {
+        return;
+      }
+
+      const res = await supabaseSetUserStatus(userId, newStatus);
+      if (res.success) {
+        showAdminAlert(`User account successfully ${newStatus === 'suspended' ? 'suspended' : 'reactivated'}.`, true);
+        await loadUsersData();
+      } else {
+        showAdminAlert(res.error || 'Failed to update account status.', false);
+      }
+    }
+
+    function openUserDetails(userId) {
+      const user = cachedUsers.find(u => u.id === userId);
+      if (!user) return;
+
+      const modalContent = document.getElementById('user-modal-content');
+      const location = [user.business_city, user.business_state, user.business_country].filter(Boolean).join(', ') || 'India';
+      const joinedDate = user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Registered Member';
+
+      modalContent.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div><strong style="color: var(--text-muted);">Full Name:</strong> <div style="color: #fff; font-weight: 600;">${escapeHtml(user.full_name)}</div></div>
+          <div><strong style="color: var(--text-muted);">Account Role:</strong> <div><span class="role-badge ${user.role === 'admin' ? 'role-admin' : 'role-user'}">${escapeHtml(user.role)}</span></div></div>
+          <div><strong style="color: var(--text-muted);">Email Address:</strong> <div style="color: #fff;">${escapeHtml(user.email)}</div></div>
+          <div><strong style="color: var(--text-muted);">Phone Number:</strong> <div style="color: #fff;">${escapeHtml(user.country_code)} ${escapeHtml(user.mobile_number)}</div></div>
+          <div><strong style="color: var(--text-muted);">Business / Brand:</strong> <div style="color: #fff;">${escapeHtml(user.business_name)}</div></div>
+          <div><strong style="color: var(--text-muted);">Location:</strong> <div style="color: #fff;">${escapeHtml(location)}</div></div>
+          <div><strong style="color: var(--text-muted);">Account Status:</strong> <div><span class="status-badge ${user.status === 'suspended' ? 'status-suspended' : 'status-active'}">${user.status}</span></div></div>
+          <div><strong style="color: var(--text-muted);">Joined / Updated:</strong> <div style="color: #fff;">${joinedDate}</div></div>
+        </div>
+
+        <div style="margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+          <strong style="color: var(--gold-light);">Saved Tool Preference:</strong>
+          <div style="margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 4px; border: 1px solid var(--border-subtle);">
+            ${user.preference ? `
+              <div><strong>Phase:</strong> ${escapeHtml(user.preference.phase || 'N/A')}</div>
+              <div><strong>Category:</strong> ${escapeHtml(user.preference.category || 'N/A')}</div>
+              <div><strong>Prescribed Tool:</strong> <span style="color: var(--gold-light); font-weight: 600;">${escapeHtml(user.preference.tool || 'None')}</span></div>
+            ` : '<span style="color: var(--text-muted);">No workflow preferences saved yet.</span>'}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('user-detail-modal').classList.add('is-open');
+    }
+
+    document.getElementById('close-user-modal-btn').addEventListener('click', () => {
+      document.getElementById('user-detail-modal').classList.remove('is-open');
+    });
+
+    document.getElementById('user-search-input').addEventListener('input', renderUsersTable);
+    document.getElementById('user-status-filter').addEventListener('change', renderUsersTable);
+    document.getElementById('refresh-users-btn').addEventListener('click', loadUsersData);
+
+    /* ============================================================
+       3. PRESCRIBED TOOLS CATALOG MANAGEMENT
+       ============================================================ */
+    async function loadToolsData() {
+      cachedTools = await supabaseGetTools();
+      renderKPIs();
+      renderToolsTable();
+    }
+
+    function renderToolsTable() {
+      const query = (document.getElementById('tool-search-input').value || '').trim().toLowerCase();
+      const phaseFilter = document.getElementById('tool-phase-filter').value;
+      const tbody = document.getElementById('tools-table-body');
+
+      let filtered = cachedTools.filter(t => {
+        const matchesQuery = !query ||
+          (t.purpose || '').toLowerCase().includes(query) ||
+          (t.cat || '').toLowerCase().includes(query) ||
+          (t.tag || '').toLowerCase().includes(query) ||
+          (t.link || '').toLowerCase().includes(query);
+
+        const matchesPhase = phaseFilter === 'ALL' || t.tag === phaseFilter;
+        return matchesQuery && matchesPhase;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="text-center" style="padding: 2rem; color: var(--text-muted);">
+              No prescribed tools found matching your filters.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(t => {
+        return `
+          <tr>
+            <td>
+              <div style="font-weight: 700; color: #FFFFFF;">${escapeHtml(t.purpose)}</div>
+            </td>
+            <td><span class="badge" style="background: rgba(212,175,55,0.1); border: 1px solid var(--border-gold-subtle); color: var(--gold-light); font-size: 0.68rem;">${escapeHtml(t.tag)}</span></td>
+            <td>${escapeHtml(t.cat)}</td>
+            <td>
+              <a href="${escapeHtml(t.link)}" target="_blank" rel="noopener noreferrer" style="color: var(--gold-light); text-decoration: underline; font-size: 0.72rem; word-break: break-all;">
+                ${escapeHtml(t.link.length > 35 ? t.link.substring(0, 35) + '...' : t.link)} ↗
+              </a>
+            </td>
+            <td>
+              <span class="status-badge ${t.is_active ? 'status-active' : 'status-suspended'}">
+                ${t.is_active ? '✓ Active' : 'Off'}
+              </span>
+            </td>
+            <td style="text-align: right; white-space: nowrap;">
+              <button class="btn btn-outline btn-sm edit-tool-btn" data-tool-id="${t.id}" style="padding: 4px 8px; font-size: 0.7rem; margin-right: 4px;">
+                ✏ Edit
+              </button>
+              <button class="btn ${t.is_active ? 'btn-outline' : 'btn-gold'} btn-sm toggle-tool-btn" data-tool-id="${t.id}" data-tool-active="${t.is_active}" style="padding: 4px 8px; font-size: 0.7rem;">
+                ${t.is_active ? 'Deactivate' : 'Activate'}
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // Bind tool actions
+      tbody.querySelectorAll('.edit-tool-btn').forEach(btn => {
+        btn.addEventListener('click', () => openToolModal(btn.getAttribute('data-tool-id')));
+      });
+
+      tbody.querySelectorAll('.toggle-tool-btn').forEach(btn => {
+        btn.addEventListener('click', () => handleToggleTool(
+          btn.getAttribute('data-tool-id'),
+          btn.getAttribute('data-tool-active') === 'true'
+        ));
+      });
+    }
+
+    async function handleToggleTool(toolId, currentlyActive) {
+      const res = await supabaseToggleToolStatus(toolId, !currentlyActive);
+      if (res.success) {
+        showAdminAlert(`Tool status updated to ${!currentlyActive ? 'Active' : 'Inactive'}.`, true);
+        await loadToolsData();
+      } else {
+        showAdminAlert(res.error || 'Failed to update tool status.', false);
+      }
+    }
+
+    function openToolModal(toolId = null) {
+      const modal = document.getElementById('tool-form-modal');
+      const title = document.getElementById('tool-modal-title');
+      const idInput = document.getElementById('tool-form-id');
+      const tagSelect = document.getElementById('tool-form-tag');
+      const catInput = document.getElementById('tool-form-cat');
+      const purposeInput = document.getElementById('tool-form-purpose');
+      const linkInput = document.getElementById('tool-form-link');
+      const activeCheck = document.getElementById('tool-form-active');
+
+      if (toolId) {
+        const tool = cachedTools.find(t => t.id === toolId);
+        if (!tool) return;
+        title.textContent = 'Edit Prescribed Tool';
+        idInput.value = tool.id;
+        tagSelect.value = tool.tag;
+        catInput.value = tool.cat;
+        purposeInput.value = tool.purpose;
+        linkInput.value = tool.link;
+        activeCheck.checked = tool.is_active !== false;
+      } else {
+        title.textContent = 'Add New Prescribed Tool';
+        idInput.value = '';
+        tagSelect.value = 'Product Research';
+        catInput.value = '';
+        purposeInput.value = '';
+        linkInput.value = '';
+        activeCheck.checked = true;
+      }
+
+      modal.classList.add('is-open');
+    }
+
+    document.getElementById('close-tool-modal-btn').addEventListener('click', () => {
+      document.getElementById('tool-form-modal').classList.remove('is-open');
+    });
+
+    document.getElementById('add-tool-btn').addEventListener('click', () => openToolModal(null));
+    document.getElementById('tool-search-input').addEventListener('input', renderToolsTable);
+    document.getElementById('tool-phase-filter').addEventListener('change', renderToolsTable);
+
+    document.getElementById('tool-edit-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const toolId = document.getElementById('tool-form-id').value;
+      const tag = document.getElementById('tool-form-tag').value;
+      const cat = document.getElementById('tool-form-cat').value.trim();
+      const purpose = document.getElementById('tool-form-purpose').value.trim();
+      const link = document.getElementById('tool-form-link').value.trim();
+      const is_active = document.getElementById('tool-form-active').checked;
+
+      if (!tag || !cat || !purpose || !link) {
+        alert('Please fill in all required tool fields.');
+        return;
+      }
+
+      const payload = { tag, cat, purpose, link, is_active };
+      let res;
+
+      if (toolId) {
+        res = await supabaseUpdateTool(toolId, payload);
+      } else {
+        res = await supabaseCreateTool(payload);
+      }
+
+      if (res.success) {
+        document.getElementById('tool-form-modal').classList.remove('is-open');
+        showAdminAlert(`Tool entry "${purpose}" saved successfully.`, true);
+        await loadToolsData();
+      } else {
+        alert(res.error || 'Failed to save tool entry.');
+      }
+    });
+
+    /* ============================================================
+       4. TAB NAVIGATION & LOGOUT
+       ============================================================ */
+    const tabUsersBtn = document.getElementById('tab-users-btn');
+    const tabToolsBtn = document.getElementById('tab-tools-btn');
+    const paneUsers = document.getElementById('tab-pane-users');
+    const paneTools = document.getElementById('tab-pane-tools');
+
+    tabUsersBtn.addEventListener('click', () => {
+      tabUsersBtn.classList.add('is-active');
+      tabUsersBtn.setAttribute('aria-selected', 'true');
+      tabToolsBtn.classList.remove('is-active');
+      tabToolsBtn.setAttribute('aria-selected', 'false');
+      paneUsers.classList.remove('hidden');
+      paneTools.classList.add('hidden');
+    });
+
+    tabToolsBtn.addEventListener('click', () => {
+      tabToolsBtn.classList.add('is-active');
+      tabToolsBtn.setAttribute('aria-selected', 'true');
+      tabUsersBtn.classList.remove('is-active');
+      tabUsersBtn.setAttribute('aria-selected', 'false');
+      paneTools.classList.remove('hidden');
+      paneUsers.classList.add('hidden');
+    });
+
+    document.getElementById('admin-logout-btn').addEventListener('click', async () => {
+      await authStore.logout();
+    });
+
+    // Run verification on page load
+    verifyAdminAccess();
+  </script>
+</body>
+</html>

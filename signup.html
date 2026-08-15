@@ -127,7 +127,7 @@
           </form>
 
           <p style="text-align: center; margin-top: var(--space-lg); font-size: var(--fs-xs); color: var(--text-secondary); padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle);">
-            Already have an account? <a href="/auth.html" class="text-gold" style="font-weight: 600;">Log in</a>
+            Already have an account? <a href="auth.html" class="text-gold" style="font-weight: 600;">Log in</a>
           </p>
         </div>
 
@@ -144,7 +144,7 @@
 
     // Auto-redirect if already logged in
     if (authStore.isAuthenticated()) {
-      window.location.replace('/LUVITS_WorkFlow.html');
+      window.location.replace('LUVITS_WorkFlow.html');
     }
 
     /* ---------- Elements ---------- */
@@ -245,12 +245,12 @@
             showAlert('Account created! Please check your email to confirm your account, then log in.', true);
             setBtnLoading(signupSubmitBtn, false, 'REGISTER & CONTINUE →');
             setTimeout(() => {
-              window.location.href = '/auth.html';
+              window.location.href = 'auth.html';
             }, 2500);
           } else {
             showAlert('Registration successful! Opening Tool Finder...', true);
             setTimeout(() => {
-              window.location.replace('/LUVITS_WorkFlow.html');
+              window.location.replace(result.redirectUrl || 'LUVITS_WorkFlow.html');
             }, 400);
           }
         } else {

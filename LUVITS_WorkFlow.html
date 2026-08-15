@@ -240,12 +240,13 @@
     import {
       supabase,
       supabaseGetProfile,
+      supabaseGetTools,
       supabaseGetWorkflowPreferences,
       supabaseSaveWorkflowPreferences
     } from './assets/js/supabase-config.js';
 
     /* ============================================================
-       1. ROUTE GUARD: SUPABASE REAL SESSION CHECK
+       1. ROUTE GUARD: SUPABASE REAL SESSION CHECK & SUSPENSION
        ============================================================ */
     let currentAuthUser = null;
 
@@ -255,16 +256,24 @@
         const session = sessionData?.session;
 
         if (!session || !session.user) {
-          window.location.replace('/auth.html');
+          window.location.replace('auth.html');
           return;
         }
 
         currentAuthUser = session.user;
-        await loadUserProfile(currentAuthUser);
+        const profile = await loadUserProfile(currentAuthUser);
+
+        if (profile?.status === 'suspended') {
+          alert('Your account has been suspended by administration. Access denied.');
+          await authStore.logout();
+          return;
+        }
+
+        await loadToolsDatabase();
         await restoreWorkflowPreferences(currentAuthUser.id);
       } catch (err) {
         console.warn('Auth guard verification failed:', err);
-        window.location.replace('/auth.html');
+        window.location.replace('auth.html');
       }
     }
 
@@ -282,6 +291,7 @@
       if (userWelcomeEl) {
         userWelcomeEl.textContent = `Welcome back, ${fullName}! Your operational Tool Finder and 100+ prescribed software tools are ready.`;
       }
+      return dbProfile;
     }
 
     /* ============================================================
@@ -300,7 +310,7 @@
       "Business Scaling"
     ];
 
-    const websiteDatabase = [
+    let websiteDatabase = [
       {"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon Best Sellers","link":"https://www.amazon.com/Best-Sellers/zgbs"},
       {"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon Movers & Shakers","link":"https://www.amazon.com/gp/movers-and-shakers"},
       {"tag":"Product Research","cat":"Amazon Research","purpose":"Amazon New Releases","link":"https://www.amazon.com/gp/new-releases"},
@@ -463,6 +473,27 @@
     /* ---------- Initialize Tool Finder & Directory ---------- */
     populatePhaseSelect();
     renderCategorizedWebsites();
+
+    async function loadToolsDatabase() {
+      try {
+        const dbTools = await supabaseGetTools();
+        if (dbTools && dbTools.length > 0) {
+          const activeOnly = dbTools.filter(t => t.is_active !== false);
+          if (activeOnly.length > 0) {
+            websiteDatabase = activeOnly.map(t => ({
+              tag: t.tag,
+              cat: t.cat,
+              purpose: t.purpose,
+              link: t.link
+            }));
+            populatePhaseSelect();
+            renderCategorizedWebsites();
+          }
+        }
+      } catch (e) {
+        console.warn('Load tools database fallback:', e);
+      }
+    }
 
     /* ============================================================
        3. WORKFLOW PREFERENCES: SAVE & RESTORE (SUPABASE)

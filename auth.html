@@ -85,7 +85,7 @@
           </form>
 
           <p style="text-align: center; margin-top: var(--space-lg); font-size: var(--fs-xs); color: var(--text-secondary); padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle);">
-            Don’t have an account? <a href="/signup.html" class="text-gold" style="font-weight: 600;">Sign up</a>
+            Don’t have an account? <a href="signup.html" class="text-gold" style="font-weight: 600;">Sign up</a>
           </p>
         </div>
 
@@ -102,7 +102,7 @@
 
     // Auto-redirect if already logged in
     if (authStore.isAuthenticated()) {
-      window.location.replace('/LUVITS_WorkFlow.html');
+      window.location.replace('LUVITS_WorkFlow.html');
     }
 
     /* ---------- Elements ---------- */
@@ -180,7 +180,7 @@
         if (result.success) {
           showAlert('Authentication successful! Opening Tool Finder...', true);
           setTimeout(() => {
-            window.location.replace(result.redirectUrl || '/LUVITS_WorkFlow.html');
+            window.location.replace(result.redirectUrl || 'LUVITS_WorkFlow.html');
           }, 300);
         } else {
           showAlert(result.error || 'Invalid credentials. Please try again.');

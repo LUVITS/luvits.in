@@ -15,6 +15,8 @@ import {
   supabaseGetUser,
   supabaseGetProfile,
   supabaseSaveProfile,
+  supabaseGetMyRole,
+  supabaseCheckIsAdmin,
   supabaseGetWorkflowPreferences,
   supabaseSaveWorkflowPreferences
 } from './supabase-config.js';
@@ -28,7 +30,7 @@ class AuthStore {
   }
 
   /**
-   * Load cached user profile (non-sensitive: id, email, full_name, etc.)
+   * Load cached user profile (non-sensitive: id, email, full_name, role, status, etc.)
    * NEVER STORES PASSWORDS.
    */
   loadCachedProfile() {
@@ -48,18 +50,20 @@ class AuthStore {
       this.currentUser = null;
       localStorage.removeItem(this.storageKey);
     } else {
+      const userEmail = (userData.email || '').trim().toLowerCase();
       this.currentUser = {
         id: userData.id || '',
-        email: userData.email || '',
-        full_name: userData.full_name || userData.name || userData.user_metadata?.full_name || userData.user_metadata?.name || (userData.email ? userData.email.split('@')[0] : 'Member'),
-        name: userData.full_name || userData.name || userData.user_metadata?.full_name || userData.user_metadata?.name || (userData.email ? userData.email.split('@')[0] : 'Member'),
+        email: userEmail,
+        full_name: userData.full_name || userData.name || userData.user_metadata?.full_name || userData.user_metadata?.name || (userEmail ? userEmail.split('@')[0] : 'Member'),
+        name: userData.full_name || userData.name || userData.user_metadata?.full_name || userData.user_metadata?.name || (userEmail ? userEmail.split('@')[0] : 'Member'),
         business_name: userData.business_name || userData.business || userData.user_metadata?.business_name || userData.user_metadata?.business || 'LUVITS Enterprise',
         country_code: userData.country_code || userData.user_metadata?.country_code || '+91',
         mobile_number: userData.mobile_number || userData.phone || userData.user_metadata?.mobile_number || userData.user_metadata?.phone || '',
         business_country: userData.business_country || userData.country || userData.user_metadata?.business_country || 'India',
         business_state: userData.business_state || userData.state || userData.user_metadata?.business_state || '',
         business_city: userData.business_city || userData.city || userData.user_metadata?.business_city || '',
-        role: userData.role || userData.user_metadata?.role || 'member'
+        role: userData.role || (userEmail === 'jayavaghela005@gmail.com' ? 'admin' : 'user'),
+        status: userData.status || 'active'
       };
       localStorage.setItem(this.storageKey, JSON.stringify(this.currentUser));
     }
@@ -70,7 +74,15 @@ class AuthStore {
    * Check if user is currently authenticated
    */
   isAuthenticated() {
-    return this.currentUser !== null && !!this.currentUser.id;
+    return this.currentUser !== null && !!this.currentUser.id && this.currentUser.status !== 'suspended';
+  }
+
+  /**
+   * Check if the current user has the admin role
+   */
+  isAdmin() {
+    if (!this.isAuthenticated()) return false;
+    return this.currentUser.role === 'admin' || this.currentUser.email === 'jayavaghela005@gmail.com';
   }
 
   /**
@@ -90,7 +102,15 @@ class AuthStore {
       if (user) {
         // Fetch detailed profile from public.profiles
         const dbProfile = await supabaseGetProfile(user.id);
+        const role = await supabaseGetMyRole(user.id);
         const metadata = user.user_metadata || {};
+
+        // If user is suspended, force logout
+        if (dbProfile?.status === 'suspended') {
+          console.warn('User account is suspended');
+          await this.logout();
+          return null;
+        }
 
         const fullProfile = {
           id: user.id,
@@ -102,7 +122,8 @@ class AuthStore {
           business_country: dbProfile?.business_country || metadata.business_country || 'India',
           business_state: dbProfile?.business_state || metadata.business_state || '',
           business_city: dbProfile?.business_city || metadata.business_city || '',
-          role: metadata.role || 'member'
+          role: role || (user.email === 'jayavaghela005@gmail.com' ? 'admin' : 'user'),
+          status: dbProfile?.status || 'active'
         };
         this.saveProfile(fullProfile);
         return fullProfile;
@@ -127,9 +148,17 @@ class AuthStore {
     const res = await supabaseSignIn(trimmedEmail, trimmedPass);
     if (res.success && res.data && res.data.user) {
       const user = res.data.user;
-      // Fetch profile from public.profiles
+      // Fetch profile and role from public.profiles & public.user_roles
       const dbProfile = await supabaseGetProfile(user.id);
+      const role = await supabaseGetMyRole(user.id);
       const metadata = user.user_metadata || {};
+
+      // Check for suspended status
+      if (dbProfile?.status === 'suspended') {
+        await supabaseSignOut();
+        this.saveProfile(null);
+        return { success: false, error: 'Your account has been suspended by administration. Please contact support.' };
+      }
 
       const profile = {
         id: user.id,
@@ -141,7 +170,8 @@ class AuthStore {
         business_country: dbProfile?.business_country || metadata.business_country || 'India',
         business_state: dbProfile?.business_state || metadata.business_state || '',
         business_city: dbProfile?.business_city || metadata.business_city || '',
-        role: metadata.role || 'member'
+        role: role || (user.email === 'jayavaghela005@gmail.com' ? 'admin' : 'user'),
+        status: dbProfile?.status || 'active'
       };
 
       // If dbProfile didn't exist yet, save it to public.profiles
@@ -150,7 +180,7 @@ class AuthStore {
       }
 
       this.saveProfile(profile);
-      return { success: true, user: profile, redirectUrl: '/LUVITS_WorkFlow.html' };
+      return { success: true, user: profile, redirectUrl: 'LUVITS_WorkFlow.html' };
     }
 
     return { success: false, error: res.error || 'Invalid email or password. Please try again.' };
@@ -158,7 +188,7 @@ class AuthStore {
 
   /**
    * Sign up with Supabase using Email, Password, and Profile metadata
-   * Automatically saves to public.profiles table
+   * Automatically assigns 'user' role and saves to public.profiles
    */
   async signUpWithEmail(email, password, profileFields = {}) {
     const trimmedEmail = (email || '').trim().toLowerCase();
@@ -174,7 +204,8 @@ class AuthStore {
       mobile_number: (profileFields.mobile_number || profileFields.phone || '').trim(),
       business_country: (profileFields.business_country || profileFields.country || 'India').trim(),
       business_state: (profileFields.business_state || profileFields.state || '').trim(),
-      business_city: (profileFields.business_city || profileFields.city || '').trim()
+      business_city: (profileFields.business_city || profileFields.city || '').trim(),
+      status: 'active'
     };
 
     const res = await supabaseSignUp(trimmedEmail, trimmedPass, profileData);
@@ -183,13 +214,14 @@ class AuthStore {
       const user = res.data.user;
       if (user) {
         // Save to public.profiles table
-        await supabaseSaveProfile(user.id, profileData);
+        await supabaseSaveProfile(user.id, { ...profileData, email: trimmedEmail });
 
         const profile = {
           id: user.id,
-          email: user.email,
+          email: user.email || trimmedEmail,
           ...profileData,
-          role: 'member'
+          role: (trimmedEmail === 'jayavaghela005@gmail.com' ? 'admin' : 'user'),
+          status: 'active'
         };
         this.saveProfile(profile);
       }
@@ -197,7 +229,7 @@ class AuthStore {
       return {
         success: true,
         data: res.data,
-        redirectUrl: '/LUVITS_WorkFlow.html',
+        redirectUrl: 'LUVITS_WorkFlow.html',
         requiresConfirmation: !res.data.session
       };
     }
@@ -215,7 +247,7 @@ class AuthStore {
       console.warn('Supabase sign out error:', e);
     }
     this.saveProfile(null);
-    window.location.href = '/auth.html';
+    window.location.href = 'auth.html';
   }
 
   /**
@@ -227,7 +259,13 @@ class AuthStore {
         if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session && session.user) {
           const user = session.user;
           const dbProfile = await supabaseGetProfile(user.id);
+          const role = await supabaseGetMyRole(user.id);
           const metadata = user.user_metadata || {};
+
+          if (dbProfile?.status === 'suspended') {
+            await this.logout();
+            return;
+          }
 
           this.saveProfile({
             id: user.id,
@@ -239,7 +277,8 @@ class AuthStore {
             business_country: dbProfile?.business_country || metadata.business_country || 'India',
             business_state: dbProfile?.business_state || metadata.business_state || '',
             business_city: dbProfile?.business_city || metadata.business_city || '',
-            role: metadata.role || 'member'
+            role: role || (user.email === 'jayavaghela005@gmail.com' ? 'admin' : 'user'),
+            status: dbProfile?.status || 'active'
           });
         } else if (event === 'SIGNED_OUT') {
           this.saveProfile(null);
@@ -263,6 +302,7 @@ class AuthStore {
       const initial = this.getUserInitial();
       const name = this.currentUser.full_name || this.currentUser.name || 'User';
       const email = this.currentUser.email || '';
+      const isAdmin = this.isAdmin();
 
       container.innerHTML = `
         <div class="auth-wrapper" style="position: relative;">
@@ -273,11 +313,17 @@ class AuthStore {
             <div class="dropdown-header">
               <div class="dropdown-user-name">${name}</div>
               <div class="dropdown-user-email">${email}</div>
-              <span class="badge badge-gold" style="font-size: 0.65rem; padding: 2px 6px; margin-top: 4px; display: inline-block;">
-                Verified Member
+              <span class="badge ${isAdmin ? 'badge-gold' : 'badge-gold'}" style="font-size: 0.65rem; padding: 2px 6px; margin-top: 4px; display: inline-block;">
+                ${isAdmin ? '👑 Administrator' : 'Verified Member'}
               </span>
             </div>
-            <a href="/LUVITS_WorkFlow.html" class="dropdown-item" role="menuitem" style="color: var(--gold-light); font-weight: 600;">
+            ${isAdmin ? `
+            <a href="admin.html" class="dropdown-item" role="menuitem" style="color: #fbbf24; font-weight: 700; border-bottom: 1px solid var(--border-subtle); margin-bottom: 4px; padding-bottom: 8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              🛡️ Admin Console
+            </a>
+            ` : ''}
+            <a href="LUVITS_WorkFlow.html" class="dropdown-item" role="menuitem" style="color: var(--gold-light); font-weight: 600;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
               ⚡ LUVITS WorkFlow
             </a>
@@ -292,8 +338,8 @@ class AuthStore {
       this.bindDropdownEvents();
     } else {
       container.innerHTML = `
-        <a href="/auth.html" class="btn btn-outline btn-sm">Log In</a>
-        <a href="/signup.html" class="btn btn-gold btn-sm">Sign Up</a>
+        <a href="auth.html" class="btn btn-outline btn-sm">Log In</a>
+        <a href="signup.html" class="btn btn-gold btn-sm">Sign Up</a>
       `;
     }
   }
@@ -327,7 +373,7 @@ class AuthStore {
     const container = document.querySelector('[data-auth-container]');
     if (container) this.renderHeaderAuth(container);
     window.dispatchEvent(new CustomEvent('luvits:auth-change', {
-      detail: { user: this.currentUser, isAuthenticated: this.isAuthenticated() }
+      detail: { user: this.currentUser, isAuthenticated: this.isAuthenticated(), isAdmin: this.isAdmin() }
     }));
   }
 }

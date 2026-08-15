@@ -12,6 +12,7 @@ export function updateNavMenu() {
   if (!navMenu) return;
 
   const isAuthed = authStore.isAuthenticated();
+  const isAdmin = authStore.isAdmin();
   let workflowLink = navMenu.querySelector('.nav-link-workflow-wrap');
 
   if (isAuthed) {
@@ -20,7 +21,8 @@ export function updateNavMenu() {
       workflowLink.className = 'nav-link-workflow-wrap';
       workflowLink.style.display = 'contents';
       workflowLink.innerHTML = `
-        <a href="/LUVITS_WorkFlow.html" class="nav-link nav-link-workflow"><span>⚡ WorkFlow</span></a>
+        ${isAdmin ? '<a href="admin.html" class="nav-link" style="color: #fbbf24; font-weight: 700;"><span>🛡️ Admin</span></a>' : ''}
+        <a href="LUVITS_WorkFlow.html" class="nav-link nav-link-workflow"><span>⚡ WorkFlow</span></a>
       `;
       
       const drawerFooter = navMenu.querySelector('.nav-drawer-footer');

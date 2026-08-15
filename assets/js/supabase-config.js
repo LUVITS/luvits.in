@@ -256,3 +256,227 @@ export async function supabaseGetWorkflowPreferences(userId) {
     return null;
   }
 }
+
+/**
+ * Check if the currently authenticated user has the 'admin' role
+ * Executes database-level SECURITY DEFINER function or user_roles query
+ */
+export async function supabaseCheckIsAdmin(userId) {
+  if (!userId) return false;
+  try {
+    // 1. Attempt database RPC function is_admin()
+    const { data: rpcAdmin, error: rpcErr } = await supabase.rpc('is_admin');
+    if (!rpcErr && typeof rpcAdmin === 'boolean') {
+      return rpcAdmin;
+    }
+
+    // 2. Direct user_roles lookup as fallback
+    const { data, error } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (error || !data) return false;
+    return data.role === 'admin';
+  } catch (err) {
+    console.warn('Admin check error:', err);
+    return false;
+  }
+}
+
+/**
+ * Fetch current user's role ('admin' or 'user')
+ */
+export async function supabaseGetMyRole(userId) {
+  if (!userId) return 'user';
+  try {
+    const { data, error } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (error || !data) return 'user';
+    return data.role || 'user';
+  } catch (e) {
+    return 'user';
+  }
+}
+
+/**
+ * Fetch all users for Admin Dashboard (Profiles + Roles + Preferences)
+ * Protected by Supabase Row Level Security (RLS)
+ */
+export async function supabaseGetAllUsers() {
+  try {
+    // 1. Fetch profiles
+    const { data: profiles, error: pErr } = await supabase
+      .from('profiles')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (pErr) throw pErr;
+    if (!profiles || profiles.length === 0) return [];
+
+    // 2. Fetch roles
+    const { data: roles } = await supabase
+      .from('user_roles')
+      .select('*');
+
+    const roleMap = {};
+    (roles || []).forEach(r => { roleMap[r.user_id] = r.role; });
+
+    // 3. Fetch workflow preferences
+    const { data: prefs } = await supabase
+      .from('workflow_preferences')
+      .select('*');
+
+    const prefMap = {};
+    (prefs || []).forEach(pr => {
+      prefMap[pr.user_id] = {
+        phase: pr.phase || pr.workflow_phase || '',
+        category: pr.category || '',
+        tool: pr.tool || pr.selected_tool || ''
+      };
+    });
+
+    // Merge into user records
+    return profiles.map(p => ({
+      ...p,
+      role: roleMap[p.id] || 'user',
+      status: p.status || 'active',
+      preference: prefMap[p.id] || null
+    }));
+  } catch (err) {
+    console.error('Fetch all users error:', err);
+    return [];
+  }
+}
+
+/**
+ * Admin: Suspend or Reactivate a user account
+ * Protected by Supabase Row Level Security (RLS)
+ */
+export async function supabaseSetUserStatus(userId, status) {
+  if (!userId || !['active', 'suspended'].includes(status)) {
+    return { success: false, error: 'Invalid user ID or status' };
+  }
+  try {
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ status, updated_at: new Date().toISOString() })
+      .eq('id', userId);
+
+    if (error) throw error;
+    return { success: true, data };
+  } catch (err) {
+    console.error('Set user status error:', err);
+    return { success: false, error: err.message || 'Failed to update user status' };
+  }
+}
+
+/**
+ * Fetch Tools from public.tools table
+ * Regular users receive active tools only; Admins receive all tools (enforced by RLS)
+ */
+export async function supabaseGetTools() {
+  try {
+    const { data, error } = await supabase
+      .from('tools')
+      .select('*')
+      .order('sort_order', { ascending: true })
+      .order('tag', { ascending: true })
+      .order('cat', { ascending: true });
+
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.warn('Fetch tools error:', err);
+    return [];
+  }
+}
+
+/**
+ * Admin: Add a new tool to public.tools
+ */
+export async function supabaseCreateTool(toolData) {
+  try {
+    const payload = {
+      tag: (toolData.tag || '').trim(),
+      cat: (toolData.cat || '').trim(),
+      purpose: (toolData.purpose || '').trim(),
+      link: (toolData.link || '').trim(),
+      is_active: toolData.is_active !== false,
+      sort_order: parseInt(toolData.sort_order, 10) || 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+
+    if (!payload.tag || !payload.cat || !payload.purpose || !payload.link) {
+      return { success: false, error: 'All tool fields are required.' };
+    }
+
+    const { data, error } = await supabase
+      .from('tools')
+      .insert([payload])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return { success: true, data };
+  } catch (err) {
+    console.error('Create tool error:', err);
+    return { success: false, error: err.message || 'Failed to create tool' };
+  }
+}
+
+/**
+ * Admin: Update an existing tool in public.tools
+ */
+export async function supabaseUpdateTool(toolId, toolData) {
+  if (!toolId) return { success: false, error: 'Tool ID is required.' };
+  try {
+    const payload = {
+      tag: (toolData.tag || '').trim(),
+      cat: (toolData.cat || '').trim(),
+      purpose: (toolData.purpose || '').trim(),
+      link: (toolData.link || '').trim(),
+      is_active: toolData.is_active !== false,
+      sort_order: parseInt(toolData.sort_order, 10) || 0,
+      updated_at: new Date().toISOString()
+    };
+
+    const { data, error } = await supabase
+      .from('tools')
+      .update(payload)
+      .eq('id', toolId)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return { success: true, data };
+  } catch (err) {
+    console.error('Update tool error:', err);
+    return { success: false, error: err.message || 'Failed to update tool' };
+  }
+}
+
+/**
+ * Admin: Toggle tool active/inactive status in public.tools
+ */
+export async function supabaseToggleToolStatus(toolId, isActive) {
+  if (!toolId) return { success: false, error: 'Tool ID is required.' };
+  try {
+    const { data, error } = await supabase
+      .from('tools')
+      .update({ is_active: isActive, updated_at: new Date().toISOString() })
+      .eq('id', toolId);
+
+    if (error) throw error;
+    return { success: true, data };
+  } catch (err) {
+    console.error('Toggle tool status error:', err);
+    return { success: false, error: err.message || 'Failed to update tool status' };
+  }
+}
