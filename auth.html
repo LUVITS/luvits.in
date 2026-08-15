@@ -3,41 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authentication | LUVITS — Secure Portal Access</title>
-  <meta name="description" content="Sign in or register for your LUVITS portal account powered by Supabase authentication." />
+  <title>Sign In | LUVITS — Portal Login</title>
+  <meta name="description" content="Sign in to your LUVITS portal account to access the Tool Finder and operations." />
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
-    .auth-tab-nav {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-medium);
-      border-radius: var(--radius-md);
-      padding: 4px;
-      margin-bottom: var(--space-lg);
-      gap: 4px;
-    }
-    .auth-tab-btn {
-      padding: 10px 16px;
-      font-family: var(--font-display);
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      background: transparent;
-      border: none;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      text-align: center;
-    }
-    .auth-tab-btn.is-active {
-      background: rgba(212, 175, 55, 0.15);
-      color: var(--gold-light);
-      border: 1px solid var(--border-gold-subtle);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
-    }
     .auth-feedback-alert {
       padding: 12px 14px;
       border-radius: var(--radius-sm);
@@ -71,32 +40,22 @@
   <div data-global-header></div>
 
   <main data-anime-section id="main-content" class="section-spacing" style="padding-top: calc(var(--header-height) + var(--space-xl)); min-height: 85vh;">
-    <div class="container" style="max-width: 540px;">
+    <div class="container" style="max-width: 500px;">
       
       <div class="luxury-card anime-reveal" style="padding: var(--space-xl);">
         
-        <!-- Tab Navigation -->
-        <div class="auth-tab-nav" role="tablist">
-          <button class="auth-tab-btn is-active" id="tab-login-btn" role="tab" aria-selected="true" aria-controls="pane-login">
-            🔐 Sign In
-          </button>
-          <button class="auth-tab-btn" id="tab-signup-btn" role="tab" aria-selected="false" aria-controls="pane-signup">
-            ✨ Create Account
-          </button>
-        </div>
-
         <!-- Global Alert Message Box -->
         <div id="auth-alert" class="auth-feedback-alert" role="alert"></div>
 
         <!-- ====================================================
-             PANE 1: SIGN IN FORM
+             SIGN IN FORM
              ==================================================== -->
         <div id="pane-login">
           <div class="section-header text-left" style="margin-bottom: var(--space-md);">
             <span class="eyebrow">PORTAL LOGIN</span>
             <h1 style="font-size: var(--fs-2xl); margin-top: 4px;">WELCOME BACK.</h1>
             <p style="font-size: var(--fs-xs); color: var(--text-secondary);">
-              Sign in with your email & password to access LUVITS WorkFlow.
+              Sign in with your email &amp; password to access LUVITS WorkFlow &amp; Tool Finder.
             </p>
             <div class="gold-line"></div>
           </div>
@@ -125,92 +84,8 @@
             </button>
           </form>
 
-          <p style="text-align: center; margin-top: var(--space-md); font-size: var(--fs-xs); color: var(--text-secondary);">
-            Don't have an account? <a href="#signup" id="switch-to-signup" class="text-gold" style="font-weight: 600;">Register here</a>
-          </p>
-        </div>
-
-        <!-- ====================================================
-             PANE 2: SIGN UP FORM (REGISTRATION)
-             ==================================================== -->
-        <div id="pane-signup" class="hidden">
-          <div class="section-header text-left" style="margin-bottom: var(--space-md);">
-            <span class="eyebrow">REGISTRATION</span>
-            <h1 style="font-size: var(--fs-2xl); margin-top: 4px;">CREATE ACCOUNT.</h1>
-            <p style="font-size: var(--fs-xs); color: var(--text-secondary);">
-              Register your credentials to get access to LUVITS WorkFlow & operations.
-            </p>
-            <div class="gold-line"></div>
-          </div>
-
-          <form id="auth-signup-form" novalidate autocomplete="on">
-            <div class="form-group">
-              <label for="signup-name" class="input-label">Full Name *</label>
-              <input type="text" id="signup-name" class="luxury-input" placeholder="e.g. Jay Vaghela" autocomplete="name" required />
-            </div>
-
-            <div class="grid-2" style="gap: 10px; margin-bottom: var(--space-md);">
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="signup-email" class="input-label">Email Address *</label>
-                <input type="email" id="signup-email" class="luxury-input" placeholder="name@business.com" autocomplete="email" required />
-              </div>
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="signup-phone" class="input-label">Mobile Number *</label>
-                <div style="display: flex; gap: 6px;">
-                  <select class="luxury-select" id="signup-country-code" style="width: 80px; padding: 0.85rem 0.3rem;">
-                    <option value="+91">🇮🇳 +91</option>
-                    <option value="+44">🇬🇧 +44</option>
-                    <option value="+1">🇺🇸 +1</option>
-                    <option value="+971">🇦🇪 +971</option>
-                  </select>
-                  <input type="tel" id="signup-phone" class="luxury-input" placeholder="63594 35595" autocomplete="tel" required />
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="signup-business" class="input-label">Business / Brand Name *</label>
-              <input type="text" id="signup-business" class="luxury-input" placeholder="e.g. Vaghela Enterprises" required />
-            </div>
-
-            <div class="grid-3" style="gap: 8px; margin-bottom: var(--space-md);">
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="signup-country" class="input-label">Country *</label>
-                <input type="text" id="signup-country" class="luxury-input" placeholder="India" required />
-              </div>
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="signup-state" class="input-label">State *</label>
-                <input type="text" id="signup-state" class="luxury-input" placeholder="Gujarat" required />
-              </div>
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="signup-city" class="input-label">City *</label>
-                <input type="text" id="signup-city" class="luxury-input" placeholder="Ahmedabad" required />
-              </div>
-            </div>
-
-            <div class="grid-2" style="gap: 10px; margin-bottom: var(--space-md);">
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="signup-password" class="input-label">Password * (min 6 chars)</label>
-                <div style="position: relative;">
-                  <input type="password" id="signup-password" class="luxury-input" placeholder="••••••••" autocomplete="new-password" required />
-                  <button type="button" id="toggle-signup-pw" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--text-muted); background: none; border: none; cursor: pointer;" aria-label="Toggle password visibility">
-                    👁 Show
-                  </button>
-                </div>
-              </div>
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="signup-confirm-password" class="input-label">Confirm Password *</label>
-                <input type="password" id="signup-confirm-password" class="luxury-input" placeholder="••••••••" autocomplete="new-password" required />
-              </div>
-            </div>
-
-            <button type="submit" id="signup-submit-btn" class="btn btn-gold auth-loader-btn" style="width: 100%; margin-top: var(--space-sm);">
-              <span class="btn-text">REGISTER & CONTINUE →</span>
-            </button>
-          </form>
-
-          <p style="text-align: center; margin-top: var(--space-md); font-size: var(--fs-xs); color: var(--text-secondary);">
-            Already have an account? <a href="#login" id="switch-to-login" class="text-gold" style="font-weight: 600;">Sign in here</a>
+          <p style="text-align: center; margin-top: var(--space-lg); font-size: var(--fs-xs); color: var(--text-secondary); padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle);">
+            Don’t have an account? <a href="/signup.html" class="text-gold" style="font-weight: 600;">Sign up</a>
           </p>
         </div>
 
@@ -231,64 +106,12 @@
     }
 
     /* ---------- Elements ---------- */
-    const tabLoginBtn = document.getElementById('tab-login-btn');
-    const tabSignupBtn = document.getElementById('tab-signup-btn');
-    const paneLogin = document.getElementById('pane-login');
-    const paneSignup = document.getElementById('pane-signup');
     const authAlert = document.getElementById('auth-alert');
-
     const loginForm = document.getElementById('auth-login-form');
     const loginEmailInput = document.getElementById('login-email');
     const loginPassInput = document.getElementById('login-password');
     const toggleLoginPw = document.getElementById('toggle-login-pw');
     const loginSubmitBtn = document.getElementById('login-submit-btn');
-
-    const signupForm = document.getElementById('auth-signup-form');
-    const signupName = document.getElementById('signup-name');
-    const signupEmail = document.getElementById('signup-email');
-    const signupPhone = document.getElementById('signup-phone');
-    const signupCountryCode = document.getElementById('signup-country-code');
-    const signupBusiness = document.getElementById('signup-business');
-    const signupCountry = document.getElementById('signup-country');
-    const signupState = document.getElementById('signup-state');
-    const signupCity = document.getElementById('signup-city');
-    const signupPass = document.getElementById('signup-password');
-    const signupConfirmPass = document.getElementById('signup-confirm-password');
-    const toggleSignupPw = document.getElementById('toggle-signup-pw');
-    const signupSubmitBtn = document.getElementById('signup-submit-btn');
-
-    /* ---------- Tab Switching ---------- */
-    function showTab(tab) {
-      clearAlert();
-      if (tab === 'signup') {
-        tabSignupBtn.classList.add('is-active');
-        tabSignupBtn.setAttribute('aria-selected', 'true');
-        tabLoginBtn.classList.remove('is-active');
-        tabLoginBtn.setAttribute('aria-selected', 'false');
-
-        paneSignup.classList.remove('hidden');
-        paneLogin.classList.add('hidden');
-        window.location.hash = 'signup';
-      } else {
-        tabLoginBtn.classList.add('is-active');
-        tabLoginBtn.setAttribute('aria-selected', 'true');
-        tabSignupBtn.classList.remove('is-active');
-        tabSignupBtn.setAttribute('aria-selected', 'false');
-
-        paneLogin.classList.remove('hidden');
-        paneSignup.classList.add('hidden');
-        window.location.hash = 'login';
-      }
-    }
-
-    tabLoginBtn.addEventListener('click', () => showTab('login'));
-    tabSignupBtn.addEventListener('click', () => showTab('signup'));
-    document.getElementById('switch-to-signup')?.addEventListener('click', (e) => { e.preventDefault(); showTab('signup'); });
-    document.getElementById('switch-to-login')?.addEventListener('click', (e) => { e.preventDefault(); showTab('login'); });
-
-    if (window.location.hash === '#signup') {
-      showTab('signup');
-    }
 
     /* ---------- Alerts & Helpers ---------- */
     function showAlert(msg, isSuccess = false) {
@@ -320,12 +143,6 @@
       toggleLoginPw.textContent = isPw ? '🔒 Hide' : '👁 Show';
     });
 
-    toggleSignupPw.addEventListener('click', () => {
-      const isPw = signupPass.type === 'password';
-      signupPass.type = isPw ? 'text' : 'password';
-      toggleSignupPw.textContent = isPw ? '🔒 Hide' : '👁 Show';
-    });
-
     document.getElementById('forgot-pw-link').addEventListener('click', (e) => {
       e.preventDefault();
       const email = loginEmailInput.value.trim();
@@ -346,7 +163,7 @@
       const password = loginPassInput.value;
 
       if (!email) {
-        showAlert('Please enter your email address or employee ID.');
+        showAlert('Please enter your email address.');
         loginEmailInput.focus();
         return;
       }
@@ -361,10 +178,10 @@
       try {
         const result = await authStore.loginWithEmail(email, password);
         if (result.success) {
-          showAlert('Authentication successful! Redirecting to LUVITS WorkFlow...', true);
+          showAlert('Authentication successful! Opening Tool Finder...', true);
           setTimeout(() => {
             window.location.replace(result.redirectUrl || '/LUVITS_WorkFlow.html');
-          }, 400);
+          }, 300);
         } else {
           showAlert(result.error || 'Invalid credentials. Please try again.');
           setBtnLoading(loginSubmitBtn, false, 'SIGN IN TO WORKFLOW →');
@@ -374,74 +191,6 @@
       } catch (err) {
         showAlert('An unexpected error occurred. Please try again.');
         setBtnLoading(loginSubmitBtn, false, 'SIGN IN TO WORKFLOW →');
-      }
-    });
-
-    /* ---------- Sign Up Form Submission ---------- */
-    signupForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      clearAlert();
-
-      const full_name = signupName.value.trim();
-      const email = signupEmail.value.trim();
-      const country_code = signupCountryCode.value.trim();
-      const mobile_number = signupPhone.value.trim();
-      const business_name = signupBusiness.value.trim();
-      const business_country = signupCountry.value.trim() || 'India';
-      const business_state = signupState.value.trim();
-      const business_city = signupCity.value.trim();
-      const password = signupPass.value;
-      const confirmPassword = signupConfirmPass.value;
-
-      if (!full_name || !email || !password) {
-        showAlert('Please fill in all required fields marked with *.');
-        return;
-      }
-
-      if (password.length < 6) {
-        showAlert('Password must be at least 6 characters long.');
-        signupPass.focus();
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        showAlert('Passwords do not match. Please verify your password confirmation.');
-        signupConfirmPass.focus();
-        return;
-      }
-
-      setBtnLoading(signupSubmitBtn, true, 'REGISTER & CONTINUE →');
-
-      try {
-        const result = await authStore.signUpWithEmail(email, password, {
-          full_name,
-          business_name,
-          country_code,
-          mobile_number,
-          business_country,
-          business_state,
-          business_city,
-          role: 'member'
-        });
-
-        if (result.success) {
-          if (result.requiresConfirmation) {
-            showAlert('Account created! Please check your email to confirm your account, then sign in.', true);
-            setBtnLoading(signupSubmitBtn, false, 'REGISTER & CONTINUE →');
-            setTimeout(() => showTab('login'), 2500);
-          } else {
-            showAlert('Registration successful! Redirecting to LUVITS WorkFlow...', true);
-            setTimeout(() => {
-              window.location.replace('/LUVITS_WorkFlow.html');
-            }, 500);
-          }
-        } else {
-          showAlert(result.error || 'Failed to create account. Please check your details.');
-          setBtnLoading(signupSubmitBtn, false, 'REGISTER & CONTINUE →');
-        }
-      } catch (err) {
-        showAlert('An error occurred during registration. Please try again.');
-        setBtnLoading(signupSubmitBtn, false, 'REGISTER & CONTINUE →');
       }
     });
   </script>

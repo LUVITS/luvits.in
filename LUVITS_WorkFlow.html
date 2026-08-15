@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LUVITS WorkFlow & Global Operations Portal | Verified Access</title>
-  <meta name="description" content="LUVITS universal operational workflow pipeline, department milestone matrix, and 100+ prescribed websites selection directory." />
+  <title>LUVITS WorkFlow &amp; Tool Finder Portal | Verified Access</title>
+  <meta name="description" content="LUVITS universal operational Tool Finder and 100+ prescribed software selection directory." />
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
     .phase-category-block {
@@ -61,16 +61,6 @@
       font-size: 0.85rem;
       flex-shrink: 0;
     }
-    .roster-card {
-      padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-medium);
-      border-radius: var(--radius-md);
-      transition: border-color var(--transition-fast);
-    }
-    .roster-card:hover {
-      border-color: var(--border-gold-subtle);
-    }
   </style>
 </head>
 <body class="workflow-page">
@@ -80,7 +70,7 @@
     <div class="container workflow-container">
 
       <!-- ========================================================
-           AUTHENTICATED WORKFLOW PORTAL
+           AUTHENTICATED TOOL FINDER PORTAL
            ======================================================== -->
       <div id="workflow-app-section">
         
@@ -89,18 +79,15 @@
           <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
             <div>
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px;">GLOBAL BLUEPRINT</span>
+                <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px;">VERIFIED ACCESS</span>
                 <span id="wf-user-badge" style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 600;">LUVITS OPERATIONS</span>
               </div>
               <h1 style="font-size: var(--fs-3xl); margin-top: 2px; letter-spacing: -0.01em;">LUVITS WORKFLOW</h1>
               <p id="wf-user-welcome" style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; max-width: 540px;">
-                Loading your operational blueprint and prescribed tools...
+                Loading your prescribed tools and software preferences...
               </p>
             </div>
             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-              <a href="/workflow/tools" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm" title="Open Tool Finder in a New Tab">
-                🚀 Tool Finder in New Tab ↗
-              </a>
               <button id="wf-logout-btn" class="btn btn-outline btn-sm" title="Sign out of LUVITS WorkFlow">
                 Log Out ⎋
               </button>
@@ -108,203 +95,134 @@
           </div>
         </div>
 
-        <!-- Top Segmented Navigation (Two Distinct Separate Pages) -->
-        <nav class="workflow-nav-tabs" role="tablist" aria-label="Workflow Pages">
-          <button class="workflow-nav-tab is-active" id="tab-btn-roles" role="tab" aria-selected="true" aria-controls="page-roles">
-            <span>👥</span>
-            <span>1. Operational Pipeline & Milestones</span>
-          </button>
-          <button class="workflow-nav-tab" id="tab-btn-links" role="tab" aria-selected="false" aria-controls="page-links">
-            <span>🔗</span>
-            <span>2. Prescribed Websites & Tools Menu</span>
-          </button>
-        </nav>
-
         <!-- ======================================================
-             PAGE 1: OPERATIONAL PIPELINE & MILESTONES BOARD
+             SECTION A: 3-STEP TOOL FINDER WIZARD
              ====================================================== -->
-        <div id="page-roles" role="tabpanel" aria-labelledby="tab-btn-roles" class="anime-reveal">
-          
-          <!-- Department Roster Overview Card -->
-          <div class="luxury-card" style="padding: var(--space-lg) var(--space-xl); margin-bottom: var(--space-lg);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md);">
-              <div>
-                <h2 style="font-size: var(--fs-lg); color: var(--gold-light); font-family: var(--font-display);">Operational Departments Matrix</h2>
-                <p style="font-size: var(--fs-xs); color: var(--text-secondary);">Core functional teams orchestrating the 10-stage brand rollout</p>
-              </div>
-              <span class="badge badge-gold" id="total-roles-count">10 Core Phases</span>
+        <div class="luxury-card anime-reveal" style="padding: var(--space-lg) var(--space-xl); margin-bottom: var(--space-lg);">
+          <div style="margin-bottom: var(--space-lg); padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+              <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px;">STREAMLINED WIZARD</span>
+              <span style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 700;">TOOL FINDER</span>
             </div>
-
-            <!-- Department Overview Grid -->
-            <div class="grid-2" style="gap: 12px;" id="department-roster-grid">
-              <!-- Dynamically populated roster summary -->
-            </div>
+            <h2 style="font-size: var(--fs-2xl); color: #FFFFFF; font-family: var(--font-display);">Prescribed Software &amp; Website Finder</h2>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px;">
+              Select an operational phase, category, and tool. Your selections are automatically synced to your Supabase workflow preferences.
+            </p>
           </div>
 
-          <!-- Pipeline Timeline Section -->
-          <div class="luxury-card" style="padding: var(--space-lg) var(--space-xl);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md);">
-              <div>
-                <h2 style="font-size: var(--fs-xl); color: var(--text-primary); font-family: var(--font-display);">10-Phase Brand Lifecycle Pipeline</h2>
-                <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 2px;">
-                  From product research and global sourcing to US warehousing and multi-channel scaling.
-                </p>
-              </div>
-              <button id="go-to-menu-btn" class="btn btn-gold btn-sm">
-                🚀 Open Websites Menu →
+          <!-- Step 1: Phase -->
+          <div class="wizard-step-box">
+            <label class="wizard-label" for="selTag">
+              <span class="wizard-label-num">1</span>
+              <span>Operational Phase / Goal</span>
+            </label>
+            <select id="selTag" class="wizard-select">
+              <option value="">Choose an operational phase</option>
+            </select>
+          </div>
+
+          <!-- Step 2: Category -->
+          <div class="wizard-step-box">
+            <label class="wizard-label" for="selCat">
+              <span class="wizard-label-num">2</span>
+              <span>Category / Department Function</span>
+            </label>
+            <select id="selCat" class="wizard-select" disabled>
+              <option value="">Select a phase first</option>
+            </select>
+            <p id="emptyCatNote" class="wizard-empty-note hidden"></p>
+          </div>
+
+          <!-- Step 3: Tool -->
+          <div class="wizard-step-box">
+            <label class="wizard-label" for="selPurpose">
+              <span class="wizard-label-num">3</span>
+              <span>Prescribed Tool / Software</span>
+            </label>
+            <select id="selPurpose" class="wizard-select" disabled>
+              <option value="">Select a category first</option>
+            </select>
+          </div>
+
+          <button id="wizardStartBtn" class="btn btn-gold hidden" style="width: 100%; margin-top: var(--space-md); font-size: var(--fs-base);">
+            🚀 Launch Website in New Tab ↗
+          </button>
+
+          <!-- Result Card -->
+          <div id="resultCard" class="workflow-result-card hidden">
+            <div class="result-eyebrow">
+              <span>📍</span>
+              <span id="resultBreadcrumb"></span>
+            </div>
+            <h3 class="result-title" id="resultPurpose"></h3>
+            <a id="resultLink" class="btn btn-gold" target="_blank" rel="noopener noreferrer" style="width: 100%; justify-content: center; font-size: var(--fs-base);">
+              Open Website in New Tab ↗
+            </a>
+            <div class="result-actions">
+              <button id="copyLinkBtn" class="btn btn-outline btn-sm" style="font-size: var(--fs-xs);">
+                📋 Copy Link
               </button>
-            </div>
-
-            <!-- Filter by Department Pills -->
-            <div class="filter-pills-wrap" style="margin-bottom: var(--space-md);">
-              <span style="font-size: var(--fs-xs); color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Filter Department:</span>
-              <button class="filter-pill is-active" data-filter-dept="ALL">All (10)</button>
-              <button class="filter-pill" data-filter-dept="Research">🔍 Research & Strategy</button>
-              <button class="filter-pill" data-filter-dept="Sourcing">🤝 Sourcing & QA</button>
-              <button class="filter-pill" data-filter-dept="Production">🏭 Production & Operations</button>
-              <button class="filter-pill" data-filter-dept="Logistics">🚢 Logistics & Export</button>
-              <button class="filter-pill" data-filter-dept="Growth">📈 Amazon & Growth</button>
-            </div>
-
-            <!-- Timeline Container -->
-            <div id="boardTimeline" class="workflow-timeline">
-              <!-- Rendered dynamically -->
+              <button id="resetWizardBtn" class="btn btn-outline btn-sm" style="font-size: var(--fs-xs);">
+                ↺ Reset Selector
+              </button>
             </div>
           </div>
 
         </div>
 
         <!-- ======================================================
-             PAGE 2: PRESCRIBED WEBSITES SELECTION MENU & DIRECTORY
+             SECTION B: PHASE-BY-PHASE PRESCRIBED WEBSITES BROWSER
              ====================================================== -->
-        <div id="page-links" role="tabpanel" aria-labelledby="tab-btn-links" class="hidden anime-reveal">
-          
-          <!-- SECTION A: 3-STEP TOOL FINDER SELECTION MENU -->
-          <div class="luxury-card" style="padding: var(--space-lg) var(--space-xl); margin-bottom: var(--space-lg);">
-            <div style="margin-bottom: var(--space-lg); padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px;">STREAMLINED WIZARD</span>
-                <span style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 700;">TOOL FINDER</span>
-              </div>
-              <h2 style="font-size: var(--fs-2xl); color: #FFFFFF; font-family: var(--font-display);">Prescribed Software & Website Finder</h2>
-              <p style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px;">
-                Your selections are automatically synced to your Supabase workflow preferences.
+        <div class="luxury-card anime-reveal" style="padding: var(--space-lg) var(--space-xl);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md); padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px; margin-bottom: 4px; display: inline-block;">ALL WEBSITES</span>
+              <h2 style="font-size: var(--fs-xl); color: var(--text-primary); font-family: var(--font-display);">Prescribed Websites by Operational Phase</h2>
+              <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 2px;">
+                Browse and search 100+ verified tools mapped across all operational phases (click any to open in a new tab).
               </p>
             </div>
-
-            <!-- Step 1: Phase -->
-            <div class="wizard-step-box">
-              <label class="wizard-label" for="selTag">
-                <span class="wizard-label-num">1</span>
-                <span>Operational Phase / Goal</span>
-              </label>
-              <select id="selTag" class="wizard-select">
-                <option value="">Choose an operational phase</option>
-              </select>
+            <div id="prescribed-count-badge" class="badge badge-gold">
+              100+ Websites
             </div>
-
-            <!-- Step 2: Category -->
-            <div class="wizard-step-box">
-              <label class="wizard-label" for="selCat">
-                <span class="wizard-label-num">2</span>
-                <span>Category / Department Function</span>
-              </label>
-              <select id="selCat" class="wizard-select" disabled>
-                <option value="">Select a phase first</option>
-              </select>
-              <p id="emptyCatNote" class="wizard-empty-note hidden"></p>
-            </div>
-
-            <!-- Step 3: Tool -->
-            <div class="wizard-step-box">
-              <label class="wizard-label" for="selPurpose">
-                <span class="wizard-label-num">3</span>
-                <span>Prescribed Tool / Software</span>
-              </label>
-              <select id="selPurpose" class="wizard-select" disabled>
-                <option value="">Select a category first</option>
-              </select>
-            </div>
-
-            <button id="wizardStartBtn" class="btn btn-gold hidden" style="width: 100%; margin-top: var(--space-md); font-size: var(--fs-base);">
-              🚀 Launch Website in New Tab ↗
-            </button>
-
-            <!-- Result Card -->
-            <div id="resultCard" class="workflow-result-card hidden">
-              <div class="result-eyebrow">
-                <span>📍</span>
-                <span id="resultBreadcrumb"></span>
-              </div>
-              <h3 class="result-title" id="resultPurpose"></h3>
-              <a id="resultLink" class="btn btn-gold" target="_blank" rel="noopener noreferrer" style="width: 100%; justify-content: center; font-size: var(--fs-base);">
-                Open Website in New Tab ↗
-              </a>
-              <div class="result-actions">
-                <button id="copyLinkBtn" class="btn btn-outline btn-sm" style="font-size: var(--fs-xs);">
-                  📋 Copy Link
-                </button>
-                <button id="resetWizardBtn" class="btn btn-outline btn-sm" style="font-size: var(--fs-xs);">
-                  ↺ Reset Selector
-                </button>
-              </div>
-            </div>
-
           </div>
 
-          <!-- SECTION B: PHASE-BY-PHASE PRESCRIBED WEBSITES BROWSER -->
-          <div class="luxury-card" style="padding: var(--space-lg) var(--space-xl);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md); padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
-              <div>
-                <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px; margin-bottom: 4px; display: inline-block;">ALL WEBSITES</span>
-                <h2 style="font-size: var(--fs-xl); color: var(--text-primary); font-family: var(--font-display);">Prescribed Websites by Operational Phase</h2>
-                <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 2px;">
-                  Browse and search 100+ verified tools mapped across all 10 phases (click any to open in a new tab).
-                </p>
-              </div>
-              <div id="prescribed-count-badge" class="badge badge-gold">
-                100+ Websites
-              </div>
+          <!-- Phase Selector Dropdown & Search -->
+          <div class="grid-2" style="gap: 12px; margin-bottom: var(--space-md);">
+            <div>
+              <label class="input-label" for="phase-select-menu" style="font-size: 0.72rem; color: var(--gold-light);">Filter by Phase Menu</label>
+              <select id="phase-select-menu" class="wizard-select">
+                <option value="ALL">🌐 All Operational Phases</option>
+                <option value="Product Research">🔍 Product Research (34 tools)</option>
+                <option value="Supplier Selection">🤝 Supplier Selection (36 tools)</option>
+                <option value="Sample Approval">✅ Sample Approval (AI Spec)</option>
+                <option value="Manufacturing">🏭 Manufacturing (46 tools)</option>
+                <option value="Quality Inspection">🧪 Quality Inspection (37 tools)</option>
+                <option value="Export">🚢 Export &amp; Customs (31 tools)</option>
+                <option value="USA Warehouse">🏬 USA Warehouse &amp; 3PL (44 tools)</option>
+                <option value="Amazon USA Launch">📦 Amazon USA Launch (35 tools)</option>
+                <option value="Business Scaling">📈 Business Scaling (34 tools)</option>
+              </select>
             </div>
 
-            <!-- Phase Selector Dropdown & Search -->
-            <div class="grid-2" style="gap: 12px; margin-bottom: var(--space-md);">
-              <div>
-                <label class="input-label" for="phase-select-menu" style="font-size: 0.72rem; color: var(--gold-light);">Filter by Phase Menu</label>
-                <select id="phase-select-menu" class="wizard-select">
-                  <option value="ALL">🌐 All Operational Phases</option>
-                  <option value="Product Research">🔍 Product Research (34 tools)</option>
-                  <option value="Supplier Selection">🤝 Supplier Selection (36 tools)</option>
-                  <option value="Sample Approval">✅ Sample Approval (AI Spec)</option>
-                  <option value="Manufacturing">🏭 Manufacturing (46 tools)</option>
-                  <option value="Quality Inspection">🧪 Quality Inspection (37 tools)</option>
-                  <option value="Export">🚢 Export & Customs (31 tools)</option>
-                  <option value="USA Warehouse">🏬 USA Warehouse & 3PL (44 tools)</option>
-                  <option value="Amazon USA Launch">📦 Amazon USA Launch (35 tools)</option>
-                  <option value="Business Scaling">📈 Business Scaling (34 tools)</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="input-label" for="quick-search-input" style="font-size: 0.72rem; color: var(--gold-light);">Search Any Tool / Website</label>
-                <div class="directory-search-box" style="margin-bottom: 0;">
-                  <span class="directory-search-icon" style="font-size: 0.95rem;">🔍</span>
-                  <input type="text" id="quick-search-input" class="directory-search-input" placeholder="Search by name (e.g. Helium 10, Alibaba, SGS, UPS)..." style="padding: 0.95rem 1rem 0.95rem 2.6rem;" />
-                </div>
+            <div>
+              <label class="input-label" for="quick-search-input" style="font-size: 0.72rem; color: var(--gold-light);">Search Any Tool / Website</label>
+              <div class="directory-search-box" style="margin-bottom: 0;">
+                <span class="directory-search-icon" style="font-size: 0.95rem;">🔍</span>
+                <input type="text" id="quick-search-input" class="directory-search-input" placeholder="Search by name (e.g. Helium 10, Alibaba, SGS, UPS)..." style="padding: 0.95rem 1rem 0.95rem 2.6rem;" />
               </div>
             </div>
+          </div>
 
-            <!-- Categorized Prescribed Websites Container -->
-            <div id="categorized-websites-container">
-              <!-- Rendered dynamically -->
-            </div>
+          <!-- Categorized Prescribed Websites Container -->
+          <div id="categorized-websites-container">
+            <!-- Rendered dynamically -->
+          </div>
 
-            <!-- Empty Results Notice -->
-            <div id="websites-empty-note" class="hidden text-center" style="padding: var(--space-xl) var(--space-md); color: var(--text-muted);">
-              <p style="font-size: var(--fs-md); color: var(--gold-light); margin-bottom: 6px;">No websites found matching your search</p>
-              <p style="font-size: var(--fs-xs);">Try searching for a different keyword or reset the phase filter.</p>
-            </div>
-
+          <!-- Empty Results Notice -->
+          <div id="websites-empty-note" class="hidden text-center" style="padding: var(--space-xl) var(--space-md); color: var(--text-muted);">
+            <p style="font-size: var(--fs-md); color: var(--gold-light); margin-bottom: 6px;">No websites found matching your search</p>
+            <p style="font-size: var(--fs-xs);">Try searching for a different keyword or reset the phase filter.</p>
           </div>
 
         </div>
@@ -362,94 +280,24 @@
         userNameEl.textContent = fullName.toUpperCase();
       }
       if (userWelcomeEl) {
-        userWelcomeEl.textContent = `Welcome back, ${fullName}! Your operational blueprint and 100+ prescribed software tools are ready.`;
+        userWelcomeEl.textContent = `Welcome back, ${fullName}! Your operational Tool Finder and 100+ prescribed software tools are ready.`;
       }
     }
 
     /* ============================================================
-       UNIVERSAL 10-PHASE OPERATIONAL PIPELINE DATA
+       PRESCRIBED WEBSITES & TOOLS DATABASE
        ============================================================ */
-    const flowBoardData = [
-      {
-        tag: "Product Research",
-        deptCategory: "Research",
-        dept: "Market Intelligence & Analytics",
-        roleLead: "Research & Product Analyst",
-        roleSupport: "Category Strategist",
-        deliverable: "High-Demand Opportunity Validation & Margin Viability Study"
-      },
-      {
-        tag: "Supplier Selection",
-        deptCategory: "Sourcing",
-        dept: "Global Sourcing & Procurement",
-        roleLead: "Sourcing Director",
-        roleSupport: "Factory Audit Specialist",
-        deliverable: "Verified Manufacturer Shortlist & Commercial Term Sheet"
-      },
-      {
-        tag: "Sample Approval",
-        deptCategory: "Sourcing",
-        dept: "Product Design & Quality Assurance",
-        roleLead: "Product Development Lead",
-        roleSupport: "Quality Assurance Engineer",
-        deliverable: "Golden Production Sample Sign-Off & Spec Sheet"
-      },
-      {
-        tag: "Manufacturing",
-        deptCategory: "Production",
-        dept: "Production & Supply Chain",
-        roleLead: "Manufacturing Supervisor",
-        roleSupport: "Packaging & Compliance Engineer",
-        deliverable: "Mass Production Completion & Batch Regulatory Clearance"
-      },
-      {
-        tag: "Quality Inspection",
-        deptCategory: "Production",
-        dept: "Quality Assurance & Compliance",
-        roleLead: "Senior QC Inspector",
-        roleSupport: "Laboratory Compliance Officer",
-        deliverable: "AQL 2.5 Pre-Shipment Inspection Report & Lab Certification"
-      },
-      {
-        tag: "India Launch",
-        deptCategory: "Production",
-        dept: "Domestic Rollout Operations",
-        roleLead: "Launch Operations Lead",
-        roleSupport: "Domestic Fulfillment Lead",
-        deliverable: "Domestic Market Testing, Review Traction & Operational Proof"
-      },
-      {
-        tag: "Export",
-        deptCategory: "Logistics",
-        dept: "Global Trade & Customs Logistics",
-        roleLead: "International Trade Manager",
-        roleSupport: "Customs Broker & Forwarder",
-        deliverable: "DGFT & ICEGATE Clearance, Ocean/Air Bill of Lading & Tracking"
-      },
-      {
-        tag: "USA Warehouse",
-        deptCategory: "Logistics",
-        dept: "US 3PL & Fulfillment Operations",
-        roleLead: "US Logistics Coordinator",
-        roleSupport: "Warehouse Intake & Prep Team",
-        deliverable: "3PL Receiving, FBA Inbound Labeling & Pallet Distribution"
-      },
-      {
-        tag: "Amazon USA Launch",
-        deptCategory: "Growth",
-        dept: "Marketplace Growth & Advertising",
-        roleLead: "Amazon Brand Manager",
-        roleSupport: "PPC & Copywriting Specialist",
-        deliverable: "A+ Content Indexing, Brand Registry & Amazon PPC Campaigns Active"
-      },
-      {
-        tag: "Business Scaling",
-        deptCategory: "Growth",
-        dept: "Executive Growth & Scaling",
-        roleLead: "Head of Growth Strategy",
-        roleSupport: "Automation & BI Engineer",
-        deliverable: "Profit Optimization, Multi-Channel Expansion & CRM Scaling"
-      }
+    const phasesList = [
+      "Product Research",
+      "Supplier Selection",
+      "Sample Approval",
+      "Manufacturing",
+      "Quality Inspection",
+      "India Launch",
+      "Export",
+      "USA Warehouse",
+      "Amazon USA Launch",
+      "Business Scaling"
     ];
 
     const websiteDatabase = [
@@ -494,7 +342,65 @@
       {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"IndiaMART","link":"https://www.indiamart.com"},
       {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"TradeIndia","link":"https://www.tradeindia.com"},
       {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"ExportersIndia","link":"https://www.exportersindia.com"},
-      {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Thomasnet","link":"https://www.thomasnet.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Kompass","link":"https://www.kompass.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"EC21","link":"https://www.ec21.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"DHgate","link":"https://www.dhgate.com"},{"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"AliExpress","link":"https://www.aliexpress.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"OpenCorporates","link":"https://opencorporates.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"Google Maps","link":"https://maps.google.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"LinkedIn","link":"https://www.linkedin.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"Google Search","link":"https://www.google.com"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"WHOIS Lookup","link":"https://who.is"},{"tag":"Supplier Selection","cat":"Company Verification","purpose":"Archive.org","link":"https://archive.org"},{"tag":"Supplier Selection","cat":"Supplier Background","purpose":"Panjiva","link":"https://panjiva.com"},{"tag":"Supplier Selection","cat":"Supplier Background","purpose":"ImportYeti","link":"https://www.importyeti.com"},{"tag":"Supplier Selection","cat":"Supplier Background","purpose":"Volza","link":"https://www.volza.com"},{"tag":"Supplier Selection","cat":"Supplier Background","purpose":"ImportGenius","link":"https://www.importgenius.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"SGS","link":"https://www.sgs.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"Intertek","link":"https://www.intertek.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},{"tag":"Supplier Selection","cat":"Factory Verification","purpose":"QIMA","link":"https://www.qima.com"},{"tag":"Supplier Selection","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Supplier Selection","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},{"tag":"Supplier Selection","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Supplier Selection","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Supplier Selection","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"Supplier Selection","cat":"Documents","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Supplier Selection","cat":"Documents","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Supplier Selection","cat":"Documents","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Supplier Selection","cat":"Documents","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Supplier Selection","cat":"Documents","purpose":"OneDrive","link":"https://onedrive.live.com"},{"tag":"Supplier Selection","cat":"Currency","purpose":"XE Currency Converter","link":"https://www.xe.com"},{"tag":"Supplier Selection","cat":"Currency","purpose":"OANDA Currency Converter","link":"https://www.oanda.com/currency-converter"},{"tag":"Sample Approval","cat":"AI","purpose":"ChatGPT","link":"https://chatgpt.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Alibaba","link":"https://www.alibaba.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"1688","link":"https://www.1688.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Global Sources","link":"https://www.globalsources.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Made-in-China","link":"https://www.made-in-china.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"IndiaMART","link":"https://www.indiamart.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"TradeIndia","link":"https://www.tradeindia.com"},{"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Thomasnet","link":"https://www.thomasnet.com"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Uline","link":"https://www.uline.com"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Packlane","link":"https://www.packlane.com"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Noissue","link":"https://www.noissue.co"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"SwissPac","link":"https://www.swisspac.com"},{"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Packhelp","link":"https://packhelp.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"CPSC","link":"https://www.cpsc.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FDA","link":"https://www.fda.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"EPA","link":"https://www.epa.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FCC","link":"https://www.fcc.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FTC","link":"https://www.ftc.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"USDA","link":"https://www.usda.gov"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"European Commission Product Safety","link":"https://ec.europa.eu/safety-gate"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"UK GOV Product Safety","link":"https://www.gov.uk/product-safety-for-businesses"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"BIS India","link":"https://www.bis.gov.in"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"Bureau of Indian Standards CRS","link":"https://www.crsbis.in"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"ISO","link":"https://www.iso.org"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"ASTM International","link":"https://www.astm.org"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"UL Solutions","link":"https://www.ul.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"RoHS","link":"https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"REACH","link":"https://echa.europa.eu/regulations/reach"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"OEKO-TEX","link":"https://www.oeko-tex.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"GOTS","link":"https://global-standard.org"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"Sedex","link":"https://www.sedex.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"BSCI amfori","link":"https://www.amfori.org"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"SGS","link":"https://www.sgs.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Intertek","link":"https://www.intertek.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"QIMA","link":"https://www.qima.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"TÜV Rheinland","link":"https://www.tuv.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Eurofins","link":"https://www.eurofins.com"},{"tag":"Manufacturing","cat":"Lab Testing","purpose":"UL Solutions Testing","link":"https://www.ul.com/services/testing"},{"tag":"Manufacturing","cat":"Lab Testing","purpose":"TUV Testing Services","link":"https://www.tuvsud.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"QIMA Factory Audit","link":"https://www.qima.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"SGS Factory Audit","link":"https://www.sgs.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"Intertek Factory Audit","link":"https://www.intertek.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Manufacturing","cat":"Project Management","purpose":"Notion","link":"https://www.notion.so"},{"tag":"Manufacturing","cat":"Project Management","purpose":"Trello","link":"https://trello.com"},{"tag":"Manufacturing","cat":"Project Management","purpose":"ClickUp","link":"https://clickup.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Manufacturing","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"SGS","link":"https://www.sgs.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Intertek","link":"https://www.intertek.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"QIMA","link":"https://www.qima.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"TÜV Rheinland","link":"https://www.tuv.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Eurofins","link":"https://www.eurofins.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Cotecna","link":"https://www.cotecna.com"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"AQL Calculator","link":"https://www.aqltable.com"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ANSI/ASQ Z1.4","link":"https://asq.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ISO","link":"https://www.iso.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ASTM International","link":"https://www.astm.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"IEC","link":"https://www.iec.ch"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"SGS Testing Services","link":"https://www.sgs.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"Intertek Testing","link":"https://www.intertek.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"Eurofins Laboratories","link":"https://www.eurofins.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"UL Solutions Testing","link":"https://www.ul.com/services/testing"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"CPSC","link":"https://www.cpsc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FDA","link":"https://www.fda.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"EPA","link":"https://www.epa.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FCC","link":"https://www.fcc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FTC","link":"https://www.ftc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"OEKO-TEX","link":"https://www.oeko-tex.com"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"GOTS","link":"https://global-standard.org"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"REACH","link":"https://echa.europa.eu/regulations/reach"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"RoHS","link":"https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Quality Inspection","cat":"Image Documentation","purpose":"Google Photos","link":"https://photos.google.com"},{"tag":"Quality Inspection","cat":"Image Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"Export","cat":"Export Documentation","purpose":"DGFT (India)","link":"https://www.dgft.gov.in"},{"tag":"Export","cat":"Export Documentation","purpose":"ICEGATE","link":"https://www.icegate.gov.in"},{"tag":"Export","cat":"Export Documentation","purpose":"Indian Trade Portal","link":"https://www.indiantradeportal.in"},{"tag":"Export","cat":"Export Documentation","purpose":"FIEO","link":"https://www.fieo.org"},{"tag":"Export","cat":"Export Documentation","purpose":"GST Portal","link":"https://www.gst.gov.in"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"Indian Customs Tariff","link":"https://www.cbic.gov.in"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"USITC HTS Search","link":"https://hts.usitc.gov"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"WCO HS Database","link":"https://www.wcoomd.org"},{"tag":"Export","cat":"Customs & Regulations","purpose":"CBP (US Customs)","link":"https://www.cbp.gov"},{"tag":"Export","cat":"Customs & Regulations","purpose":"US Customs Rulings","link":"https://rulings.cbp.gov"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Freightos","link":"https://www.freightos.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Flexport","link":"https://www.flexport.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Maersk","link":"https://www.maersk.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"MSC","link":"https://www.msc.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"CMA CGM","link":"https://www.cma-cgm.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Hapag-Lloyd","link":"https://www.hapag-lloyd.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Evergreen Line","link":"https://www.evergreen-marine.com"},{"tag":"Export","cat":"Courier & Express","purpose":"DHL Express","link":"https://www.dhl.com"},{"tag":"Export","cat":"Courier & Express","purpose":"FedEx","link":"https://www.fedex.com"},{"tag":"Export","cat":"Courier & Express","purpose":"UPS","link":"https://www.ups.com"},{"tag":"Export","cat":"Courier & Express","purpose":"Aramex","link":"https://www.aramex.com"},{"tag":"Export","cat":"Container Tracking","purpose":"SeaRates","link":"https://www.searates.com"},{"tag":"Export","cat":"Container Tracking","purpose":"MarineTraffic","link":"https://www.marinetraffic.com"},{"tag":"Export","cat":"Container Tracking","purpose":"VesselFinder","link":"https://www.vesselfinder.com"},{"tag":"Export","cat":"Cargo Insurance","purpose":"Allianz Trade","link":"https://www.allianz-trade.com"},{"tag":"Export","cat":"Cargo Insurance","purpose":"Marsh","link":"https://www.marsh.com"},{"tag":"Export","cat":"Trade Compliance","purpose":"Export Genius","link":"https://www.exportgenius.in"},{"tag":"Export","cat":"Trade Compliance","purpose":"Volza","link":"https://www.volza.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Export","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Export","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Export","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Export","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"Flexe","link":"https://www.flexe.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"WareSpace","link":"https://www.warespace.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"LoopNet","link":"https://www.loopnet.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"CommercialCafe","link":"https://www.commercialcafe.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"Prologis","link":"https://www.prologis.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"ReadySpaces","link":"https://www.readyspaces.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"ShipBob","link":"https://www.shipbob.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"ShipHero","link":"https://shiphero.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"Red Stag Fulfillment","link":"https://redstagfulfillment.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"Extensiv","link":"https://www.extensiv.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"uShip","link":"https://www.uship.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"Freightos","link":"https://www.freightos.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"GoShare","link":"https://goshare.co"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"Roadie","link":"https://www.roadie.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"U-Haul","link":"https://www.uhaul.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Penske Truck Rental","link":"https://www.pensketruckrental.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Budget Truck Rental","link":"https://www.budgettruck.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Enterprise Truck Rental","link":"https://www.enterprisetrucks.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Ryder Truck Rental","link":"https://www.ryder.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Two Men and a Truck","link":"https://twomenandatruck.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"PODS","link":"https://www.pods.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Bellhop","link":"https://www.getbellhops.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Moving Help","link":"https://www.movinghelp.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"HireAHelper","link":"https://www.hireahelper.com"},{"tag":"USA Warehouse","cat":"Pallet Supplier","purpose":"CHEP","link":"https://www.chep.com"},{"tag":"USA Warehouse","cat":"Pallet Supplier","purpose":"PECO Pallet","link":"https://www.pecopallet.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Uline","link":"https://www.uline.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Grainger","link":"https://www.grainger.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Global Industrial","link":"https://www.globalindustrial.com"},{"tag":"USA Warehouse","cat":"Forklift Rental","purpose":"United Rentals","link":"https://www.unitedrentals.com"},{"tag":"USA Warehouse","cat":"Forklift Rental","purpose":"Sunbelt Rentals","link":"https://www.sunbeltrentals.com"},{"tag":"USA Warehouse","cat":"Equipment Rental","purpose":"Herc Rentals","link":"https://www.hercrentals.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"Public Storage","link":"https://www.publicstorage.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"Extra Space Storage","link":"https://www.extraspace.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"CubeSmart","link":"https://www.cubesmart.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"PeopleReady","link":"https://www.peopleready.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"Instawork","link":"https://www.instawork.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"Wonolo","link":"https://www.wonolo.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"UPS","link":"https://www.ups.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"FedEx","link":"https://www.fedex.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"USPS","link":"https://www.usps.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"DHL","link":"https://www.dhl.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Yelp","link":"https://www.yelp.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Google Maps","link":"https://maps.google.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Yellow Pages","link":"https://www.yellowpages.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Seller Central","link":"https://sellercentral.amazon.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Brand Registry","link":"https://brandservices.amazon.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon FBA","link":"https://sell.amazon.com/fulfillment-by-amazon"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Partnered Carrier","link":"https://sellercentral.amazon.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"MyFBAPrep","link":"https://myfbaprep.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"AMZ Prep","link":"https://amzprep.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"ShipBob","link":"https://www.shipbob.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"Prep Ninjas","link":"https://prepninjas.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"West Coast Prep","link":"https://westcoastprep.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Packlane","link":"https://www.packlane.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Noissue","link":"https://www.noissue.co"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Uline","link":"https://www.uline.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Packhelp","link":"https://packhelp.com"},{"tag":"Amazon USA Launch","cat":"Packaging Supplies","purpose":"Grainger","link":"https://www.grainger.com"},{"tag":"Amazon USA Launch","cat":"Packaging Supplies","purpose":"Global Industrial","link":"https://www.globalindustrial.com"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Staples Print & Marketing","link":"https://www.staples.com/services/printing"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Office Depot Print","link":"https://www.officedepot.com/print"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"The UPS Store Printing","link":"https://www.theupsstore.com/print"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"FedEx Office","link":"https://www.office.fedex.com"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Vistaprint","link":"https://www.vistaprint.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"Zebra Technologies","link":"https://www.zebra.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"BarTender","link":"https://www.seagullscientific.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"Loftware","link":"https://www.loftware.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Fiverr","link":"https://www.fiverr.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Upwork","link":"https://www.upwork.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Freelancer","link":"https://www.freelancer.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"PeoplePerHour","link":"https://www.peopleperhour.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Instawork","link":"https://www.instawork.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Wonolo","link":"https://www.wonolo.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"PeopleReady","link":"https://www.peopleready.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Veryable","link":"https://www.veryableops.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Bluecrew","link":"https://www.bluecrewjobs.com"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Amazon Imaging","link":"https://amazonimaging.com"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Soona","link":"https://soona.co"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Squareshot","link":"https://www.squareshot.com"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"Helium 10","link":"https://www.helium10.com"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"DataDive","link":"https://datadive.tools"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"Jungle Scout","link":"https://www.junglescout.com"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Amazon Ads","link":"https://advertising.amazon.com"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Perpetua","link":"https://perpetua.io"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Pacvue","link":"https://pacvue.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Seller Central Business Reports","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Brand Analytics","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Product Opportunity Explorer","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Helium 10","link":"https://www.helium10.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Jungle Scout","link":"https://www.junglescout.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"DataDive","link":"https://datadive.tools"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Keepa","link":"https://keepa.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"Amazon Reviews","link":"https://www.amazon.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"FeedbackWhiz","link":"https://www.feedbackwhiz.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"Helium 10 Follow-Up","link":"https://www.helium10.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"SmartScout","link":"https://www.smartscout.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"SellerAmp SAS","link":"https://sas.selleramp.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"Google Shopping","link":"https://shopping.google.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"Sellerboard","link":"https://sellerboard.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"Shopkeeper","link":"https://shopkeeper.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"ManageByStats","link":"https://managebystats.com"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Amazon Ads","link":"https://advertising.amazon.com"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Perpetua","link":"https://perpetua.io"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Pacvue","link":"https://pacvue.com"},{"tag":"Business Scaling","cat":"Email & CRM","purpose":"HubSpot","link":"https://www.hubspot.com"},{"tag":"Business Scaling","cat":"Email & CRM","purpose":"Mailchimp","link":"https://mailchimp.com"},{"tag":"Business Scaling","cat":"Surveys","purpose":"Typeform","link":"https://www.typeform.com"},{"tag":"Business Scaling","cat":"Surveys","purpose":"Google Forms","link":"https://forms.google.com"},{"tag":"Business Scaling","cat":"Project Management","purpose":"Notion","link":"https://www.notion.so"},{"tag":"Business Scaling","cat":"Project Management","purpose":"ClickUp","link":"https://clickup.com"},{"tag":"Business Scaling","cat":"Project Management","purpose":"Asana","link":"https://asana.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"Zapier","link":"https://zapier.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"Make","link":"https://www.make.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"n8n","link":"https://n8n.io"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Looker Studio","link":"https://lookerstudio.google.com"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Power BI","link":"https://powerbi.microsoft.com"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Tableau","link":"https://www.tableau.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Fiverr","link":"https://www.fiverr.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Upwork","link":"https://www.upwork.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Toptal","link":"https://www.toptal.com"},{"tag":"Business Scaling","cat":"Patent & Trademark","purpose":"USPTO","link":"https://www.uspto.gov"},{"tag":"Business Scaling","cat":"Patent & Trademark","purpose":"WIPO","link":"https://www.wipo.int"}
+      {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Thomasnet","link":"https://www.thomasnet.com"},
+      {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"Kompass","link":"https://www.kompass.com"},
+      {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"EC21","link":"https://www.ec21.com"},
+      {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"DHgate","link":"https://www.dhgate.com"},
+      {"tag":"Supplier Selection","cat":"Supplier Sourcing","purpose":"AliExpress","link":"https://www.aliexpress.com"},
+      {"tag":"Supplier Selection","cat":"Company Verification","purpose":"OpenCorporates","link":"https://opencorporates.com"},
+      {"tag":"Supplier Selection","cat":"Company Verification","purpose":"Google Maps","link":"https://maps.google.com"},
+      {"tag":"Supplier Selection","cat":"Company Verification","purpose":"LinkedIn","link":"https://www.linkedin.com"},
+      {"tag":"Supplier Selection","cat":"Company Verification","purpose":"Google Search","link":"https://www.google.com"},
+      {"tag":"Supplier Selection","cat":"Company Verification","purpose":"WHOIS Lookup","link":"https://who.is"},
+      {"tag":"Supplier Selection","cat":"Company Verification","purpose":"Archive.org","link":"https://archive.org"},
+      {"tag":"Supplier Selection","cat":"Supplier Background","purpose":"Panjiva","link":"https://panjiva.com"},
+      {"tag":"Supplier Selection","cat":"Supplier Background","purpose":"ImportYeti","link":"https://www.importyeti.com"},
+      {"tag":"Supplier Selection","cat":"Supplier Background","purpose":"Volza","link":"https://www.volza.com"},
+      {"tag":"Supplier Selection","cat":"Supplier Background","purpose":"ImportGenius","link":"https://www.importgenius.com"},
+      {"tag":"Supplier Selection","cat":"Factory Verification","purpose":"SGS","link":"https://www.sgs.com"},
+      {"tag":"Supplier Selection","cat":"Factory Verification","purpose":"Intertek","link":"https://www.intertek.com"},
+      {"tag":"Supplier Selection","cat":"Factory Verification","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},
+      {"tag":"Supplier Selection","cat":"Factory Verification","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},
+      {"tag":"Supplier Selection","cat":"Factory Verification","purpose":"QIMA","link":"https://www.qima.com"},
+      {"tag":"Supplier Selection","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},
+      {"tag":"Supplier Selection","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},
+      {"tag":"Supplier Selection","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},
+      {"tag":"Supplier Selection","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},
+      {"tag":"Supplier Selection","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},
+      {"tag":"Supplier Selection","cat":"Documents","purpose":"Google Drive","link":"https://drive.google.com"},
+      {"tag":"Supplier Selection","cat":"Documents","purpose":"Google Sheets","link":"https://sheets.google.com"},
+      {"tag":"Supplier Selection","cat":"Documents","purpose":"Google Docs","link":"https://docs.google.com"},
+      {"tag":"Supplier Selection","cat":"Documents","purpose":"Dropbox","link":"https://www.dropbox.com"},
+      {"tag":"Supplier Selection","cat":"Documents","purpose":"OneDrive","link":"https://onedrive.live.com"},
+      {"tag":"Supplier Selection","cat":"Currency","purpose":"XE Currency Converter","link":"https://www.xe.com"},
+      {"tag":"Supplier Selection","cat":"Currency","purpose":"OANDA Currency Converter","link":"https://www.oanda.com/currency-converter"},
+      {"tag":"Sample Approval","cat":"AI","purpose":"ChatGPT","link":"https://chatgpt.com"},
+      {"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Alibaba","link":"https://www.alibaba.com"},
+      {"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"1688","link":"https://www.1688.com"},
+      {"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Global Sources","link":"https://www.globalsources.com"},
+      {"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Made-in-China","link":"https://www.made-in-china.com"},
+      {"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"IndiaMART","link":"https://www.indiamart.com"},
+      {"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"TradeIndia","link":"https://www.tradeindia.com"},
+      {"tag":"Manufacturing","cat":"Raw Material Sourcing","purpose":"Thomasnet","link":"https://www.thomasnet.com"},
+      {"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Uline","link":"https://www.uline.com"},
+      {"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Packlane","link":"https://www.packlane.com"},
+      {"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Noissue","link":"https://www.noissue.co"},
+      {"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"SwissPac","link":"https://www.swisspac.com"},
+      {"tag":"Manufacturing","cat":"Packaging Suppliers","purpose":"Packhelp","link":"https://packhelp.com"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"CPSC","link":"https://www.cpsc.gov"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FDA","link":"https://www.fda.gov"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"EPA","link":"https://www.epa.gov"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FCC","link":"https://www.fcc.gov"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"FTC","link":"https://www.ftc.gov"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"USDA","link":"https://www.usda.gov"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"European Commission Product Safety","link":"https://ec.europa.eu/safety-gate"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"UK GOV Product Safety","link":"https://www.gov.uk/product-safety-for-businesses"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"BIS India","link":"https://www.bis.gov.in"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"Bureau of Indian Standards CRS","link":"https://www.crsbis.in"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"ISO","link":"https://www.iso.org"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"ASTM International","link":"https://www.astm.org"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"UL Solutions","link":"https://www.ul.com"},
+      {"tag":"Manufacturing","cat":"Compliance Standards","purpose":"RoHS","link":"https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"REACH","link":"https://echa.europa.eu/regulations/reach"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"OEKO-TEX","link":"https://www.oeko-tex.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"GOTS","link":"https://global-standard.org"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"Sedex","link":"https://www.sedex.com"},{"tag":"Manufacturing","cat":"Compliance Standards","purpose":"BSCI amfori","link":"https://www.amfori.org"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"SGS","link":"https://www.sgs.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Intertek","link":"https://www.intertek.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"QIMA","link":"https://www.qima.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"TÜV Rheinland","link":"https://www.tuv.com"},{"tag":"Manufacturing","cat":"Product Testing","purpose":"Eurofins","link":"https://www.eurofins.com"},{"tag":"Manufacturing","cat":"Lab Testing","purpose":"UL Solutions Testing","link":"https://www.ul.com/services/testing"},{"tag":"Manufacturing","cat":"Lab Testing","purpose":"TUV Testing Services","link":"https://www.tuvsud.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"QIMA Factory Audit","link":"https://www.qima.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"SGS Factory Audit","link":"https://www.sgs.com"},{"tag":"Manufacturing","cat":"Factory Audit","purpose":"Intertek Factory Audit","link":"https://www.intertek.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Manufacturing","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Manufacturing","cat":"Project Management","purpose":"Notion","link":"https://www.notion.so"},{"tag":"Manufacturing","cat":"Project Management","purpose":"Trello","link":"https://trello.com"},{"tag":"Manufacturing","cat":"Project Management","purpose":"ClickUp","link":"https://clickup.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Manufacturing","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Manufacturing","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"SGS","link":"https://www.sgs.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Intertek","link":"https://www.intertek.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Bureau Veritas","link":"https://group.bureauveritas.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"QIMA","link":"https://www.qima.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"TÜV SÜD","link":"https://www.tuvsud.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"TÜV Rheinland","link":"https://www.tuv.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Eurofins","link":"https://www.eurofins.com"},{"tag":"Quality Inspection","cat":"Inspection Agencies","purpose":"Cotecna","link":"https://www.cotecna.com"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"AQL Calculator","link":"https://www.aqltable.com"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ANSI/ASQ Z1.4","link":"https://asq.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ISO","link":"https://www.iso.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"ASTM International","link":"https://www.astm.org"},{"tag":"Quality Inspection","cat":"Inspection Standards","purpose":"IEC","link":"https://www.iec.ch"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"SGS Testing Services","link":"https://www.sgs.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"Intertek Testing","link":"https://www.intertek.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"Eurofins Laboratories","link":"https://www.eurofins.com"},{"tag":"Quality Inspection","cat":"Lab Testing","purpose":"UL Solutions Testing","link":"https://www.ul.com/services/testing"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"CPSC","link":"https://www.cpsc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FDA","link":"https://www.fda.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"EPA","link":"https://www.epa.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FCC","link":"https://www.fcc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"FTC","link":"https://www.ftc.gov"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"OEKO-TEX","link":"https://www.oeko-tex.com"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"GOTS","link":"https://global-standard.org"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"REACH","link":"https://echa.europa.eu/regulations/reach"},{"tag":"Quality Inspection","cat":"Compliance Verification","purpose":"RoHS","link":"https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Quality Inspection","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Quality Inspection","cat":"Image Documentation","purpose":"Google Photos","link":"https://photos.google.com"},{"tag":"Quality Inspection","cat":"Image Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"WeChat","link":"https://www.wechat.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Quality Inspection","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"Export","cat":"Export Documentation","purpose":"DGFT (India)","link":"https://www.dgft.gov.in"},{"tag":"Export","cat":"Export Documentation","purpose":"ICEGATE","link":"https://www.icegate.gov.in"},{"tag":"Export","cat":"Export Documentation","purpose":"Indian Trade Portal","link":"https://www.indiantradeportal.in"},{"tag":"Export","cat":"Export Documentation","purpose":"FIEO","link":"https://www.fieo.org"},{"tag":"Export","cat":"Export Documentation","purpose":"GST Portal","link":"https://www.gst.gov.in"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"Indian Customs Tariff","link":"https://www.cbic.gov.in"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"USITC HTS Search","link":"https://hts.usitc.gov"},{"tag":"Export","cat":"HS Code & Tariff","purpose":"WCO HS Database","link":"https://www.wcoomd.org"},{"tag":"Export","cat":"Customs & Regulations","purpose":"CBP (US Customs)","link":"https://www.cbp.gov"},{"tag":"Export","cat":"Customs & Regulations","purpose":"US Customs Rulings","link":"https://rulings.cbp.gov"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Freightos","link":"https://www.freightos.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Flexport","link":"https://www.flexport.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Maersk","link":"https://www.maersk.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"MSC","link":"https://www.msc.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"CMA CGM","link":"https://www.cma-cgm.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Hapag-Lloyd","link":"https://www.hapag-lloyd.com"},{"tag":"Export","cat":"Freight Forwarders","purpose":"Evergreen Line","link":"https://www.evergreen-marine.com"},{"tag":"Export","cat":"Courier & Express","purpose":"DHL Express","link":"https://www.dhl.com"},{"tag":"Export","cat":"Courier & Express","purpose":"FedEx","link":"https://www.fedex.com"},{"tag":"Export","cat":"Courier & Express","purpose":"UPS","link":"https://www.ups.com"},{"tag":"Export","cat":"Courier & Express","purpose":"Aramex","link":"https://www.aramex.com"},{"tag":"Export","cat":"Container Tracking","purpose":"SeaRates","link":"https://www.searates.com"},{"tag":"Export","cat":"Container Tracking","purpose":"MarineTraffic","link":"https://www.marinetraffic.com"},{"tag":"Export","cat":"Container Tracking","purpose":"VesselFinder","link":"https://www.vesselfinder.com"},{"tag":"Export","cat":"Cargo Insurance","purpose":"Allianz Trade","link":"https://www.allianz-trade.com"},{"tag":"Export","cat":"Cargo Insurance","purpose":"Marsh","link":"https://www.marsh.com"},{"tag":"Export","cat":"Trade Compliance","purpose":"Export Genius","link":"https://www.exportgenius.in"},{"tag":"Export","cat":"Trade Compliance","purpose":"Volza","link":"https://www.volza.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Drive","link":"https://drive.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Docs","link":"https://docs.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Google Sheets","link":"https://sheets.google.com"},{"tag":"Export","cat":"Documentation","purpose":"Dropbox","link":"https://www.dropbox.com"},{"tag":"Export","cat":"Communication","purpose":"WhatsApp Web","link":"https://web.whatsapp.com"},{"tag":"Export","cat":"Communication","purpose":"Zoom","link":"https://zoom.us"},{"tag":"Export","cat":"Communication","purpose":"Google Meet","link":"https://meet.google.com"},{"tag":"Export","cat":"Communication","purpose":"Microsoft Teams","link":"https://www.microsoft.com/microsoft-teams"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"Flexe","link":"https://www.flexe.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"WareSpace","link":"https://www.warespace.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"LoopNet","link":"https://www.loopnet.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"CommercialCafe","link":"https://www.commercialcafe.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"Prologis","link":"https://www.prologis.com"},{"tag":"USA Warehouse","cat":"Warehouse Rental","purpose":"ReadySpaces","link":"https://www.readyspaces.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"ShipBob","link":"https://www.shipbob.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"ShipHero","link":"https://shiphero.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"Red Stag Fulfillment","link":"https://redstagfulfillment.com"},{"tag":"USA Warehouse","cat":"3PL Warehouse","purpose":"Extensiv","link":"https://www.extensiv.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"uShip","link":"https://www.uship.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"Freightos","link":"https://www.freightos.com"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"GoShare","link":"https://goshare.co"},{"tag":"USA Warehouse","cat":"Freight Marketplace","purpose":"Roadie","link":"https://www.roadie.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"U-Haul","link":"https://www.uhaul.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Penske Truck Rental","link":"https://www.pensketruckrental.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Budget Truck Rental","link":"https://www.budgettruck.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Enterprise Truck Rental","link":"https://www.enterprisetrucks.com"},{"tag":"USA Warehouse","cat":"Local Truck Rental","purpose":"Ryder Truck Rental","link":"https://www.ryder.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Two Men and a Truck","link":"https://twomenandatruck.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"PODS","link":"https://www.pods.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Bellhop","link":"https://www.getbellhops.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"Moving Help","link":"https://www.movinghelp.com"},{"tag":"USA Warehouse","cat":"Moving Services","purpose":"HireAHelper","link":"https://www.hireahelper.com"},{"tag":"USA Warehouse","cat":"Pallet Supplier","purpose":"CHEP","link":"https://www.chep.com"},{"tag":"USA Warehouse","cat":"Pallet Supplier","purpose":"PECO Pallet","link":"https://www.pecopallet.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Uline","link":"https://www.uline.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Grainger","link":"https://www.grainger.com"},{"tag":"USA Warehouse","cat":"Packaging Supplies","purpose":"Global Industrial","link":"https://www.globalindustrial.com"},{"tag":"USA Warehouse","cat":"Forklift Rental","purpose":"United Rentals","link":"https://www.unitedrentals.com"},{"tag":"USA Warehouse","cat":"Forklift Rental","purpose":"Sunbelt Rentals","link":"https://www.sunbeltrentals.com"},{"tag":"USA Warehouse","cat":"Equipment Rental","purpose":"Herc Rentals","link":"https://www.hercrentals.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"Public Storage","link":"https://www.publicstorage.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"Extra Space Storage","link":"https://www.extraspace.com"},{"tag":"USA Warehouse","cat":"Storage Services","purpose":"CubeSmart","link":"https://www.cubesmart.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"PeopleReady","link":"https://www.peopleready.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"Instawork","link":"https://www.instawork.com"},{"tag":"USA Warehouse","cat":"Warehouse Labor","purpose":"Wonolo","link":"https://www.wonolo.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"UPS","link":"https://www.ups.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"FedEx","link":"https://www.fedex.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"USPS","link":"https://www.usps.com"},{"tag":"USA Warehouse","cat":"Courier Services","purpose":"DHL","link":"https://www.dhl.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Yelp","link":"https://www.yelp.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Google Maps","link":"https://maps.google.com"},{"tag":"USA Warehouse","cat":"Business Directory","purpose":"Yellow Pages","link":"https://www.yellowpages.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Seller Central","link":"https://sellercentral.amazon.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Brand Registry","link":"https://brandservices.amazon.com"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon FBA","link":"https://sell.amazon.com/fulfillment-by-amazon"},{"tag":"Amazon USA Launch","cat":"Amazon Seller Tools","purpose":"Amazon Partnered Carrier","link":"https://sellercentral.amazon.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"MyFBAPrep","link":"https://myfbaprep.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"AMZ Prep","link":"https://amzprep.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"ShipBob","link":"https://www.shipbob.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"Prep Ninjas","link":"https://prepninjas.com"},{"tag":"Amazon USA Launch","cat":"Prep Centers","purpose":"West Coast Prep","link":"https://westcoastprep.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Packlane","link":"https://www.packlane.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Noissue","link":"https://www.noissue.co"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Uline","link":"https://www.uline.com"},{"tag":"Amazon USA Launch","cat":"Packaging Services","purpose":"Packhelp","link":"https://packhelp.com"},{"tag":"Amazon USA Launch","cat":"Packaging Supplies","purpose":"Grainger","link":"https://www.grainger.com"},{"tag":"Amazon USA Launch","cat":"Packaging Supplies","purpose":"Global Industrial","link":"https://www.globalindustrial.com"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Staples Print & Marketing","link":"https://www.staples.com/services/printing"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Office Depot Print","link":"https://www.officedepot.com/print"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"The UPS Store Printing","link":"https://www.theupsstore.com/print"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"FedEx Office","link":"https://www.office.fedex.com"},{"tag":"Amazon USA Launch","cat":"Printing Services","purpose":"Vistaprint","link":"https://www.vistaprint.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"Zebra Technologies","link":"https://www.zebra.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"BarTender","link":"https://www.seagullscientific.com"},{"tag":"Amazon USA Launch","cat":"Barcode & Label Printing","purpose":"Loftware","link":"https://www.loftware.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Fiverr","link":"https://www.fiverr.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Upwork","link":"https://www.upwork.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"Freelancer","link":"https://www.freelancer.com"},{"tag":"Amazon USA Launch","cat":"Freelancers","purpose":"PeoplePerHour","link":"https://www.peopleperhour.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Instawork","link":"https://www.instawork.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Wonolo","link":"https://www.wonolo.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"PeopleReady","link":"https://www.peopleready.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Veryable","link":"https://www.veryableops.com"},{"tag":"Amazon USA Launch","cat":"Warehouse Labour","purpose":"Bluecrew","link":"https://www.bluecrewjobs.com"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Amazon Imaging","link":"https://amazonimaging.com"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Soona","link":"https://soona.co"},{"tag":"Amazon USA Launch","cat":"Photography","purpose":"Squareshot","link":"https://www.squareshot.com"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"Helium 10","link":"https://www.helium10.com"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"DataDive","link":"https://datadive.tools"},{"tag":"Amazon USA Launch","cat":"Listing Optimization","purpose":"Jungle Scout","link":"https://www.junglescout.com"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Amazon Ads","link":"https://advertising.amazon.com"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Perpetua","link":"https://perpetua.io"},{"tag":"Amazon USA Launch","cat":"Advertising","purpose":"Pacvue","link":"https://pacvue.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Seller Central Business Reports","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Brand Analytics","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Amazon Analytics","purpose":"Amazon Product Opportunity Explorer","link":"https://sellercentral.amazon.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Helium 10","link":"https://www.helium10.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Jungle Scout","link":"https://www.junglescout.com"},{"tag":"Business Scaling","cat":"Market Research","purpose":"DataDive","link":"https://datadive.tools"},{"tag":"Business Scaling","cat":"Market Research","purpose":"Keepa","link":"https://keepa.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"Amazon Reviews","link":"https://www.amazon.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"FeedbackWhiz","link":"https://www.feedbackwhiz.com"},{"tag":"Business Scaling","cat":"Customer Feedback","purpose":"Helium 10 Follow-Up","link":"https://www.helium10.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"SmartScout","link":"https://www.smartscout.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"SellerAmp SAS","link":"https://sas.selleramp.com"},{"tag":"Business Scaling","cat":"Competitor Analysis","purpose":"Google Shopping","link":"https://shopping.google.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"Sellerboard","link":"https://sellerboard.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"Shopkeeper","link":"https://shopkeeper.com"},{"tag":"Business Scaling","cat":"Pricing & Profitability","purpose":"ManageByStats","link":"https://managebystats.com"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Amazon Ads","link":"https://advertising.amazon.com"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Perpetua","link":"https://perpetua.io"},{"tag":"Business Scaling","cat":"Advertising","purpose":"Pacvue","link":"https://pacvue.com"},{"tag":"Business Scaling","cat":"Email & CRM","purpose":"HubSpot","link":"https://www.hubspot.com"},{"tag":"Business Scaling","cat":"Email & CRM","purpose":"Mailchimp","link":"https://mailchimp.com"},{"tag":"Business Scaling","cat":"Surveys","purpose":"Typeform","link":"https://www.typeform.com"},{"tag":"Business Scaling","cat":"Surveys","purpose":"Google Forms","link":"https://forms.google.com"},{"tag":"Business Scaling","cat":"Project Management","purpose":"Notion","link":"https://www.notion.so"},{"tag":"Business Scaling","cat":"Project Management","purpose":"ClickUp","link":"https://clickup.com"},{"tag":"Business Scaling","cat":"Project Management","purpose":"Asana","link":"https://asana.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"Zapier","link":"https://zapier.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"Make","link":"https://www.make.com"},{"tag":"Business Scaling","cat":"Automation","purpose":"n8n","link":"https://n8n.io"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Looker Studio","link":"https://lookerstudio.google.com"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Power BI","link":"https://powerbi.microsoft.com"},{"tag":"Business Scaling","cat":"Business Intelligence","purpose":"Tableau","link":"https://www.tableau.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Fiverr","link":"https://www.fiverr.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Upwork","link":"https://www.upwork.com"},{"tag":"Business Scaling","cat":"Freelancers","purpose":"Toptal","link":"https://www.toptal.com"},{"tag":"Business Scaling","cat":"Patent & Trademark","purpose":"USPTO","link":"https://www.uspto.gov"},{"tag":"Business Scaling","cat":"Patent & Trademark","purpose":"WIPO","link":"https://www.wipo.int"}
     ];
 
     const workflowIcons = {
@@ -532,15 +438,7 @@
     }
 
     /* ---------- Elements ---------- */
-    const tabBtnRoles = document.getElementById('tab-btn-roles');
-    const tabBtnLinks = document.getElementById('tab-btn-links');
-    const pageRoles = document.getElementById('page-roles');
-    const pageLinks = document.getElementById('page-links');
-    const goToMenuBtn = document.getElementById('go-to-menu-btn');
     const wfLogoutBtn = document.getElementById('wf-logout-btn');
-
-    const boardTimeline = document.getElementById('boardTimeline');
-    const departmentRosterGrid = document.getElementById('department-roster-grid');
 
     const selTag = document.getElementById('selTag');
     const selCat = document.getElementById('selCat');
@@ -555,8 +453,6 @@
     const websitesEmptyNote = document.getElementById('websites-empty-note');
     const prescribedCountBadge = document.getElementById('prescribed-count-badge');
 
-    let currentDeptFilter = 'ALL';
-
     // Logout Action
     if (wfLogoutBtn) {
       wfLogoutBtn.addEventListener('click', async () => {
@@ -564,117 +460,9 @@
       });
     }
 
-    /* ---------- Tab Navigation ---------- */
-    function switchTab(targetTab) {
-      if (targetTab === 'roles') {
-        tabBtnRoles.classList.add('is-active');
-        tabBtnRoles.setAttribute('aria-selected', 'true');
-        tabBtnLinks.classList.remove('is-active');
-        tabBtnLinks.setAttribute('aria-selected', 'false');
-
-        pageRoles.classList.remove('hidden');
-        pageLinks.classList.add('hidden');
-        window.location.hash = 'pipeline';
-      } else {
-        tabBtnLinks.classList.add('is-active');
-        tabBtnLinks.setAttribute('aria-selected', 'true');
-        tabBtnRoles.classList.remove('is-active');
-        tabBtnRoles.setAttribute('aria-selected', 'false');
-
-        pageLinks.classList.remove('hidden');
-        pageRoles.classList.add('hidden');
-        window.location.hash = 'tools';
-      }
-      window.scrollTo({ top: 120, behavior: 'smooth' });
-    }
-
-    tabBtnRoles.addEventListener('click', () => switchTab('roles'));
-    tabBtnLinks.addEventListener('click', () => switchTab('links'));
-    if (goToMenuBtn) {
-      goToMenuBtn.addEventListener('click', () => switchTab('links'));
-    }
-
-    if (window.location.hash === '#tools' || window.location.hash === '#links') {
-      switchTab('links');
-    }
-
-    /* ---------- Initialize Dashboard ---------- */
-    renderDepartmentMatrix();
-    renderBoard();
+    /* ---------- Initialize Tool Finder & Directory ---------- */
     populatePhaseSelect();
     renderCategorizedWebsites();
-
-    function renderDepartmentMatrix() {
-      const depts = [
-        { name: "Market Intelligence & Research", icon: "🔍", count: 1, phases: ["Product Research"] },
-        { name: "Global Sourcing & Quality", icon: "🤝", count: 2, phases: ["Supplier Selection", "Sample Approval"] },
-        { name: "Manufacturing & Production", icon: "🏭", count: 2, phases: ["Manufacturing", "Quality Inspection"] },
-        { name: "Domestic & Global Logistics", icon: "🚢", count: 2, phases: ["India Launch", "Export"] },
-        { name: "US 3PL & Fulfillment", icon: "🏬", count: 1, phases: ["USA Warehouse"] },
-        { name: "Amazon Marketplace & Growth", icon: "📈", count: 2, phases: ["Amazon USA Launch", "Business Scaling"] }
-      ];
-
-      departmentRosterGrid.innerHTML = depts.map(d => `
-        <div class="roster-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span style="font-family: var(--font-display); font-weight: 700; color: var(--gold-light); font-size: var(--fs-sm); display: flex; align-items: center; gap: 6px;">
-              <span>${d.icon}</span>
-              <span>${escapeHtml(d.name)}</span>
-            </span>
-            <span class="badge badge-gold" style="font-size: 0.65rem; padding: 2px 6px;">${d.phases.length} Phases</span>
-          </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;">
-            ${d.phases.map(p => `<span style="font-size: 0.7rem; color: var(--text-secondary); background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-subtle);">${workflowIcons[p] || '•'} ${p}</span>`).join('')}
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function renderBoard() {
-      const filtered = flowBoardData.filter(item => {
-        if (currentDeptFilter === 'ALL') return true;
-        return item.deptCategory === currentDeptFilter;
-      });
-
-      boardTimeline.innerHTML = filtered.map((item) => {
-        const originalIndex = flowBoardData.findIndex(f => f.tag === item.tag);
-        const num = String(originalIndex + 1).padStart(2, '0');
-        const icon = workflowIcons[item.tag] || '•';
-
-        return `
-          <div class="workflow-timeline-item">
-            <div class="workflow-timeline-node">${num}</div>
-            <div class="workflow-card">
-              <div class="workflow-card-head">
-                <span class="workflow-icon">${icon}</span>
-                <span class="workflow-title">${escapeHtml(item.tag)}</span>
-              </div>
-
-              <div style="margin-top: 8px; font-size: var(--fs-xs); color: var(--gold-light); font-weight: 600;">
-                🏢 Department: <span style="color: #fff; font-weight: 400;">${escapeHtml(item.dept)}</span>
-              </div>
-
-              <div style="margin-top: 4px; font-size: var(--fs-xs); color: var(--text-secondary);">
-                🎯 Key Roles: <span class="badge" style="background: rgba(212,175,55,0.1); border: 1px solid var(--border-gold-subtle); color: var(--gold-light); font-size: 0.68rem; padding: 2px 6px;">${escapeHtml(item.roleLead)}</span> &bull; <span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.68rem; padding: 2px 6px;">${escapeHtml(item.roleSupport)}</span>
-              </div>
-
-              <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-subtle); font-size: var(--fs-xs); color: var(--text-muted);">
-                📋 <strong style="color: var(--text-secondary);">Key Milestone:</strong> ${escapeHtml(item.deliverable)}
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    document.querySelectorAll('[data-filter-dept]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-filter-dept]').forEach(b => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        currentDeptFilter = btn.getAttribute('data-filter-dept');
-        renderBoard();
-      });
-    });
 
     /* ============================================================
        3. WORKFLOW PREFERENCES: SAVE & RESTORE (SUPABASE)
@@ -733,9 +521,8 @@
 
     /* ---------- 3-Step Streamlined Tool Finder Wizard ---------- */
     function populatePhaseSelect() {
-      const tags = [...new Set(flowBoardData.map(f => f.tag))];
       selTag.innerHTML = '<option value="">Choose an operational phase</option>' +
-        tags.map(t => `<option value="${escapeHtml(t)}">${workflowIcons[t] || ''} ${escapeHtml(t)}</option>`).join('');
+        phasesList.map(t => `<option value="${escapeHtml(t)}">${workflowIcons[t] || ''} ${escapeHtml(t)}</option>`).join('');
     }
 
     selTag.addEventListener('change', async () => {

@@ -83,7 +83,7 @@
           </form>
 
           <p style="text-align: center; margin-top: var(--space-md); font-size: var(--fs-xs); color: var(--text-secondary);">
-            Already have an account? <a href="/login" class="text-gold" style="font-weight: 600;">Sign In</a>
+            Already have an account? <a href="/auth.html" class="text-gold" style="font-weight: 600;">Log in</a>
           </p>
         </div>
       </div>
@@ -136,7 +136,7 @@
           if (res.success) {
             if (res.requiresConfirmation) {
               alert('Registration submitted! Please verify your email address to confirm your account.');
-              window.location.replace('/auth.html#login');
+              window.location.replace('/auth.html');
             } else {
               alert(`Account created successfully! Welcome to LUVITS, ${name}.`);
               window.location.replace('/LUVITS_WorkFlow.html');

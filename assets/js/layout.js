@@ -21,7 +21,6 @@ export function updateNavMenu() {
       workflowLink.style.display = 'contents';
       workflowLink.innerHTML = `
         <a href="/LUVITS_WorkFlow.html" class="nav-link nav-link-workflow"><span>⚡ WorkFlow</span></a>
-        <a href="/workflow/tools" class="nav-link nav-link-tools" target="_blank" rel="noopener noreferrer" title="Open Tool Finder in a New Tab"><span>🚀 Tool Finder ↗</span></a>
       `;
       
       const drawerFooter = navMenu.querySelector('.nav-drawer-footer');

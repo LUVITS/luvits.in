@@ -281,14 +281,6 @@ class AuthStore {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
               ⚡ LUVITS WorkFlow
             </a>
-            <a href="/workflow/tools" target="_blank" rel="noopener noreferrer" class="dropdown-item" role="menuitem" style="color: var(--text-primary); font-size: var(--fs-xs);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-              🚀 Prescribed Tools ↗
-            </a>
-            <a href="/dashboard" class="dropdown-item" role="menuitem">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              Dashboard
-            </a>
             <button type="button" class="dropdown-item text-danger" id="logout-btn" role="menuitem">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
               Log Out
@@ -300,8 +292,8 @@ class AuthStore {
       this.bindDropdownEvents();
     } else {
       container.innerHTML = `
-        <a href="/auth.html#login" class="btn btn-outline btn-sm">Log In</a>
-        <a href="/auth.html#signup" class="btn btn-gold btn-sm">Sign Up</a>
+        <a href="/auth.html" class="btn btn-outline btn-sm">Log In</a>
+        <a href="/signup.html" class="btn btn-gold btn-sm">Sign Up</a>
       `;
     }
   }
