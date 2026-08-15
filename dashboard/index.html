@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | LUVITS — Client Workspace</title>
+    <meta name="description" content="Manage your LUVITS services, project orders, consultations, and profile settings." />
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body class="dashboard-page">
+    <div data-global-header></div>
+
+    <main data-anime-section id="main-content" class="section-spacing" style="padding-top: calc(var(--header-height) + var(--space-xl));">
+      <div class="container">
+        <!-- Dashboard Header -->
+        <div class="luxury-card anime-reveal" style="margin-bottom: var(--space-2xl); padding: var(--space-lg) var(--space-xl);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <span class="eyebrow">PRIVATE CLIENT PORTAL</span>
+              <h1 id="dash-user-welcome" style="font-size: var(--fs-3xl); margin-top: 2px;">WELCOME BACK, JAY.</h1>
+              <p style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 700; letter-spacing: 0.08em; margin-top: 4px;">
+                HERE'S YOUR LUVITS WORKSPACE.
+              </p>
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <a href="/pricing" class="btn btn-outline btn-sm">VIEW PRICING</a>
+              <a href="/contact" class="btn btn-gold btn-sm">BOOK CONSULTATION</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Workspace Grid -->
+        <div class="grid-4" style="gap: var(--space-lg); align-items: start;">
+          <!-- Workspace Sidebar -->
+          <div class="luxury-card anime-reveal" style="padding: var(--space-sm);">
+            <div style="display: flex; flex-direction: column; gap: 4px;" id="dash-tabs">
+              <button class="dropdown-item dash-tab-btn is-active" data-tab="overview" style="background: rgba(212,175,55,0.12); color: var(--gold-light); font-weight: 600;">
+                📊 Overview
+              </button>
+              <button class="dropdown-item dash-tab-btn" data-tab="profile">
+                👤 My Profile
+              </button>
+              <button class="dropdown-item dash-tab-btn" data-tab="services">
+                🛍 My Services
+              </button>
+              <button class="dropdown-item dash-tab-btn" data-tab="projects">
+                📁 Projects
+              </button>
+              <button class="dropdown-item dash-tab-btn" data-tab="messages">
+                💬 Messages
+              </button>
+              <button class="dropdown-item dash-tab-btn" data-tab="settings">
+                ⚙ Settings
+              </button>
+            </div>
+          </div>
+
+          <!-- Main Workspace Content Area -->
+          <div class="col-span-8" style="display: flex; flex-direction: column; gap: var(--space-lg);">
+            <!-- Metrics Summary Cards -->
+            <div class="grid-3 dash-section" id="section-overview-metrics">
+              <div class="luxury-card anime-reveal" style="padding: var(--space-md);">
+                <span class="input-label" style="font-size: 0.7rem;">Active Services</span>
+                <div class="text-gold" style="font-family: var(--font-display); font-size: var(--fs-2xl); font-weight: 800; margin-top: 4px;">2 Active</div>
+                <span style="font-size: var(--fs-xs); color: var(--text-muted);">E-commerce & Web Dev</span>
+              </div>
+              <div class="luxury-card anime-reveal" style="padding: var(--space-md);">
+                <span class="input-label" style="font-size: 0.7rem;">Next Consultation</span>
+                <div style="font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); margin-top: 4px;">Tomorrow, 4:00 PM</div>
+                <span style="font-size: var(--fs-xs); color: #10b981;">Google Meet Confirmed</span>
+              </div>
+              <div class="luxury-card anime-reveal" style="padding: var(--space-md);">
+                <span class="input-label" style="font-size: 0.7rem;">Luv.AI Assistant</span>
+                <div style="font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; color: var(--ai-purple); margin-top: 4px;">Active Tier</div>
+                <span style="font-size: var(--fs-xs); color: var(--text-muted);">Unlimited Prompts</span>
+              </div>
+            </div>
+
+            <!-- Profile Summary Card -->
+            <div class="luxury-card anime-reveal dash-section" id="section-profile">
+              <h3 style="font-size: var(--fs-lg); color: var(--gold-light); margin-bottom: 12px;">My Profile Details</h3>
+              <div class="grid-2" style="font-size: var(--fs-sm); gap: 12px;">
+                <div><strong>Full Name:</strong> <span id="profile-name-text">Jay Vaghela</span></div>
+                <div><strong>Email Address:</strong> <span id="profile-email-text">luvits.co@gmail.com</span></div>
+                <div><strong>Mobile Phone:</strong> <span id="profile-phone-text">+91 63594 35595</span></div>
+                <div><strong>Business Name:</strong> <span id="profile-business-text">LUVITS Client Enterprise</span></div>
+                <div class="col-span-12"><strong>Business Location:</strong> <span id="profile-location-text">Nikol, Ahmedabad, Gujarat, India</span></div>
+              </div>
+            </div>
+
+            <!-- Projects Table -->
+            <div class="luxury-card anime-reveal dash-section" id="section-projects">
+              <h3 style="font-size: var(--fs-lg); color: var(--gold-light); margin-bottom: 12px;">Active Projects & Services</h3>
+              <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: var(--fs-xs); text-align: left;">
+                  <thead>
+                    <tr style="border-bottom: 1px solid var(--border-medium); color: var(--text-muted);">
+                      <th style="padding: 8px;">Project Code</th>
+                      <th style="padding: 8px;">Service Category</th>
+                      <th style="padding: 8px;">Status</th>
+                      <th style="padding: 8px;">Pricing Scope</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                      <td style="padding: 10px; color: var(--gold-light);">#LUV-8841</td>
+                      <td style="padding: 10px;">Amazon India E-commerce Mgmt</td>
+                      <td style="padding: 10px;"><span style="color: #10b981; font-weight: 700;">● Active</span></td>
+                      <td style="padding: 10px;">₹12,500 / mo</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                      <td style="padding: 10px; color: var(--gold-light);">#LUV-9012</td>
+                      <td style="padding: 10px;">Web Development Architecture</td>
+                      <td style="padding: 10px;"><span style="color: #3b82f6; font-weight: 700;">● In Progress</span></td>
+                      <td style="padding: 10px;">Starting ₹6,999</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Messages & Notifications Panel (Tab Content) -->
+            <div class="luxury-card anime-reveal dash-section" id="section-messages" style="display: none;">
+              <h3 style="font-size: var(--fs-lg); color: var(--gold-light); margin-bottom: 12px;">Client Messages & Communications</h3>
+              <p style="font-size: var(--fs-xs); color: var(--text-secondary);">You have 0 unread messages from your strategy consultant. All milestone updates will appear here.</p>
+            </div>
+
+            <!-- Settings Panel (Tab Content) -->
+            <div class="luxury-card anime-reveal dash-section" id="section-settings" style="display: none;">
+              <h3 style="font-size: var(--fs-lg); color: var(--gold-light); margin-bottom: 12px;">Account Settings & Preferences</h3>
+              <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-bottom: 12px;">Manage security, notification preferences, and billing details.</p>
+              <button class="btn btn-outline btn-sm" onclick="alert('Notification preferences updated successfully.');">Save Preferences</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div data-global-footer></div>
+    <script type="module" src="../assets/js/app.js"></script>
+    <script type="module">
+      import { authStore } from '../assets/js/auth-store.js';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        if (!authStore.isAuthenticated()) {
+          authStore.saveSession({
+            name: 'Jay Vaghela',
+            email: 'luvits.co@gmail.com',
+            phone: '+91 63594 35595',
+            business: 'LUVITS Client Enterprise',
+            location: 'Nikol, Ahmedabad, Gujarat, India'
+          });
+        }
+
+        const user = authStore.currentUser;
+        if (user) {
+          const firstName = user.name.split(' ')[0].toUpperCase();
+          document.getElementById('dash-user-welcome').textContent = `WELCOME BACK, ${firstName}.`;
+          document.getElementById('profile-name-text').textContent = user.name;
+          document.getElementById('profile-email-text').textContent = user.email;
+          document.getElementById('profile-phone-text').textContent = user.phone || '+91 9876543210';
+          document.getElementById('profile-business-text').textContent = user.business || 'LUVITS Client Enterprise';
+          document.getElementById('profile-location-text').textContent = user.location || 'Mumbai, Maharashtra, India';
+        }
+
+        // Tab Switcher Logic
+        const tabBtns = document.querySelectorAll('.dash-tab-btn');
+        const sections = {
+          overview: [document.getElementById('section-overview-metrics'), document.getElementById('section-profile'), document.getElementById('section-projects')],
+          profile: [document.getElementById('section-profile')],
+          services: [document.getElementById('section-overview-metrics'), document.getElementById('section-projects')],
+          projects: [document.getElementById('section-projects')],
+          messages: [document.getElementById('section-messages')],
+          settings: [document.getElementById('section-settings')]
+        };
+
+        const allPanels = document.querySelectorAll('.dash-section');
+
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            tabBtns.forEach(b => {
+              b.classList.remove('is-active');
+              b.style.background = 'transparent';
+              b.style.color = 'var(--text-secondary)';
+            });
+            btn.classList.add('is-active');
+            btn.style.background = 'rgba(212,175,55,0.12)';
+            btn.style.color = 'var(--gold-light)';
+
+            const targetTab = btn.getAttribute('data-tab');
+            allPanels.forEach(panel => { if (panel) panel.style.display = 'none'; });
+
+            if (sections[targetTab]) {
+              sections[targetTab].forEach(panel => {
+                if (panel) panel.style.display = 'block';
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

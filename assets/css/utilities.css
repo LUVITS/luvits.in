@@ -1,0 +1,160 @@
+/* ==========================================================================
+   LUVITS - UTILITY CLASSES & LAYOUT HELPERS
+   ========================================================================== */
+
+/* Flex & Grid Layouts */
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.justify-start { justify-content: flex-start; }
+.gap-1 { gap: var(--space-xs); }
+.gap-2 { gap: var(--space-sm); }
+.gap-3 { gap: var(--space-md); }
+.gap-4 { gap: var(--space-lg); }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-lg);
+}
+
+.col-span-12 { grid-column: span 12; }
+.col-span-8 { grid-column: span 8; }
+.col-span-7 { grid-column: span 7; }
+.col-span-6 { grid-column: span 6; }
+.col-span-5 { grid-column: span 5; }
+.col-span-4 { grid-column: span 4; }
+.col-span-3 { grid-column: span 3; }
+
+/* Section Header Structure */
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-2xl);
+}
+
+.section-header.text-left {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.section-title {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-3xl);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+.section-subtitle {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  margin-top: var(--space-xs);
+  line-height: 1.6;
+}
+
+/* Gold Accent Line */
+.gold-line {
+  height: 2px;
+  width: 60px;
+  background: var(--gold-gradient);
+  display: inline-block;
+  margin-block: var(--space-xs);
+  border-radius: 2px;
+}
+
+/* Anime.js Motion Utilities */
+.anime-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+.anime-clip {
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+}
+
+.anime-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  will-change: opacity, transform;
+}
+
+.anime-reveal.is-visible,
+.anime-scale.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.anime-clip.is-visible {
+  clip-path: inset(0 0% 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anime-reveal, .anime-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .anime-clip {
+    clip-path: none !important;
+  }
+}
+
+/* Responsive Grid & Layout Breakpoints */
+@media (max-width: 1200px) {
+  .grid-5 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 992px) {
+  .grid-5, .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .col-span-8, .col-span-7, .col-span-6, .col-span-5, .col-span-4, .col-span-3 { grid-column: span 12; }
+  .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; gap: var(--space-lg); }
+}
+
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr; }
+  .grid-5 { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .footer-bottom { flex-direction: column; gap: var(--space-xs); text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .section-header.text-left { text-align: left; }
+}
+

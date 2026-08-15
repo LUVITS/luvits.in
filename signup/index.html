@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | LUVITS — Account Creation</title>
+    <meta name="description" content="CREATE YOUR LUVITS ACCOUNT. Your business journey starts here." />
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body class="auth-page">
+    <div data-global-header></div>
+
+    <main data-anime-section id="main-content" class="section-spacing" style="padding-top: calc(var(--header-height) + var(--space-xl));">
+      <div class="container" style="max-width: 640px;">
+        <div class="luxury-card anime-reveal">
+          <div class="section-header text-left" style="margin-bottom: var(--space-lg);">
+            <span class="eyebrow">REGISTRATION</span>
+            <h1 style="font-size: var(--fs-3xl); margin-top: 4px;">CREATE YOUR LUVITS ACCOUNT.</h1>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary);">Your business journey starts here.</p>
+            <div class="gold-line"></div>
+          </div>
+
+          <form id="signup-form">
+            <div class="form-group">
+              <label for="signup-name" class="input-label">Full Name *</label>
+              <input type="text" id="signup-name" class="luxury-input" placeholder="e.g. Jay Vaghela" required />
+            </div>
+
+            <div class="grid-2" style="gap: 12px; margin-bottom: var(--space-md);">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="signup-email" class="input-label">Email Address *</label>
+                <input type="email" id="signup-email" class="luxury-input" placeholder="name@business.com" required />
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="signup-phone" class="input-label">Mobile Number *</label>
+                <div style="display: flex; gap: 8px;">
+                  <select class="luxury-select" id="signup-country-code" style="width: 90px; padding: 0.9rem 0.4rem;">
+                    <option value="+91">🇮🇳 +91</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+971">🇦🇪 +971</option>
+                  </select>
+                  <input type="tel" id="signup-phone" class="luxury-input" placeholder="63594 35595" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="signup-business" class="input-label">Business Name *</label>
+              <input type="text" id="signup-business" class="luxury-input" placeholder="e.g. Vaghela Enterprises" required />
+            </div>
+
+            <!-- Business Location: Country, State, City -->
+            <div class="grid-3" style="gap: 10px; margin-bottom: var(--space-md);">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="signup-country" class="input-label">Country *</label>
+                <input type="text" id="signup-country" class="luxury-input" placeholder="India" required />
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="signup-state" class="input-label">State / Province *</label>
+                <input type="text" id="signup-state" class="luxury-input" placeholder="Gujarat" required />
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="signup-city" class="input-label">City *</label>
+                <input type="text" id="signup-city" class="luxury-input" placeholder="Ahmedabad" required />
+              </div>
+            </div>
+
+            <div class="grid-2" style="gap: 12px; margin-bottom: var(--space-md);">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="signup-password" class="input-label">Password *</label>
+                <input type="password" id="signup-password" class="luxury-input" placeholder="••••••••" required />
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="signup-confirm-password" class="input-label">Confirm Password *</label>
+                <input type="password" id="signup-confirm-password" class="luxury-input" placeholder="••••••••" required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: var(--space-sm);">
+              CREATE ACCOUNT →
+            </button>
+          </form>
+
+          <p style="text-align: center; margin-top: var(--space-md); font-size: var(--fs-xs); color: var(--text-secondary);">
+            Already have an account? <a href="/login" class="text-gold" style="font-weight: 600;">Sign In</a>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <div data-global-footer></div>
+    <script type="module" src="../assets/js/app.js"></script>
+    <script type="module">
+      import { authStore } from '../assets/js/auth-store.js';
+
+      if (authStore.isAuthenticated()) {
+        window.location.replace('/LUVITS_WorkFlow.html');
+      }
+
+      const submitBtn = document.querySelector('#signup-form button[type="submit"]');
+
+      document.getElementById('signup-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('signup-name').value.trim();
+        const email = document.getElementById('signup-email').value.trim();
+        const pass = document.getElementById('signup-password').value;
+        const confirmPass = document.getElementById('signup-confirm-password').value;
+
+        if (pass.length < 6) {
+          alert('Password must be at least 6 characters.');
+          return;
+        }
+
+        if (pass !== confirmPass) {
+          alert('Passwords do not match. Please verify your passwords.');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Creating Account...';
+
+        try {
+          const metadata = {
+            full_name: name,
+            business_name: document.getElementById('signup-business').value.trim(),
+            country_code: document.getElementById('signup-country-code').value.trim(),
+            mobile_number: document.getElementById('signup-phone').value.trim(),
+            business_country: document.getElementById('signup-country').value.trim() || 'India',
+            business_state: document.getElementById('signup-state').value.trim(),
+            business_city: document.getElementById('signup-city').value.trim()
+          };
+
+          const res = await authStore.signUpWithEmail(email, pass, metadata);
+
+          if (res.success) {
+            if (res.requiresConfirmation) {
+              alert('Registration submitted! Please verify your email address to confirm your account.');
+              window.location.replace('/auth.html#login');
+            } else {
+              alert(`Account created successfully! Welcome to LUVITS, ${name}.`);
+              window.location.replace('/LUVITS_WorkFlow.html');
+            }
+          } else {
+            alert(res.error || 'Failed to create account. Please check your details.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'CREATE ACCOUNT →';
+          }
+        } catch (err) {
+          alert('An error occurred during registration. Please try again.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'CREATE ACCOUNT →';
+        }
+      });
+    </script>
+  </body>
+</html>

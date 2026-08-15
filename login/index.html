@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In | LUVITS — Client Portal</title>
+    <meta name="description" content="WELCOME BACK. Continue where you left off." />
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body class="auth-page">
+    <div data-global-header></div>
+
+    <main data-anime-section id="main-content" class="section-spacing" style="padding-top: calc(var(--header-height) + var(--space-xl));">
+      <div class="container" style="max-width: 480px;">
+        <div class="luxury-card anime-reveal">
+          <div class="section-header text-left" style="margin-bottom: var(--space-lg);">
+            <span class="eyebrow">CLIENT PORTAL</span>
+            <h1 style="font-size: var(--fs-3xl); margin-top: 4px;">WELCOME BACK.</h1>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary);">Continue where you left off.</p>
+            <div class="gold-line"></div>
+          </div>
+
+          <form id="login-form">
+            <div class="form-group">
+              <label for="login-email" class="input-label">Email Address *</label>
+              <input type="email" id="login-email" class="luxury-input" placeholder="name@business.com" autocomplete="username" required />
+            </div>
+
+            <div class="form-group">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label for="login-password" class="input-label">Password *</label>
+                <a href="#" onclick="alert('Password reset link sent to your registered email address.'); return false;" style="font-size: var(--fs-xs); color: var(--gold-light);">Forgot Password?</a>
+              </div>
+              <div style="position: relative;">
+                <input type="password" id="login-password" class="luxury-input" placeholder="••••••••" autocomplete="current-password" required />
+                <button type="button" id="toggle-password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer;" aria-label="Toggle password visibility">
+                  👁 Show
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: var(--space-md);">
+              SIGN IN →
+            </button>
+          </form>
+
+          <p style="text-align: center; margin-top: var(--space-md); font-size: var(--fs-xs); color: var(--text-secondary);">
+            Don't have an account? <a href="/signup" class="text-gold" style="font-weight: 600;">Sign Up</a>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <div data-global-footer></div>
+    <script type="module" src="../assets/js/app.js"></script>
+    <script type="module">
+      import { authStore } from '../assets/js/auth-store.js';
+
+      // Redirect if already authenticated
+      if (authStore.isAuthenticated()) {
+        window.location.replace('/LUVITS_WorkFlow.html');
+      }
+
+      const passInput = document.getElementById('login-password');
+      const toggleBtn = document.getElementById('toggle-password');
+      const submitBtn = document.querySelector('#login-form button[type="submit"]');
+
+      toggleBtn.addEventListener('click', () => {
+        const isPass = passInput.type === 'password';
+        passInput.type = isPass ? 'text' : 'password';
+        toggleBtn.textContent = isPass ? '🔒 Hide' : '👁 Show';
+      });
+
+      document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const identifier = document.getElementById('login-email').value.trim();
+        const password = passInput.value;
+
+        if (!identifier || !password) {
+          alert('Please enter your email and password.');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Verifying...';
+
+        try {
+          const res = await authStore.loginWithEmail(identifier, password);
+          if (res.success) {
+            window.location.replace(res.redirectUrl || '/LUVITS_WorkFlow.html');
+          } else {
+            alert(res.error || 'Invalid credentials. Access denied.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'SIGN IN →';
+            passInput.value = '';
+            passInput.focus();
+          }
+        } catch (err) {
+          alert('An unexpected error occurred. Please try again.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'SIGN IN →';
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing & Packages | LUVITS — Executive Strategy, Marketplace Ops & Brand Growth</title>
+    <meta name="description" content="Transparent pricing for e-commerce management, executive business consulting, web development, creative design, and end-to-end brand building." />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <style>
+      .pricing-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.05) 100%);
+        border: 1px solid var(--gold-border);
+        color: var(--gold-light);
+        font-family: var(--font-display);
+        font-size: var(--fs-xs);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        padding: 4px 12px;
+        border-radius: var(--radius-full);
+        text-transform: uppercase;
+      }
+      .bundle-card {
+        background: linear-gradient(145deg, rgba(212, 175, 55, 0.08) 0%, rgba(17, 17, 17, 0.85) 100%);
+        border: 1px solid var(--gold-border) !important;
+        position: relative;
+        box-shadow: 0 8px 32px rgba(212, 175, 55, 0.08);
+      }
+      .bundle-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.15), transparent 70%);
+        pointer-events: none;
+        border-top-right-radius: var(--radius-lg);
+      }
+      .pricing-list {
+        list-style: none;
+        padding: 0;
+        margin: var(--space-md) 0 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .pricing-list li {
+        font-size: var(--fs-sm);
+        color: var(--text-secondary);
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        line-height: 1.5;
+      }
+      .pricing-list li::before {
+        content: "✓";
+        color: var(--gold-primary);
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .credit-note {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: #10b981;
+        padding: 10px 14px;
+        border-radius: var(--radius-md);
+        font-size: var(--fs-xs);
+        font-weight: 600;
+        margin-top: var(--space-md);
+        line-height: 1.4;
+      }
+      .category-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+        margin-block: var(--space-2xl);
+      }
+      .price-tag {
+        font-family: var(--font-display);
+        font-size: var(--fs-2xl);
+        font-weight: 800;
+        color: var(--gold-light);
+        margin-block: 8px;
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+      .price-period {
+        font-size: var(--fs-xs);
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+      .nav-quick-jump {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: var(--space-md);
+      }
+      .jump-chip {
+        padding: 6px 14px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-full);
+        font-size: var(--fs-xs);
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all var(--transition-fast);
+      }
+      .jump-chip:hover {
+        border-color: var(--gold-primary);
+        color: var(--gold-light);
+        background: rgba(212, 175, 55, 0.1);
+      }
+    </style>
+  </head>
+  <body class="pricing-page">
+    <div data-global-header></div>
+
+    <main data-anime-section id="main-content" class="section-spacing" style="padding-top: calc(var(--header-height) + var(--space-xl));">
+      <div class="container">
+        <!-- HERO -->
+        <div class="section-header text-left anime-reveal" style="max-width: 900px; margin-bottom: var(--space-2xl);">
+          <span class="eyebrow">TRANSPARENT INVESTMENT SCHEDULE</span>
+          <h1 class="section-title" style="font-size: var(--fs-4xl);">PRICING & MANAGEMENT PACKAGES.</h1>
+          <p class="section-subtitle" style="margin-top: 1rem; max-width: 780px;">
+            Clear, performance-driven rates across executive consulting, marketplace operations, web engineering, visual design, and complete brand transformations.
+          </p>
+          
+          <div class="nav-quick-jump">
+            <a href="#consulting" class="jump-chip">1. Executive Consulting</a>
+            <a href="#marketplace" class="jump-chip">2. Marketplace Management</a>
+            <a href="#webdev" class="jump-chip">3. Web Development</a>
+            <a href="#creative" class="jump-chip">4. Creative Studio</a>
+            <a href="#brand" class="jump-chip">5. Brand Transformation</a>
+          </div>
+
+          <div class="gold-line" style="margin-top: var(--space-md);"></div>
+        </div>
+
+        <!-- 1. EXECUTIVE BUSINESS CONSULTING -->
+        <section id="consulting" style="margin-bottom: var(--space-3xl);" class="anime-reveal">
+          <div class="section-header text-left" style="margin-bottom: var(--space-lg);">
+            <span class="eyebrow">1. EXECUTIVE ADVISORY & AUDITS</span>
+            <h2>Executive Business Consulting</h2>
+          </div>
+
+          <div class="grid-2">
+            <!-- Strategy & Diagnostics Call -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <div class="d-flex align-center justify-between">
+                  <span class="pricing-badge">Google Meet 1-on-1</span>
+                  <span style="font-size: var(--fs-xs); color: var(--text-muted);">45 Minutes</span>
+                </div>
+                <h3 style="font-size: var(--fs-xl); color: var(--text-primary); margin-top: 12px;">Strategy & Diagnostics Call</h3>
+                <div class="price-tag">₹1,000 <span class="price-period">/ session</span></div>
+                
+                <ul class="pricing-list">
+                  <li>45-Minute intensive consultation analyzing e-commerce, sourcing, and digital growth challenges.</li>
+                  <li>Direct action plan & clear recommendations summary delivered post-call.</li>
+                </ul>
+              </div>
+
+              <div>
+                <div class="credit-note">
+                  💡 <strong>Consulting Credit:</strong> 100% of this fee is credited toward your first month's retainer if you sign up for any monthly management package.
+                </div>
+                <a href="/contact" class="btn btn-gold btn-sm" style="width: 100%; margin-top: var(--space-md);">Book Diagnostics Call →</a>
+              </div>
+            </div>
+
+            <!-- On-Site Operational & Factory Audit -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <div class="d-flex align-center justify-between">
+                  <span class="pricing-badge">In-Person Audit</span>
+                  <span style="font-size: var(--fs-xs); color: var(--text-muted);">Full-Day Visit</span>
+                </div>
+                <h3 style="font-size: var(--fs-xl); color: var(--text-primary); margin-top: 12px;">On-Site Operational & Factory Audit</h3>
+                <div class="price-tag">₹2,999 <span class="price-period">/ full-day visit</span></div>
+                
+                <ul class="pricing-list">
+                  <li>In-person workflow, supply chain, and production process audit at your facility.</li>
+                  <li>Workflow optimization blueprint and issue-mapping delivered post-visit.</li>
+                </ul>
+              </div>
+
+              <div>
+                <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Schedule On-Site Audit →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="category-divider"></div>
+
+        <!-- 2. E-COMMERCE MARKETPLACE MANAGEMENT -->
+        <section id="marketplace" style="margin-bottom: var(--space-3xl);" class="anime-reveal">
+          <div class="section-header text-left" style="margin-bottom: var(--space-lg);">
+            <span class="eyebrow">2. MARKETPLACE OPERATIONS (MONTHLY RETAINER)</span>
+            <h2>E-Commerce Marketplace Management</h2>
+          </div>
+
+          <!-- DOMESTIC OPERATIONS HEADER -->
+          <h3 style="font-size: var(--fs-lg); color: var(--gold-light); margin-bottom: var(--space-md);">
+            🇮🇳 Domestic Operations (India)
+          </h3>
+
+          <div class="grid-3" style="margin-bottom: var(--space-xl);">
+            <!-- Amazon India -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-lg);">Amazon India</h4>
+                <div class="price-tag">₹12,500 <span class="price-period">/ month</span></div>
+                <ul class="pricing-list">
+                  <li>Full Account Operations & Seller Central Health</li>
+                  <li>AMS Ad Campaign Management & Optimization</li>
+                  <li>Cataloging, A+ Setup & Brand Store Maintenance</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Select Amazon India →</a>
+            </div>
+
+            <!-- Flipkart -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-lg);">Flipkart</h4>
+                <div class="price-tag">₹10,000 <span class="price-period">/ month</span></div>
+                <ul class="pricing-list">
+                  <li>Seller Hub End-to-End Account Management</li>
+                  <li>Flipkart Ads Setup & Sponsored Listing Control</li>
+                  <li>Catalog Optimization & Organic Ranking Enhancements</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Select Flipkart →</a>
+            </div>
+
+            <!-- Meesho -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-lg);">Meesho</h4>
+                <div class="price-tag">₹7,500 <span class="price-period">/ month</span></div>
+                <ul class="pricing-list">
+                  <li>Catalog Uploads & Batch Product Publishing</li>
+                  <li>Competitive Pricing Strategy & Discount Control</li>
+                  <li>Meesho Ads Management & Real-time Inventory Sync</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Select Meesho →</a>
+            </div>
+          </div>
+
+          <!-- DOMESTIC VALUE BUNDLES -->
+          <h4 style="font-size: var(--fs-md); color: var(--text-secondary); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: 0.05em;">
+            🎁 Domestic Value Bundles
+          </h4>
+          <div class="grid-2" style="margin-bottom: var(--space-2xl);">
+            <!-- All-in-One Domestic Growth Bundle -->
+            <div class="luxury-card bundle-card d-flex flex-column justify-between">
+              <div>
+                <div class="d-flex align-center justify-between">
+                  <span class="pricing-badge" style="background: rgba(212, 175, 55, 0.25);">MOST POPULAR BUNDLE</span>
+                  <span style="font-size: var(--fs-xs); color: #10b981; font-weight: 700;">SAVE ₹3,000 / MO</span>
+                </div>
+                <h3 style="font-size: var(--fs-xl); color: var(--gold-light); margin-top: 12px;">All-in-One Domestic Growth Bundle</h3>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px;">Amazon India + Flipkart + Meesho</p>
+                <div class="price-tag" style="font-size: var(--fs-3xl);">₹26,999 <span class="price-period">/ month</span></div>
+                <ul class="pricing-list">
+                  <li>Complete account operations across all 3 leading Indian marketplaces</li>
+                  <li>Unified ad strategy & campaign allocation for maximum ROAS</li>
+                  <li>Cross-channel cataloging, price parity monitoring & inventory sync</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-gold btn-sm" style="width: 100%; margin-top: var(--space-md);">Claim Domestic Growth Bundle →</a>
+            </div>
+
+            <!-- Starter Dual Pack -->
+            <div class="luxury-card bundle-card d-flex flex-column justify-between">
+              <div>
+                <div class="d-flex align-center justify-between">
+                  <span class="pricing-badge">DUAL MARKETPLACE PACK</span>
+                  <span style="font-size: var(--fs-xs); color: #10b981; font-weight: 700;">SAVE ₹2,000 / MO</span>
+                </div>
+                <h3 style="font-size: var(--fs-xl); color: var(--gold-light); margin-top: 12px;">Starter Dual Pack</h3>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px;">Amazon India + Flipkart</p>
+                <div class="price-tag" style="font-size: var(--fs-3xl);">₹20,500 <span class="price-period">/ month</span></div>
+                <ul class="pricing-list">
+                  <li>Comprehensive management for India's top 2 e-commerce platforms</li>
+                  <li>Full seller panel ops, ad campaigns & ranking strategies</li>
+                  <li>Monthly performance reporting & catalog maintenance</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-gold btn-sm" style="width: 100%; margin-top: var(--space-md);">Claim Starter Dual Pack →</a>
+            </div>
+          </div>
+
+          <!-- GLOBAL OPERATIONS HEADER -->
+          <h3 style="font-size: var(--fs-lg); color: var(--gold-light); margin-bottom: var(--space-md);">
+            🌐 Global Operations & D2C (Monthly Retainer)
+          </h3>
+
+          <div class="grid-3" style="margin-bottom: var(--space-xl);">
+            <!-- eBay Global -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-lg);">eBay Global</h4>
+                <div class="price-tag">$199 <span class="price-period">/ month</span></div>
+                <ul class="pricing-list">
+                  <li>Global Listing Creation & International Cataloging</li>
+                  <li>eBay Promoted Listings & Ad Campaigns</li>
+                  <li>Multi-Currency Setup & International Account Ops</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Select eBay Global →</a>
+            </div>
+
+            <!-- Amazon Global -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-lg);">Amazon Global</h4>
+                <div class="price-tag">$399 <span class="price-period">/ month</span></div>
+                <ul class="pricing-list">
+                  <li>US, UK & EU International Account Operations</li>
+                  <li>Global AMS Advertising Scaling & PPC Management</li>
+                  <li>Listing Localization, Compliance & FBA Strategy</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Select Amazon Global →</a>
+            </div>
+
+            <!-- Custom D2C Web Store -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-lg);">Custom D2C Web Store</h4>
+                <div class="price-tag">$499 <span class="price-period">/ month</span></div>
+                <ul class="pricing-list">
+                  <li>E-Commerce Store Management & Product Maintenance</li>
+                  <li>Meta / Google Performance Ad Campaigns</li>
+                  <li>Technical Maintenance, Security & Conversion Optimization (CRO)</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Select D2C Store Retainer →</a>
+            </div>
+          </div>
+
+          <!-- GLOBAL BUNDLE -->
+          <div class="luxury-card bundle-card d-flex flex-column justify-between">
+            <div class="grid-2 align-center" style="gap: var(--space-lg);">
+              <div>
+                <div class="d-flex align-center gap-2" style="margin-bottom: 8px;">
+                  <span class="pricing-badge">CROSS-BORDER BUNDLE</span>
+                  <span style="font-size: var(--fs-xs); color: #10b981; font-weight: 700;">SAVE $69 / MO</span>
+                </div>
+                <h3 style="font-size: var(--fs-2xl); color: var(--gold-light);">Global E-Commerce Dominance Pack</h3>
+                <p style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px;">Amazon Global + eBay Global</p>
+              </div>
+
+              <div>
+                <div class="price-tag" style="font-size: var(--fs-4xl);">
+                  $529 <span class="price-period">/ month</span>
+                </div>
+                <ul class="pricing-list">
+                  <li>Unified cross-border operations for US, European & Global markets</li>
+                  <li>Global AMS & Promoted Listings ad optimization</li>
+                  <li>Multi-currency compliance, listing localization & international support</li>
+                </ul>
+                <a href="/contact" class="btn btn-gold btn-sm" style="margin-top: var(--space-md);">Get Global Dominance Pack →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="category-divider"></div>
+
+        <!-- 3. WEB PRESENCE & DEVELOPMENT -->
+        <section id="webdev" style="margin-bottom: var(--space-3xl);" class="anime-reveal">
+          <div class="section-header text-left" style="margin-bottom: var(--space-lg);">
+            <span class="eyebrow">3. DIGITAL ENGINEERING</span>
+            <h2>Web Presence & Development</h2>
+          </div>
+
+          <div class="grid-2">
+            <!-- Starter Business Website -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <span class="pricing-badge">LIGHTNING FAST</span>
+                <h3 style="font-size: var(--fs-xl); color: var(--text-primary); margin-top: 12px;">Starter Business Website</h3>
+                <div class="price-tag">Starting at ₹6,999</div>
+                
+                <ul class="pricing-list">
+                  <li>Mobile-responsive modern luxury design</li>
+                  <li>WhatsApp direct chat & lead integration</li>
+                  <li>Custom contact form & email inquiry setup</li>
+                  <li>Service & portfolio presentation pages</li>
+                  <li>Core Web Vitals & SEO best practices pre-configured</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-gold btn-sm" style="width: 100%; margin-top: var(--space-md);">Start Web Project →</a>
+            </div>
+
+            <!-- Custom E-Commerce & Enterprise Portals -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <span class="pricing-badge" style="background: rgba(124, 58, 237, 0.2); border-color: rgba(124, 58, 237, 0.4); color: #a78bfa;">ENTERPRISE GRADE</span>
+                <h3 style="font-size: var(--fs-xl); color: var(--text-primary); margin-top: 12px;">Custom E-Commerce & Enterprise Portals</h3>
+                <div class="price-tag">Quote Based</div>
+                
+                <ul class="pricing-list">
+                  <li>Tailored D2C web stores, custom checkout & payment gateways</li>
+                  <li>Headless commerce, React / Next.js architecture & database integrations</li>
+                  <li>High-concurrency performance, custom API workflows & admin panels</li>
+                  <li>Bespoke UX/UI micro-animations & brand immersion</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Request Enterprise Quote →</a>
+            </div>
+          </div>
+        </section>
+
+        <div class="category-divider"></div>
+
+        <!-- 4. CREATIVE & VISUAL IDENTITY STUDIO -->
+        <section id="creative" style="margin-bottom: var(--space-3xl);" class="anime-reveal">
+          <div class="section-header text-left" style="margin-bottom: var(--space-lg);">
+            <span class="eyebrow">4. VISUAL ASSETS & DESIGN</span>
+            <h2>Creative & Visual Identity Studio</h2>
+          </div>
+
+          <h3 style="font-size: var(--fs-lg); color: var(--gold-light); margin-bottom: var(--space-md);">
+            🔹 Individual Creative Services
+          </h3>
+
+          <div class="grid-3" style="margin-bottom: var(--space-xl);">
+            <!-- Listing Graphics Pack -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-md);">Product Listing Graphics Pack</h4>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px;">7 High-converting images</p>
+                <div class="price-tag">₹700</div>
+                <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 8px;">
+                  Infographics, feature callouts, dimensions & benefit-focused main images.
+                </p>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Order Graphics →</a>
+            </div>
+
+            <!-- A+ Content / EBC -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-md);">A+ Content / EBC Modules</h4>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px;">5 Custom Banners</p>
+                <div class="price-tag">₹1,000</div>
+                <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 8px;">
+                  Brand story modules, comparative charts & high-resolution luxury banners.
+                </p>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Order A+ Content →</a>
+            </div>
+
+            <!-- Product Photography -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-md);">Commercial Product Photography</h4>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px;">Studio lighting & Editing</p>
+                <div class="price-tag">₹3,500</div>
+                <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 8px;">
+                  Professional studio lighting setup, RAW captures & fully retouched catalog photos.
+                </p>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Book Shoot →</a>
+            </div>
+
+            <!-- Complete Brand Kit -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-md);">Complete Visual Brand Kit</h4>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px;">Brand identity guidelines</p>
+                <div class="price-tag">₹5,000</div>
+                <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 8px;">
+                  Logo vector assets, typography system, color palette & complete brand style guide.
+                </p>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Get Brand Kit →</a>
+            </div>
+
+            <!-- E-Commerce Storefront -->
+            <div class="luxury-card d-flex flex-column justify-between">
+              <div>
+                <h4 style="font-size: var(--fs-md);">E-Commerce Brand Storefront</h4>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px;">Amazon / Flipkart Store</p>
+                <div class="price-tag">Quote Based</div>
+                <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 8px;">
+                  Custom sub-pages, brand experience layout, video integration & hero banners.
+                </p>
+              </div>
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; margin-top: var(--space-md);">Get Storefront Quote →</a>
+            </div>
+          </div>
+
+          <!-- CREATIVE BUNDLES -->
+          <h4 style="font-size: var(--fs-md); color: var(--text-secondary); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: 0.05em;">
+            🎁 Creative Value Bundles
+          </h4>
+
+          <div class="grid-2">
+            <!-- Amazon Listing Creative Combo -->
+            <div class="luxury-card bundle-card d-flex flex-column justify-between">
+              <div>
+                <span class="pricing-badge">LISTING ESSENTIALS</span>
+                <h3 style="font-size: var(--fs-xl); color: var(--gold-light); margin-top: 12px;">Amazon Listing Creative Combo</h3>
+                <div class="price-tag" style="font-size: var(--fs-3xl);">₹1,500</div>
+                <ul class="pricing-list">
+                  <li>7 High-impact product listing graphics</li>
+                  <li>4 Customized A+ Content / EBC modules</li>
+                  <li>Designed to boost click-through rate & conversion</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-gold btn-sm" style="width: 100%; margin-top: var(--space-md);">Order Creative Combo →</a>
+            </div>
+
+            <!-- Full Brand Launch Suite -->
+            <div class="luxury-card bundle-card d-flex flex-column justify-between">
+              <div>
+                <div class="d-flex align-center justify-between">
+                  <span class="pricing-badge" style="background: rgba(212, 175, 55, 0.25);">ULTIMATE CREATIVE SUITE</span>
+                  <span style="font-size: var(--fs-xs); color: #10b981; font-weight: 700;">SAVE ₹1,700</span>
+                </div>
+                <h3 style="font-size: var(--fs-xl); color: var(--gold-light); margin-top: 12px;">Full Brand Launch Suite</h3>
+                <div class="price-tag" style="font-size: var(--fs-3xl);">₹8,999</div>
+                <ul class="pricing-list">
+                  <li>Complete Visual Brand Kit (Logo, fonts, colors, guidelines)</li>
+                  <li>Commercial Studio Product Photography session</li>
+                  <li>7 Product Listing Graphics Pack</li>
+                  <li>5 A+ Content / EBC Module Banners</li>
+                </ul>
+              </div>
+              <a href="/contact" class="btn btn-gold btn-sm" style="width: 100%; margin-top: var(--space-md);">Get Full Launch Suite →</a>
+            </div>
+          </div>
+        </section>
+
+        <div class="category-divider"></div>
+
+        <!-- 5. END-TO-END BRAND BUILDING & ADVISORY -->
+        <section id="brand" style="margin-bottom: var(--space-3xl);" class="anime-reveal">
+          <div class="section-header text-left" style="margin-bottom: var(--space-lg);">
+            <span class="eyebrow">5. FULL TRANSFORMATION</span>
+            <h2>End-to-End Brand Building & Advisory</h2>
+          </div>
+
+          <div class="luxury-card bundle-card" style="padding: var(--space-2xl);">
+            <div class="grid-2 align-center" style="gap: var(--space-xl);">
+              <div>
+                <span class="pricing-badge" style="background: rgba(124, 58, 237, 0.2); border-color: rgba(124, 58, 237, 0.4); color: #a78bfa;">FLAGSHIP ENGAGEMENT</span>
+                <h3 style="font-size: var(--fs-3xl); color: var(--gold-light); margin-top: 12px;">Product-to-Brand Transformation</h3>
+                <div class="price-tag" style="font-size: var(--fs-4xl); margin-block: 16px;">Custom Quote</div>
+                <p style="font-size: var(--fs-md); color: var(--text-secondary); line-height: 1.6;">
+                  For manufacturers, sellers, and business owners ready to evolve simple products into an equity-building consumer brand.
+                </p>
+              </div>
+
+              <div>
+                <ul class="pricing-list" style="gap: 14px;">
+                  <li><strong>Brand Positioning & Market Strategy:</strong> Detailed target audience mapping and competitive differentiation.</li>
+                  <li><strong>Multi-Channel Rollout:</strong> Synchronized deployment across Amazon, Flipkart, D2C website & export markets.</li>
+                  <li><strong>Visual Identity Overhaul:</strong> Premium packaging design, brand assets, and digital storefront setup.</li>
+                  <li><strong>Executive Strategy & Consulting:</strong> Ongoing 1-on-1 advisory with founders and operations team.</li>
+                  <li><strong>End-to-End Launch Management:</strong> Full operational execution from pre-launch to scale.</li>
+                </ul>
+                <a href="/contact" class="btn btn-gold" style="width: 100%; margin-top: var(--space-lg);">Book Transformation Advisory →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRICING NOTE & POLICIES -->
+        <div class="luxury-card anime-reveal" style="padding: var(--space-lg); border-color: var(--border-gold-subtle); margin-bottom: var(--space-2xl);">
+          <h4 style="font-family: var(--font-display); color: var(--gold-light); margin-bottom: 8px;">INVESTMENT & TERMS NOTE:</h4>
+          <p style="font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.6;">
+            All listed prices represent standard starting rates for defined scopes. Custom modifications or expanded inventory requirements will receive a tailored scope proposal prior to commencement. Monthly management retainers carry no long-term lock-in unless explicitly agreed. Applicable statutory taxes, if any, are extra.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <div data-global-footer></div>
+    <script type="module" src="../assets/js/app.js"></script>
+  </body>
+</html>
+

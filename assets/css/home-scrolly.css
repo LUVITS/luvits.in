@@ -1,0 +1,795 @@
+/* ==========================================================================
+   LUVITS - CINEMATIC SCROLLYTELLING STYLES (60 FPS GPU-ACCELERATED)
+   Flanking Editorial Layout (Never overlaps character's face/head in any mode)
+   Max Height on Mobile & Desktop is strictly below the shirt collar
+   ========================================================================== */
+
+/* Seamless deep black theme for the home page */
+body.home-page {
+  background-color: #000000 !important;
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+}
+
+body.home-page .site-footer {
+  position: relative;
+  z-index: 10;
+  background-color: #060608;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  margin-top: 0;
+}
+
+/* ==========================================================================
+   1. FIXED BACKGROUND CANVAS STAGE (GPU Hardware-Accelerated)
+   ========================================================================== */
+.scrolly-background-stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: #000000;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.scrolly-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  transform: translateZ(0);
+  will-change: contents;
+}
+
+.scrolly-canvas.loaded {
+  opacity: 1;
+}
+
+/* Subtle Vignette to blend image edges into pure black without obscuring face */
+.scrolly-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.92) 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, transparent 15%, transparent 82%, rgba(0, 0, 0, 0.95) 100%);
+  pointer-events: none;
+  z-index: 1;
+  transform: translateZ(0);
+}
+
+/* ==========================================================================
+   2. SCROLL TRACK
+   ========================================================================== */
+.scrolly-scroll-track {
+  position: relative;
+  height: 600vh;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Fixed Overlay Viewport for Story Beats */
+.scrolly-overlay-viewport {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(0);
+}
+
+/* ==========================================================================
+   3. STORY BEATS (Strictly Flanked / Lower Half - Never reaches above collar)
+   ========================================================================== */
+.story-beat {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) translateZ(0);
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.4s;
+  pointer-events: none;
+  z-index: 3;
+  will-change: opacity, transform;
+}
+
+.story-beat.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) translateZ(0);
+  pointer-events: auto;
+}
+
+/* Glassmorphism Luxury Styling for Cards (GPU-Optimized & Compact) */
+.scrolly-glass-card {
+  background: rgba(8, 8, 10, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 18px 22px;
+  transform: translateZ(0);
+  contain: paint;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.scrolly-glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 16px rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px) translateZ(0);
+}
+
+/* --------------------------------------------------------------------------
+   BEAT 1: INTRO (Hero - Left Flank, strictly below upper collar level)
+   -------------------------------------------------------------------------- */
+.beat-intro {
+  left: 5vw;
+  top: 54%;
+  transform: translateY(-40%) translateZ(0);
+  max-width: 460px;
+  text-align: left;
+}
+
+.beat-intro.is-active {
+  transform: translateY(-44%) translateZ(0);
+}
+
+.beat-intro .hero-headline {
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-xs);
+}
+
+.beat-intro .hero-lede {
+  font-size: clamp(0.9rem, 1vw, 1.05rem);
+  color: var(--text-secondary);
+  margin-block: 8px 18px;
+  line-height: 1.5;
+}
+
+.beat-intro .hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.beat-intro .hero-actions .btn {
+  padding: 8px 18px;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.scrolly-scroll-indicator {
+  position: absolute;
+  bottom: 4vh;
+  left: 5vw;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0.8;
+  animation: scrollyPulse 2.4s ease-in-out infinite;
+}
+
+.scrolly-scroll-indicator .scroll-arrow {
+  display: inline-block;
+  animation: scrollyBounce 1.8s infinite;
+}
+
+@keyframes scrollyBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes scrollyPulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BEAT 2: SERVICES (Split Flanking Layout - Left & Right Lower Columns)
+   -------------------------------------------------------------------------- */
+.beat-services {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 4.5vw 8vh 4.5vw;
+  box-sizing: border-box;
+}
+
+.beat-services-left {
+  max-width: 360px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.beat-services-right {
+  max-width: 360px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.beat-services .service-tile {
+  padding: 12px 18px;
+}
+
+.beat-services .service-tile-title {
+  font-size: 1.02rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.beat-services .service-tile-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   BEAT 3: PORTFOLIO (Left Flank - Lower Half)
+   -------------------------------------------------------------------------- */
+.beat-portfolio {
+  left: 5vw;
+  top: 54%;
+  transform: translateY(-40%) translateZ(0);
+  max-width: 420px;
+  text-align: left;
+}
+
+.beat-portfolio.is-active {
+  transform: translateY(-44%) translateZ(0);
+}
+
+.portfolio-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-block: 10px 14px;
+}
+
+.portfolio-item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(12, 12, 14, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.portfolio-item-card:hover {
+  border-color: var(--gold-primary);
+  background: rgba(20, 20, 24, 0.85);
+}
+
+.portfolio-item-card h4 {
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  font-family: var(--font-heading);
+}
+
+.portfolio-item-card span {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   BEAT 4: LUV.AI (Right Flank - Lower Half)
+   -------------------------------------------------------------------------- */
+.beat-ai {
+  right: 5vw;
+  top: 54%;
+  transform: translateY(-40%) translateZ(0);
+  max-width: 420px;
+  text-align: left;
+}
+
+.beat-ai.is-active {
+  transform: translateY(-44%) translateZ(0);
+}
+
+.beat-ai .scrolly-glass-card {
+  border-color: rgba(138, 43, 226, 0.25);
+  background: rgba(12, 8, 20, 0.82);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(138, 43, 226, 0.08);
+}
+
+.ai-prompts-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-block: 10px;
+}
+
+.ai-prompt-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(138, 43, 226, 0.18);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.ai-prompt-chip .chip-icon {
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   BEAT 5: FINALE (Bottom / Left Flank)
+   -------------------------------------------------------------------------- */
+.beat-finale {
+  left: 5vw;
+  bottom: 8vh;
+  max-width: 520px;
+  text-align: left;
+}
+
+.beat-finale.is-active {
+  transform: translateY(0) translateZ(0);
+}
+
+.beat-finale .scrolly-glass-card {
+  padding: 20px 24px;
+  border-color: rgba(212, 175, 55, 0.28);
+}
+
+.beat-finale .cta-headline {
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  line-height: 1.2;
+  margin-block: 4px 6px;
+}
+
+.beat-finale .cta-sub {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+/* ==========================================================================
+   4. TABLET ADAPTATIONS (769px to 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+
+  .beat-intro,
+  .beat-portfolio,
+  .beat-ai,
+  .beat-finale {
+    max-width: 360px;
+    left: 4vw;
+    top: 56%;
+  }
+
+  .beat-ai {
+    right: 4vw;
+    left: auto;
+  }
+
+  .beat-services {
+    padding: 0 4vw 6vh 4vw;
+  }
+
+  .beat-services-left,
+  .beat-services-right {
+    max-width: 300px;
+  }
+}
+
+/* ==========================================================================
+   5. MOBILE NAVIGATION BAR & HEADER (Max width 992px)
+   ========================================================================== */
+@media (max-width: 992px) {
+  .site-header {
+    height: 60px !important;
+    background: rgba(4, 4, 6, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12) !important;
+    padding-inline: 16px !important;
+  }
+
+  .site-header.is-scrolled {
+    background: rgba(4, 4, 6, 0.92) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  .header-inner {
+    padding: 0 !important;
+    height: 100% !important;
+    align-items: center !important;
+  }
+
+  .brand {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 1px !important;
+  }
+
+  .brand-title {
+    font-size: 1.35rem !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1 !important;
+  }
+
+  .nav-toggle {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 8px !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  }
+
+  .hamburger-bar {
+    width: 20px !important;
+    height: 2px !important;
+    background: #e4e4e7 !important;
+    margin-block: 2px !important;
+  }
+
+  .nav-menu {
+    top: 60px !important;
+    height: calc(100dvh - 60px) !important;
+    background: rgba(6, 6, 8, 0.98) !important;
+    backdrop-filter: blur(28px) !important;
+    -webkit-backdrop-filter: blur(28px) !important;
+    border-top: 1px solid rgba(212, 175, 55, 0.15) !important;
+    padding: 20px 20px calc(24px + env(safe-area-inset-bottom, 0px)) 20px !important;
+    gap: 4px !important;
+    display: flex !important;
+  }
+
+  .nav-link {
+    font-size: 0.95rem !important;
+    padding: 10px 14px !important;
+    min-height: 44px !important;
+    border-radius: 8px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+  }
+
+  .nav-link.is-active,
+  .nav-link:hover {
+    background: rgba(212, 175, 55, 0.1) !important;
+    color: #f1d77a !important;
+  }
+
+  .nav-drawer-footer {
+    margin-top: auto !important;
+    padding-top: 16px !important;
+    border-top: 1px solid rgba(212, 175, 55, 0.15) !important;
+  }
+}
+
+/* ==========================================================================
+   6. MOBILE ULTRA-OPTIMIZED (Max width 768px)
+   Strictly positioned in bottom 38vh (below shirt collar at ~52vh)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .scrolly-scroll-track {
+    height: 600vh;
+  }
+
+  /* Anchor ALL story beats strictly to the bottom 38vh (safely below shirt collar) */
+  .story-beat {
+    left: 3.5vw !important;
+    right: 3.5vw !important;
+    width: 93vw !important;
+    max-width: 440px !important;
+    margin-inline: auto !important;
+    top: auto !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    max-height: 38vh !important;
+    transform: translateY(12px) translateZ(0) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+  }
+
+  .story-beat.is-active {
+    transform: translateY(0) translateZ(0) !important;
+  }
+
+  /* Compact glass card styling */
+  .scrolly-glass-card {
+    padding: 12px 14px !important;
+    background: rgba(6, 6, 8, 0.92) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(212, 175, 55, 0.20) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.85) !important;
+  }
+
+  /* Compact Typography for Mobile */
+  .eyebrow {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.16em !important;
+    margin-bottom: 2px !important;
+  }
+
+  .section-title {
+    font-size: 1.15rem !important;
+    line-height: 1.2 !important;
+    margin-top: 2px !important;
+  }
+
+  .gold-line {
+    width: 28px !important;
+    margin-block: 4px !important;
+    height: 1.5px !important;
+  }
+
+  /* Compact Buttons */
+  .btn,
+  .btn-gold,
+  .btn-outline {
+    font-size: 0.72rem !important;
+    padding: 7px 12px !important;
+    letter-spacing: 0.06em !important;
+    height: auto !important;
+    min-height: 32px !important;
+    gap: 4px !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     BEAT 1 MOBILE (Welcome to LUVITS Hero Card)
+     ------------------------------------------------------------------------ */
+  .beat-intro .scrolly-glass-card {
+    padding: 14px 16px !important;
+    background: rgba(6, 6, 8, 0.92) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  }
+
+  .beat-intro .hero-eyebrow {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.18em !important;
+    font-weight: 700 !important;
+    color: #f1d77a !important;
+    margin-bottom: 2px !important;
+  }
+
+  .beat-intro .hero-headline {
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 2px !important;
+  }
+
+  .beat-intro .hero-gold-line {
+    width: 32px !important;
+    height: 1.5px !important;
+    margin-block: 4px 6px !important;
+    background: linear-gradient(90deg, #d4af37, transparent) !important;
+  }
+
+  .beat-intro .hero-lede {
+    font-size: 0.75rem !important;
+    color: #a1a1aa !important;
+    line-height: 1.32 !important;
+    margin-block: 0 10px !important;
+  }
+
+  .beat-intro .hero-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 6px !important;
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .beat-intro .hero-actions .btn {
+    flex: 1 1 50% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-size: clamp(0.62rem, 2.7vw, 0.70rem) !important;
+    padding: 6px 6px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .scrolly-scroll-indicator {
+    display: none !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     BEAT 2 MOBILE (Services)
+     ------------------------------------------------------------------------ */
+  .beat-services {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: stretch !important;
+    padding: 0 !important;
+  }
+
+  .beat-services-left {
+    max-width: 100% !important;
+    gap: 6px !important;
+  }
+
+  .beat-services-left .scrolly-glass-card:first-child {
+    padding: 8px 12px !important;
+  }
+
+  .beat-services-left .scrolly-glass-card:first-child p {
+    font-size: 0.74rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .beat-services .service-tile {
+    padding: 6px 12px !important;
+  }
+
+  .beat-services .service-tile-title {
+    font-size: 0.84rem !important;
+    margin-bottom: 1px !important;
+  }
+
+  .beat-services .service-tile-desc {
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .beat-services-right {
+    display: none !important;
+    /* Keep mobile concise so it stays below collar */
+  }
+
+  /* ------------------------------------------------------------------------
+     BEAT 3 MOBILE (Portfolio)
+     ------------------------------------------------------------------------ */
+  .portfolio-cards-stack {
+    gap: 4px !important;
+    margin-block: 6px 8px !important;
+  }
+
+  .portfolio-item-card {
+    padding: 5px 8px !important;
+  }
+
+  .portfolio-item-card h4 {
+    font-size: 0.82rem !important;
+  }
+
+  .portfolio-item-card span {
+    font-size: 0.68rem !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     BEAT 4 MOBILE (LUV.AI)
+     ------------------------------------------------------------------------ */
+  .beat-ai .scrolly-glass-card p {
+    font-size: 0.74rem !important;
+    line-height: 1.25 !important;
+    margin-top: 4px !important;
+  }
+
+  .ai-prompts-stack {
+    gap: 4px !important;
+    margin-block: 6px !important;
+  }
+
+  .ai-prompt-chip {
+    padding: 5px 8px !important;
+    font-size: 0.7rem !important;
+    gap: 6px !important;
+  }
+
+  .ai-prompt-chip .chip-icon {
+    font-size: 0.75rem !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     BEAT 5 MOBILE (Finale)
+     ------------------------------------------------------------------------ */
+  .beat-finale .scrolly-glass-card {
+    padding: 12px 14px !important;
+  }
+
+  .beat-finale .cta-headline {
+    font-size: 1.22rem !important;
+    line-height: 1.15 !important;
+    margin-block: 2px 4px !important;
+  }
+
+  .beat-finale .cta-sub {
+    font-size: 0.76rem !important;
+    margin-bottom: 10px !important;
+  }
+}
+
+/* ==========================================================================
+   7. REDUCED MOTION PREFERENCE
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .scrolly-background-stage {
+    position: static;
+    height: 50vh;
+  }
+
+  .scrolly-scroll-track {
+    height: auto;
+  }
+
+  .scrolly-overlay-viewport {
+    position: static;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    padding: var(--space-2xl) 5vw;
+  }
+
+  .story-beat {
+    position: static;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .beat-services {
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: 0;
+  }
+}

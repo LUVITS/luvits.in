@@ -1,0 +1,23 @@
+{
+  "name": "luvits-in",
+  "version": "1.0.0",
+  "description": "Official Website for LUVITS - We Build Brands. You Grow Beyond.",
+  "main": "assets/js/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node -e \"console.log('LUVITS static website ready')\""
+  },
+  "keywords": [
+    "luvits",
+    "business-consulting",
+    "brand-building",
+    "web-development",
+    "ecommerce",
+    "luv-ai"
+  ],
+  "author": "LUVITS",
+  "license": "ISC",
+  "dependencies": {
+    "animejs": "^3.2.2"
+  }
+}

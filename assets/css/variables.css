@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Typography System */
+  --font-brand: 'Cinzel Decorative', 'Cinzel', Georgia, serif;
+  --font-heading: "Cormorant Garamond", "Cinzel", Georgia, serif;
+  --font-display: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Inter", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Background Color Palette */
+  --bg-near-black: #050505;
+  --bg-deep-charcoal: #0B0B0B;
+  --bg-secondary-charcoal: #111111;
+  --bg-card: rgba(17, 17, 17, 0.78);
+  --bg-card-hover: rgba(22, 22, 26, 0.92);
+
+  /* Color Palette - Text */
+  --text-primary: #F8F8F8;
+  --text-secondary: #A6A6A6;
+  --text-muted: #6B6B6B;
+  --text-dark: #050505;
+
+  /* Color Palette - Refined Metallic Gold */
+  --gold-primary: #D4AF37;
+  --gold-light: #F1D77A;
+  --gold-dark: #9A7B2C;
+  --gold-muted: rgba(212, 175, 55, 0.22);
+  --gold-glow: rgba(212, 175, 55, 0.16);
+  --gold-border: rgba(212, 175, 55, 0.35);
+  --gold-gradient: linear-gradient(135deg, #F1D77A 0%, #D4AF37 50%, #9A7B2C 100%);
+  --gold-gradient-text: linear-gradient(120deg, #FFFFFF 0%, #F1D77A 45%, #D4AF37 100%);
+
+  /* Luv.AI Technology Accent (Indigo/Purple) */
+  --ai-purple: #8B5CF6;
+  --ai-indigo: #6366F1;
+  --ai-glow: rgba(139, 92, 246, 0.22);
+  --ai-border: rgba(139, 92, 246, 0.4);
+
+  /* WhatsApp Emerald Accent */
+  --whatsapp-green: #25D366;
+  --whatsapp-green-dark: #1EBE5D;
+  --whatsapp-glow: rgba(37, 211, 102, 0.28);
+
+  /* UI Borders & Lines */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-gold-subtle: rgba(212, 175, 55, 0.2);
+
+  /* Elevation & Shadows */
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.85);
+  --shadow-gold: 0 10px 30px rgba(212, 175, 55, 0.18);
+
+  /* Fluid Clamp Typography System (50% to 200% Zoom & Multi-device Resilient) */
+  --fs-xs: clamp(0.72rem, 0.68rem + 0.2vw, 0.8rem);       /* ~11.5px - 13px */
+  --fs-sm: clamp(0.84rem, 0.8rem + 0.25vw, 0.92rem);      /* ~13.5px - 15px */
+  --fs-base: clamp(0.95rem, 0.9rem + 0.3vw, 1.05rem);     /* ~15px - 17px */
+  --fs-md: clamp(1.08rem, 1rem + 0.4vw, 1.2rem);          /* ~17px - 19.5px */
+  --fs-lg: clamp(1.2rem, 1.1rem + 0.55vw, 1.38rem);       /* ~19px - 22px */
+  --fs-xl: clamp(1.35rem, 1.2rem + 0.85vw, 1.65rem);      /* ~21.5px - 26px */
+  --fs-2xl: clamp(1.65rem, 1.45rem + 1.2vw, 2.15rem);     /* ~26px - 34px */
+  --fs-3xl: clamp(2rem, 1.7rem + 1.8vw, 2.75rem);         /* ~32px - 44px */
+  --fs-4xl: clamp(2.4rem, 2rem + 2.5vw, 3.5rem);          /* ~38px - 56px */
+  --fs-5xl: clamp(2.85rem, 2.35rem + 3.2vw, 4.25rem);     /* ~45px - 68px */
+  --fs-hero: clamp(3.2rem, 2.6rem + 4.2vw, 5.25rem);      /* ~51px - 84px */
+
+  /* Fluid Spacing System */
+  --space-2xs: clamp(0.2rem, 0.18rem + 0.1vw, 0.3rem);
+  --space-xs: clamp(0.4rem, 0.35rem + 0.25vw, 0.6rem);
+  --space-sm: clamp(0.75rem, 0.65rem + 0.4vw, 1.1rem);
+  --space-md: clamp(1.2rem, 1rem + 0.6vw, 1.65rem);
+  --space-lg: clamp(1.8rem, 1.4rem + 1.2vw, 2.75rem);
+  --space-xl: clamp(2.75rem, 2rem + 2vw, 4.25rem);
+  --space-2xl: clamp(4rem, 3rem + 3vw, 6.25rem);
+  --space-3xl: clamp(5.5rem, 4rem + 4.5vw, 8.5rem);
+
+  /* Layout Boundaries */
+  --container-max: 1260px;
+  --header-height: 80px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Animation & Transitions */
+  --transition-fast: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+

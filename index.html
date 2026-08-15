@@ -1,858 +1,187 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LUVITS | Strategic IT & Digital Authority</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@300;400;500;600&family=Limelight&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUVITS | Business Strategy, Digital Execution & Brand Growth</title>
+  <meta name="description"
+    content="LUVITS helps businesses with Business Consulting, E-commerce Management, Web Development, Graphic Designing, Brand Building, and AI Assistance through Luv.AI." />
+  <meta property="og:title" content="LUVITS | We Build Brands. You Grow Beyond." />
+  <meta property="og:description"
+    content="Strategic thinking. Powerful execution. Digital solutions built around your business." />
+  <meta property="og:type" content="website" />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: {
-                            900: '#030712',
-                            800: '#0b1120',
-                            700: '#111827',
-                        },
-                        cyan: {
-                            accent: '#00F0FF',
-                            glow: 'rgba(0, 240, 255, 0.4)',
-                        },
-                        gold: {
-                            accent: '#FFD700',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                        decorative: ['"Cinzel Decorative"', 'serif'],
-                        logo: ['Limelight', 'cursive'],
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Custom CSS for Premium Effects & Animations -->
-    <style>
-        body {
-            background-color: #030712;
-            color: #ffffff;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Glassmorphism Utilities */
-        .glass {
-            background: rgba(11, 17, 32, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .glass-card {
-            background: linear-gradient(145deg, rgba(17, 24, 39, 0.65) 0%, rgba(3, 7, 18, 0.85) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.4s ease;
-        }
-        
-        @media (hover: hover) {
-            .glass-card:hover {
-                border-color: rgba(0, 240, 255, 0.3);
-                box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.15);
-            }
-        }
-
-        /* Glow Effects */
-        .text-glow { text-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
-        .box-glow { box-shadow: 0 0 30px rgba(0, 240, 255, 0.2); }
-        
-        /* Blurred Orbs for Background Depth */
-        .bg-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.35;
-            pointer-events: none;
-        }
-        @media (min-width: 768px) {
-            .bg-orb { filter: blur(120px); }
-        }
-
-        /* Scroll Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Staggered reveals for grids */
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-
-        /* Accordion Robust Transition */
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
-            opacity: 0;
-        }
-        .accordion-item.active .accordion-content {
-            max-height: 1500px; /* Optimized for typical content height */
-            opacity: 1;
-        }
-        .accordion-item.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 4px; }
-        @media (min-width: 768px) { ::-webkit-scrollbar { width: 6px; } }
-        ::-webkit-scrollbar-track { background: #030712; }
-        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
-
-        /* Loader */
-        .loader {
-            border: 3px solid rgba(0, 240, 255, 0.2);
-            border-top: 3px solid #00F0FF;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        /* AI Result Formatted Content */
-        .ai-formatted-result p { margin-bottom: 0.75rem; }
-        .ai-formatted-result ul { list-style-type: disc; margin-left: 1.25rem; margin-bottom: 0.75rem; }
-        .ai-formatted-result strong { color: #00F0FF; font-weight: 600; }
-        .ai-formatted-result li { margin-bottom: 0.25rem; }
-        
-        /* Hide scrollbar for horizontal scroll elements */
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/css/home-scrolly.css" />
 </head>
-<body id="home" class="antialiased selection:bg-cyan-accent selection:text-navy-900">
 
-    <!-- Global Background Orbs -->
-    <div class="bg-orb bg-cyan-accent w-[70vw] h-[70vw] md:w-[40vw] md:h-[40vw] top-[-5%] left-[-15%] md:left-[-10%]"></div>
-    <div class="bg-orb bg-cyan-800 w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] top-[30%] md:top-[40%] right-[-20%] opacity-20"></div>
+<body class="home-page">
+  <div data-global-header></div>
 
-    <!-- 1. NAVBAR -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 md:py-5">
-        <div class="max-w-7xl mx-auto px-5 md:px-12 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#home" class="z-50 relative block shrink-0">
-                <img src="assets/luvits-logo.png" alt="LUVITS Logo" class="h-8 md:h-10 w-auto object-contain drop-shadow-lg" onerror="this.outerHTML='<span class=\'text-2xl font-logo text-white tracking-widest\'>LUVITS<span class=\'text-cyan-accent\'>.</span></span>'">
-            </a>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#home" class="text-sm font-medium text-gray-300 hover:text-cyan-accent transition-colors">Home</a>
-                <a href="#services" class="text-sm font-medium text-gray-300 hover:text-cyan-accent transition-colors">Services</a>
-                <a href="#ai-solutions" class="text-sm font-medium text-cyan-accent/80 hover:text-cyan-accent transition-colors flex items-center gap-1">
-                    <i class="ph-fill ph-sparkle"></i> AI Solutions
-                </a>
-                <a href="#portfolio" class="text-sm font-medium text-gray-300 hover:text-cyan-accent transition-colors">Portfolio</a>
-                <!-- Secure Staff Portal Link -->
-<a href="LUVITS_WorkFlow.html" target="_blank" class="text-sm font-medium text-gray-300 hover:text-gold-accent transition-colors flex items-center gap-1">
-    <i class="ph-fill ph-lock-key"></i> Staff Portal
-</a>
-                <a href="#contact" class="px-5 py-2 text-sm font-medium border border-cyan-accent text-cyan-accent hover:bg-cyan-accent hover:text-navy-900 transition-all rounded-sm shadow-[0_0_15px_rgba(0,240,255,0.1)] hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]">
-                    Contact Us
-                </a>
-            </div>
-
-            <!-- Mobile Hamburger -->
-            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white z-50 relative focus:outline-none p-2 -mr-2">
-                <i class="ph ph-list text-3xl" id="menu-icon"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-navy-900/98 backdrop-blur-xl flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 z-40">
-            <a href="#home" class="mobile-link text-2xl font-display text-gray-300 hover:text-cyan-accent transition-colors">Home</a>
-            <a href="#services" class="mobile-link text-2xl font-display text-gray-300 hover:text-cyan-accent transition-colors">Services</a>
-            <a href="#ai-solutions" class="mobile-link text-2xl font-display text-cyan-accent hover:text-cyan-300 transition-colors flex items-center gap-2">
-                <i class="ph-fill ph-sparkle"></i> AI Solutions
-            </a>
-            <a href="#portfolio" class="mobile-link text-2xl font-display text-gray-300 hover:text-cyan-accent transition-colors">Portfolio</a>
-            <!-- Secure Staff Portal Link (Mobile) -->
-<a href="LUVITS_WorkFlow.html" target="_blank" class="mobile-link text-2xl font-display text-gray-300 hover:text-gold-accent transition-colors flex items-center gap-2">
-    <i class="ph-fill ph-lock-key"></i> Staff Portal
-</a>
-            <a href="#contact" class="mobile-link mt-4 px-8 py-3.5 border border-cyan-accent text-cyan-accent hover:bg-cyan-accent hover:text-navy-900 transition-all rounded-sm text-xl font-display shadow-[0_0_15px_rgba(0,240,255,0.2)]">Contact Us</a>
-        </div>
-    </nav>
-
-    <!-- 2. HERO SECTION -->
-    <section class="relative min-h-[100svh] md:min-h-screen flex items-center pt-20 pb-12 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-5 md:px-12 w-full z-10 mt-10 md:mt-0">
-            <div class="max-w-4xl">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-gray-700 bg-gray-800/40 backdrop-blur-md mb-6 md:mb-8 reveal">
-                    <span class="w-2 h-2 rounded-full bg-cyan-accent animate-pulse"></span>
-                    <span class="text-[10px] md:text-xs font-semibold tracking-wide text-gray-300 uppercase">Strategic Digital Authority</span>
-                </div>
-                
-                <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.15] mb-5 md:mb-6 reveal reveal-delay-1">
-                    Architecting <br class="hidden sm:block">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-accent to-blue-500 text-glow">Digital Growth</span> <br class="hidden sm:block">
-                    With Precision.
-                </h1>
-                
-                <p class="text-sm sm:text-base md:text-xl text-gray-400 font-sans max-w-2xl mb-8 md:mb-10 reveal reveal-delay-2 leading-relaxed">
-                    We empower enterprises through high-end web development, cybersecurity-driven eCommerce strategies, and unparalleled digital brand building.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 reveal reveal-delay-3 w-full sm:w-auto">
-                    <a href="#services" class="group relative px-6 md:px-8 py-4 bg-cyan-accent text-navy-900 font-bold font-sans rounded-sm overflow-hidden text-center transition-all box-glow hover:shadow-[0_0_40px_rgba(0,240,255,0.4)]">
-                        <span class="relative z-10 flex items-center justify-center gap-2">
-                            Explore Services <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                        </span>
-                    </a>
-                    <a href="#contact" class="px-6 md:px-8 py-4 bg-transparent text-white font-bold font-sans border border-gray-600 hover:border-white rounded-sm text-center transition-all">
-                        Consult with Experts
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. TRUST / AUTHORITY STRIP -->
-    <div class="w-full border-y border-gray-800 bg-navy-800/30 backdrop-blur-md py-4 md:py-6 relative z-10 reveal overflow-hidden">
-        <div class="max-w-7xl mx-auto px-5 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-            <p class="text-[11px] md:text-sm font-semibold text-gray-400 tracking-widest uppercase flex items-center gap-2 text-center md:text-left shrink-0">
-                <i class="ph-fill ph-shield-check text-cyan-accent text-base md:text-lg"></i>
-                Managed by Cybersecurity Experts
-            </p>
-            <!-- Scrolling wrapper on mobile, flex on desktop -->
-            <div class="w-full md:w-auto overflow-x-auto pb-1 md:pb-0 scrollbar-hide flex items-center justify-start md:justify-end gap-6 md:gap-10 text-gray-500 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                <span class="text-sm md:text-lg font-bold tracking-tight shrink-0">amazon</span>
-                <span class="text-sm md:text-lg font-bold tracking-tighter text-blue-500 shrink-0">eBay</span>
-                <span class="text-sm md:text-lg font-bold italic text-yellow-500 shrink-0">Flipkart</span>
-                <span class="text-sm md:text-lg font-bold tracking-tight text-green-500 shrink-0">Shopify</span>
-                <span class="text-sm md:text-lg font-bold tracking-tight text-pink-500 shrink-0">Meesho</span>
-            </div>
-        </div>
+  <main id="main-content">
+    <!-- FIXED BACKGROUND STAGE: Always pinned and visible on 100% of the homepage scroll -->
+    <div class="scrolly-background-stage" aria-hidden="true">
+      <canvas class="scrolly-canvas"></canvas>
+      <div class="scrolly-vignette"></div>
     </div>
 
-    <!-- 4. CORE SERVICES (PREVIEW GRID) -->
-    <section id="services-preview" class="py-16 lg:py-24 relative z-10">
-        <div class="max-w-7xl mx-auto px-5 md:px-12">
-            <h2 class="text-3xl md:text-5xl font-display font-bold mb-3 md:mb-4 reveal">Core Competencies</h2>
-            <p class="text-sm md:text-base text-gray-400 max-w-2xl mb-10 md:mb-16 reveal reveal-delay-1 leading-relaxed">Strategic solutions designed to establish market dominance and ensure operational security across all digital fronts.</p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <!-- Card 1 -->
-                <div class="glass-card p-6 md:p-8 rounded-xl reveal reveal-delay-1 group">
-                    <div class="w-12 h-12 md:w-14 md:h-14 bg-cyan-accent/10 rounded-xl flex items-center justify-center mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="ph ph-chart-line-up text-2xl md:text-3xl text-cyan-accent"></i>
-                    </div>
-                    <h3 class="text-lg md:text-xl font-display font-bold mb-2 md:mb-3 text-white">Business Consulting</h3>
-                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Strategic growth advisory and digital transformation for modern enterprises.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="glass-card p-6 md:p-8 rounded-xl reveal reveal-delay-2 group">
-                    <div class="w-12 h-12 md:w-14 md:h-14 bg-cyan-accent/10 rounded-xl flex items-center justify-center mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="ph ph-storefront text-2xl md:text-3xl text-cyan-accent"></i>
-                    </div>
-                    <h3 class="text-lg md:text-xl font-display font-bold mb-2 md:mb-3 text-white">eCommerce Mgmt</h3>
-                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">End-to-end marketplace management across Amazon, eBay, and more.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="glass-card p-6 md:p-8 rounded-xl reveal reveal-delay-3 group">
-                    <div class="w-12 h-12 md:w-14 md:h-14 bg-cyan-accent/10 rounded-xl flex items-center justify-center mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="ph ph-code text-2xl md:text-3xl text-cyan-accent"></i>
-                    </div>
-                    <h3 class="text-lg md:text-xl font-display font-bold mb-2 md:mb-3 text-white">Web Development</h3>
-                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">High-performance websites and online presence optimization.</p>
-                </div>
-                <!-- Card 4 -->
-                <div class="glass-card p-6 md:p-8 rounded-xl reveal reveal-delay-4 group">
-                    <div class="w-12 h-12 md:w-14 md:h-14 bg-cyan-accent/10 rounded-xl flex items-center justify-center mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="ph ph-bezier-curve text-2xl md:text-3xl text-cyan-accent"></i>
-                    </div>
-                    <h3 class="text-lg md:text-xl font-display font-bold mb-2 md:mb-3 text-white">Graphics & Branding</h3>
-                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Premium visual identities, packaging, and catalog design.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- SCROLL TRACK: Creates the scroll distance for 100 frames -->
+    <div class="scrolly-scroll-track">
+      <!-- FIXED OVERLAY VIEWPORT: Houses flanking story beats that never overlap the central character -->
+      <div class="scrolly-overlay-viewport">
 
-    <!-- 5. FULL SERVICES (EXPANDABLE ACCORDION) -->
-    <section id="services" class="py-16 lg:py-24 bg-navy-800/30 border-y border-gray-800/50 relative z-10">
-        <div class="bg-orb bg-cyan-900/40 w-[90vw] h-[90vw] md:w-[60vw] md:h-[60vw] bottom-0 left-[-30%]"></div>
-        <div class="max-w-4xl mx-auto px-5 md:px-12">
-            <div class="text-center mb-10 md:mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-display font-bold mb-3 md:mb-4">Deep Dive Expertise</h2>
-                <p class="text-sm md:text-base text-gray-400">Comprehensive capabilities across the digital spectrum.</p>
-            </div>
-
-            <div class="flex flex-col gap-3 md:gap-4">
-                
-                <!-- Accordion Item 1 -->
-                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
-                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
-                        <div class="flex items-center gap-3 md:gap-4">
-                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">01</span>
-                            <h3 class="text-base md:text-2xl font-display font-bold group-hover:text-cyan-accent transition-colors">Business Consulting</h3>
-                        </div>
-                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300 shrink-0"></i>
-                    </button>
-                    <div class="accordion-content bg-navy-900/50">
-                        <div class="px-5 md:px-6 pb-6 pt-2">
-                            <p class="text-xs md:text-sm text-gray-400 mb-4 leading-relaxed">We provide high-level strategy, growth modeling, and operational advisory to navigate complex digital landscapes. Our consulting bridges the gap between technical infrastructure and business objectives.</p>
-                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                                <li class="flex items-start gap-2 text-xs md:text-sm text-gray-300"><i class="ph-fill ph-check-circle text-cyan-accent mt-0.5 shrink-0"></i> Digital Transformation Strategy</li>
-                                <li class="flex items-start gap-2 text-xs md:text-sm text-gray-300"><i class="ph-fill ph-check-circle text-cyan-accent mt-0.5 shrink-0"></i> Growth & Scaling Advisory</li>
-                                <li class="flex items-start gap-2 text-xs md:text-sm text-gray-300"><i class="ph-fill ph-check-circle text-cyan-accent mt-0.5 shrink-0"></i> Operational Efficiency Models</li>
-                                <li class="flex items-start gap-2 text-xs md:text-sm text-gray-300"><i class="ph-fill ph-check-circle text-cyan-accent mt-0.5 shrink-0"></i> Tech Stack Audits</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accordion Item 2 -->
-                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
-                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
-                        <div class="flex items-center gap-3 md:gap-4">
-                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">02</span>
-                            <h3 class="text-base md:text-2xl font-display font-bold group-hover:text-cyan-accent transition-colors pr-2">eCommerce Marketplace Management</h3>
-                        </div>
-                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300 shrink-0"></i>
-                    </button>
-                    <div class="accordion-content bg-navy-900/50">
-                        <div class="px-5 md:px-6 pb-6 pt-2">
-                            <div class="mb-5 md:mb-6">
-                                <h4 class="text-white text-xs md:text-sm font-semibold mb-2 md:mb-3 uppercase tracking-wider">Supported Platforms</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-gray-800 rounded text-[10px] md:text-xs text-gray-300">Amazon</span>
-                                    <span class="px-3 py-1 bg-gray-800 rounded text-[10px] md:text-xs text-gray-300">eBay</span>
-                                    <span class="px-3 py-1 bg-gray-800 rounded text-[10px] md:text-xs text-gray-300">Flipkart</span>
-                                    <span class="px-3 py-1 bg-gray-800 rounded text-[10px] md:text-xs text-gray-300">Meesho</span>
-                                    <span class="px-3 py-1 bg-gray-800 rounded text-[10px] md:text-xs text-gray-300">Walmart</span>
-                                </div>
-                            </div>
-                            
-                            <h4 class="text-white text-xs md:text-sm font-semibold mb-2 md:mb-3 uppercase tracking-wider">Management Plans</h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-5">
-                                <div class="p-3 md:p-4 border border-gray-700/50 bg-gray-800/30 rounded-lg">
-                                    <h5 class="text-cyan-accent text-sm md:text-base font-bold mb-1">Platinum</h5>
-                                    <p class="text-[11px] md:text-xs text-gray-400 leading-snug">Complete A-Z full marketplace management.</p>
-                                </div>
-                                <div class="p-3 md:p-4 border border-gray-700/50 bg-gray-800/30 rounded-lg">
-                                    <h5 class="text-gold-accent text-sm md:text-base font-bold mb-1">Gold</h5>
-                                    <p class="text-[11px] md:text-xs text-gray-400 leading-snug">Listing optimization & aggressive sales strategies.</p>
-                                </div>
-                                <div class="p-3 md:p-4 border border-gray-700/50 bg-gray-800/30 rounded-lg">
-                                    <h5 class="text-gray-300 text-sm md:text-base font-bold mb-1">Silver</h5>
-                                    <p class="text-[11px] md:text-xs text-gray-400 leading-snug">Core sales and account health management.</p>
-                                </div>
-                            </div>
-
-                            <p class="text-[11px] md:text-xs text-gray-400 flex items-center gap-2 border-t border-gray-800 pt-4">
-                                <i class="ph-fill ph-speaker-hifi text-cyan-accent shrink-0 text-sm"></i> Includes dedicated Voice of Customer (VoC) analytics.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accordion Item 3 -->
-                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
-                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
-                        <div class="flex items-center gap-3 md:gap-4">
-                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">03</span>
-                            <h3 class="text-base md:text-2xl font-display font-bold group-hover:text-cyan-accent transition-colors pr-2">Web Development & Presence</h3>
-                        </div>
-                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300 shrink-0"></i>
-                    </button>
-                    <div class="accordion-content bg-navy-900/50">
-                        <div class="px-5 md:px-6 pb-6 pt-2">
-                            <p class="text-xs md:text-sm text-gray-400 mb-5 leading-relaxed">Building secure, lightning-fast digital experiences that convert. We don't just build websites; we engineer complete online ecosystems.</p>
-                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
-                                <li class="flex items-center gap-2 text-xs md:text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Website Architecture</li>
-                                <li class="flex items-center gap-2 text-xs md:text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> UX & Speed Optimization</li>
-                                <li class="flex items-center gap-2 text-xs md:text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Advanced SEO Services</li>
-                                <li class="flex items-center gap-2 text-xs md:text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Social Media Management</li>
-                                <li class="flex items-center gap-2 text-xs md:text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Brand Marketing</li>
-                                <li class="flex items-center gap-2 text-xs md:text-sm text-gray-300"><div class="w-1.5 h-1.5 bg-cyan-accent rounded-full shrink-0"></div> Targeted Ads Strategy</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accordion Item 4 -->
-                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
-                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
-                        <div class="flex items-center gap-3 md:gap-4">
-                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">04</span>
-                            <h3 class="text-base md:text-2xl font-display font-bold group-hover:text-cyan-accent transition-colors">Graphics Designing</h3>
-                        </div>
-                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300 shrink-0"></i>
-                    </button>
-                    <div class="accordion-content bg-navy-900/50">
-                        <div class="px-5 md:px-6 pb-6 pt-2">
-                            <p class="text-xs md:text-sm text-gray-400 mb-5 leading-relaxed">Visual communication that demands authority. We handle all design types to ensure your brand looks premium across every touchpoint.</p>
-                            <div class="flex flex-wrap gap-2 md:gap-3">
-                                <span class="px-3 md:px-4 py-1.5 border border-gray-700/80 rounded-full text-[11px] md:text-xs text-gray-300 hover:border-cyan-accent transition-colors bg-gray-800/30">Logo Design</span>
-                                <span class="px-3 md:px-4 py-1.5 border border-gray-700/80 rounded-full text-[11px] md:text-xs text-gray-300 hover:border-cyan-accent transition-colors bg-gray-800/30">Catalogue</span>
-                                <span class="px-3 md:px-4 py-1.5 border border-gray-700/80 rounded-full text-[11px] md:text-xs text-gray-300 hover:border-cyan-accent transition-colors bg-gray-800/30">Packaging</span>
-                                <span class="px-3 md:px-4 py-1.5 border border-gray-700/80 rounded-full text-[11px] md:text-xs text-gray-300 hover:border-cyan-accent transition-colors bg-gray-800/30">Store Design</span>
-                                <span class="px-3 md:px-4 py-1.5 border border-gray-700/80 rounded-full text-[11px] md:text-xs text-gray-300 hover:border-cyan-accent transition-colors bg-gray-800/30">Ad Banners</span>
-                                <span class="px-3 md:px-4 py-1.5 border border-gray-700/80 rounded-full text-[11px] md:text-xs text-gray-300 hover:border-cyan-accent transition-colors bg-gray-800/30">Business Cards</span>
-                                <span class="px-3 md:px-4 py-1.5 border border-gray-700/80 rounded-full text-[11px] md:text-xs text-gray-300 hover:border-cyan-accent transition-colors bg-gray-800/30">Social Creatives</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accordion Item 5 -->
-                <div class="accordion-item glass-card rounded-xl reveal border border-gray-800 transition-colors duration-300">
-                    <button class="accordion-header w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group">
-                        <div class="flex items-center gap-3 md:gap-4">
-                            <span class="text-cyan-accent font-mono text-xs md:text-sm opacity-70">05</span>
-                            <h3 class="text-base md:text-2xl font-display font-bold group-hover:text-cyan-accent transition-colors">Brand Building</h3>
-                        </div>
-                        <i class="ph ph-caret-down text-gray-400 accordion-icon transition-transform duration-300 shrink-0"></i>
-                    </button>
-                    <div class="accordion-content bg-navy-900/50">
-                        <div class="px-5 md:px-6 pb-6 pt-2">
-                            <p class="text-xs md:text-sm text-gray-400 mb-5 leading-relaxed">Establishing a dominant market presence requires more than just aesthetics. It requires data-backed analysis and compliance.</p>
-                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <li class="flex items-start gap-3 bg-gray-800/20 p-3 rounded-lg border border-gray-800/50">
-                                    <i class="ph ph-target text-cyan-accent mt-0.5 text-lg shrink-0"></i>
-                                    <div>
-                                        <h5 class="text-white text-xs md:text-sm font-semibold">Niche & Market Analysis</h5>
-                                        <p class="text-[11px] md:text-xs text-gray-500 mt-1 leading-snug">Identifying gaps and opportunities in your sector.</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start gap-3 bg-gray-800/20 p-3 rounded-lg border border-gray-800/50">
-                                    <i class="ph ph-cube text-cyan-accent mt-0.5 text-lg shrink-0"></i>
-                                    <div>
-                                        <h5 class="text-white text-xs md:text-sm font-semibold">Product Analysis</h5>
-                                        <p class="text-[11px] md:text-xs text-gray-500 mt-1 leading-snug">Evaluating viability, margins, and positioning.</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start gap-3 bg-gray-800/20 p-3 rounded-lg border border-gray-800/50">
-                                    <i class="ph ph-shield-check text-cyan-accent mt-0.5 text-lg shrink-0"></i>
-                                    <div>
-                                        <h5 class="text-white text-xs md:text-sm font-semibold">Compliance Analysis</h5>
-                                        <p class="text-[11px] md:text-xs text-gray-500 mt-1 leading-snug">Ensuring marketplace and legal alignment.</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start gap-3 bg-gray-800/20 p-3 rounded-lg border border-gray-800/50">
-                                    <i class="ph ph-crown text-cyan-accent mt-0.5 text-lg shrink-0"></i>
-                                    <div>
-                                        <h5 class="text-white text-xs md:text-sm font-semibold">Full Brand Support</h5>
-                                        <p class="text-[11px] md:text-xs text-gray-500 mt-1 leading-snug">Continuous advisory to maintain brand equity.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. NEW: AI BUSINESS SOLUTIONS -->
-    <section id="ai-solutions" class="py-16 lg:py-24 relative z-10 overflow-hidden border-b border-gray-800/50">
-        <div class="max-w-4xl mx-auto px-5 md:px-12">
-            <div class="text-center mb-8 md:mb-12 reveal">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-cyan-accent/10 mb-4 border border-cyan-accent/30 box-glow">
-                    <i class="ph-fill ph-sparkle text-2xl text-cyan-accent"></i>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-display font-bold mb-3 md:mb-4">AI Business Solutions</h2>
-                <p class="text-sm md:text-base text-gray-400 px-2">Describe your business challenge below, and our strategic AI engine will generate a customized, actionable roadmap.</p>
-            </div>
-
-            <div class="glass-card p-5 md:p-8 rounded-2xl reveal reveal-delay-1 relative border-cyan-accent/20 border shadow-[0_0_30px_rgba(0,240,255,0.05)]">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-[10px] md:text-xs text-cyan-accent font-bold uppercase tracking-widest mb-2 ml-1">Your Business Problem</label>
-                        <textarea id="ai-input" rows="4" class="w-full bg-navy-900/80 border border-gray-700 rounded-xl px-4 py-3 text-sm md:text-base text-white placeholder-gray-600 focus:outline-none focus:border-cyan-accent focus:ring-1 focus:ring-cyan-accent transition-all resize-none shadow-inner" placeholder="e.g., My eCommerce store is getting traffic but conversions are below 1%. How can I optimize it strategically?"></textarea>
-                    </div>
-                    <button id="ai-submit" class="w-full bg-cyan-accent/10 border border-cyan-accent text-cyan-accent hover:bg-cyan-accent hover:text-navy-900 font-bold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 group text-sm md:text-base">
-                        <i class="ph-bold ph-magic-wand group-hover:animate-pulse"></i> Generate Strategic Solution
-                    </button>
-                </div>
-
-                <!-- AI Output Area -->
-                <div id="ai-result-container" class="mt-6 pt-6 border-t border-gray-800 hidden">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 rounded-full bg-cyan-accent flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.4)] shrink-0">
-                            <i class="ph-bold ph-robot text-navy-900 text-lg"></i>
-                        </div>
-                        <h4 class="font-display font-bold text-white text-base md:text-lg">Strategic Advisory</h4>
-                    </div>
-                    <div id="ai-result-content" class="bg-navy-900/90 rounded-xl p-4 md:p-6 border border-gray-700 text-xs md:text-sm text-gray-300 leading-relaxed ai-formatted-result shadow-inner overflow-x-hidden">
-                        <!-- Content injected via JS -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. PORTFOLIO SECTION (UPDATED) -->
-    <section id="portfolio" class="py-16 lg:py-24 bg-navy-800/20 relative z-10 border-b border-gray-800/50">
-        <div class="max-w-7xl mx-auto px-5 md:px-12 text-center">
-            <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 reveal">Featured Work</h2>
-            <p class="text-sm md:text-base text-gray-400 mb-10 md:mb-12 reveal reveal-delay-1 max-w-2xl mx-auto px-2">A glimpse into our premium execution. Explore our latest brand transformations, design creatives, and technical architectures directly on our Instagram feed.</p>
-            
-            <div class="max-w-3xl mx-auto reveal reveal-delay-2 px-2">
-                <div class="glass-card p-8 md:p-14 rounded-2xl flex flex-col items-center justify-center border border-gray-800 hover:border-cyan-accent/30 transition-all group">
-                    <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 flex items-center justify-center mb-5 md:mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-500">
-                        <i class="ph ph-instagram-logo text-3xl md:text-4xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl md:text-3xl font-display font-bold text-white mb-2 text-center">Follow Our Journey</h3>
-                    <p class="text-gray-400 mb-8 max-w-md mx-auto text-xs md:text-base text-center">We constantly update our portfolio showcasing our digital artistry and business success stories.</p>
-                    
-                    <a href="https://instagram.com/luvits.in" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 md:px-8 py-3.5 md:py-4 bg-cyan-accent text-navy-900 font-bold rounded-lg hover:bg-cyan-400 transition-colors shadow-[0_0_20px_rgba(0,240,255,0.2)] hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] transform hover:-translate-y-1 text-sm md:text-base">
-                        <i class="ph-bold ph-instagram-logo text-lg md:text-xl"></i> Preview on Instagram
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. PROCESS SECTION -->
-    <section class="py-16 lg:py-24 relative z-10 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-5 md:px-12">
-            <h2 class="text-3xl md:text-5xl font-display font-bold mb-12 md:mb-16 text-center reveal">Our Methodology</h2>
-            
-            <div class="relative">
-                <!-- Desktop Connection Line -->
-                <div class="hidden md:block absolute top-[40px] md:top-[45px] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-transparent via-gray-700 to-transparent z-0"></div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-10 relative z-10">
-                    <!-- Step 1 -->
-                    <div class="flex flex-col items-center text-center reveal reveal-delay-1 relative">
-                        <div class="md:hidden absolute top-[70px] bottom-[-40px] left-1/2 w-[2px] bg-gray-800 -translate-x-1/2 z-[-1]"></div>
-                        <div class="w-16 h-16 md:w-24 md:h-24 rounded-full glass-card flex items-center justify-center mb-4 md:mb-6 border border-gray-700 shadow-lg relative group bg-navy-900 z-10">
-                            <span class="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 rounded-full bg-navy-900 border border-gold-accent text-gold-accent flex items-center justify-center text-[10px] md:text-sm font-bold font-mono">1</span>
-                            <i class="ph ph-magnifying-glass text-xl md:text-3xl text-white group-hover:text-cyan-accent transition-colors"></i>
-                        </div>
-                        <h3 class="text-base md:text-lg font-display font-bold mb-2">Understanding Business</h3>
-                        <p class="text-xs md:text-sm text-gray-400 px-6 md:px-0">Deep-dive into your core objectives, pain points, and target market dynamics.</p>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="flex flex-col items-center text-center reveal reveal-delay-2 relative">
-                        <div class="md:hidden absolute top-[70px] bottom-[-40px] left-1/2 w-[2px] bg-gray-800 -translate-x-1/2 z-[-1]"></div>
-                        <div class="w-16 h-16 md:w-24 md:h-24 rounded-full glass-card flex items-center justify-center mb-4 md:mb-6 border border-gray-700 shadow-lg relative group bg-navy-900 z-10">
-                            <span class="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 rounded-full bg-navy-900 border border-gold-accent text-gold-accent flex items-center justify-center text-[10px] md:text-sm font-bold font-mono">2</span>
-                            <i class="ph ph-strategy text-xl md:text-3xl text-white group-hover:text-cyan-accent transition-colors"></i>
-                        </div>
-                        <h3 class="text-base md:text-lg font-display font-bold mb-2">Strategy Planning</h3>
-                        <p class="text-xs md:text-sm text-gray-400 px-6 md:px-0">Architecting a bespoke, data-driven roadmap to secure competitive advantage.</p>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="flex flex-col items-center text-center reveal reveal-delay-3 relative">
-                        <div class="md:hidden absolute top-[70px] bottom-[-40px] left-1/2 w-[2px] bg-gray-800 -translate-x-1/2 z-[-1]"></div>
-                        <div class="w-16 h-16 md:w-24 md:h-24 rounded-full glass-card flex items-center justify-center mb-4 md:mb-6 border border-gray-700 shadow-lg relative group bg-navy-900 z-10">
-                            <span class="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 rounded-full bg-navy-900 border border-gold-accent text-gold-accent flex items-center justify-center text-[10px] md:text-sm font-bold font-mono">3</span>
-                            <i class="ph ph-rocket-launch text-xl md:text-3xl text-white group-hover:text-cyan-accent transition-colors"></i>
-                        </div>
-                        <h3 class="text-base md:text-lg font-display font-bold mb-2">Execution</h3>
-                        <p class="text-xs md:text-sm text-gray-400 px-6 md:px-0">Flawless deployment of tech, design, and marketplace strategies.</p>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="flex flex-col items-center text-center reveal reveal-delay-4 relative">
-                        <div class="w-16 h-16 md:w-24 md:h-24 rounded-full glass-card flex items-center justify-center mb-4 md:mb-6 border border-gray-700 shadow-lg relative group bg-navy-900 z-10">
-                            <span class="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 rounded-full bg-navy-900 border border-gold-accent text-gold-accent flex items-center justify-center text-[10px] md:text-sm font-bold font-mono">4</span>
-                            <i class="ph ph-trend-up text-xl md:text-3xl text-white group-hover:text-cyan-accent transition-colors"></i>
-                        </div>
-                        <h3 class="text-base md:text-lg font-display font-bold mb-2">Scaling & Opt.</h3>
-                        <p class="text-xs md:text-sm text-gray-400 px-6 md:px-0">Continuous monitoring, a/b testing, and iterative improvements for scale.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 9. CONTACT SECTION -->
-    <section id="contact" class="py-16 lg:py-24 relative z-10 border-t border-gray-800/50">
-        <div class="bg-orb bg-cyan-900/30 w-[80vw] h-[80vw] top-[10%] right-[-20%] md:w-[40vw] md:h-[40vw]"></div>
-        
-        <div class="max-w-7xl mx-auto px-5 md:px-12 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
-            <!-- Left: Info (Span 2 cols on Desktop) -->
-            <div class="reveal lg:col-span-2 flex flex-col justify-center">
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6 leading-tight">Let's Build <br class="hidden lg:block"><span class="text-cyan-accent">Greatness.</span></h2>
-                <p class="text-sm md:text-base text-gray-400 mb-8 md:mb-10 max-w-md">Ready to scale your digital presence with authority? Reach out to our experts to discuss strategy and execution.</p>
-                
-                <div class="space-y-6 md:space-y-8">
-                    <!-- Location -->
-                    <div class="flex items-start gap-4 group">
-                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-cyan-accent transition-colors shrink-0 mt-0.5">
-                            <i class="ph ph-map-pin text-lg md:text-xl text-gray-300 group-hover:text-cyan-accent"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Headquarters</p>
-                            <p class="text-sm md:text-lg font-medium text-white leading-snug max-w-[250px]">Nikol, Ahmedabad,<br>Gujarat, India - 382415</p>
-                        </div>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-cyan-accent transition-colors shrink-0">
-                            <i class="ph ph-envelope-simple text-lg md:text-xl text-gray-300 group-hover:text-cyan-accent"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Email</p>
-                            <a href="mailto:luvits.co@gmail.com" class="text-sm md:text-lg font-medium text-white hover:text-cyan-accent transition-colors">luvits.co@gmail.com</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Phone -->
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-cyan-accent transition-colors shrink-0">
-                            <i class="ph ph-phone text-lg md:text-xl text-gray-300 group-hover:text-cyan-accent"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Phone</p>
-                            <a href="tel:+916359435595" class="text-sm md:text-lg font-medium text-white hover:text-cyan-accent transition-colors">+91 6359435595</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Instagram -->
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-cyan-accent transition-colors shrink-0">
-                            <i class="ph ph-instagram-logo text-lg md:text-xl text-gray-300 group-hover:text-cyan-accent"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Instagram</p>
-                            <a href="https://instagram.com/luvits.in" target="_blank" rel="noopener noreferrer" class="text-sm md:text-lg font-medium text-white hover:text-cyan-accent transition-colors">@luvits.in</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Google Form Embed (Span 3 cols on Desktop) -->
-            <div class="glass-card rounded-2xl reveal reveal-delay-2 relative overflow-hidden h-[800px] md:h-[700px] lg:col-span-3 border border-gray-800 p-0 sm:p-2 bg-white/5 w-full max-w-full">
-                <!-- Using embedded Google Form. Note: Height adjusted for mobile to prevent form cut-off -->
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf1L1D_S1DsKCV2xYelXYbJIwwjuJmPO0vB5djv7cBfOmeGCA/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" class="w-full h-full rounded-xl bg-transparent" title="Contact Form">Loading…</iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- 10. FOOTER -->
-    <footer class="bg-[#020408] border-t border-gray-800 py-10 md:py-16 relative z-10">
-        <div class="max-w-7xl mx-auto px-5 md:px-12 flex flex-col items-center">
-            
-            <a href="#home" class="mb-6 block">
-                <img src="assets/luvits-logo.png" alt="LUVITS Logo" class="h-10 md:h-16 w-auto object-contain" onerror="this.outerHTML='<span class=\'text-3xl font-logo text-white tracking-widest\'>LUVITS<span class=\'text-cyan-accent\'>.</span></span>'">
-            </a>
-
-            <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-8 md:mb-12 text-xs md:text-sm font-medium text-gray-400 px-4 text-center">
-                <a href="#home" class="hover:text-cyan-accent transition-colors">Home</a>
-                <a href="#services" class="hover:text-cyan-accent transition-colors">Services</a>
-                <a href="#portfolio" class="hover:text-cyan-accent transition-colors">Portfolio</a>
-                <a href="#contact" class="hover:text-cyan-accent transition-colors">Contact</a>
-                <a href="#" class="hover:text-cyan-accent transition-colors">Privacy Policy</a>
-                <!-- Secure Staff Portal Link (Footer) -->
-<a href="LUVITS_WorkFlow.html" target="_blank" class="hover:text-gold-accent transition-colors flex items-center gap-1 justify-center">
-    Staff Portal <i class="ph-fill ph-lock-key"></i>
-</a>
-            </div>
-
-            <!-- Specific required quote with Decorative font -->
-            <p class="font-decorative text-lg md:text-3xl text-gold-accent mb-10 md:mb-12 tracking-wide text-center px-2 max-w-3xl leading-relaxed">
-                Be The Arjuna Of Your Business, Let Krishna Guide You Digital Dharma
+        <!-- BEAT 1: INTRO (Hero - Left Flank) -->
+        <div class="story-beat beat-intro">
+          <div class="scrolly-glass-card">
+            <span class="eyebrow hero-eyebrow">WELCOME TO LUVITS</span>
+            <h1 class="hero-headline">
+              WE BUILD BRANDS.<br />
+              <span class="text-gold-gradient">YOU GROW BEYOND.</span>
+            </h1>
+            <div class="gold-line hero-gold-line"></div>
+            <p class="hero-lede">
+              Strategic thinking. Powerful execution. Digital solutions built around your business.
             </p>
-
-            <div class="w-full flex flex-col md:flex-row justify-between items-center pt-6 md:pt-8 border-t border-gray-800/50 text-[10px] md:text-xs text-gray-500 text-center md:text-left gap-2 md:gap-3">
-                <p>&copy; <script>document.write(new Date().getFullYear())</script> LUVITS. All rights reserved. | Nikol, Ahmedabad, Gujarat</p>
-                <p>Designed for Digital Authority.</p>
+            <div class="hero-actions">
+              <a href="/services" class="btn btn-gold">EXPLORE SERVICES →</a>
+              <a href="/contact" class="btn btn-outline">BOOK CONSULTATION</a>
             </div>
+          </div>
+          <div class="scrolly-scroll-indicator">
+            <span>SCROLL TO REVEAL</span>
+            <span class="scroll-arrow">↓</span>
+          </div>
         </div>
-    </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/916359435595?text=Hey%20Jay%2C%0AI%20just%20checked%20your%20website%20and%20wanted%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[60] w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center text-2xl md:text-3xl shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:shadow-[0_0_30px_rgba(37,211,102,0.6)] md:hover:scale-105 transition-all focus:outline-none cursor-pointer">
-        <i class="ph-bold ph-whatsapp-logo"></i>
-    </a>
+        <!-- BEAT 2: SERVICES (Split Flanks - Left & Right Columns) -->
+        <div class="story-beat beat-services">
+          <div class="beat-services-left">
+            <div class="scrolly-glass-card">
+              <span class="eyebrow">WHAT WE DO</span>
+              <h2 class="section-title" style="font-size: 1.5rem; margin-top: 4px;">BUILT AROUND YOUR BUSINESS.</h2>
+              <div class="gold-line" style="width: 44px; margin-block: 10px;"></div>
+              <p style="font-size: 0.88rem; color: var(--text-secondary);">From strategic consulting to full-scale
+                digital execution.</p>
+            </div>
+            <div class="scrolly-glass-card service-tile">
+              <h3 class="service-tile-title">Business Consulting</h3>
+              <p class="service-tile-desc">Strategic direction for real business problems.</p>
+              <a href="/services/business-consulting" class="text-gold"
+                style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
+                →</a>
+            </div>
+            <div class="scrolly-glass-card service-tile">
+              <h3 class="service-tile-title">E-commerce Management</h3>
+              <p class="service-tile-desc">Manage and grow your marketplace presence.</p>
+              <a href="/services/ecommerce-management" class="text-gold"
+                style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
+                →</a>
+            </div>
+          </div>
 
-    <!-- Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // 1. Navbar Glass Effect on Scroll
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('glass');
-                    navbar.classList.remove('py-4', 'md:py-5');
-                    navbar.classList.add('py-2', 'md:py-3');
-                } else {
-                    navbar.classList.remove('glass');
-                    navbar.classList.add('py-4', 'md:py-5');
-                    navbar.classList.remove('py-2', 'md:py-3');
-                }
-            });
+          <div class="beat-services-right">
+            <div class="scrolly-glass-card service-tile">
+              <h3 class="service-tile-title">Web Development</h3>
+              <p class="service-tile-desc">Digital experiences built around your business.</p>
+              <a href="/services/web-development" class="text-gold"
+                style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
+                →</a>
+            </div>
+            <div class="scrolly-glass-card service-tile">
+              <h3 class="service-tile-title">Graphic Designing</h3>
+              <p class="service-tile-desc">Visuals that make your brand recognizable.</p>
+              <a href="/services/graphic-designing" class="text-gold"
+                style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
+                →</a>
+            </div>
+            <div class="scrolly-glass-card service-tile">
+              <h3 class="service-tile-title">Brand Building</h3>
+              <p class="service-tile-desc">From product to brand.</p>
+              <a href="/services/brand-building" class="text-gold"
+                style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
+                →</a>
+            </div>
+          </div>
+        </div>
 
-            // 2. Mobile Menu Toggle
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            const menuIcon = document.getElementById('menu-icon');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-            let isMenuOpen = false;
+        <!-- BEAT 3: PORTFOLIO (Left Flank) -->
+        <div class="story-beat beat-portfolio">
+          <div class="scrolly-glass-card">
+            <span class="eyebrow">PORTFOLIO</span>
+            <h2 class="section-title" style="font-size: 1.5rem; margin-top: 4px;">SELECTED WORK</h2>
+            <div class="gold-line" style="width: 44px; margin-block: 10px;"></div>
 
-            function toggleMenu() {
-                isMenuOpen = !isMenuOpen;
-                if (isMenuOpen) {
-                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-                    menuIcon.classList.replace('ph-list', 'ph-x');
-                    document.body.style.overflow = 'hidden'; 
-                } else {
-                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-                    menuIcon.classList.replace('ph-x', 'ph-list');
-                    document.body.style.overflow = '';
-                }
-            }
+            <div class="portfolio-cards-stack">
+              <div class="portfolio-item-card">
+                <div>
+                  <h4>Sharlin Traders</h4>
+                  <span>E-commerce Management & Social Media</span>
+                </div>
+                <span class="text-gold">→</span>
+              </div>
+              <div class="portfolio-item-card">
+                <div>
+                  <h4>Luxurion Mart</h4>
+                  <span>E-commerce & Product Sourcing</span>
+                </div>
+                <span class="text-gold">→</span>
+              </div>
+              <div class="portfolio-item-card">
+                <div>
+                  <h4>MAXO</h4>
+                  <span>Amazon Brand Management</span>
+                </div>
+                <span class="text-gold">→</span>
+              </div>
+            </div>
+            <a href="/portfolio" class="btn btn-outline"
+              style="width: 100%; text-align: center; justify-content: center; margin-top: 6px;">VIEW FULL PORTFOLIO
+              →</a>
+          </div>
+        </div>
 
-            menuBtn.addEventListener('click', toggleMenu);
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (isMenuOpen) toggleMenu();
-                });
-            });
+        <!-- BEAT 4: LUV.AI (Right Flank) -->
+        <div class="story-beat beat-ai">
+          <div class="scrolly-glass-card">
+            <span class="eyebrow" style="color: var(--ai-purple);">MEET LUV.AI</span>
+            <h2 class="section-title" style="font-size: 1.5rem; margin-top: 4px;">YOUR AI BUSINESS ADVISOR.</h2>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 8px;">
+              Think through business problems, explore opportunities and find clearer strategic direction.
+            </p>
+            <div class="ai-prompts-stack">
+              <div class="ai-prompt-chip">
+                <span class="chip-icon">🤖</span>
+                <span>"How can I improve my marketplace sales?"</span>
+              </div>
+              <div class="ai-prompt-chip">
+                <span class="chip-icon">🤖</span>
+                <span>"How should I position my product?"</span>
+              </div>
+            </div>
+            <a href="/luv-ai" class="btn btn-gold"
+              style="width: 100%; text-align: center; justify-content: center; margin-top: 8px;">EXPLORE LUV.AI →</a>
+          </div>
+        </div>
 
-            // 3. Scroll Reveal Animation using Intersection Observer
-            const revealElements = document.querySelectorAll('.reveal');
-            const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
-            const revealObserver = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); 
-                });
-            }, revealOptions);
-            revealElements.forEach(el => revealObserver.observe(el));
+        <!-- BEAT 5: FINALE (Bottom / Left Flank) -->
+        <div class="story-beat beat-finale">
+          <div class="scrolly-glass-card">
+            <span class="eyebrow">GET IN TOUCH</span>
+            <h2 class="cta-headline">READY TO BUILD WHAT COMES NEXT?</h2>
+            <p class="cta-sub">Let's turn your next business challenge into a clear direction.</p>
+            <a href="/contact" class="btn btn-gold">START A CONVERSATION →</a>
+          </div>
+        </div>
 
-            // 4. Accordion Logic (Robust Pure CSS Max-Height toggle)
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const item = header.parentElement;
-                    const isActive = item.classList.contains('active');
+      </div>
+    </div>
+  </main>
 
-                    // Close all others
-                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                        otherItem.classList.remove('active', 'border-cyan-accent/30');
-                        otherItem.classList.add('border-gray-800');
-                    });
+  <div data-global-footer></div>
 
-                    // Toggle clicked item
-                    if (!isActive) {
-                        item.classList.add('active');
-                        item.classList.remove('border-gray-800');
-                        item.classList.add('border-cyan-accent/30');
-                    }
-                });
-            });
-
-            // 5. Shared Gemini API Function for AI Solutions
-            async function callGeminiAPI(message, systemContext) {
-                // Environment API Key enforcement - Environment secures the actual Key at runtime.
-                const apiKey = ""; 
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                
-                const payload = {
-                    contents: [{ parts: [{ text: message }] }],
-                    systemInstruction: { parts: [{ text: systemContext }] }
-                };
-
-                let retries = 5; let delay = 1000;
-                while (retries > 0) {
-                    try {
-                        const response = await fetch(url, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                        const data = await response.json();
-                        return data.candidates?.[0]?.content?.parts?.[0]?.text || "Unable to process request.";
-                    } catch (error) {
-                        retries--;
-                        if (retries === 0) {
-                            console.error("Gemini API Error:", error);
-                            return "Error connecting to AI servers. Please try again later.";
-                        }
-                        await new Promise(res => setTimeout(res, delay));
-                        delay *= 2;
-                    }
-                }
-            }
-
-            // 6. AI Business Solutions Logic
-            const aiSubmitBtn = document.getElementById('ai-submit');
-            const aiInput = document.getElementById('ai-input');
-            const aiResultContainer = document.getElementById('ai-result-container');
-            const aiResultContent = document.getElementById('ai-result-content');
-
-            aiSubmitBtn.addEventListener('click', async () => {
-                const problemText = aiInput.value.trim();
-                if(!problemText) return;
-
-                // UI Update
-                aiResultContainer.classList.remove('hidden');
-                aiResultContent.innerHTML = `<div class="flex items-center gap-3 py-2"><div class="loader"></div><span class="text-cyan-accent text-xs md:text-sm">Analyzing parameters & generating strategy...</span></div>`;
-                aiSubmitBtn.disabled = true;
-                aiSubmitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-
-                const systemPrompt = "You are LUVITS AI, an elite digital business strategist. A client has provided a business/digital problem. Provide a concise, actionable, and highly strategic solution. Format your response cleanly using minimal markdown (use bullet points and bold text where necessary, do NOT use markdown code blocks). Keep it under 200 words. Focus on eCommerce, Web, or Branding depending on context.";
-                
-                const response = await callGeminiAPI(problemText, systemPrompt);
-
-                // Format response (convert markdown bold and bullets to basic HTML for styling)
-                let formattedHtml = response
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
-                    .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italics
-                    .replace(/\n\n/g, '</p><p>') // Paragraphs
-                    .replace(/\n- (.*?)(?=\n|$)/g, '<li>$1</li>') // List items
-                    .replace(/(<li>.*<\/li>)/s, '<ul class="mt-2 mb-2">$1</ul>'); // Wrap lists
-                
-                if (!formattedHtml.startsWith('<p>') && !formattedHtml.startsWith('<ul')) {
-                    formattedHtml = `<p>${formattedHtml}</p>`;
-                }
-
-                aiResultContent.innerHTML = formattedHtml;
-                aiSubmitBtn.disabled = false;
-                aiSubmitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            });
-            
-        });
-    </script>
+  <script type="module" src="assets/js/app.js"></script>
+  <script src="assets/js/home-scrolly.js"></script>
 </body>
+
 </html>

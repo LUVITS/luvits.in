@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operational Pipeline & Milestones | LUVITS Global Blueprint</title>
+  <meta name="description" content="Universal 10-Phase Brand Lifecycle Pipeline and Department Milestones for LUVITS." />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+  <style>
+    .roster-card {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      transition: border-color var(--transition-fast);
+    }
+    .roster-card:hover {
+      border-color: var(--border-gold-subtle);
+    }
+  </style>
+</head>
+<body class="workflow-page">
+  <div data-global-header></div>
+
+  <main id="main-content" style="padding-top: calc(var(--header-height) + var(--space-lg)); padding-bottom: var(--space-3xl); min-height: 85vh;">
+    <div class="container workflow-container">
+
+      <!-- ========================================================
+           STATE 1: UNAUTHENTICATED LOGIN SCREEN
+           ======================================================== -->
+      <div id="workflow-login-section" class="luxury-card workflow-login-card">
+        <div class="section-header text-left" style="margin-bottom: var(--space-lg);">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span class="badge badge-gold" style="font-size: 0.72rem; padding: 3px 10px; font-weight: 700;">PORTAL ACCESS</span>
+            <span style="font-size: var(--fs-xs); color: var(--text-muted);">LUVITS Operations</span>
+          </div>
+          <h1 style="font-size: var(--fs-2xl); margin-top: 4px;">LUVITS WORKFLOW</h1>
+          <p style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 600; letter-spacing: 0.04em;">
+            OPERATIONAL PIPELINE ACCESS
+          </p>
+          <div class="gold-line"></div>
+        </div>
+
+        <form id="wf-login-form" autocomplete="on" novalidate>
+          <div class="form-group">
+            <label for="wf-username" class="input-label">Email Address *</label>
+            <input type="email" id="wf-username" class="luxury-input" placeholder="name@business.com" autocomplete="username" spellcheck="false" required />
+          </div>
+
+          <div class="form-group">
+            <label for="wf-password" class="input-label">Password *</label>
+            <div style="position: relative;">
+              <input type="password" id="wf-password" class="luxury-input" placeholder="••••••••" autocomplete="current-password" required />
+              <button type="button" id="wf-toggle-pw" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--text-muted); background: none; border: none; cursor: pointer;" aria-label="Toggle password visibility">
+                👁 Show
+              </button>
+            </div>
+          </div>
+
+          <div id="wf-login-error" class="workflow-login-error" role="alert"></div>
+
+          <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: var(--space-sm);">
+            ACCESS PIPELINE BOARD →
+          </button>
+        </form>
+
+        <div style="margin-top: var(--space-md); text-align: center; font-size: var(--fs-xs); color: var(--text-muted);">
+          Don't have an account? <a href="/auth.html#signup" class="text-gold" style="font-weight: 600;">Sign Up</a>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           STATE 2: AUTHENTICATED PIPELINE & ROLES BOARD
+           ======================================================== -->
+      <div id="workflow-app-section" class="hidden">
+        
+        <!-- Header Banner Card -->
+        <div class="workflow-header-card anime-reveal">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px;">DEDICATED VIEW</span>
+                <span style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 600;">GLOBAL BLUEPRINT</span>
+              </div>
+              <h1 style="font-size: var(--fs-3xl); margin-top: 2px; letter-spacing: -0.01em;">OPERATIONAL PIPELINE</h1>
+              <p style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; max-width: 520px;">
+                Phase-by-phase brand rollout blueprint, key deliverables, and functional department matrix.
+              </p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <a href="/workflow/tools" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm" title="Open Prescribed Tools in a New Tab">
+                🚀 Open Tool Finder in New Tab ↗
+              </a>
+              <button id="wf-logout-btn" class="btn btn-outline btn-sm" title="Sign out of Workflow">
+                Sign Out ⎋
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Department Matrix Summary Card -->
+        <div class="luxury-card anime-reveal" style="padding: var(--space-lg) var(--space-xl); margin-bottom: var(--space-lg);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md);">
+            <div>
+              <h2 style="font-size: var(--fs-lg); color: var(--gold-light); font-family: var(--font-display);">Operational Departments Matrix</h2>
+              <p style="font-size: var(--fs-xs); color: var(--text-secondary);">Core functional teams orchestrating the 10-stage brand rollout</p>
+            </div>
+            <span class="badge badge-gold">10 Operational Phases</span>
+          </div>
+
+          <!-- Department Overview Grid -->
+          <div class="grid-2" style="gap: 12px;" id="department-roster-grid">
+            <!-- Dynamically populated roster summary -->
+          </div>
+        </div>
+
+        <!-- Pipeline Timeline Section -->
+        <div class="luxury-card anime-reveal" style="padding: var(--space-lg) var(--space-xl);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md);">
+            <div>
+              <h2 style="font-size: var(--fs-xl); color: var(--text-primary); font-family: var(--font-display);">10-Phase Brand Lifecycle Pipeline</h2>
+              <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 2px;">
+                Product Research to Business Scaling &bull; Department Milestones & Key Deliverables
+              </p>
+            </div>
+            <a href="/workflow/tools" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="border-color: var(--border-gold-subtle); color: var(--gold-light);">
+              🔗 Prescribed Websites ↗
+            </a>
+          </div>
+
+          <!-- Filter by Department Pills -->
+          <div class="filter-pills-wrap" style="margin-bottom: var(--space-md);">
+            <span style="font-size: var(--fs-xs); color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Filter Department:</span>
+            <button class="filter-pill is-active" data-filter-dept="ALL">All (10)</button>
+            <button class="filter-pill" data-filter-dept="Research">🔍 Research & Strategy</button>
+            <button class="filter-pill" data-filter-dept="Sourcing">🤝 Sourcing & QA</button>
+            <button class="filter-pill" data-filter-dept="Production">🏭 Production & Operations</button>
+            <button class="filter-pill" data-filter-dept="Logistics">🚢 Logistics & Export</button>
+            <button class="filter-pill" data-filter-dept="Growth">📈 Amazon & Growth</button>
+          </div>
+
+          <!-- Timeline Container -->
+          <div id="boardTimeline" class="workflow-timeline">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <div data-global-footer></div>
+
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module">
+    import { authStore } from '../../assets/js/auth-store.js';
+
+    const flowBoardData = [
+      {
+        tag: "Product Research",
+        deptCategory: "Research",
+        dept: "Market Intelligence & Analytics",
+        roleLead: "Research & Product Analyst",
+        roleSupport: "Category Strategist",
+        deliverable: "High-Demand Opportunity Validation & Margin Viability Study"
+      },
+      {
+        tag: "Supplier Selection",
+        deptCategory: "Sourcing",
+        dept: "Global Sourcing & Procurement",
+        roleLead: "Sourcing Director",
+        roleSupport: "Factory Audit Specialist",
+        deliverable: "Verified Manufacturer Shortlist & Commercial Term Sheet"
+      },
+      {
+        tag: "Sample Approval",
+        deptCategory: "Sourcing",
+        dept: "Product Design & Quality Assurance",
+        roleLead: "Product Development Lead",
+        roleSupport: "Quality Assurance Engineer",
+        deliverable: "Golden Production Sample Sign-Off & Spec Sheet"
+      },
+      {
+        tag: "Manufacturing",
+        deptCategory: "Production",
+        dept: "Production & Supply Chain",
+        roleLead: "Manufacturing Supervisor",
+        roleSupport: "Packaging & Compliance Engineer",
+        deliverable: "Mass Production Completion & Batch Regulatory Clearance"
+      },
+      {
+        tag: "Quality Inspection",
+        deptCategory: "Production",
+        dept: "Quality Assurance & Compliance",
+        roleLead: "Senior QC Inspector",
+        roleSupport: "Laboratory Compliance Officer",
+        deliverable: "AQL 2.5 Pre-Shipment Inspection Report & Lab Certification"
+      },
+      {
+        tag: "India Launch",
+        deptCategory: "Production",
+        dept: "Domestic Rollout Operations",
+        roleLead: "Launch Operations Lead",
+        roleSupport: "Domestic Fulfillment Lead",
+        deliverable: "Domestic Market Testing, Review Traction & Operational Proof"
+      },
+      {
+        tag: "Export",
+        deptCategory: "Logistics",
+        dept: "Global Trade & Customs Logistics",
+        roleLead: "International Trade Manager",
+        roleSupport: "Customs Broker & Forwarder",
+        deliverable: "DGFT & ICEGATE Clearance, Ocean/Air Bill of Lading & Tracking"
+      },
+      {
+        tag: "USA Warehouse",
+        deptCategory: "Logistics",
+        dept: "US 3PL & Fulfillment Operations",
+        roleLead: "US Logistics Coordinator",
+        roleSupport: "Warehouse Intake & Prep Team",
+        deliverable: "3PL Receiving, FBA Inbound Labeling & Pallet Distribution"
+      },
+      {
+        tag: "Amazon USA Launch",
+        deptCategory: "Growth",
+        dept: "Marketplace Growth & Advertising",
+        roleLead: "Amazon Brand Manager",
+        roleSupport: "PPC & Copywriting Specialist",
+        deliverable: "A+ Content Indexing, Brand Registry & Amazon PPC Campaigns Active"
+      },
+      {
+        tag: "Business Scaling",
+        deptCategory: "Growth",
+        dept: "Executive Growth & Scaling",
+        roleLead: "Head of Growth Strategy",
+        roleSupport: "Automation & BI Engineer",
+        deliverable: "Profit Optimization, Multi-Channel Expansion & CRM Scaling"
+      }
+    ];
+
+    const workflowIcons = {
+      "Product Research": "🔍",
+      "Supplier Selection": "🤝",
+      "Sample Approval": "✅",
+      "Manufacturing": "🏭",
+      "Quality Inspection": "🧪",
+      "India Launch": "🇮🇳",
+      "Export": "🚢",
+      "USA Warehouse": "🏬",
+      "Amazon USA Launch": "📦",
+      "Business Scaling": "📈"
+    };
+
+    function escapeHtml(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    const loginSection = document.getElementById('workflow-login-section');
+    const appSection = document.getElementById('workflow-app-section');
+    const wfLoginForm = document.getElementById('wf-login-form');
+    const wfLoginError = document.getElementById('wf-login-error');
+    const wfUsername = document.getElementById('wf-username');
+    const wfPassword = document.getElementById('wf-password');
+    const wfTogglePw = document.getElementById('wf-toggle-pw');
+    const wfLogoutBtn = document.getElementById('wf-logout-btn');
+
+    const boardTimeline = document.getElementById('boardTimeline');
+    const departmentRosterGrid = document.getElementById('department-roster-grid');
+
+    let currentDeptFilter = 'ALL';
+
+    function checkAuthState() {
+      if (authStore.isAuthenticated()) {
+        loginSection.classList.add('hidden');
+        loginSection.style.display = 'none';
+        appSection.classList.remove('hidden');
+        appSection.style.display = 'block';
+        initApp();
+      } else {
+        loginSection.classList.remove('hidden');
+        loginSection.style.display = 'block';
+        appSection.classList.add('hidden');
+        appSection.style.display = 'none';
+      }
+    }
+
+    wfTogglePw.addEventListener('click', () => {
+      const isPw = wfPassword.type === 'password';
+      wfPassword.type = isPw ? 'text' : 'password';
+      wfTogglePw.textContent = isPw ? '🔒 Hide' : '👁 Show';
+    });
+
+    wfLoginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const u = wfUsername.value.trim();
+      const p = wfPassword.value;
+
+      const submitBtn = wfLoginForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Verifying...';
+
+      try {
+        const res = await authStore.loginWithEmail(u, p);
+        if (res.success) {
+          wfLoginError.classList.remove('shown', 'shake');
+          checkAuthState();
+        } else {
+          wfLoginError.textContent = res.error || 'Invalid Credentials. Access Denied';
+          wfLoginError.classList.add('shown');
+          wfPassword.value = '';
+          wfPassword.focus();
+        }
+      } catch (err) {
+        wfLoginError.textContent = 'Authentication error. Please try again.';
+        wfLoginError.classList.add('shown');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'ACCESS PIPELINE BOARD →';
+      }
+    });
+
+    wfLogoutBtn.addEventListener('click', () => {
+      authStore.logout();
+    });
+
+    window.addEventListener('luvits:auth-change', checkAuthState);
+
+    function initApp() {
+      renderDepartmentMatrix();
+      renderBoard();
+    }
+
+    function renderDepartmentMatrix() {
+      const depts = [
+        { name: "Market Intelligence & Research", icon: "🔍", count: 1, phases: ["Product Research"] },
+        { name: "Global Sourcing & Quality", icon: "🤝", count: 2, phases: ["Supplier Selection", "Sample Approval"] },
+        { name: "Manufacturing & Production", icon: "🏭", count: 2, phases: ["Manufacturing", "Quality Inspection"] },
+        { name: "Domestic & Global Logistics", icon: "🚢", count: 2, phases: ["India Launch", "Export"] },
+        { name: "US 3PL & Fulfillment", icon: "🏬", count: 1, phases: ["USA Warehouse"] },
+        { name: "Amazon Marketplace & Growth", icon: "📈", count: 2, phases: ["Amazon USA Launch", "Business Scaling"] }
+      ];
+
+      departmentRosterGrid.innerHTML = depts.map(d => `
+        <div class="roster-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-family: var(--font-display); font-weight: 700; color: var(--gold-light); font-size: var(--fs-sm); display: flex; align-items: center; gap: 6px;">
+              <span>${d.icon}</span>
+              <span>${escapeHtml(d.name)}</span>
+            </span>
+            <span class="badge badge-gold" style="font-size: 0.65rem; padding: 2px 6px;">${d.phases.length} Phases</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;">
+            ${d.phases.map(p => `<span style="font-size: 0.7rem; color: var(--text-secondary); background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-subtle);">${workflowIcons[p] || '•'} ${p}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderBoard() {
+      const filtered = flowBoardData.filter(item => {
+        if (currentDeptFilter === 'ALL') return true;
+        return item.deptCategory === currentDeptFilter;
+      });
+
+      boardTimeline.innerHTML = filtered.map((item) => {
+        const originalIndex = flowBoardData.findIndex(f => f.tag === item.tag);
+        const num = String(originalIndex + 1).padStart(2, '0');
+        const icon = workflowIcons[item.tag] || '•';
+
+        return `
+          <div class="workflow-timeline-item">
+            <div class="workflow-timeline-node">${num}</div>
+            <div class="workflow-card">
+              <div class="workflow-card-head">
+                <span class="workflow-icon">${icon}</span>
+                <span class="workflow-title">${escapeHtml(item.tag)}</span>
+              </div>
+
+              <div style="margin-top: 8px; font-size: var(--fs-xs); color: var(--gold-light); font-weight: 600;">
+                🏢 Department: <span style="color: #fff; font-weight: 400;">${escapeHtml(item.dept)}</span>
+              </div>
+
+              <div style="margin-top: 4px; font-size: var(--fs-xs); color: var(--text-secondary);">
+                🎯 Key Roles: <span class="badge" style="background: rgba(212,175,55,0.1); border: 1px solid var(--border-gold-subtle); color: var(--gold-light); font-size: 0.68rem; padding: 2px 6px;">${escapeHtml(item.roleLead)}</span> &bull; <span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.68rem; padding: 2px 6px;">${escapeHtml(item.roleSupport)}</span>
+              </div>
+
+              <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-subtle); font-size: var(--fs-xs); color: var(--text-muted);">
+                📋 <strong style="color: var(--text-secondary);">Key Milestone:</strong> ${escapeHtml(item.deliverable)}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.querySelectorAll('[data-filter-dept]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-filter-dept]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        currentDeptFilter = btn.getAttribute('data-filter-dept');
+        renderBoard();
+      });
+    });
+
+    checkAuthState();
+  </script>
+</body>
+</html>
