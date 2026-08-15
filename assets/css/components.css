@@ -1510,6 +1510,122 @@
   }
 }
 
+/* ==========================================================================
+   PRODUCTION RESPONSIVE & ACCESSIBILITY POLISH (320px to 1440px+)
+   ========================================================================== */
+
+/* Universal Touch & Button Micro-Interactions */
+.btn {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.luxury-input:focus,
+.luxury-select:focus,
+.wizard-select:focus,
+.directory-search-input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+}
+
+/* Mobile & Touch Viewports (320px - 640px) */
+@media (max-width: 640px) {
+  /* Prevent iOS auto-zoom on input focus while keeping fluid layout */
+  .luxury-input,
+  .luxury-select,
+  .wizard-select,
+  .directory-search-input {
+    font-size: 16px !important;
+    min-height: 44px;
+  }
+
+  .btn {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-sm {
+    min-height: 38px;
+  }
+
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .luxury-card {
+    padding: 1.25rem 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .modal-dialog {
+    padding: 1.25rem 1rem !important;
+    max-width: calc(100vw - 20px) !important;
+    margin: 10px !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .admin-kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  .admin-kpi-card {
+    padding: 1rem !important;
+  }
+
+  .admin-tabs-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-tab-btn {
+    padding: 8px 12px !important;
+    font-size: 0.72rem !important;
+  }
+}
+
+/* Ultra-Compact Mobile Screens (320px - 375px) */
+@media (max-width: 375px) {
+  .admin-kpi-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 8px 10px !important;
+    font-size: 0.7rem !important;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Accessible Focus States */
+:focus-visible {
+  outline: 2px solid var(--gold-primary) !important;
+  outline-offset: 3px !important;
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 
 
 
