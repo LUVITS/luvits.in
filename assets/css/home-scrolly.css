@@ -13,6 +13,19 @@ body.home-page {
 }
 
 /* --------------------------------------------------------------------------
+   TRANSPARENT FLOATING HEADER (Zero Canvas Obstruction)
+   -------------------------------------------------------------------------- */
+body.home-page .site-header,
+body.home-page .site-header.is-scrolled {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-bottom: 1px solid transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* --------------------------------------------------------------------------
    TRANSPARENT FLOATING GLASS FOOTER (Preserves Background Character Visibility)
    -------------------------------------------------------------------------- */
 body.home-page .site-footer {
