@@ -290,7 +290,7 @@
   box-shadow: 0 0 18px rgba(212, 175, 55, 0.4);
 }
 
-/* Avatar Dropdown Menu */
+/* Avatar Dropdown Menu with Smooth Luxury Transition */
 .user-dropdown {
   position: absolute;
   top: calc(100% + 12px);
@@ -300,16 +300,25 @@
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
   padding: 0.6rem;
-  box-shadow: var(--shadow-lg);
-  display: none;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.15);
+  display: flex;
   flex-direction: column;
   gap: 4px;
   z-index: 1001;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.96);
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
 }
 
 .user-dropdown.is-open {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .dropdown-header {
@@ -1360,7 +1369,7 @@
   font-size: var(--fs-sm);
   letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   text-decoration: none;
   text-align: center;
 }
@@ -1398,7 +1407,7 @@
   font-size: var(--fs-xs);
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
 .filter-pill:hover {
@@ -1429,7 +1438,7 @@
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: var(--fs-sm);
-  transition: all var(--transition-fast);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .directory-search-input:focus {
@@ -1464,7 +1473,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
-  transition: all var(--transition-fast);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   box-shadow: var(--shadow-sm);
 }
 
