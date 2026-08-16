@@ -29,11 +29,18 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.header-inner {
+.header-inner,
+.site-header .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 3.5vw, 3.5rem);
+  padding-right: clamp(1.25rem, 3.5vw, 3.5rem);
+  box-sizing: border-box;
 }
 
 /* Brand Logo & Tagline */
@@ -110,7 +117,7 @@
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: clamp(0.6rem, 1.4vw, 1.8rem);
   position: relative;
 }
 
@@ -231,7 +238,7 @@
   font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--text-secondary);
-  padding: 0.45rem 0.75rem;
+  padding: 0.45rem clamp(0.4rem, 0.75vw, 0.85rem);
   position: relative;
   transition: color var(--transition-fast), background-color var(--transition-fast);
 }
@@ -246,8 +253,8 @@
     content: "";
     position: absolute;
     bottom: -4px;
-    left: 0.75rem;
-    right: 0.75rem;
+    left: clamp(0.4rem, 0.75vw, 0.85rem);
+    right: clamp(0.4rem, 0.75vw, 0.85rem);
     height: 2px;
     background: var(--gold-gradient);
     border-radius: 2px;
@@ -262,7 +269,7 @@
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: clamp(0.5rem, 1vw, 1rem);
   position: relative;
 }
 
