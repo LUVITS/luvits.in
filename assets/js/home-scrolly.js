@@ -17,8 +17,8 @@ class HighPerformanceScrollyEngine {
     });
 
     this.beats = document.querySelectorAll('.story-beat');
-    this.frameCount = 100;
-    this.startFrame = 21;
+    this.frameCount = 237;
+    this.startFrame = 4;
     
     // Cache for pre-decoded ImageBitmaps or HTMLImageElements
     this.frames = new Array(this.frameCount);
@@ -104,8 +104,8 @@ class HighPerformanceScrollyEngine {
   async preloadAllFrames() {
     const supportsBitmap = typeof window.createImageBitmap === 'function';
 
-    // Priority 1: Load and decode Frame 0 (website_021.png) immediately for peak LCP
-    const firstFrameSrc = `LUV/website_021.png`;
+    // Priority 1: Load and decode Frame 0 (website_004.webp) immediately for peak LCP
+    const firstFrameSrc = `LUV/website_004.webp`;
     try {
       if (supportsBitmap) {
         const res = await fetch(firstFrameSrc);
@@ -131,21 +131,21 @@ class HighPerformanceScrollyEngine {
       };
     }
 
-    // Priority 2: Progressive batched loading for remaining 99 frames (concurrency controlled)
+    // Priority 2: Progressive batched loading for remaining 236 WebP frames
     const loadQueue = [];
     for (let i = 1; i < this.frameCount; i++) {
       const frameNum = this.startFrame + i;
       const frameStr = this.pad(frameNum, 3);
-      loadQueue.push({ index: i, src: `LUV/website_${frameStr}.png` });
+      loadQueue.push({ index: i, src: `LUV/website_${frameStr}.webp` });
     }
 
-    // Process initial scroll buffer (first 12 frames) immediately, remaining frames in idle batches
-    const immediateBuffer = loadQueue.splice(0, 12);
+    // Process initial scroll buffer (first 20 frames) immediately, remaining frames in idle batches
+    const immediateBuffer = loadQueue.splice(0, 20);
     immediateBuffer.forEach(item => this.loadSingleFrame(item.index, item.src, supportsBitmap));
 
     // Process remainder with throttled queue
     const processRemaining = () => {
-      const concurrency = 6;
+      const concurrency = 8;
       let active = 0;
       let currentIndex = 0;
 
@@ -164,9 +164,9 @@ class HighPerformanceScrollyEngine {
     };
 
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => processRemaining(), { timeout: 1500 });
+      requestIdleCallback(() => processRemaining(), { timeout: 1200 });
     } else {
-      setTimeout(processRemaining, 100);
+      setTimeout(processRemaining, 80);
     }
   }
 
@@ -197,7 +197,7 @@ class HighPerformanceScrollyEngine {
 
   initReducedMotion() {
     const img = new Image();
-    img.src = `LUV/website_021.png`;
+    img.src = `LUV/website_004.webp`;
     img.onload = () => {
       this.frames[0] = img;
       this.canvas.classList.add('loaded');
