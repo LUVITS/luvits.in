@@ -426,17 +426,18 @@ body.home-page .footer-bottom {
 }
 
 /* --------------------------------------------------------------------------
-   BEAT 5: FINALE (Bottom / Left Flank)
+   BEAT 5: FINALE (Left Flank - Lower Half, perfectly clears footer)
    -------------------------------------------------------------------------- */
 .beat-finale {
   left: 5vw;
-  bottom: 8vh;
-  max-width: 520px;
+  top: 54%;
+  transform: translateY(-40%) translateZ(0);
+  max-width: 480px;
   text-align: left;
 }
 
 .beat-finale.is-active {
-  transform: translateY(0) translateZ(0);
+  transform: translateY(-44%) translateZ(0);
 }
 
 .beat-finale .scrolly-glass-card {

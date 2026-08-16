@@ -37,13 +37,13 @@ class HighPerformanceScrollyEngine {
 
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Story beat active scroll ranges
+    // Story beat active scroll ranges (Leaves smooth clearance before footer)
     this.beatRanges = [
       { start: 0.00, end: 0.18 }, // Beat 1: Intro (Left Flank)
       { start: 0.22, end: 0.45 }, // Beat 2: Services (Split Flanks)
       { start: 0.48, end: 0.70 }, // Beat 3: Portfolio (Left Flank)
-      { start: 0.73, end: 0.90 }, // Beat 4: LUV.AI (Right Flank)
-      { start: 0.92, end: 1.00 }  // Beat 5: Finale (Bottom Flank)
+      { start: 0.73, end: 0.88 }, // Beat 4: LUV.AI (Right Flank)
+      { start: 0.90, end: 0.975 } // Beat 5: Finale (Left Flank, fades before footer arrives)
     ];
 
     this.renderLoopBound = this.renderLoop.bind(this);
@@ -318,12 +318,21 @@ class HighPerformanceScrollyEngine {
   }
 
   updateStoryBeats(progress) {
+    const scrollTrack = document.querySelector('.scrolly-scroll-track');
+    const scrollMax = scrollTrack
+      ? scrollTrack.offsetHeight - window.innerHeight
+      : document.documentElement.scrollHeight - window.innerHeight;
+    const currentY = window.scrollY || window.pageYOffset;
+    
+    // When user scrolls near or into the footer, fade out all fixed overlay cards
+    const isOverFooter = scrollMax > 0 && currentY >= (scrollMax - 40);
+
     for (let i = 0; i < this.beats.length; i++) {
       const beat = this.beats[i];
       const range = this.beatRanges[i];
       if (!range) continue;
 
-      const isActive = progress >= range.start && progress <= range.end;
+      const isActive = !isOverFooter && progress >= range.start && progress <= range.end;
 
       if (isActive) {
         if (!beat.classList.contains('is-active')) {
