@@ -38,37 +38,19 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@graph": [
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@type": "SoftwareApplication",
-        "@id": "https://luvits.in/luv-ai/#software",
-        "name": "Luv.AI",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "All",
-        "url": "https://luvits.in/luv-ai/",
-        "offers": {
-          "@type": "Offer",
-          "price": "0.00",
-          "priceCurrency": "INR"
-        },
-        "description": "Luv.AI is an AI business advisory framework designed to help business owners think through problems and discover strategic direction."
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://luvits.in/"
       },
       {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://luvits.in/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Luv.AI",
-            "item": "https://luvits.in/luv-ai/"
-          }
-        ]
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Luv.AI",
+        "item": "https://luvits.in/luv-ai/"
       }
     ]
   }

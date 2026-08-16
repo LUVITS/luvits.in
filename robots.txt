@@ -1,12 +1,15 @@
 # ==============================================================================
-# LUVITS (luvits.in) - Robots Exclusion Protocol
+# LUVITS (https://luvits.in) - Robots Exclusion Protocol
 # ==============================================================================
 
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /admin.html
+Disallow: /workflow/
 Disallow: /dashboard/
+Disallow: /login/
+Disallow: /signup/
+Disallow: /*.html$
 
-# Sitemap location
+# Canonical XML Sitemap
 Sitemap: https://luvits.in/sitemap.xml
