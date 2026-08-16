@@ -4,16 +4,99 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LUVITS | Business Strategy, Digital Execution & Brand Growth</title>
+  <title>LUVITS | Business Strategy, Digital Execution &amp; Brand Growth</title>
   <meta name="description"
-    content="LUVITS helps businesses with Business Consulting, E-commerce Management, Web Development, Graphic Designing, Brand Building, and AI Assistance through Luv.AI." />
+    content="LUVITS helps ambitious businesses scale with Executive Business Consulting, E-commerce Management, Web Development, Graphic Designing, Brand Building, and Luv.AI." />
+  <meta name="keywords" content="LUVITS, business consulting, ecommerce management, web development, brand building, Amazon seller, graphic designing, Ahmedabad, Jay Vaghela, Luv AI" />
+  <link rel="canonical" href="https://luvits.in/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="LUVITS" />
   <meta property="og:title" content="LUVITS | We Build Brands. You Grow Beyond." />
   <meta property="og:description"
     content="Strategic thinking. Powerful execution. Digital solutions built around your business." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luvits.in/" />
+  <meta property="og:image" content="https://luvits.in/assets/logo.png" />
+  <meta property="og:image:alt" content="LUVITS Brand Logo" />
 
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LUVITS | We Build Brands. You Grow Beyond." />
+  <meta name="twitter:description"
+    content="Strategic thinking. Powerful execution. Digital solutions built around your business." />
+  <meta name="twitter:image" content="https://luvits.in/assets/logo.png" />
+
+  <!-- Theme & PWA -->
+  <meta name="theme-color" content="#050505" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" />
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="stylesheet" href="assets/css/home-scrolly.css" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://luvits.in/#organization",
+        "name": "LUVITS",
+        "url": "https://luvits.in/",
+        "logo": "https://luvits.in/assets/logo.png",
+        "founder": {
+          "@type": "Person",
+          "name": "Jay Vaghela"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+916359435595",
+          "contactType": "customer service",
+          "email": "luvits.co@gmail.com",
+          "availableLanguage": ["English", "Hindi", "Gujarati"]
+        },
+        "sameAs": [
+          "https://instagram.com/luvits.in"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://luvits.in/#website",
+        "url": "https://luvits.in/",
+        "name": "LUVITS",
+        "publisher": {
+          "@id": "https://luvits.in/#organization"
+        },
+        "description": "We Build Brands. You Grow Beyond."
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://luvits.in/#service",
+        "name": "LUVITS Business & Brand Growth",
+        "url": "https://luvits.in/",
+        "telephone": "+916359435595",
+        "email": "luvits.co@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "TNTC, Virat Nagar Rd, near Kanba Hospital, Nikol",
+          "addressLocality": "Ahmedabad",
+          "addressRegion": "Gujarat",
+          "postalCode": "380049",
+          "addressCountry": "IN"
+        },
+        "priceRange": "$$"
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body class="home-page">
@@ -32,7 +115,7 @@
       <div class="scrolly-overlay-viewport">
 
         <!-- BEAT 1: INTRO (Hero - Left Flank) -->
-        <div class="story-beat beat-intro">
+        <section class="story-beat beat-intro" aria-label="Hero Introduction">
           <div class="scrolly-glass-card">
             <span class="eyebrow hero-eyebrow">WELCOME TO LUVITS</span>
             <h1 class="hero-headline">
@@ -44,18 +127,18 @@
               Strategic thinking. Powerful execution. Digital solutions built around your business.
             </p>
             <div class="hero-actions">
-              <a href="/services" class="btn btn-gold">EXPLORE SERVICES →</a>
-              <a href="/contact" class="btn btn-outline">BOOK CONSULTATION</a>
+              <a href="/services/" class="btn btn-gold">EXPLORE SERVICES →</a>
+              <a href="/contact/" class="btn btn-outline">BOOK CONSULTATION</a>
             </div>
           </div>
           <div class="scrolly-scroll-indicator">
             <span>SCROLL TO REVEAL</span>
             <span class="scroll-arrow">↓</span>
           </div>
-        </div>
+        </section>
 
         <!-- BEAT 2: SERVICES (Split Flanks - Left & Right Columns) -->
-        <div class="story-beat beat-services">
+        <section class="story-beat beat-services" aria-label="Our Core Services">
           <div class="beat-services-left">
             <div class="scrolly-glass-card">
               <span class="eyebrow">WHAT WE DO</span>
@@ -67,14 +150,14 @@
             <div class="scrolly-glass-card service-tile">
               <h3 class="service-tile-title">Business Consulting</h3>
               <p class="service-tile-desc">Strategic direction for real business problems.</p>
-              <a href="/services/business-consulting" class="text-gold"
+              <a href="/services/business-consulting/" class="text-gold"
                 style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
                 →</a>
             </div>
             <div class="scrolly-glass-card service-tile">
               <h3 class="service-tile-title">E-commerce Management</h3>
               <p class="service-tile-desc">Manage and grow your marketplace presence.</p>
-              <a href="/services/ecommerce-management" class="text-gold"
+              <a href="/services/ecommerce-management/" class="text-gold"
                 style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
                 →</a>
             </div>
@@ -84,29 +167,29 @@
             <div class="scrolly-glass-card service-tile">
               <h3 class="service-tile-title">Web Development</h3>
               <p class="service-tile-desc">Digital experiences built around your business.</p>
-              <a href="/services/web-development" class="text-gold"
+              <a href="/services/web-development/" class="text-gold"
                 style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
                 →</a>
             </div>
             <div class="scrolly-glass-card service-tile">
               <h3 class="service-tile-title">Graphic Designing</h3>
               <p class="service-tile-desc">Visuals that make your brand recognizable.</p>
-              <a href="/services/graphic-designing" class="text-gold"
+              <a href="/services/graphic-designing/" class="text-gold"
                 style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
                 →</a>
             </div>
             <div class="scrolly-glass-card service-tile">
               <h3 class="service-tile-title">Brand Building</h3>
               <p class="service-tile-desc">From product to brand.</p>
-              <a href="/services/brand-building" class="text-gold"
+              <a href="/services/brand-building/" class="text-gold"
                 style="font-size: var(--fs-xs); font-weight: 700; margin-top: 8px; display: inline-block;">Learn More
                 →</a>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- BEAT 3: PORTFOLIO (Left Flank) -->
-        <div class="story-beat beat-portfolio">
+        <section class="story-beat beat-portfolio" aria-label="Portfolio Highlights">
           <div class="scrolly-glass-card">
             <span class="eyebrow">PORTFOLIO</span>
             <h2 class="section-title" style="font-size: 1.5rem; margin-top: 4px;">SELECTED WORK</h2>
@@ -115,34 +198,34 @@
             <div class="portfolio-cards-stack">
               <div class="portfolio-item-card">
                 <div>
-                  <h4>Sharlin Traders</h4>
-                  <span>E-commerce Management & Social Media</span>
+                  <h4 style="margin: 0; font-size: 0.95rem; color: #FFFFFF;">Sharlin Traders</h4>
+                  <span style="font-size: 0.75rem; color: var(--text-secondary);">E-commerce Management &amp; Social Media</span>
                 </div>
                 <span class="text-gold">→</span>
               </div>
               <div class="portfolio-item-card">
                 <div>
-                  <h4>Luxurion Mart</h4>
-                  <span>E-commerce & Product Sourcing</span>
+                  <h4 style="margin: 0; font-size: 0.95rem; color: #FFFFFF;">Luxurion Mart</h4>
+                  <span style="font-size: 0.75rem; color: var(--text-secondary);">E-commerce &amp; Product Sourcing</span>
                 </div>
                 <span class="text-gold">→</span>
               </div>
               <div class="portfolio-item-card">
                 <div>
-                  <h4>MAXO</h4>
-                  <span>Amazon Brand Management</span>
+                  <h4 style="margin: 0; font-size: 0.95rem; color: #FFFFFF;">MAXO</h4>
+                  <span style="font-size: 0.75rem; color: var(--text-secondary);">Amazon Brand Management</span>
                 </div>
                 <span class="text-gold">→</span>
               </div>
             </div>
-            <a href="/portfolio" class="btn btn-outline"
+            <a href="/portfolio/" class="btn btn-outline"
               style="width: 100%; text-align: center; justify-content: center; margin-top: 6px;">VIEW FULL PORTFOLIO
               →</a>
           </div>
-        </div>
+        </section>
 
         <!-- BEAT 4: LUV.AI (Right Flank) -->
-        <div class="story-beat beat-ai">
+        <section class="story-beat beat-ai" aria-label="Luv.AI Assistant Feature">
           <div class="scrolly-glass-card">
             <span class="eyebrow" style="color: var(--ai-purple);">MEET LUV.AI</span>
             <h2 class="section-title" style="font-size: 1.5rem; margin-top: 4px;">YOUR AI BUSINESS ADVISOR.</h2>
@@ -159,20 +242,20 @@
                 <span>"How should I position my product?"</span>
               </div>
             </div>
-            <a href="/luv-ai" class="btn btn-gold"
+            <a href="/luv-ai/" class="btn btn-gold"
               style="width: 100%; text-align: center; justify-content: center; margin-top: 8px;">EXPLORE LUV.AI →</a>
           </div>
-        </div>
+        </section>
 
         <!-- BEAT 5: FINALE (Bottom / Left Flank) -->
-        <div class="story-beat beat-finale">
+        <section class="story-beat beat-finale" aria-label="Call to Action">
           <div class="scrolly-glass-card">
             <span class="eyebrow">GET IN TOUCH</span>
             <h2 class="cta-headline">READY TO BUILD WHAT COMES NEXT?</h2>
             <p class="cta-sub">Let's turn your next business challenge into a clear direction.</p>
-            <a href="/contact" class="btn btn-gold">START A CONVERSATION →</a>
+            <a href="/contact/" class="btn btn-gold">START A CONVERSATION →</a>
           </div>
-        </div>
+        </section>
 
       </div>
     </div>
@@ -181,7 +264,7 @@
   <div data-global-footer></div>
 
   <script type="module" src="assets/js/app.js"></script>
-  <script src="assets/js/home-scrolly.js"></script>
+  <script src="assets/js/home-scrolly.js" defer></script>
 </body>
 
 </html>

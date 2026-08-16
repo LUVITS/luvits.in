@@ -1,0 +1,12 @@
+# ==============================================================================
+# LUVITS (luvits.in) - Robots Exclusion Protocol
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin.html
+Disallow: /dashboard/
+
+# Sitemap location
+Sitemap: https://luvits.in/sitemap.xml

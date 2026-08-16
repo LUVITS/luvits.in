@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+/* ==========================================================================
+   LUVITS - DESIGN SYSTEM TOKENS & CSS VARIABLES
+   Fonts are preloaded via <link rel="preconnect"> in HTML <head> for peak performance
+   ========================================================================== */
 
 :root {
   /* Typography System */

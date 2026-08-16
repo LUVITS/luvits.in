@@ -158,3 +158,36 @@
   .section-header.text-left { text-align: left; }
 }
 
+/* ==========================================================================
+   PERFORMANCE & ACCESSIBILITY UTILITIES
+   ========================================================================== */
+
+/* Content visibility optimizations for long pages */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 350px;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Lazy-loaded image smooth fade-in */
+img[loading="lazy"] {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"]:not([src]) {
+  opacity: 0;
+}
+

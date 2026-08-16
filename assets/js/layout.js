@@ -21,8 +21,8 @@ export function updateNavMenu() {
       workflowLink.className = 'nav-link-workflow-wrap';
       workflowLink.style.display = 'contents';
       workflowLink.innerHTML = `
-        ${isAdmin ? '<a href="admin.html" class="nav-link" style="color: #fbbf24; font-weight: 700;"><span>🛡️ Admin</span></a>' : ''}
-        <a href="LUVITS_WorkFlow.html" class="nav-link nav-link-workflow"><span>⚡ WorkFlow</span></a>
+        ${isAdmin ? '<a href="/admin/" class="nav-link" style="color: #fbbf24; font-weight: 700;"><span>🛡️ Admin</span></a>' : ''}
+        <a href="/workflow/" class="nav-link nav-link-workflow"><span>⚡ WorkFlow</span></a>
       `;
       
       const drawerFooter = navMenu.querySelector('.nav-drawer-footer');
@@ -71,12 +71,12 @@ export function renderGlobalLayout() {
 
           <nav class="nav-menu" id="main-nav" aria-label="Primary Navigation">
             <a href="/" class="nav-link">Home</a>
-            <a href="/services" class="nav-link">Services</a>
-            <a href="/portfolio" class="nav-link">Portfolio</a>
-            <a href="/about" class="nav-link">About Us</a>
-            <a href="/luv-ai" class="nav-link">Luv.AI</a>
-            <a href="/pricing" class="nav-link">Pricing</a>
-            <a href="/contact" class="nav-link">Contact</a>
+            <a href="/services/" class="nav-link">Services</a>
+            <a href="/portfolio/" class="nav-link">Portfolio</a>
+            <a href="/about/" class="nav-link">About Us</a>
+            <a href="/luv-ai/" class="nav-link">Luv.AI</a>
+            <a href="/pricing/" class="nav-link">Pricing</a>
+            <a href="/contact/" class="nav-link">Contact</a>
 
             <div class="nav-drawer-footer">
               <a href="https://wa.me/916359435595?text=Hello%20LUVITS%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." 
@@ -127,12 +127,12 @@ export function renderGlobalLayout() {
             <div>
               <h4 class="footer-heading">Services</h4>
               <div class="footer-links">
-                <a href="/services/business-consulting">Business Consulting</a>
-                <a href="/services/ecommerce-management">E-commerce Management</a>
-                <a href="/services/web-development">Web Development</a>
-                <a href="/services/graphic-designing">Graphic Designing</a>
-                <a href="/services/brand-building">Brand Building</a>
-                <a href="/luv-ai">Luv.AI Assistant</a>
+                <a href="/services/business-consulting/">Business Consulting</a>
+                <a href="/services/ecommerce-management/">E-commerce Management</a>
+                <a href="/services/web-development/">Web Development</a>
+                <a href="/services/graphic-designing/">Graphic Designing</a>
+                <a href="/services/brand-building/">Brand Building</a>
+                <a href="/luv-ai/">Luv.AI Assistant</a>
               </div>
             </div>
 
@@ -140,11 +140,11 @@ export function renderGlobalLayout() {
               <h4 class="footer-heading">Explore</h4>
               <div class="footer-links">
                 <a href="/">Home</a>
-                <a href="/services">All Services</a>
-                <a href="/portfolio">Portfolio</a>
-                <a href="/about">About Us</a>
-                <a href="/pricing">Pricing & Packages</a>
-                <a href="/contact">Contact</a>
+                <a href="/services/">All Services</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/about/">About Us</a>
+                <a href="/pricing/">Pricing & Packages</a>
+                <a href="/contact/">Contact</a>
               </div>
             </div>
 

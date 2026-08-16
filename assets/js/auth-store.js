@@ -180,7 +180,7 @@ class AuthStore {
       }
 
       this.saveProfile(profile);
-      return { success: true, user: profile, redirectUrl: 'LUVITS_WorkFlow.html' };
+      return { success: true, user: profile, redirectUrl: '/workflow/' };
     }
 
     return { success: false, error: res.error || 'Invalid email or password. Please try again.' };
@@ -229,7 +229,7 @@ class AuthStore {
       return {
         success: true,
         data: res.data,
-        redirectUrl: 'LUVITS_WorkFlow.html',
+        redirectUrl: '/workflow/',
         requiresConfirmation: !res.data.session
       };
     }
@@ -238,7 +238,7 @@ class AuthStore {
   }
 
   /**
-   * Sign out and redirect to auth.html
+   * Sign out and redirect to /login/
    */
   async logout() {
     try {
@@ -247,7 +247,7 @@ class AuthStore {
       console.warn('Supabase sign out error:', e);
     }
     this.saveProfile(null);
-    window.location.href = 'auth.html';
+    window.location.href = '/login/';
   }
 
   /**
@@ -313,17 +313,17 @@ class AuthStore {
             <div class="dropdown-header">
               <div class="dropdown-user-name">${name}</div>
               <div class="dropdown-user-email">${email}</div>
-              <span class="badge ${isAdmin ? 'badge-gold' : 'badge-gold'}" style="font-size: 0.65rem; padding: 2px 6px; margin-top: 4px; display: inline-block;">
+              <span class="badge badge-gold" style="font-size: 0.65rem; padding: 2px 6px; margin-top: 4px; display: inline-block;">
                 ${isAdmin ? '👑 Administrator' : 'Verified Member'}
               </span>
             </div>
             ${isAdmin ? `
-            <a href="admin.html" class="dropdown-item" role="menuitem" style="color: #fbbf24; font-weight: 700; border-bottom: 1px solid var(--border-subtle); margin-bottom: 4px; padding-bottom: 8px;">
+            <a href="/admin/" class="dropdown-item" role="menuitem" style="color: #fbbf24; font-weight: 700; border-bottom: 1px solid var(--border-subtle); margin-bottom: 4px; padding-bottom: 8px;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               🛡️ Admin Console
             </a>
             ` : ''}
-            <a href="LUVITS_WorkFlow.html" class="dropdown-item" role="menuitem" style="color: var(--gold-light); font-weight: 600;">
+            <a href="/workflow/" class="dropdown-item" role="menuitem" style="color: var(--gold-light); font-weight: 600;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
               ⚡ LUVITS WorkFlow
             </a>
@@ -338,8 +338,8 @@ class AuthStore {
       this.bindDropdownEvents();
     } else {
       container.innerHTML = `
-        <a href="auth.html" class="btn btn-outline btn-sm">Log In</a>
-        <a href="signup.html" class="btn btn-gold btn-sm">Sign Up</a>
+        <a href="/login/" class="btn btn-outline btn-sm">Log In</a>
+        <a href="/signup/" class="btn btn-gold btn-sm">Sign Up</a>
       `;
     }
   }

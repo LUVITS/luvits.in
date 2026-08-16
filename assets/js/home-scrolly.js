@@ -104,7 +104,7 @@ class HighPerformanceScrollyEngine {
   async preloadAllFrames() {
     const supportsBitmap = typeof window.createImageBitmap === 'function';
 
-    // Priority 1: Load and decode Frame 0 (website_021.png) first for immediate display
+    // Priority 1: Load and decode Frame 0 (website_021.png) immediately for peak LCP
     const firstFrameSrc = `LUV/website_021.png`;
     try {
       if (supportsBitmap) {
@@ -122,7 +122,6 @@ class HighPerformanceScrollyEngine {
       this.canvas.classList.add('loaded');
       this.drawFrame(0);
     } catch (e) {
-      // Fallback
       const img = new Image();
       img.src = firstFrameSrc;
       img.onload = () => {
@@ -132,13 +131,42 @@ class HighPerformanceScrollyEngine {
       };
     }
 
-    // Priority 2: Asynchronously pre-decode all remaining 99 frames in parallel
+    // Priority 2: Progressive batched loading for remaining 99 frames (concurrency controlled)
+    const loadQueue = [];
     for (let i = 1; i < this.frameCount; i++) {
       const frameNum = this.startFrame + i;
       const frameStr = this.pad(frameNum, 3);
-      const src = `LUV/website_${frameStr}.png`;
+      loadQueue.push({ index: i, src: `LUV/website_${frameStr}.png` });
+    }
 
-      this.loadSingleFrame(i, src, supportsBitmap);
+    // Process initial scroll buffer (first 12 frames) immediately, remaining frames in idle batches
+    const immediateBuffer = loadQueue.splice(0, 12);
+    immediateBuffer.forEach(item => this.loadSingleFrame(item.index, item.src, supportsBitmap));
+
+    // Process remainder with throttled queue
+    const processRemaining = () => {
+      const concurrency = 6;
+      let active = 0;
+      let currentIndex = 0;
+
+      const next = () => {
+        while (active < concurrency && currentIndex < loadQueue.length) {
+          const item = loadQueue[currentIndex++];
+          active++;
+          this.loadSingleFrame(item.index, item.src, supportsBitmap).finally(() => {
+            active--;
+            next();
+          });
+        }
+      };
+
+      next();
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => processRemaining(), { timeout: 1500 });
+    } else {
+      setTimeout(processRemaining, 100);
     }
   }
 
