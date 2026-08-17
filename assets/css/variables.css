@@ -78,9 +78,11 @@
   --space-2xl: clamp(4rem, 3rem + 3vw, 6.25rem);
   --space-3xl: clamp(5.5rem, 4rem + 4.5vw, 8.5rem);
 
-  /* Layout Boundaries */
+  /* Layout Boundaries & Dynamic Viewport */
   --container-max: 1260px;
   --header-height: 80px;
+  --vh: 1vh;
+  --app-height: 100dvh;
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;

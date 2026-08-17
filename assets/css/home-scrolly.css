@@ -88,14 +88,18 @@ body.home-page .footer-bottom {
 }
 
 /* ==========================================================================
-   1. FIXED BACKGROUND CANVAS STAGE (GPU Hardware-Accelerated)
+   1. FIXED BACKGROUND CANVAS STAGE (GPU Hardware-Accelerated & Dynamic Viewport)
    ========================================================================== */
 .scrolly-background-stage {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  height: 100dvh;
+  max-height: 100dvh;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
@@ -111,8 +115,7 @@ body.home-page .footer-bottom {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
+  opacity: 1; /* Instant visibility to prevent any blank screen */
   transform: translateZ(0);
   will-change: contents;
 }
@@ -144,18 +147,23 @@ body.home-page .footer-bottom {
   pointer-events: none;
 }
 
-/* Fixed Overlay Viewport for Story Beats */
+/* Fixed Overlay Viewport for Story Beats (Auto-adapts to collapsing address bars) */
 .scrolly-overlay-viewport {
   position: fixed;
   inset: 0;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  height: 100dvh;
+  max-height: 100dvh;
   z-index: 2;
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: translateZ(0);
+  box-sizing: border-box;
 }
 
 /* ==========================================================================
@@ -587,27 +595,37 @@ body.home-page .footer-bottom {
 
 /* ==========================================================================
    6. MOBILE ULTRA-OPTIMIZED (Max width 768px)
-   Strictly positioned in bottom 38vh (below shirt collar at ~52vh)
+   Dynamic Viewport (100dvh) — Zero Bottom Clipping on Chrome/Safari/iOS
    ========================================================================== */
 @media (max-width: 768px) {
   .scrolly-scroll-track {
     height: 600vh;
   }
 
-  /* Anchor ALL story beats strictly to the bottom 38vh (safely below shirt collar) */
+  .scrolly-overlay-viewport {
+    height: 100vh !important;
+    height: calc(var(--vh, 1vh) * 100) !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    box-sizing: border-box !important;
+    padding-bottom: env(safe-area-inset-bottom, 8px) !important;
+  }
+
+  /* Anchor ALL story beats strictly inside the visible lower dynamic viewport */
   .story-beat {
-    left: 3.5vw !important;
-    right: 3.5vw !important;
-    width: 93vw !important;
+    left: 3vw !important;
+    right: 3vw !important;
+    width: 94vw !important;
     max-width: 440px !important;
     margin-inline: auto !important;
     top: auto !important;
-    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
-    max-height: 38vh !important;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    max-height: min(38dvh, 290px) !important;
     transform: translateY(12px) translateZ(0) !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
+    box-sizing: border-box !important;
   }
 
   .story-beat.is-active {
@@ -616,13 +634,17 @@ body.home-page .footer-bottom {
 
   /* Compact glass card styling */
   .scrolly-glass-card {
-    padding: 12px 14px !important;
+    padding: clamp(8px, 2.5vw, 12px) clamp(10px, 3vw, 14px) !important;
     background: rgba(6, 6, 8, 0.92) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
     border-radius: 12px !important;
-    border: 1px solid rgba(212, 175, 55, 0.20) !important;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.85) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.88) !important;
+    max-height: min(36dvh, 270px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
   }
 
   /* Compact Typography for Mobile */
@@ -633,14 +655,14 @@ body.home-page .footer-bottom {
   }
 
   .section-title {
-    font-size: 1.15rem !important;
+    font-size: clamp(1rem, 3.8vw, 1.15rem) !important;
     line-height: 1.2 !important;
     margin-top: 2px !important;
   }
 
   .gold-line {
     width: 28px !important;
-    margin-block: 4px !important;
+    margin-block: 3px !important;
     height: 1.5px !important;
   }
 
@@ -649,10 +671,10 @@ body.home-page .footer-bottom {
   .btn-gold,
   .btn-outline {
     font-size: 0.72rem !important;
-    padding: 7px 12px !important;
-    letter-spacing: 0.06em !important;
+    padding: 6px 12px !important;
+    letter-spacing: 0.05em !important;
     height: auto !important;
-    min-height: 32px !important;
+    min-height: 30px !important;
     gap: 4px !important;
   }
 
@@ -660,7 +682,7 @@ body.home-page .footer-bottom {
      BEAT 1 MOBILE (Welcome to LUVITS Hero Card)
      ------------------------------------------------------------------------ */
   .beat-intro .scrolly-glass-card {
-    padding: 14px 16px !important;
+    padding: 10px 14px !important;
     background: rgba(6, 6, 8, 0.92) !important;
     border: 1px solid rgba(212, 175, 55, 0.22) !important;
   }
@@ -677,7 +699,7 @@ body.home-page .footer-bottom {
   }
 
   .beat-intro .hero-headline {
-    font-size: 1.25rem !important;
+    font-size: clamp(1.1rem, 4vw, 1.25rem) !important;
     font-weight: 800 !important;
     line-height: 1.15 !important;
     letter-spacing: 0.02em !important;
@@ -685,17 +707,17 @@ body.home-page .footer-bottom {
   }
 
   .beat-intro .hero-gold-line {
-    width: 32px !important;
+    width: 30px !important;
     height: 1.5px !important;
-    margin-block: 4px 6px !important;
+    margin-block: 3px 5px !important;
     background: linear-gradient(90deg, #d4af37, transparent) !important;
   }
 
   .beat-intro .hero-lede {
-    font-size: 0.75rem !important;
+    font-size: 0.74rem !important;
     color: #a1a1aa !important;
-    line-height: 1.32 !important;
-    margin-block: 0 10px !important;
+    line-height: 1.3 !important;
+    margin-block: 0 8px !important;
   }
 
   .beat-intro .hero-actions {
@@ -739,7 +761,7 @@ body.home-page .footer-bottom {
 
   .beat-services-left {
     max-width: 100% !important;
-    gap: 6px !important;
+    gap: 4px !important;
   }
 
   .beat-services-left .scrolly-glass-card:first-child {
@@ -747,27 +769,26 @@ body.home-page .footer-bottom {
   }
 
   .beat-services-left .scrolly-glass-card:first-child p {
-    font-size: 0.74rem !important;
-    line-height: 1.25 !important;
+    font-size: 0.72rem !important;
+    line-height: 1.22 !important;
   }
 
   .beat-services .service-tile {
-    padding: 6px 12px !important;
+    padding: 5px 10px !important;
   }
 
   .beat-services .service-tile-title {
-    font-size: 0.84rem !important;
+    font-size: 0.82rem !important;
     margin-bottom: 1px !important;
   }
 
   .beat-services .service-tile-desc {
-    font-size: 0.7rem !important;
-    line-height: 1.2 !important;
+    font-size: 0.68rem !important;
+    line-height: 1.18 !important;
   }
 
   .beat-services-right {
     display: none !important;
-    /* Keep mobile concise so it stays below collar */
   }
 
   /* ------------------------------------------------------------------------
@@ -775,7 +796,7 @@ body.home-page .footer-bottom {
      ------------------------------------------------------------------------ */
   .portfolio-cards-stack {
     gap: 4px !important;
-    margin-block: 6px 8px !important;
+    margin-block: 5px 7px !important;
   }
 
   .portfolio-item-card {
@@ -783,53 +804,83 @@ body.home-page .footer-bottom {
   }
 
   .portfolio-item-card h4 {
-    font-size: 0.82rem !important;
+    font-size: 0.80rem !important;
   }
 
   .portfolio-item-card span {
-    font-size: 0.68rem !important;
+    font-size: 0.66rem !important;
   }
 
   /* ------------------------------------------------------------------------
      BEAT 4 MOBILE (LUV.AI)
      ------------------------------------------------------------------------ */
   .beat-ai .scrolly-glass-card p {
-    font-size: 0.74rem !important;
-    line-height: 1.25 !important;
-    margin-top: 4px !important;
+    font-size: 0.72rem !important;
+    line-height: 1.22 !important;
+    margin-top: 3px !important;
   }
 
   .ai-prompts-stack {
     gap: 4px !important;
-    margin-block: 6px !important;
+    margin-block: 5px !important;
   }
 
   .ai-prompt-chip {
     padding: 5px 8px !important;
-    font-size: 0.7rem !important;
-    gap: 6px !important;
+    font-size: 0.68rem !important;
+    gap: 5px !important;
   }
 
   .ai-prompt-chip .chip-icon {
-    font-size: 0.75rem !important;
+    font-size: 0.72rem !important;
   }
 
   /* ------------------------------------------------------------------------
      BEAT 5 MOBILE (Finale)
      ------------------------------------------------------------------------ */
   .beat-finale .scrolly-glass-card {
-    padding: 12px 14px !important;
+    padding: 10px 14px !important;
   }
 
   .beat-finale .cta-headline {
-    font-size: 1.22rem !important;
+    font-size: clamp(1.05rem, 3.8vw, 1.20rem) !important;
     line-height: 1.15 !important;
     margin-block: 2px 4px !important;
   }
 
   .beat-finale .cta-sub {
-    font-size: 0.76rem !important;
-    margin-bottom: 10px !important;
+    font-size: 0.74rem !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* Extra Small Screen Adaptations (320px to 380px: iPhone SE & Compact Foldables) */
+@media (max-width: 380px) {
+  .scrolly-glass-card {
+    padding: 8px 10px !important;
+    border-radius: 10px !important;
+  }
+
+  .section-title {
+    font-size: 0.95rem !important;
+  }
+
+  .beat-intro .hero-headline {
+    font-size: 1.05rem !important;
+  }
+
+  .beat-intro .hero-lede {
+    font-size: 0.68rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .btn,
+  .btn-gold,
+  .btn-outline {
+    font-size: 0.65rem !important;
+    padding: 5px 8px !important;
+    min-height: 28px !important;
+    height: 28px !important;
   }
 }
 

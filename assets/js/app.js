@@ -11,11 +11,28 @@ import { animationEngine } from './animation-engine.js';
 
 class LuvitsApp {
   constructor() {
+    this.initViewportMetrics();
     renderGlobalLayout();
     this.initHeader();
     this.initActiveRoute();
     this.initMobileNav();
     this.initAuth();
+  }
+
+  initViewportMetrics() {
+    const updateMetrics = () => {
+      const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight) * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      document.documentElement.style.setProperty('--app-height', `${vh * 100}px`);
+    };
+
+    updateMetrics();
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', updateMetrics, { passive: true });
+    }
+    window.addEventListener('resize', updateMetrics, { passive: true });
+    window.addEventListener('orientationchange', () => setTimeout(updateMetrics, 80), { passive: true });
   }
 
   initHeader() {

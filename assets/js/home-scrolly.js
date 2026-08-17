@@ -1,7 +1,8 @@
 /**
  * ==========================================================================
  * LUVITS - 60 FPS ULTRA-PERFORMANCE SCROLLYTELLING ENGINE
- * Hardware-Accelerated ImageBitmap Pipeline & Responsive Physics Scrubbing
+ * Hardware-Accelerated ImageBitmap Pipeline, Dynamic Viewport (100dvh)
+ * Universal Mobile/Desktop Responsive Framing & Fail-Safe Asset Loading
  * ==========================================================================
  */
 
@@ -48,6 +49,8 @@ class HighPerformanceScrollyEngine {
 
     this.renderLoopBound = this.renderLoop.bind(this);
 
+    this.initViewportMetrics();
+
     if (!this.reducedMotion) {
       this.init();
     } else {
@@ -61,17 +64,44 @@ class HighPerformanceScrollyEngine {
     return s;
   }
 
+  getFrameUrl(frameNum) {
+    const frameStr = this.pad(frameNum, 3);
+    return `LUV/website_${frameStr}.webp`;
+  }
+
+  initViewportMetrics() {
+    const updateMetrics = () => {
+      const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight) * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      document.documentElement.style.setProperty('--app-height', `${vh * 100}px`);
+    };
+
+    updateMetrics();
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', updateMetrics, { passive: true });
+    }
+    window.addEventListener('resize', updateMetrics, { passive: true });
+    window.addEventListener('orientationchange', () => setTimeout(updateMetrics, 80), { passive: true });
+  }
+
   init() {
     this.handleResize();
     this.preloadAllFrames();
 
-    window.addEventListener('resize', () => {
+    const debouncedResize = () => {
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
         this.handleResize();
         this.requestRender();
-      }, 60);
-    }, { passive: true });
+      }, 50);
+    };
+
+    window.addEventListener('resize', debouncedResize, { passive: true });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', debouncedResize, { passive: true });
+    }
+    window.addEventListener('orientationchange', () => setTimeout(debouncedResize, 80), { passive: true });
 
     // Smooth, zero-overhead passive scroll listener
     window.addEventListener('scroll', () => {
@@ -85,7 +115,7 @@ class HighPerformanceScrollyEngine {
   handleResize() {
     this.dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = window.innerWidth;
-    const h = window.innerHeight;
+    const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
     this.canvasWidth = Math.round(w * this.dpr);
     this.canvasHeight = Math.round(h * this.dpr);
@@ -98,6 +128,8 @@ class HighPerformanceScrollyEngine {
     // Redraw active frame immediately on resize
     if (this.currentRenderedIndex >= 0) {
       this.drawFrame(this.currentRenderedIndex);
+    } else if (this.frames[0]) {
+      this.drawFrame(0);
     }
   }
 
@@ -105,42 +137,55 @@ class HighPerformanceScrollyEngine {
     const supportsBitmap = typeof window.createImageBitmap === 'function';
 
     // Priority 1: Load and decode Frame 0 (website_004.webp) immediately for peak LCP
-    const firstFrameSrc = `LUV/website_004.webp`;
+    const firstFrameSrc = this.getFrameUrl(this.startFrame);
+    
+    // Fail-safe immediate HTMLImage element
+    const fallbackImg = new Image();
+    fallbackImg.crossOrigin = 'anonymous';
+    fallbackImg.decoding = 'async';
+    fallbackImg.src = firstFrameSrc;
+    fallbackImg.onload = () => {
+      if (!this.frames[0]) {
+        this.frames[0] = fallbackImg;
+        this.loadedCount++;
+        this.canvas.classList.add('loaded');
+        this.drawFrame(0);
+      }
+    };
+
     try {
       if (supportsBitmap) {
         const res = await fetch(firstFrameSrc);
-        const blob = await res.blob();
-        const bmp = await createImageBitmap(blob);
-        this.frames[0] = bmp;
+        if (res.ok) {
+          const blob = await res.blob();
+          const bmp = await createImageBitmap(blob);
+          this.frames[0] = bmp;
+          this.loadedCount++;
+          this.canvas.classList.add('loaded');
+          this.drawFrame(0);
+        }
       } else {
-        const img = new Image();
-        img.src = firstFrameSrc;
-        await img.decode();
-        this.frames[0] = img;
+        if (fallbackImg.decode) {
+          await fallbackImg.decode();
+          this.frames[0] = fallbackImg;
+          this.loadedCount++;
+          this.canvas.classList.add('loaded');
+          this.drawFrame(0);
+        }
       }
-      this.loadedCount++;
-      this.canvas.classList.add('loaded');
-      this.drawFrame(0);
     } catch (e) {
-      const img = new Image();
-      img.src = firstFrameSrc;
-      img.onload = () => {
-        this.frames[0] = img;
-        this.canvas.classList.add('loaded');
-        this.drawFrame(0);
-      };
+      // Fallback img handles it via onload
     }
 
     // Priority 2: Progressive batched loading for remaining 236 WebP frames
     const loadQueue = [];
     for (let i = 1; i < this.frameCount; i++) {
       const frameNum = this.startFrame + i;
-      const frameStr = this.pad(frameNum, 3);
-      loadQueue.push({ index: i, src: `LUV/website_${frameStr}.webp` });
+      loadQueue.push({ index: i, src: this.getFrameUrl(frameNum) });
     }
 
-    // Process initial scroll buffer (first 20 frames) immediately, remaining frames in idle batches
-    const immediateBuffer = loadQueue.splice(0, 20);
+    // Process initial scroll buffer (first 24 frames) with high priority
+    const immediateBuffer = loadQueue.splice(0, 24);
     immediateBuffer.forEach(item => this.loadSingleFrame(item.index, item.src, supportsBitmap));
 
     // Process remainder with throttled queue
@@ -166,7 +211,7 @@ class HighPerformanceScrollyEngine {
     if ('requestIdleCallback' in window) {
       requestIdleCallback(() => processRemaining(), { timeout: 1200 });
     } else {
-      setTimeout(processRemaining, 80);
+      setTimeout(processRemaining, 60);
     }
   }
 
@@ -174,30 +219,54 @@ class HighPerformanceScrollyEngine {
     try {
       if (supportsBitmap) {
         const res = await fetch(src);
-        const blob = await res.blob();
-        const bmp = await createImageBitmap(blob);
-        this.frames[index] = bmp;
-      } else {
-        const img = new Image();
-        img.src = src;
-        if (img.decode) {
-          await img.decode();
+        if (res.ok) {
+          const blob = await res.blob();
+          const bmp = await createImageBitmap(blob);
+          this.frames[index] = bmp;
+          this.loadedCount++;
+          if (index === 0 && !this.canvas.classList.contains('loaded')) {
+            this.canvas.classList.add('loaded');
+            this.drawFrame(0);
+          }
+          return;
         }
-        this.frames[index] = img;
       }
     } catch (e) {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        this.frames[index] = img;
-      };
+      // Fall through to Image fallback
     }
-    this.loadedCount++;
+
+    // Reliable fallback for Image element
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.decoding = 'async';
+    img.src = src;
+    if (img.decode) {
+      try {
+        await img.decode();
+        this.frames[index] = img;
+        this.loadedCount++;
+        if (index === 0 && !this.canvas.classList.contains('loaded')) {
+          this.canvas.classList.add('loaded');
+          this.drawFrame(0);
+        }
+        return;
+      } catch (e) {}
+    }
+
+    img.onload = () => {
+      this.frames[index] = img;
+      this.loadedCount++;
+      if (index === 0 && !this.canvas.classList.contains('loaded')) {
+        this.canvas.classList.add('loaded');
+        this.drawFrame(0);
+      }
+    };
   }
 
   initReducedMotion() {
     const img = new Image();
-    img.src = `LUV/website_004.webp`;
+    img.crossOrigin = 'anonymous';
+    img.src = this.getFrameUrl(this.startFrame);
     img.onload = () => {
       this.frames[0] = img;
       this.canvas.classList.add('loaded');
@@ -209,9 +278,10 @@ class HighPerformanceScrollyEngine {
 
   onScroll() {
     const scrollTrack = document.querySelector('.scrolly-scroll-track');
+    const viewportH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     const scrollMax = scrollTrack
-      ? scrollTrack.offsetHeight - window.innerHeight
-      : document.documentElement.scrollHeight - window.innerHeight;
+      ? scrollTrack.offsetHeight - viewportH
+      : document.documentElement.scrollHeight - viewportH;
 
     if (scrollMax > 0) {
       const currentY = window.scrollY || window.pageYOffset;
@@ -289,13 +359,13 @@ class HighPerformanceScrollyEngine {
     let drawW, drawH, offX, offY;
 
     if (isMobile) {
-      // Mobile: Scale so full upper body & head are framed below mobile header
-      const targetH = ch * 0.74;
+      // Mobile: Scale character so head & upper torso are framed in upper 60% above the glass cards
+      const targetH = ch * 0.68;
       const scale = targetH / fh;
       drawW = fw * scale;
       drawH = fh * scale;
       offX = (cw - drawW) * 0.5;
-      offY = Math.round(56 * this.dpr);
+      offY = Math.round(50 * this.dpr);
     } else {
       // Desktop / Widescreen: Scale so head & feather sit safely below header with full character visibility
       const headerOffset = Math.round(62 * this.dpr);
@@ -319,9 +389,10 @@ class HighPerformanceScrollyEngine {
 
   updateStoryBeats(progress) {
     const scrollTrack = document.querySelector('.scrolly-scroll-track');
+    const viewportH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     const scrollMax = scrollTrack
-      ? scrollTrack.offsetHeight - window.innerHeight
-      : document.documentElement.scrollHeight - window.innerHeight;
+      ? scrollTrack.offsetHeight - viewportH
+      : document.documentElement.scrollHeight - viewportH;
     const currentY = window.scrollY || window.pageYOffset;
     
     // When user scrolls near or into the footer, fade out all fixed overlay cards
