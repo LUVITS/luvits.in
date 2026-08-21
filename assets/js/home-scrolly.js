@@ -113,7 +113,8 @@ class HighPerformanceScrollyEngine {
   }
 
   handleResize() {
-    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const isMobile = window.innerWidth <= 768;
+    this.dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 2);
     const w = window.innerWidth;
     const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
@@ -124,6 +125,10 @@ class HighPerformanceScrollyEngine {
     this.canvas.height = this.canvasHeight;
     this.canvas.style.width = `${w}px`;
     this.canvas.style.height = `${h}px`;
+
+    // Configure context performance settings
+    this.ctx.imageSmoothingEnabled = true;
+    this.ctx.imageSmoothingQuality = isMobile ? 'low' : 'medium';
 
     // Redraw active frame immediately on resize
     if (this.currentRenderedIndex >= 0) {
@@ -362,10 +367,10 @@ class HighPerformanceScrollyEngine {
       // Mobile: Scale character so head & upper torso are framed in upper 60% above the glass cards
       const targetH = ch * 0.68;
       const scale = targetH / fh;
-      drawW = fw * scale;
-      drawH = fh * scale;
-      offX = (cw - drawW) * 0.5;
-      offY = Math.round(50 * this.dpr);
+      drawW = Math.round(fw * scale);
+      drawH = Math.round(fh * scale);
+      offX = Math.round((cw - drawW) * 0.5);
+      offY = Math.round(48 * this.dpr);
     } else {
       // Desktop / Widescreen: Scale so head & feather sit safely below header with full character visibility
       const headerOffset = Math.round(62 * this.dpr);
@@ -373,10 +378,10 @@ class HighPerformanceScrollyEngine {
       const availableW = cw;
 
       const scale = Math.min(availableW / fw, availableH / fh);
-      drawW = fw * scale;
-      drawH = fh * scale;
-      offX = (cw - drawW) * 0.5;
-      offY = headerOffset + (availableH - drawH) * 0.5;
+      drawW = Math.round(fw * scale);
+      drawH = Math.round(fh * scale);
+      offX = Math.round((cw - drawW) * 0.5);
+      offY = Math.round(headerOffset + (availableH - drawH) * 0.5);
     }
 
     // Clear canvas with deep black before blitting

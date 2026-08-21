@@ -99,28 +99,51 @@
         </div>
       </section>
 
-      <!-- EXAMPLE QUESTIONS -->
-      <section class="luxury-card anime-reveal content-auto" style="margin-bottom: var(--space-3xl); padding: var(--space-xl);">
-        <span class="eyebrow" style="color: var(--ai-purple);">EXAMPLE PROMPTS</span>
-        <h2 style="font-size: var(--fs-2xl); margin-block: 8px;">EXAMPLE QUESTIONS</h2>
-        <div class="grid-2" style="gap: 12px; margin-top: 1rem;">
-          <div class="ai-chat-bubble">
+      <!-- INTERACTIVE LUV.AI ADVISOR PLAYGROUND -->
+      <section class="luxury-card luv-ai-card anime-reveal content-auto" style="margin-bottom: var(--space-3xl); padding: var(--space-xl);">
+        <div class="section-header text-left" style="margin-bottom: var(--space-md);">
+          <span class="eyebrow" style="color: var(--ai-purple);">INTERACTIVE ADVISOR</span>
+          <h2 style="font-size: var(--fs-2xl); margin-block: 6px;">ASK LUV.AI A BUSINESS STRATEGY QUESTION</h2>
+          <p style="font-size: var(--fs-sm); color: var(--text-secondary);">
+            Tap an example question below or type your business challenge to receive a structured strategic breakdown.
+          </p>
+          <div class="gold-line"></div>
+        </div>
+
+        <div class="grid-2" style="gap: 10px; margin-bottom: var(--space-lg);">
+          <button type="button" class="ai-chat-bubble prompt-btn" data-question="How can I improve my marketplace sales?" style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.25); text-align: left; cursor: pointer; padding: 12px 14px; border-radius: 8px; transition: all 0.2s ease;">
             <span class="bubble-icon">💬</span>
-            <div class="bubble-text">"How can I improve my marketplace sales?"</div>
-          </div>
-          <div class="ai-chat-bubble">
+            <span class="bubble-text" style="font-size: var(--fs-xs); color: #FFFFFF; font-weight: 600;">"How can I improve my marketplace sales?"</span>
+          </button>
+          <button type="button" class="ai-chat-bubble prompt-btn" data-question="How should I position my product against big brands?" style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.25); text-align: left; cursor: pointer; padding: 12px 14px; border-radius: 8px; transition: all 0.2s ease;">
             <span class="bubble-icon">💬</span>
-            <div class="bubble-text">"How should I position my product?"</div>
-          </div>
-          <div class="ai-chat-bubble">
+            <span class="bubble-text" style="font-size: var(--fs-xs); color: #FFFFFF; font-weight: 600;">"How should I position my product?"</span>
+          </button>
+          <button type="button" class="ai-chat-bubble prompt-btn" data-question="Which product category has the highest export margins?" style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.25); text-align: left; cursor: pointer; padding: 12px 14px; border-radius: 8px; transition: all 0.2s ease;">
             <span class="bubble-icon">💬</span>
-            <div class="bubble-text">"Which product should I focus on?"</div>
-          </div>
-          <div class="ai-chat-bubble">
+            <span class="bubble-text" style="font-size: var(--fs-xs); color: #FFFFFF; font-weight: 600;">"Which product should I focus on for export?"</span>
+          </button>
+          <button type="button" class="ai-chat-bubble prompt-btn" data-question="What website optimizations yield the highest conversions?" style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.25); text-align: left; cursor: pointer; padding: 12px 14px; border-radius: 8px; transition: all 0.2s ease;">
             <span class="bubble-icon">💬</span>
-            <div class="bubble-text">"What should I improve on my website?"</div>
+            <span class="bubble-text" style="font-size: var(--fs-xs); color: #FFFFFF; font-weight: 600;">"What should I improve on my website?"</span>
+          </button>
+        </div>
+
+        <!-- Interactive AI Chat Box -->
+        <div id="ai-chat-container" style="background: rgba(6, 6, 8, 0.85); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; padding: 16px; margin-bottom: var(--space-md);">
+          <div id="ai-response-area" style="min-height: 100px; font-size: var(--fs-sm); color: #e4e4e7; line-height: 1.6;">
+            <div style="color: var(--text-muted); font-style: italic;">
+              ⚡ Select one of the strategic questions above or type below to generate an instant strategic assessment framework.
+            </div>
           </div>
         </div>
+
+        <form id="ai-input-form" style="display: flex; gap: 8px;">
+          <input type="text" id="ai-user-query" class="luxury-input" placeholder="Type a business or marketplace question..." style="flex: 1;" />
+          <button type="submit" class="btn btn-gold btn-sm" style="flex-shrink: 0; min-height: 44px; padding: 0 20px;">
+            <span>ASK AI →</span>
+          </button>
+        </form>
       </section>
 
       <!-- POSITIONING & CTA -->
@@ -133,12 +156,111 @@
         <p style="font-size: var(--fs-xs); color: var(--text-secondary); max-width: 540px; margin: 0 auto 1.5rem auto;">
           Luv.AI provides structured thinking frameworks to augment your decision making, working alongside experienced business strategists.
         </p>
-        <a href="/contact/" class="btn btn-gold">TRY LUVITS SERVICES &amp; LUV.AI →</a>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <a href="/contact/" class="btn btn-gold">TRY LUVITS SERVICES &amp; LUV.AI →</a>
+          <a href="https://wa.me/916359435595?text=Hello%20Jay%2C%20I%20tested%20Luv.AI%20and%20would%20like%20to%20discuss%20strategic%20consulting%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            <span>💬 DISCUSS WITH JAY VAGHELA</span>
+          </a>
+        </div>
       </section>
     </div>
   </main>
 
   <div data-global-footer></div>
   <script type="module" src="../assets/js/app.js"></script>
+  <script type="module">
+    const knowledgeBase = {
+      "How can I improve my marketplace sales?": {
+        title: "STRATEGIC DIAGNOSTIC: MARKETPLACE ACCELERATION",
+        points: [
+          "<strong>1. Listing Conversion Rate (CTR & CVR):</strong> Audit hero main-image compliance, 7-image storytelling infographic sequence, and A+ / EBC comparison charts.",
+          "<strong>2. Keyword & Indexing Depth:</strong> Run high-relevancy keyword extraction (Helium 10 Cerebro / Magnet) to capture long-tail organic search volume.",
+          "<strong>3. Advertising Efficiency (TACOS / ACOS):</strong> Structure exact-match campaign defense on branded keywords and isolate high-converting search terms.",
+          "<strong>4. Buy Box & Inventory Buffer:</strong> Ensure minimum 45-day warehouse safety stock to avoid rank penalization from stockouts."
+        ],
+        cta: "Need a full marketplace audit? Book an Executive Strategy Session with Jay Vaghela."
+      },
+      "How should I position my product against big brands?": {
+        title: "STRATEGIC DIAGNOSTIC: BRAND DIFFERENTIATION & POSITIONING",
+        points: [
+          "<strong>1. Identify Unserved Customer Gaps:</strong> Analyze 2-star & 3-star reviews of market leaders to identify recurring pain points and design flaws.",
+          "<strong>2. Premium Visual Identity:</strong> High-end packaging aesthetics, clear value proposition, and luxury brand assets elevate perceived value.",
+          "<strong>3. Niche Audience Hyper-Focus:</strong> Do not target 'everyone'; win a dedicated micro-niche before expanding horizontally.",
+          "<strong>4. Direct Customer Connection:</strong> Use D2C channels and custom inserts to build brand affinity that marketplaces cannot replicate."
+        ],
+        cta: "Ready to turn your product into an equity brand? Explore LUVITS Brand Building."
+      },
+      "Which product category has the highest export margins?": {
+        title: "STRATEGIC DIAGNOSTIC: CROSS-BORDER & EXPORT MARGINS",
+        points: [
+          "<strong>1. Weight-to-Value Ratio:</strong> Focus on compact, high-value goods (e.g. specialized apparel, organic wellness, precision tools) with low dimensional freight costs.",
+          "<strong>2. Regulatory & Duty Structure:</strong> Verify HS Code classifications and US / EU compliance certificates before scaling production.",
+          "<strong>3. Amazon USA / FBA Arbitrage:</strong> Products sourced in India and launched in the USA typically command 3x-5x realization when brand equity is established.",
+          "<strong>4. Logistics & Warehousing:</strong> Utilize consolidated sea freight for base stock and express air courier for rapid restocking."
+        ],
+        cta: "Plan your Amazon USA & Global Export roadmap with LUVITS WorkFlow."
+      },
+      "What website optimizations yield the highest conversions?": {
+        title: "STRATEGIC DIAGNOSTIC: D2C & DIGITAL CONVERSION ENGINE",
+        points: [
+          "<strong>1. Page Load Velocity:</strong> Ensure sub-1.2s First Contentful Paint with WebP assets and lightweight DOM architecture.",
+          "<strong>2. Frictionless Checkout Flow:</strong> Implement 1-click mobile checkouts (UPI, Apple Pay, Cards) and transparent shipping timelines.",
+          "<strong>3. Social Proof & Trust Architecture:</strong> Display verified customer reviews, SSL trust seals, and real brand storytelling.",
+          "<strong>4. Dynamic Mobile Viewport:</strong> Ensure zero layout shifts across collapsing mobile browser toolbars (100dvh compliance)."
+        ],
+        cta: "Explore LUVITS High-Performance Web Development packages (Starting ₹6,999)."
+      }
+    };
+
+    function displayAiResponse(q) {
+      const respArea = document.getElementById('ai-response-area');
+      const data = knowledgeBase[q] || {
+        title: `STRATEGIC ASSESSMENT FOR: "${q}"`,
+        points: [
+          "<strong>1. Situation Analysis:</strong> Deconstruct core unit economics, acquisition costs, and customer retention metrics.",
+          "<strong>2. Strategic Roadmap:</strong> Implement a phased 30-60-90 day execution plan focusing on top revenue-generating levers.",
+          "<strong>3. Operational Toolset:</strong> Leverage verified software tools from the LUVITS directory to automate routine management."
+        ],
+        cta: "Discuss this exact objective 1-on-1 with Founder Jay Vaghela."
+      };
+
+      respArea.innerHTML = `
+        <div style="margin-bottom: 8px;">
+          <span style="font-size: 0.72rem; color: #a78bfa; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">${data.title}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+          ${data.points.map(p => `<div style="background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px; border-left: 2px solid var(--gold-primary);">${p}</div>`).join('')}
+        </div>
+        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 600;">${data.cta}</span>
+          <a href="https://wa.me/916359435595?text=Hello%20Jay%2C%20I%20would%20like%20to%20discuss%3A%20${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm" style="padding: 4px 12px; font-size: 0.75rem;">
+            <span>💬 Chat on WhatsApp →</span>
+          </a>
+        </div>
+      `;
+    }
+
+    document.querySelectorAll('.prompt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q = btn.getAttribute('data-question');
+        displayAiResponse(q);
+        document.getElementById('ai-chat-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+
+    const form = document.getElementById('ai-input-form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = document.getElementById('ai-user-query');
+        const q = (input.value || '').trim();
+        if (q) {
+          displayAiResponse(q);
+          input.value = '';
+          document.getElementById('ai-chat-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    }
+  </script>
 </body>
 </html>

@@ -119,7 +119,6 @@ class LuvitsApp {
 
 // Immediate execution & safety wrapper
 function startApp() {
-  renderGlobalLayout();
   window.luvitsApp = new LuvitsApp();
 }
 
