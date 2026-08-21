@@ -18,7 +18,8 @@ import {
   supabaseGetMyRole,
   supabaseCheckIsAdmin,
   supabaseGetWorkflowPreferences,
-  supabaseSaveWorkflowPreferences
+  supabaseSaveWorkflowPreferences,
+  supabaseRegisterRealUser
 } from './supabase-config.js';
 
 class AuthStore {
@@ -66,6 +67,9 @@ class AuthStore {
         status: userData.status || 'active'
       };
       localStorage.setItem(this.storageKey, JSON.stringify(this.currentUser));
+      try {
+        supabaseRegisterRealUser(this.currentUser);
+      } catch (e) {}
     }
     this.notifyStateChange();
   }

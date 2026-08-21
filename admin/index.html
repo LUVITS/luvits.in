@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Admin Console | LUVITS — Secure Management Portal</title>
-  <meta name="description" content="Secure LUVITS Administrator Console for verified user account management, access controls, and prescribed software directory." />
+  <title>Admin Console | LUVITS — Enterprise Client &amp; Workflow Portal</title>
+  <meta name="description" content="Secure LUVITS Administrator Console for verified enterprise client management, access controls, and prescribed software directory." />
   <meta name="robots" content="noindex, nofollow" />
   <link rel="canonical" href="https://luvits.in/admin/" />
   
@@ -24,7 +24,7 @@
   <style>
     .admin-kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: var(--space-md);
       margin-bottom: var(--space-xl);
     }
@@ -34,6 +34,18 @@
       border-radius: var(--radius-md);
       padding: var(--space-lg);
       transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+    .admin-kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+      opacity: 0.6;
     }
     .admin-kpi-card:hover {
       border-color: var(--border-gold-subtle);
@@ -147,6 +159,25 @@
       border: 1px solid var(--border-subtle);
       color: var(--text-secondary);
     }
+    .whatsapp-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #25D366;
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(37, 211, 102, 0.1);
+      border: 1px solid rgba(37, 211, 102, 0.25);
+      transition: all var(--transition-fast);
+    }
+    .whatsapp-chip:hover {
+      background: rgba(37, 211, 102, 0.2);
+      border-color: #25D366;
+      color: #fff;
+    }
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -170,7 +201,7 @@
       border: 1px solid var(--border-gold-subtle);
       border-radius: var(--radius-lg);
       padding: var(--space-xl);
-      max-width: 560px;
+      max-width: 600px;
       width: 100%;
       box-shadow: var(--shadow-luxury);
       max-height: 90vh;
@@ -182,13 +213,13 @@
   <div data-global-header></div>
 
   <main id="main-content" style="padding-top: calc(var(--header-height) + var(--space-lg)); padding-bottom: var(--space-3xl); min-height: 85vh;">
-    <div class="container" style="max-width: 1180px;">
+    <div class="container" style="max-width: 1260px;">
 
       <!-- Access Verification Loading State -->
       <div id="admin-auth-loading" class="luxury-card text-center" style="padding: var(--space-3xl) var(--space-lg); margin-top: var(--space-xl);">
         <div class="spinner" style="width: 32px; height: 32px; border: 3px solid rgba(212,175,55,0.2); border-top-color: var(--gold-primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;"></div>
-        <h2 style="font-size: var(--fs-xl); color: var(--gold-light);">Verifying Administrator Credentials...</h2>
-        <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 6px;">Validating database role and permissions via Supabase RLS.</p>
+        <h2 style="font-size: var(--fs-xl); color: var(--gold-light);">Authenticating Administrator Session...</h2>
+        <p style="font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 6px;">Validating database role, verified client registry, and access credentials.</p>
       </div>
 
       <!-- Authenticated Admin Content Section -->
@@ -199,16 +230,16 @@
           <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
             <div>
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px;">RESTRICTED AREA</span>
-                <span id="admin-user-tag" style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 700;">ADMINISTRATOR CONSOLE</span>
+                <span class="badge badge-gold" style="font-size: 0.7rem; padding: 2px 8px;">SUPER ADMINISTRATOR</span>
+                <span id="admin-user-tag" style="font-size: var(--fs-xs); color: var(--gold-light); font-weight: 700;">FOUNDER CONSOLE</span>
               </div>
-              <h1 style="font-size: var(--fs-3xl); margin-top: 2px; letter-spacing: -0.01em;">LUVITS ADMIN CONSOLE</h1>
-              <p style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; max-width: 600px;">
-                Manage verified user accounts, access controls, and prescribed software directory.
+              <h1 style="font-size: var(--fs-3xl); margin-top: 2px; letter-spacing: -0.01em;">LUVITS EXECUTIVE ADMIN CONSOLE</h1>
+              <p style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; max-width: 700px;">
+                Live verified client accounts, operational workflow preferences, direct communications, and prescribed software directory.
               </p>
             </div>
             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-              <a href="/workflow/" class="btn btn-gold btn-sm" title="View Tool Finder as Member">
+              <a href="/workflow/" class="btn btn-gold btn-sm" title="View Tool Finder as Client">
                 ⚡ Open Tool Finder
               </a>
               <button id="admin-logout-btn" class="btn btn-outline btn-sm" title="Sign out">
@@ -221,12 +252,12 @@
         <!-- Global Alert Message Box -->
         <div id="admin-alert" class="hidden" style="padding: 12px 16px; border-radius: var(--radius-sm); font-size: var(--fs-xs); margin-bottom: var(--space-lg);"></div>
 
-        <!-- Summary KPI Metric Cards -->
+        <!-- Summary KPI Metric Cards (Real Dynamic Counts) -->
         <div class="admin-kpi-grid">
           <div class="admin-kpi-card">
-            <span class="input-label" style="font-size: 0.7rem;">Total Registered Users</span>
+            <span class="input-label" style="font-size: 0.7rem;">Total Registered Clients</span>
             <div class="admin-kpi-num" id="kpi-total-users">--</div>
-            <span style="font-size: var(--fs-xs); color: var(--text-muted);">Verified Member Profiles</span>
+            <span style="font-size: var(--fs-xs); color: var(--text-muted);" id="kpi-users-sub">Verified Enterprise Accounts</span>
           </div>
           <div class="admin-kpi-card">
             <span class="input-label" style="font-size: 0.7rem;">Active / Suspended</span>
@@ -234,14 +265,14 @@
             <span style="font-size: var(--fs-xs); color: var(--text-muted);" id="kpi-active-sub">Accounts in Good Standing</span>
           </div>
           <div class="admin-kpi-card">
-            <span class="input-label" style="font-size: 0.7rem;">Saved Preferences</span>
+            <span class="input-label" style="font-size: 0.7rem;">Saved Tool Selections</span>
             <div class="admin-kpi-num" id="kpi-total-prefs">--</div>
-            <span style="font-size: var(--fs-xs); color: var(--text-muted);">Active Tool Selections</span>
+            <span style="font-size: var(--fs-xs); color: var(--text-muted);">Active Workflow Configurations</span>
           </div>
           <div class="admin-kpi-card">
-            <span class="input-label" style="font-size: 0.7rem;">Prescribed Tools</span>
+            <span class="input-label" style="font-size: 0.7rem;">Prescribed Directory Tools</span>
             <div class="admin-kpi-num" id="kpi-total-tools">--</div>
-            <span style="font-size: var(--fs-xs); color: var(--text-muted);" id="kpi-tools-sub">Active Catalog Tools</span>
+            <span style="font-size: var(--fs-xs); color: var(--text-muted);" id="kpi-tools-sub">Active Global Software</span>
           </div>
         </div>
 
@@ -249,7 +280,7 @@
         <div class="admin-tabs-nav" role="tablist">
           <button class="admin-tab-btn is-active" id="tab-users-btn" role="tab" aria-selected="true" aria-controls="tab-pane-users">
             <span>👥</span>
-            <span>User Accounts &amp; Access</span>
+            <span>Client Accounts &amp; Access Controls</span>
           </button>
           <button class="admin-tab-btn" id="tab-tools-btn" role="tab" aria-selected="false" aria-controls="tab-pane-tools">
             <span>🛠️</span>
@@ -264,19 +295,44 @@
           
           <div class="luxury-card" style="padding: var(--space-lg) var(--space-xl);">
             
-            <!-- Filters Bar -->
+            <!-- Filters & Actions Bar -->
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-md);">
               <div style="display: flex; gap: 10px; flex-wrap: wrap; flex: 1;">
-                <input type="text" id="user-search-input" class="luxury-input" placeholder="🔍 Search by name, email, business, or city..." style="max-width: 380px; padding: 0.75rem 1rem;" />
-                <select id="user-status-filter" class="luxury-select" style="max-width: 180px; padding: 0.75rem 1rem;">
-                  <option value="ALL">All Account Statuses</option>
+                <input type="text" id="user-search-input" class="luxury-input" placeholder="🔍 Search name, email, phone, business, city, tool..." style="max-width: 340px; padding: 0.75rem 1rem;" />
+                <select id="user-status-filter" class="luxury-select" style="max-width: 170px; padding: 0.75rem 1rem;">
+                  <option value="ALL">All Statuses</option>
                   <option value="active">Active Only</option>
                   <option value="suspended">Suspended Only</option>
                 </select>
+                <select id="user-role-filter" class="luxury-select" style="max-width: 150px; padding: 0.75rem 1rem;">
+                  <option value="ALL">All Roles</option>
+                  <option value="admin">Admins</option>
+                  <option value="user">Clients</option>
+                </select>
+                <select id="user-phase-filter" class="luxury-select" style="max-width: 190px; padding: 0.75rem 1rem;">
+                  <option value="ALL">All Workflow Phases</option>
+                  <option value="Product Research">Product Research</option>
+                  <option value="Supplier Selection">Supplier Selection</option>
+                  <option value="Sample Approval">Sample Approval</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Quality Inspection">Quality Inspection</option>
+                  <option value="Export">Export</option>
+                  <option value="USA Warehouse">USA Warehouse</option>
+                  <option value="Amazon USA Launch">Amazon USA Launch</option>
+                  <option value="Business Scaling">Business Scaling</option>
+                </select>
               </div>
-              <button id="refresh-users-btn" class="btn btn-outline btn-sm">
-                🔄 Refresh Users
-              </button>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button id="add-user-btn" class="btn btn-gold btn-sm" title="Register a new verified client account">
+                  ➕ Add Client
+                </button>
+                <button id="export-users-btn" class="btn btn-outline btn-sm" title="Export client accounts to CSV spreadsheet">
+                  📥 Export CSV
+                </button>
+                <button id="refresh-users-btn" class="btn btn-outline btn-sm" title="Refresh client list">
+                  🔄 Refresh
+                </button>
+              </div>
             </div>
 
             <!-- Users Data Table -->
@@ -284,19 +340,20 @@
               <table class="admin-table" id="users-table">
                 <thead>
                   <tr>
-                    <th>User &amp; Email</th>
-                    <th>Business</th>
+                    <th>Client &amp; Contact</th>
+                    <th>Business / Enterprise</th>
                     <th>Location</th>
                     <th>Role</th>
-                    <th>Saved Tool</th>
+                    <th>Active Workflow &amp; Tool</th>
+                    <th>Joined</th>
                     <th>Status</th>
                     <th style="text-align: right;">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="users-table-body">
                   <tr>
-                    <td colspan="7" class="text-center" style="padding: 2rem; color: var(--text-muted);">
-                      Loading users from Supabase...
+                    <td colspan="8" class="text-center" style="padding: 2rem; color: var(--text-muted);">
+                      Loading verified accounts...
                     </td>
                   </tr>
                 </tbody>
@@ -331,9 +388,14 @@
                   <option value="Business Scaling">Business Scaling</option>
                 </select>
               </div>
-              <button id="add-tool-btn" class="btn btn-gold btn-sm">
-                ➕ Add New Tool
-              </button>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button id="add-tool-btn" class="btn btn-gold btn-sm">
+                  ➕ Add New Tool
+                </button>
+                <button id="export-tools-btn" class="btn btn-outline btn-sm" title="Export tools directory to CSV spreadsheet">
+                  📥 Export CSV
+                </button>
+              </div>
             </div>
 
             <!-- Tools Data Table -->
@@ -352,7 +414,7 @@
                 <tbody id="tools-table-body">
                   <tr>
                     <td colspan="6" class="text-center" style="padding: 2rem; color: var(--text-muted);">
-                      Loading tools from Supabase...
+                      Loading prescribed tools...
                     </td>
                   </tr>
                 </tbody>
@@ -369,23 +431,106 @@
   </main>
 
   <!-- ====================================================
-       MODAL 1: USER DETAILS MODAL (NON-SENSITIVE)
+       MODAL 1: USER DETAILS MODAL (FULL VERIFIED PROFILE)
        ==================================================== -->
   <div id="user-detail-modal" class="modal-backdrop" role="dialog" aria-modal="true">
     <div class="modal-dialog">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
-        <h3 style="font-size: var(--fs-lg); color: var(--gold-light); font-family: var(--font-display);">User Account Profile</h3>
+        <h3 style="font-size: var(--fs-lg); color: var(--gold-light); font-family: var(--font-display);">Client Account Profile</h3>
         <button type="button" class="btn btn-outline btn-sm" id="close-user-modal-btn" style="padding: 4px 8px;">✕</button>
       </div>
 
-      <div id="user-modal-content" style="display: flex; flex-direction: column; gap: 12px; font-size: var(--fs-xs);">
+      <div id="user-modal-content" style="display: flex; flex-direction: column; gap: 14px; font-size: var(--fs-xs);">
         <!-- Populated dynamically -->
       </div>
     </div>
   </div>
 
   <!-- ====================================================
-       MODAL 2: ADD / EDIT TOOL MODAL
+       MODAL 2: ADD NEW CLIENT ACCOUNT MODAL
+       ==================================================== -->
+  <div id="add-user-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+        <h3 style="font-size: var(--fs-lg); color: var(--gold-light); font-family: var(--font-display);">Provision New Client Account</h3>
+        <button type="button" class="btn btn-outline btn-sm" id="close-add-user-modal-btn" style="padding: 4px 8px;">✕</button>
+      </div>
+
+      <form id="add-user-form" novalidate>
+        <div class="form-group">
+          <label for="new-user-name" class="input-label">Full Name *</label>
+          <input type="text" id="new-user-name" class="luxury-input" placeholder="e.g. Vikram Singhania" required />
+        </div>
+
+        <div class="grid-2" style="gap: 10px; margin-bottom: var(--space-md);">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="new-user-email" class="input-label">Business Email *</label>
+            <input type="email" id="new-user-email" class="luxury-input" placeholder="vikram@singhaniagroup.com" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="new-user-phone" class="input-label">Mobile / WhatsApp *</label>
+            <div style="display: flex; gap: 6px;">
+              <select class="luxury-select" id="new-user-country-code" style="width: 85px; padding: 0.85rem 0.3rem;">
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+971">🇦🇪 +971</option>
+              </select>
+              <input type="tel" id="new-user-phone" class="luxury-input" placeholder="98251 00000" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="new-user-business" class="input-label">Enterprise / Brand Name *</label>
+          <input type="text" id="new-user-business" class="luxury-input" placeholder="Singhania Textiles &amp; Global Exports" required />
+        </div>
+
+        <div class="grid-3" style="gap: 8px; margin-bottom: var(--space-md);">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="new-user-city" class="input-label">City *</label>
+            <input type="text" id="new-user-city" class="luxury-input" placeholder="Ahmedabad" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="new-user-state" class="input-label">State *</label>
+            <input type="text" id="new-user-state" class="luxury-input" placeholder="Gujarat" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="new-user-country" class="input-label">Country *</label>
+            <input type="text" id="new-user-country" class="luxury-input" placeholder="India" required />
+          </div>
+        </div>
+
+        <div class="grid-2" style="gap: 10px; margin-bottom: var(--space-md);">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="new-user-phase" class="input-label">Initial Workflow Phase</label>
+            <select id="new-user-phase" class="luxury-select">
+              <option value="Product Research">Product Research</option>
+              <option value="Supplier Selection">Supplier Selection</option>
+              <option value="Sample Approval">Sample Approval</option>
+              <option value="Manufacturing">Manufacturing</option>
+              <option value="Quality Inspection">Quality Inspection</option>
+              <option value="Export">Export</option>
+              <option value="USA Warehouse">USA Warehouse</option>
+              <option value="Amazon USA Launch" selected>Amazon USA Launch</option>
+              <option value="Business Scaling">Business Scaling</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="new-user-tool" class="input-label">Assigned Prescribed Tool</label>
+            <input type="text" id="new-user-tool" class="luxury-input" placeholder="e.g. Helium 10 Platinum" value="Helium 10 Platinum" />
+          </div>
+        </div>
+
+        <button type="submit" id="save-new-user-btn" class="btn btn-gold" style="width: 100%; margin-top: var(--space-sm);">
+          Provision Account &amp; Save →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       MODAL 3: ADD / EDIT TOOL MODAL
        ==================================================== -->
   <div id="tool-form-modal" class="modal-backdrop" role="dialog" aria-modal="true">
     <div class="modal-dialog">
@@ -429,7 +574,7 @@
 
         <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
           <input type="checkbox" id="tool-form-active" checked style="accent-color: var(--gold-primary); width: 16px; height: 16px;" />
-          <label for="tool-form-active" style="font-size: var(--fs-xs); color: var(--text-primary); cursor: pointer;">Active &amp; Available in Tool Finder</label>
+          <label for="tool-form-active" style="font-size: var(--fs-xs); color: var(--text-primary); cursor: pointer;">Active &amp; Visible in Tool Finder</label>
         </div>
 
         <button type="submit" id="save-tool-submit-btn" class="btn btn-gold" style="width: 100%; margin-top: var(--space-sm);">
@@ -449,6 +594,9 @@
       supabaseCheckIsAdmin,
       supabaseGetAllUsers,
       supabaseSetUserStatus,
+      supabaseSetUserRole,
+      supabaseCreateUserAdmin,
+      supabaseDeleteUserAdmin,
       supabaseGetTools,
       supabaseCreateTool,
       supabaseUpdateTool,
@@ -472,17 +620,23 @@
         const { data: sessionData } = await supabase.auth.getSession();
         const session = sessionData?.session;
 
-        // Unauthenticated -> redirect to /login/
-        if (!session || !session.user) {
+        // Check authStore as well
+        const isAuthLocal = authStore.isAuthenticated();
+        const localUser = authStore.currentUser;
+
+        if (!session && !isAuthLocal) {
           window.location.replace('/login/');
           return;
         }
 
-        const user = session.user;
-        const userEmail = (user.email || '').toLowerCase();
+        const user = session?.user || localUser;
+        const userEmail = (user?.email || '').toLowerCase();
 
-        // Check if caller is admin via secure method / email fallback
-        const isAdmin = await supabaseCheckIsAdmin(user.id) || (userEmail === 'jayavaghela005@gmail.com');
+        // Founder / Super Admin validation
+        const isAdmin = (userEmail === 'jayavaghela005@gmail.com') ||
+                        (userEmail === 'luvits.co@gmail.com') ||
+                        (await supabaseCheckIsAdmin(user?.id)) ||
+                        (localUser?.role === 'admin');
 
         if (!isAdmin) {
           console.warn('Access denied: User is not an administrator.');
@@ -491,7 +645,7 @@
         }
 
         currentAdminUser = user;
-        document.getElementById('admin-user-tag').textContent = `ADMIN: ${userEmail.toUpperCase()}`;
+        document.getElementById('admin-user-tag').textContent = `SUPER ADMIN: ${userEmail.toUpperCase()}`;
 
         loadingSection.classList.add('hidden');
         mainSection.classList.remove('hidden');
@@ -508,9 +662,7 @@
     function showAdminAlert(msg, isSuccess = true) {
       adminAlert.textContent = msg;
       adminAlert.style.display = 'block';
-      adminAlert.className = isSuccess
-        ? 'status-active'
-        : 'status-suspended';
+      adminAlert.className = isSuccess ? 'status-active' : 'status-suspended';
       adminAlert.style.padding = '12px 16px';
       adminAlert.style.borderRadius = 'var(--radius-sm)';
       adminAlert.style.marginBottom = 'var(--space-lg)';
@@ -536,39 +688,48 @@
       const totalUsers = cachedUsers.length;
       const activeCount = cachedUsers.filter(u => u.status !== 'suspended').length;
       const suspendedCount = totalUsers - activeCount;
-      const prefCount = cachedUsers.filter(u => u.preference && u.preference.tool).length;
+      const prefCount = cachedUsers.filter(u => u.preference && (u.preference.tool || u.preference.phase)).length;
       const totalTools = cachedTools.length;
-      const activeTools = cachedTools.filter(t => t.is_active).length;
+      const activeTools = cachedTools.filter(t => t.is_active !== false).length;
 
       document.getElementById('kpi-total-users').textContent = totalUsers;
       document.getElementById('kpi-active-suspended').textContent = `${activeCount} / ${suspendedCount}`;
       document.getElementById('kpi-active-sub').textContent = `${activeCount} Active • ${suspendedCount} Suspended`;
       document.getElementById('kpi-total-prefs').textContent = prefCount;
       document.getElementById('kpi-total-tools').textContent = totalTools;
-      document.getElementById('kpi-tools-sub').textContent = `${activeTools} Active in Tool Finder`;
+      document.getElementById('kpi-tools-sub').textContent = `${activeTools} Active in Directory`;
     }
 
     function renderUsersTable() {
       const query = (document.getElementById('user-search-input').value || '').trim().toLowerCase();
       const statusFilter = document.getElementById('user-status-filter').value;
+      const roleFilter = document.getElementById('user-role-filter').value;
+      const phaseFilter = document.getElementById('user-phase-filter').value;
       const tbody = document.getElementById('users-table-body');
 
       let filtered = cachedUsers.filter(u => {
         const matchesQuery = !query ||
           (u.full_name || '').toLowerCase().includes(query) ||
           (u.email || '').toLowerCase().includes(query) ||
+          (u.mobile_number || '').includes(query) ||
           (u.business_name || '').toLowerCase().includes(query) ||
-          (u.business_city || '').toLowerCase().includes(query);
+          (u.business_city || '').toLowerCase().includes(query) ||
+          (u.business_country || '').toLowerCase().includes(query) ||
+          (u.preference?.tool || '').toLowerCase().includes(query) ||
+          (u.preference?.phase || '').toLowerCase().includes(query);
 
         const matchesStatus = statusFilter === 'ALL' || u.status === statusFilter;
-        return matchesQuery && matchesStatus;
+        const matchesRole = roleFilter === 'ALL' || (roleFilter === 'admin' ? u.role === 'admin' : u.role !== 'admin');
+        const matchesPhase = phaseFilter === 'ALL' || (u.preference && u.preference.phase === phaseFilter);
+
+        return matchesQuery && matchesStatus && matchesRole && matchesPhase;
       });
 
       if (filtered.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="7" class="text-center" style="padding: 2rem; color: var(--text-muted);">
-              No user accounts found matching your filters.
+            <td colspan="8" class="text-center" style="padding: 2.5rem; color: var(--text-muted);">
+              No verified client accounts found matching your filter criteria.
             </td>
           </tr>
         `;
@@ -578,43 +739,84 @@
       tbody.innerHTML = filtered.map(u => {
         const isSuspended = u.status === 'suspended';
         const role = u.role || 'user';
-        const prefTool = u.preference?.tool || '<span style="color: var(--text-muted);">None</span>';
+        const prefPhase = u.preference?.phase || 'General Operations';
+        const prefTool = u.preference?.tool || 'Standard Toolset';
         const location = [u.business_city, u.business_state, u.business_country].filter(Boolean).join(', ') || 'India';
+        const rawPhone = (u.country_code || '+91') + ' ' + (u.mobile_number || '');
+        const cleanDigits = (u.country_code || '91').replace(/\+/g, '') + (u.mobile_number || '').replace(/\D/g, '');
+        const whatsappUrl = cleanDigits.length >= 8 ? `https://wa.me/${cleanDigits}?text=Hello%20${encodeURIComponent(u.full_name || 'Client')},%20this%20is%20Jay%20from%20LUVITS.` : '#';
+        const joinedDate = u.created_at ? new Date(u.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Verified';
 
         return `
           <tr>
             <td>
-              <div style="font-weight: 700; color: #FFFFFF;">${escapeHtml(u.full_name || 'Member')}</div>
-              <div style="color: var(--text-muted); font-size: 0.72rem;">${escapeHtml(u.email || 'No email')}</div>
+              <div style="font-weight: 700; color: #FFFFFF; font-size: 0.85rem;">${escapeHtml(u.full_name || 'Enterprise Client')}</div>
+              <div style="color: var(--text-muted); font-size: 0.72rem; margin-top: 1px;">${escapeHtml(u.email || 'No email')}</div>
+              ${u.mobile_number ? `
+                <div style="margin-top: 4px;">
+                  <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="whatsapp-chip" title="Direct WhatsApp message">
+                    💬 ${escapeHtml(rawPhone)}
+                  </a>
+                </div>
+              ` : ''}
             </td>
-            <td>${escapeHtml(u.business_name || 'LUVITS Client')}</td>
-            <td>${escapeHtml(location)}</td>
             <td>
-              <span class="role-badge ${role === 'admin' ? 'role-admin' : 'role-user'}">${role}</span>
+              <div style="font-weight: 600; color: var(--gold-light);">${escapeHtml(u.business_name || 'LUVITS Client')}</div>
             </td>
-            <td>${prefTool}</td>
+            <td>
+              <div style="color: var(--text-secondary); font-size: 0.75rem;">${escapeHtml(location)}</div>
+            </td>
+            <td>
+              <span class="role-badge ${role === 'admin' ? 'role-admin' : 'role-user'}">${role === 'admin' ? 'ADMIN' : 'CLIENT'}</span>
+            </td>
+            <td>
+              <span class="badge" style="background: rgba(212,175,55,0.08); border: 1px solid var(--border-gold-subtle); color: var(--gold-light); font-size: 0.65rem; padding: 2px 6px;">
+                ${escapeHtml(prefPhase)}
+              </span>
+              <div style="color: var(--text-primary); font-size: 0.72rem; margin-top: 3px; font-weight: 500;">
+                🛠️ ${escapeHtml(prefTool)}
+              </div>
+            </td>
+            <td>
+              <div style="color: var(--text-muted); font-size: 0.72rem;">${escapeHtml(joinedDate)}</div>
+            </td>
             <td>
               <span class="status-badge ${isSuspended ? 'status-suspended' : 'status-active'}">
                 ${isSuspended ? '⛔ Suspended' : '✓ Active'}
               </span>
             </td>
             <td style="text-align: right; white-space: nowrap;">
-              <button class="btn btn-outline btn-sm view-user-btn" data-user-id="${u.id}" style="padding: 4px 8px; font-size: 0.7rem; margin-right: 4px;">
+              <button class="btn btn-outline btn-sm view-user-btn" data-user-id="${u.id}" style="padding: 4px 7px; font-size: 0.7rem; margin-right: 3px;" title="View complete profile">
                 🔍 Details
               </button>
-              ${u.id !== currentAdminUser.id ? `
-              <button class="btn ${isSuspended ? 'btn-gold' : 'btn-outline'} btn-sm toggle-status-btn" data-user-id="${u.id}" data-current-status="${u.status}" style="padding: 4px 8px; font-size: 0.7rem; color: ${isSuspended ? '#000' : '#ff8888'};">
+              ${u.email !== 'jayavaghela005@gmail.com' ? `
+              <button class="btn btn-outline btn-sm toggle-role-btn" data-user-id="${u.id}" data-current-role="${role}" style="padding: 4px 7px; font-size: 0.7rem; margin-right: 3px;" title="Toggle Admin/Client role">
+                ⚡ ${role === 'admin' ? 'Make Client' : 'Make Admin'}
+              </button>
+              <button class="btn ${isSuspended ? 'btn-gold' : 'btn-outline'} btn-sm toggle-status-btn" data-user-id="${u.id}" data-current-status="${u.status}" style="padding: 4px 7px; font-size: 0.7rem; margin-right: 3px; color: ${isSuspended ? '#000' : '#ff8888'};" title="${isSuspended ? 'Reactivate account' : 'Suspend account'}">
                 ${isSuspended ? 'Reactivate' : 'Suspend'}
               </button>
-              ` : ''}
+              <button class="btn btn-outline btn-sm delete-user-btn" data-user-id="${u.id}" data-user-name="${escapeHtml(u.full_name)}" style="padding: 4px 6px; font-size: 0.7rem; color: #ff5555;" title="Delete account">
+                🗑️
+              </button>
+              ` : `
+              <span style="font-size: 0.65rem; color: var(--gold-light); font-weight: 700; padding: 2px 6px;">FOUNDER</span>
+              `}
             </td>
           </tr>
         `;
       }).join('');
 
-      // Bind actions
+      // Bind dynamic actions
       tbody.querySelectorAll('.view-user-btn').forEach(btn => {
         btn.addEventListener('click', () => openUserDetails(btn.getAttribute('data-user-id')));
+      });
+
+      tbody.querySelectorAll('.toggle-role-btn').forEach(btn => {
+        btn.addEventListener('click', () => handleToggleUserRole(
+          btn.getAttribute('data-user-id'),
+          btn.getAttribute('data-current-role')
+        ));
       });
 
       tbody.querySelectorAll('.toggle-status-btn').forEach(btn => {
@@ -623,15 +825,20 @@
           btn.getAttribute('data-current-status')
         ));
       });
+
+      tbody.querySelectorAll('.delete-user-btn').forEach(btn => {
+        btn.addEventListener('click', () => handleDeleteUser(
+          btn.getAttribute('data-user-id'),
+          btn.getAttribute('data-user-name')
+        ));
+      });
     }
 
     async function handleToggleUserStatus(userId, currentStatus) {
       const newStatus = currentStatus === 'suspended' ? 'active' : 'suspended';
       const actionName = newStatus === 'suspended' ? 'suspend' : 'reactivate';
 
-      if (!confirm(`Are you sure you want to ${actionName} this user account?`)) {
-        return;
-      }
+      if (!confirm(`Are you sure you want to ${actionName} this user account?`)) return;
 
       const res = await supabaseSetUserStatus(userId, newStatus);
       if (res.success) {
@@ -642,34 +849,101 @@
       }
     }
 
+    async function handleToggleUserRole(userId, currentRole) {
+      const newRole = currentRole === 'admin' ? 'user' : 'admin';
+      if (!confirm(`Change account role to "${newRole.toUpperCase()}"?`)) return;
+
+      const res = await supabaseSetUserRole(userId, newRole);
+      if (res.success) {
+        showAdminAlert(`Account role updated to ${newRole.toUpperCase()}.`, true);
+        await loadUsersData();
+      } else {
+        showAdminAlert(res.error || 'Failed to update role.', false);
+      }
+    }
+
+    async function handleDeleteUser(userId, userName) {
+      if (!confirm(`Are you sure you want to permanently delete the account for "${userName}"? This cannot be undone.`)) return;
+
+      const res = await supabaseDeleteUserAdmin(userId);
+      if (res.success) {
+        showAdminAlert(`Account for "${userName}" has been deleted.`, true);
+        await loadUsersData();
+      } else {
+        showAdminAlert(res.error || 'Failed to delete account.', false);
+      }
+    }
+
     function openUserDetails(userId) {
       const user = cachedUsers.find(u => u.id === userId);
       if (!user) return;
 
       const modalContent = document.getElementById('user-modal-content');
       const location = [user.business_city, user.business_state, user.business_country].filter(Boolean).join(', ') || 'India';
-      const joinedDate = user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Registered Member';
+      const joinedDate = user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Verified Account';
+      const lastLogin = user.last_login_at ? new Date(user.last_login_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Recent';
+      const cleanDigits = (user.country_code || '91').replace(/\+/g, '') + (user.mobile_number || '').replace(/\D/g, '');
+      const whatsappUrl = cleanDigits.length >= 8 ? `https://wa.me/${cleanDigits}?text=Hello%20${encodeURIComponent(user.full_name || 'Client')},%20this%20is%20Jay%20from%20LUVITS.` : '#';
 
       modalContent.innerHTML = `
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-          <div><strong style="color: var(--text-muted);">Full Name:</strong> <div style="color: #fff; font-weight: 600;">${escapeHtml(user.full_name)}</div></div>
-          <div><strong style="color: var(--text-muted);">Account Role:</strong> <div><span class="role-badge ${user.role === 'admin' ? 'role-admin' : 'role-user'}">${escapeHtml(user.role)}</span></div></div>
-          <div><strong style="color: var(--text-muted);">Email Address:</strong> <div style="color: #fff;">${escapeHtml(user.email)}</div></div>
-          <div><strong style="color: var(--text-muted);">Phone Number:</strong> <div style="color: #fff;">${escapeHtml(user.country_code)} ${escapeHtml(user.mobile_number)}</div></div>
-          <div><strong style="color: var(--text-muted);">Business / Brand:</strong> <div style="color: #fff;">${escapeHtml(user.business_name)}</div></div>
-          <div><strong style="color: var(--text-muted);">Location:</strong> <div style="color: #fff;">${escapeHtml(location)}</div></div>
-          <div><strong style="color: var(--text-muted);">Account Status:</strong> <div><span class="status-badge ${user.status === 'suspended' ? 'status-suspended' : 'status-active'}">${user.status}</span></div></div>
-          <div><strong style="color: var(--text-muted);">Joined / Updated:</strong> <div style="color: #fff;">${joinedDate}</div></div>
+        <div style="background: rgba(255,255,255,0.02); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">Full Name</strong>
+            <div style="color: #fff; font-weight: 700; font-size: 0.95rem; margin-top: 2px;">${escapeHtml(user.full_name)}</div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">Account Role</strong>
+            <div style="margin-top: 2px;"><span class="role-badge ${user.role === 'admin' ? 'role-admin' : 'role-user'}">${escapeHtml(user.role || 'user')}</span></div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">Email Address</strong>
+            <div style="color: #fff; margin-top: 2px;"><a href="mailto:${escapeHtml(user.email)}" style="color: var(--gold-light); text-decoration: underline;">${escapeHtml(user.email)}</a></div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">Phone &amp; WhatsApp</strong>
+            <div style="margin-top: 2px;">
+              ${user.mobile_number ? `
+                <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="whatsapp-chip">
+                  💬 ${escapeHtml(user.country_code)} ${escapeHtml(user.mobile_number)}
+                </a>
+              ` : '<span style="color: var(--text-muted);">Not provided</span>'}
+            </div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">Business / Brand</strong>
+            <div style="color: #fff; font-weight: 600; margin-top: 2px;">${escapeHtml(user.business_name || 'LUVITS Client')}</div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">Location</strong>
+            <div style="color: #fff; margin-top: 2px;">${escapeHtml(location)}</div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">Account Status</strong>
+            <div style="margin-top: 2px;"><span class="status-badge ${user.status === 'suspended' ? 'status-suspended' : 'status-active'}">${user.status || 'active'}</span></div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">Registration Date</strong>
+            <div style="color: var(--text-secondary); margin-top: 2px;">${joinedDate}</div>
+          </div>
         </div>
 
-        <div style="margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
-          <strong style="color: var(--gold-light);">Saved Tool Preference:</strong>
-          <div style="margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 4px; border: 1px solid var(--border-subtle);">
-            ${user.preference ? `
-              <div><strong>Phase:</strong> ${escapeHtml(user.preference.phase || 'N/A')}</div>
-              <div><strong>Category:</strong> ${escapeHtml(user.preference.category || 'N/A')}</div>
-              <div><strong>Prescribed Tool:</strong> <span style="color: var(--gold-light); font-weight: 600;">${escapeHtml(user.preference.tool || 'None')}</span></div>
-            ` : '<span style="color: var(--text-muted);">No workflow preferences saved yet.</span>'}
+        <div style="background: rgba(212,175,55,0.04); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-gold-subtle);">
+          <strong style="color: var(--gold-light); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em;">Current Workflow Configuration</strong>
+          <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div>
+              <span style="color: var(--text-muted);">Active Phase:</span>
+              <div style="font-weight: 600; color: #fff; margin-top: 2px;">${escapeHtml(user.preference?.phase || 'General Operations')}</div>
+            </div>
+            <div>
+              <span style="color: var(--text-muted);">Selected Tool:</span>
+              <div style="font-weight: 600; color: var(--gold-light); margin-top: 2px;">${escapeHtml(user.preference?.tool || 'Standard Toolset')}</div>
+            </div>
+            ${user.preference?.category ? `
+            <div style="grid-column: 1 / -1;">
+              <span style="color: var(--text-muted);">Category / Focus:</span>
+              <div style="color: var(--text-secondary); margin-top: 2px;">${escapeHtml(user.preference.category)}</div>
+            </div>
+            ` : ''}
           </div>
         </div>
       `;
@@ -681,12 +955,101 @@
       document.getElementById('user-detail-modal').classList.remove('is-open');
     });
 
+    /* ---------- Add New Client Modal ---------- */
+    const addUserModal = document.getElementById('add-user-modal');
+    document.getElementById('add-user-btn').addEventListener('click', () => {
+      document.getElementById('add-user-form').reset();
+      addUserModal.classList.add('is-open');
+    });
+
+    document.getElementById('close-add-user-modal-btn').addEventListener('click', () => {
+      addUserModal.classList.remove('is-open');
+    });
+
+    document.getElementById('add-user-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('new-user-name').value.trim();
+      const email = document.getElementById('new-user-email').value.trim();
+      const countryCode = document.getElementById('new-user-country-code').value;
+      const phone = document.getElementById('new-user-phone').value.trim();
+      const business = document.getElementById('new-user-business').value.trim();
+      const city = document.getElementById('new-user-city').value.trim();
+      const state = document.getElementById('new-user-state').value.trim();
+      const country = document.getElementById('new-user-country').value.trim();
+      const phase = document.getElementById('new-user-phase').value;
+      const tool = document.getElementById('new-user-tool').value.trim();
+
+      if (!name || !email || !business) {
+        alert('Please fill in all required fields (Name, Email, Business).');
+        return;
+      }
+
+      const res = await supabaseCreateUserAdmin({
+        full_name: name,
+        email: email,
+        country_code: countryCode,
+        mobile_number: phone,
+        business_name: business,
+        business_city: city,
+        business_state: state,
+        business_country: country,
+        role: 'user',
+        phase: phase,
+        tool: tool
+      });
+
+      if (res.success) {
+        addUserModal.classList.remove('is-open');
+        showAdminAlert(`Client account for "${name}" provisioned successfully.`, true);
+        await loadUsersData();
+      } else {
+        alert(res.error || 'Failed to create client account.');
+      }
+    });
+
+    /* ---------- Export CSV Utility ---------- */
+    document.getElementById('export-users-btn').addEventListener('click', () => {
+      if (cachedUsers.length === 0) {
+        alert('No user records available to export.');
+        return;
+      }
+
+      const headers = ['ID', 'Full Name', 'Email', 'Country Code', 'Phone', 'Business Name', 'City', 'State', 'Country', 'Role', 'Status', 'Workflow Phase', 'Selected Tool', 'Joined Date'];
+      const rows = cachedUsers.map(u => [
+        `"${(u.id || '').replace(/"/g, '""')}"`,
+        `"${(u.full_name || '').replace(/"/g, '""')}"`,
+        `"${(u.email || '').replace(/"/g, '""')}"`,
+        `"${(u.country_code || '').replace(/"/g, '""')}"`,
+        `"${(u.mobile_number || '').replace(/"/g, '""')}"`,
+        `"${(u.business_name || '').replace(/"/g, '""')}"`,
+        `"${(u.business_city || '').replace(/"/g, '""')}"`,
+        `"${(u.business_state || '').replace(/"/g, '""')}"`,
+        `"${(u.business_country || '').replace(/"/g, '""')}"`,
+        `"${(u.role || 'user').replace(/"/g, '""')}"`,
+        `"${(u.status || 'active').replace(/"/g, '""')}"`,
+        `"${(u.preference?.phase || '').replace(/"/g, '""')}"`,
+        `"${(u.preference?.tool || '').replace(/"/g, '""')}"`,
+        `"${(u.created_at || '').replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `luvits_clients_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
     document.getElementById('user-search-input').addEventListener('input', renderUsersTable);
     document.getElementById('user-status-filter').addEventListener('change', renderUsersTable);
+    document.getElementById('user-role-filter').addEventListener('change', renderUsersTable);
+    document.getElementById('user-phase-filter').addEventListener('change', renderUsersTable);
     document.getElementById('refresh-users-btn').addEventListener('click', loadUsersData);
 
     /* ============================================================
-       3. PRESCRIBED TOOLS CATALOG MANAGEMENT
+       3. PRESCRIBED TOOLS DIRECTORY MANAGEMENT
        ============================================================ */
     async function loadToolsData() {
       cachedTools = await supabaseGetTools();
@@ -713,7 +1076,7 @@
       if (filtered.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="6" class="text-center" style="padding: 2rem; color: var(--text-muted);">
+            <td colspan="6" class="text-center" style="padding: 2.5rem; color: var(--text-muted);">
               No prescribed tools found matching your filters.
             </td>
           </tr>
@@ -722,29 +1085,30 @@
       }
 
       tbody.innerHTML = filtered.map(t => {
+        const isActive = t.is_active !== false;
         return `
           <tr>
             <td>
-              <div style="font-weight: 700; color: #FFFFFF;">${escapeHtml(t.purpose)}</div>
+              <div style="font-weight: 700; color: #FFFFFF; font-size: 0.85rem;">${escapeHtml(t.purpose)}</div>
             </td>
             <td><span class="badge" style="background: rgba(212,175,55,0.1); border: 1px solid var(--border-gold-subtle); color: var(--gold-light); font-size: 0.68rem;">${escapeHtml(t.tag)}</span></td>
-            <td>${escapeHtml(t.cat)}</td>
+            <td><div style="color: var(--text-secondary);">${escapeHtml(t.cat)}</div></td>
             <td>
               <a href="${escapeHtml(t.link)}" target="_blank" rel="noopener noreferrer" style="color: var(--gold-light); text-decoration: underline; font-size: 0.72rem; word-break: break-all;">
                 ${escapeHtml(t.link.length > 35 ? t.link.substring(0, 35) + '...' : t.link)} ↗
               </a>
             </td>
             <td>
-              <span class="status-badge ${t.is_active ? 'status-active' : 'status-suspended'}">
-                ${t.is_active ? '✓ Active' : 'Off'}
+              <span class="status-badge ${isActive ? 'status-active' : 'status-suspended'}">
+                ${isActive ? '✓ Active' : 'Off'}
               </span>
             </td>
             <td style="text-align: right; white-space: nowrap;">
               <button class="btn btn-outline btn-sm edit-tool-btn" data-tool-id="${t.id}" style="padding: 4px 8px; font-size: 0.7rem; margin-right: 4px;">
                 ✏ Edit
               </button>
-              <button class="btn ${t.is_active ? 'btn-outline' : 'btn-gold'} btn-sm toggle-tool-btn" data-tool-id="${t.id}" data-tool-active="${t.is_active}" style="padding: 4px 8px; font-size: 0.7rem;">
-                ${t.is_active ? 'Deactivate' : 'Activate'}
+              <button class="btn ${isActive ? 'btn-outline' : 'btn-gold'} btn-sm toggle-tool-btn" data-tool-id="${t.id}" data-tool-active="${isActive}" style="padding: 4px 8px; font-size: 0.7rem;">
+                ${isActive ? 'Deactivate' : 'Activate'}
               </button>
             </td>
           </tr>
@@ -845,6 +1209,32 @@
       } else {
         alert(res.error || 'Failed to save tool entry.');
       }
+    });
+
+    document.getElementById('export-tools-btn').addEventListener('click', () => {
+      if (cachedTools.length === 0) {
+        alert('No tool records available to export.');
+        return;
+      }
+
+      const headers = ['ID', 'Operational Phase', 'Category', 'Tool Name', 'URL Link', 'Active Status'];
+      const rows = cachedTools.map(t => [
+        `"${(t.id || '').replace(/"/g, '""')}"`,
+        `"${(t.tag || '').replace(/"/g, '""')}"`,
+        `"${(t.cat || '').replace(/"/g, '""')}"`,
+        `"${(t.purpose || '').replace(/"/g, '""')}"`,
+        `"${(t.link || '').replace(/"/g, '""')}"`,
+        `"${t.is_active !== false ? 'Active' : 'Inactive'}"`
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `luvits_tools_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     });
 
     /* ============================================================
