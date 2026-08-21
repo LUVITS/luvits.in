@@ -729,7 +729,9 @@
         tbody.innerHTML = `
           <tr>
             <td colspan="8" class="text-center" style="padding: 2.5rem; color: var(--text-muted);">
-              No verified client accounts found matching your filter criteria.
+              ${cachedUsers.length === 0 
+                ? 'No user accounts found in Supabase database. Click <strong>"➕ Add Client"</strong> above to provision a user profile in Supabase.'
+                : 'No accounts match your search/filter criteria. Try clearing the search or changing filters.'}
             </td>
           </tr>
         `;
