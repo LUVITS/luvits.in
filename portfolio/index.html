@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Portfolio | LUVITS — Selected Work &amp; Case Studies</title>
-  <meta name="description" content="Explore selected client work by LUVITS across e-commerce management, marketplace operations, web development, and brand growth." />
+  <title>Portfolio | LUVITS — Selected Work &amp; Client Projects</title>
+  <meta name="description" content="Explore selected client work by LUVITS across e-commerce management, web development, marketplace scaling, and brand growth across India and the UK." />
   <link rel="canonical" href="https://luvits.in/portfolio/" />
 
   <!-- Open Graph -->
@@ -18,7 +18,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Portfolio | LUVITS Selected Work" />
-  <meta name="twitter:description" content="Selected case studies in e-commerce, brand operations, and web development." />
+  <meta name="twitter:description" content="Selected client case studies in e-commerce, brand operations, and web development." />
   <meta name="twitter:image" content="https://luvits.in/assets/logo.png" />
 
   <!-- Theme & PWA -->
@@ -53,37 +53,79 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Sharlin Traders",
-            "description": "E-commerce Management and Social Media"
+            "description": "E-commerce — UK"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Luxurion Mart",
-            "description": "E-commerce and Product Sourcing"
+            "description": "E-commerce — UK"
           },
           {
             "@type": "ListItem",
             "position": 3,
-            "name": "MAXO",
-            "description": "Amazon Brand Management"
+            "name": "Sharlin Travels",
+            "description": "Social Media Marketing — UK"
           },
           {
             "@type": "ListItem",
             "position": 4,
-            "name": "Lofysuvon.com",
-            "description": "Web Development & Storefront"
+            "name": "MAXO",
+            "description": "Amazon Brand — UK"
           },
           {
             "@type": "ListItem",
             "position": 5,
-            "name": "Calivaro.in",
-            "description": "Web Architecture & Digital Presence"
+            "name": "lofysalon.com",
+            "description": "Salon Web Development & Pricing Automation — India"
           },
           {
             "@type": "ListItem",
             "position": 6,
+            "name": "calivaro.in",
+            "description": "Web Development — India"
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
             "name": "Calivaro",
-            "description": "Amazon Brand Management & E-commerce Operations"
+            "description": "Clothing Brand E-commerce — India"
+          },
+          {
+            "@type": "ListItem",
+            "position": 8,
+            "name": "Akshar Impex",
+            "description": "E-commerce — India"
+          },
+          {
+            "@type": "ListItem",
+            "position": 9,
+            "name": "Karma Impex",
+            "description": "E-commerce — India"
+          },
+          {
+            "@type": "ListItem",
+            "position": 10,
+            "name": "Akshar Imprints",
+            "description": "E-commerce — India"
+          },
+          {
+            "@type": "ListItem",
+            "position": 11,
+            "name": "Lool Pvt Ltd",
+            "description": "Import Export & Product Sourcing — India"
+          },
+          {
+            "@type": "ListItem",
+            "position": 12,
+            "name": "Shark Global Trading Co.",
+            "description": "Social Media Marketing — India"
+          },
+          {
+            "@type": "ListItem",
+            "position": 13,
+            "name": "The Indian Salon",
+            "description": "Graphics Designing — Nikol, Ahmedabad, India"
           }
         ]
       },
@@ -107,6 +149,72 @@
     ]
   }
   </script>
+
+  <style>
+    .portfolio-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .portfolio-filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-medium);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .portfolio-filter-btn:hover,
+    .portfolio-filter-btn.is-active {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-primary);
+      color: #FFFFFF;
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.2);
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .project-card.is-hidden {
+      display: none;
+    }
+
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.70rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .location-badge.uk {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: #93c5fd;
+    }
+
+    .location-badge.in {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fcd34d;
+    }
+  </style>
 </head>
 <body class="portfolio-page">
   <div data-global-header></div>
@@ -114,101 +222,292 @@
   <main data-anime-section id="main-content" class="section-spacing" style="padding-top: calc(var(--header-height) + var(--space-xl));">
     <div class="container">
       <!-- HERO -->
-      <section class="section-header text-left anime-reveal" style="max-width: 840px; margin-bottom: var(--space-3xl);">
-        <span class="eyebrow">SELECTED WORK</span>
+      <section class="section-header text-left anime-reveal" style="max-width: 840px; margin-bottom: var(--space-2xl);">
+        <span class="eyebrow">SELECTED CLIENT WORK</span>
         <h1 class="section-title" style="font-size: var(--fs-4xl);">BUILT WITH PURPOSE.</h1>
         <p class="section-subtitle" style="margin-top: 1rem;">
-          A selection of businesses and brands we've worked with across e-commerce, digital presence and brand development.
+          A selection of businesses and brands we've empowered across e-commerce management, marketplace acceleration, digital storefronts, and brand development in India and the UK.
         </p>
         <div class="gold-line"></div>
       </section>
 
-      <!-- PROJECTS 01 TO 06 GRID -->
-      <div class="grid-3" style="gap: var(--space-xl); margin-bottom: var(--space-3xl);">
+      <!-- FILTER TABS -->
+      <div class="portfolio-filter-bar anime-reveal" role="tablist" aria-label="Portfolio Category Filter">
+        <button type="button" class="portfolio-filter-btn is-active" data-filter="all">All Projects (13)</button>
+        <button type="button" class="portfolio-filter-btn" data-filter="ecommerce">E-commerce &amp; Amazon (7)</button>
+        <button type="button" class="portfolio-filter-btn" data-filter="web-dev">Web Development (2)</button>
+        <button type="button" class="portfolio-filter-btn" data-filter="smm">Social Media Marketing (2)</button>
+        <button type="button" class="portfolio-filter-btn" data-filter="sourcing">Import &amp; Sourcing (1)</button>
+        <button type="button" class="portfolio-filter-btn" data-filter="design">Graphic Designing (1)</button>
+      </div>
+
+      <!-- PROJECTS 01 TO 13 GRID -->
+      <div id="portfolio-grid" class="grid-3" style="gap: var(--space-xl); margin-bottom: var(--space-3xl);">
         
         <!-- PROJECT 01 -->
-        <article class="luxury-card anime-reveal content-auto">
-          <span class="eyebrow">PROJECT 01</span>
-          <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">SHARLIN TRADERS</h2>
-          <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
-            E-commerce Management · Social Media
-          </p>
-          <p style="font-size: var(--fs-sm); color: var(--text-secondary);">
-            Supporting digital marketplace and social media operations.
-          </p>
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="ecommerce">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 01</span>
+              <span class="location-badge uk">🇬🇧 UK</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">SHARLIN TRADERS</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              E-commerce · United Kingdom
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              End-to-end marketplace management, catalog listing optimization, and digital commerce operations for the UK market.
+            </p>
+          </div>
         </article>
 
         <!-- PROJECT 02 -->
-        <article class="luxury-card anime-reveal content-auto">
-          <span class="eyebrow">PROJECT 02</span>
-          <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">LUXURION MART</h2>
-          <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
-            E-commerce · Product Sourcing
-          </p>
-          <p style="font-size: var(--fs-sm); color: var(--text-secondary);">
-            Supporting product sourcing and digital commerce operations.
-          </p>
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="ecommerce">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 02</span>
+              <span class="location-badge uk">🇬🇧 UK</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">LUXURION MART</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              E-commerce · United Kingdom
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Digital commerce operations, product catalog management, and marketplace sales optimization in the United Kingdom.
+            </p>
+          </div>
         </article>
 
         <!-- PROJECT 03 -->
-        <article class="luxury-card anime-reveal content-auto">
-          <span class="eyebrow">PROJECT 03</span>
-          <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">MAXO</h2>
-          <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
-            Amazon Brand Management · E-commerce
-          </p>
-          <p style="font-size: var(--fs-sm); color: var(--text-secondary);">
-            Marketplace management and brand operations.
-          </p>
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="smm">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 03</span>
+              <span class="location-badge uk">🇬🇧 UK</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">SHARLIN TRAVELS</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              Social Media Marketing · United Kingdom
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Social media growth campaigns, brand presence management, and digital customer acquisition strategies in the UK.
+            </p>
+          </div>
         </article>
 
         <!-- PROJECT 04 -->
-        <article class="luxury-card anime-reveal content-auto">
-          <span class="eyebrow">PROJECT 04</span>
-          <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">LOFYSUVON.COM</h2>
-          <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
-            Web Development
-          </p>
-          <p style="font-size: var(--fs-sm); color: var(--text-secondary);">
-            Website development and digital presence.
-          </p>
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="ecommerce">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 04</span>
+              <span class="location-badge uk">🇬🇧 UK</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">MAXO</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              Amazon Brand · United Kingdom
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Amazon UK brand management, listing optimization, PPC advertising strategy, and marketplace brand scaling.
+            </p>
+          </div>
         </article>
 
         <!-- PROJECT 05 -->
-        <article class="luxury-card anime-reveal content-auto">
-          <span class="eyebrow">PROJECT 05</span>
-          <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">CALIVARO.IN</h2>
-          <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
-            Web Development
-          </p>
-          <p style="font-size: var(--fs-sm); color: var(--text-secondary);">
-            Website development and digital presence.
-          </p>
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="web-dev">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 05</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">LOFYSALON.COM</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              Salon Web Development &amp; Pricing Automation · India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Custom website architecture for salon operations featuring dynamic automated pricing models, online booking, and digital presence.
+            </p>
+          </div>
         </article>
 
         <!-- PROJECT 06 -->
-        <article class="luxury-card anime-reveal content-auto">
-          <span class="eyebrow">PROJECT 06</span>
-          <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">CALIVARO</h2>
-          <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
-            Amazon Brand Management
-          </p>
-          <p style="font-size: var(--fs-sm); color: var(--text-secondary);">
-            Marketplace brand management and e-commerce operations.
-          </p>
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="web-dev">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 06</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">CALIVARO.IN</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              Web Development · India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              High-performance D2C e-commerce website development, UI/UX design, and seamless storefront architecture for modern shoppers.
+            </p>
+          </div>
+        </article>
+
+        <!-- PROJECT 07 -->
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="ecommerce">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 07</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">CALIVARO</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              Clothing Brand E-commerce · India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Apparel brand building, marketplace catalog management, D2C multi-channel operations, and retail scaling strategy.
+            </p>
+          </div>
+        </article>
+
+        <!-- PROJECT 08 -->
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="ecommerce">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 08</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">AKSHAR IMPEX</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              E-commerce · India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Marketplace operations management, product listing optimization, inventory monitoring, and digital commerce growth.
+            </p>
+          </div>
+        </article>
+
+        <!-- PROJECT 09 -->
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="ecommerce">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 09</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">KARMA IMPEX</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              E-commerce · India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Multi-channel e-commerce marketplace scaling, strategic sales expansion, and operational optimization.
+            </p>
+          </div>
+        </article>
+
+        <!-- PROJECT 10 -->
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="ecommerce">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 10</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">AKSHAR IMPRINTS</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              E-commerce · India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Custom merchandising and print product e-commerce catalog structuring, fulfillment consulting, and sales management.
+            </p>
+          </div>
+        </article>
+
+        <!-- PROJECT 11 -->
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="sourcing">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 11</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">LOOL PVT LTD</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              Import Export &amp; Product Sourcing · India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Global product sourcing advisory, cross-border import-export strategy, supply chain logistics, and vendor qualification.
+            </p>
+          </div>
+        </article>
+
+        <!-- PROJECT 12 -->
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="smm">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 12</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">SHARK GLOBAL TRADING CO.</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              Social Media Marketing · India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              B2B international trading brand visibility, strategic social media marketing campaigns, and business positioning.
+            </p>
+          </div>
+        </article>
+
+        <!-- PROJECT 13 -->
+        <article class="luxury-card project-card anime-reveal content-auto" data-category="design">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="eyebrow" style="margin-bottom: 0;">PROJECT 13</span>
+              <span class="location-badge in">🇮🇳 India</span>
+            </div>
+            <h2 style="font-size: var(--fs-xl); color: var(--gold-light); margin-block: 6px;">THE INDIAN SALON</h2>
+            <p class="text-gold" style="font-size: var(--fs-xs); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;">
+              Graphic Designing · Nikol, Ahmedabad, India
+            </p>
+            <p style="font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55;">
+              Visual identity design, branding collaterals, interior signage graphics, and promotional marketing design for salon location in Nikol, Ahmedabad.
+            </p>
+          </div>
         </article>
 
       </div>
 
       <!-- CTA -->
-      <section class="cta-banner luxury-card anime-reveal content-auto">
-        <h2>Ready to Build What Comes Next?</h2>
-        <a href="/contact/" class="btn btn-gold" style="margin-top: var(--space-md);">START A PROJECT DISCUSSION →</a>
+      <section class="cta-banner luxury-card anime-reveal content-auto" style="text-align: center;">
+        <span class="eyebrow">START YOUR SUCCESS STORY</span>
+        <h2 style="font-size: var(--fs-3xl); margin-block: 8px;">Ready to Build What Comes Next?</h2>
+        <p style="font-size: var(--fs-sm); color: var(--text-secondary); max-width: 580px; margin: 0 auto 1.5rem auto;">
+          Whether you're launching in the UK, scaling e-commerce across India, or creating custom web solutions, LUVITS delivers proven execution.
+        </p>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <a href="/contact/" class="btn btn-gold">START A PROJECT DISCUSSION →</a>
+          <a href="https://wa.me/916359435595?text=Hello%20Jay%2C%20I%20reviewed%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            <span>💬 CHAT ON WHATSAPP</span>
+          </a>
+        </div>
       </section>
     </div>
   </main>
 
   <div data-global-footer></div>
   <script type="module" src="../assets/js/app.js"></script>
+  <script type="module">
+    // Interactive Category Filtering
+    const filterBtns = document.querySelectorAll('.portfolio-filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            card.classList.remove('is-hidden');
+          } else {
+            card.classList.add('is-hidden');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
