@@ -3,6 +3,7 @@
  * LUVITS - ZERO-DEPENDENCY ULTRA-PERFORMANCE ANIMATION ENGINE
  * Hardware-Accelerated 60fps GPU Pipeline, Staggered Reveals & Micro-Interactions
  * Built with native Web Animations API + IntersectionObserver (Zero external CDN)
+ * Excludes homepage scrollytelling story beats to prevent layout interference
  * ==========================================================================
  */
 
@@ -10,7 +11,6 @@ class AnimationEngine {
   constructor() {
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.hasWaapi = typeof Element !== 'undefined' && 'animate' in Element.prototype;
-    this.activeCard = null;
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => this.boot());
@@ -28,24 +28,26 @@ class AnimationEngine {
   }
 
   /**
-   * Staggered Hero Sequence for Top-of-Page Section
+   * Staggered Hero Sequence for Top-of-Page Section (Subpages only)
    */
   initHeroEntrance() {
+    // Only run on standard content pages, never on scrolly homepage
+    if (document.body.classList.contains('home-page')) return;
+
     if (this.reducedMotion) {
-      document.querySelectorAll('.hero-headline, .section-header h1, .section-subtitle, .hero-actions').forEach(el => {
+      document.querySelectorAll('.section-header h1, .section-subtitle, .hero-actions').forEach(el => {
         el.style.opacity = '1';
         el.style.transform = 'none';
       });
       return;
     }
 
-    const heroSections = document.querySelectorAll('.section-header, .page-hero, .hero-section');
+    const heroSections = document.querySelectorAll('.section-header, .page-hero');
     heroSections.forEach(hero => {
       const items = hero.querySelectorAll('.eyebrow, h1, .gold-line, .section-subtitle, p, .hero-actions');
       items.forEach((item, index) => {
         item.style.setProperty('--stagger-delay', `${index * 90}ms`);
         item.classList.add('anime-reveal');
-        // Trigger reveal after a microtick
         requestAnimationFrame(() => {
           setTimeout(() => item.classList.add('is-visible'), 40 + index * 80);
         });
@@ -57,7 +59,19 @@ class AnimationEngine {
    * High-Performance IntersectionObserver for Scroll-Triggered Reveals
    */
   initScrollObserver() {
-    const allAnimables = document.querySelectorAll('.anime-reveal, .anime-clip, .anime-scale, .luxury-card:not(.no-auto-reveal), .project-card, .service-tile, .stat-card');
+    // Exclude any elements inside the homepage scrollytelling viewport
+    const allAnimables = document.querySelectorAll(
+      'main:not(#main-content.home-main) .anime-reveal, ' +
+      'main:not(#main-content.home-main) .anime-clip, ' +
+      'main:not(#main-content.home-main) .anime-scale, ' +
+      '.services-page .luxury-card, ' +
+      '.portfolio-page .luxury-card, ' +
+      '.about-page .luxury-card, ' +
+      '.pricing-page .luxury-card, ' +
+      '.contact-page .luxury-card, ' +
+      '.luv-ai-page .luxury-card, ' +
+      '.workflow-page .luxury-card'
+    );
 
     if (this.reducedMotion || !('IntersectionObserver' in window)) {
       allAnimables.forEach(el => el.classList.add('is-visible'));
@@ -83,44 +97,40 @@ class AnimationEngine {
       rootMargin: '0px 0px -40px 0px'
     });
 
-    // Observe dedicated sections
-    const sections = document.querySelectorAll('[data-anime-section], [data-anime-stagger], .grid-2, .grid-3, .grid-4');
-    sections.forEach(sec => observer.observe(sec));
+    // Observe dedicated subpage sections
+    const sections = document.querySelectorAll('[data-anime-section], [data-anime-stagger]');
+    sections.forEach(sec => {
+      if (!sec.closest('.scrolly-scroll-track')) {
+        observer.observe(sec);
+      }
+    });
 
-    // Observe standalone animable elements
     allAnimables.forEach(el => {
-      if (!el.closest('[data-anime-section]') && !el.closest('[data-anime-stagger]')) {
+      if (!el.closest('[data-anime-section]') && !el.closest('[data-anime-stagger]') && !el.closest('.scrolly-scroll-track')) {
         observer.observe(el);
       }
     });
   }
 
-  /**
-   * Staggered animation for grid items or section children
-   */
   animateStaggerGroup(container) {
-    const children = container.querySelectorAll('.anime-reveal, .anime-scale, .anime-clip, .luxury-card, .project-card, .service-tile');
-    
+    const children = container.querySelectorAll('.anime-reveal, .anime-scale, .anime-clip, .luxury-card, .project-card');
     children.forEach((child, index) => {
       child.style.setProperty('--stagger-delay', `${index * 70}ms`);
       child.classList.add('is-visible');
     });
   }
 
-  /**
-   * Reveal a single element smoothly
-   */
   revealElement(el) {
     el.classList.add('is-visible');
   }
 
   /**
-   * 3D Luxury Tilt & Specular Lighting Micro-Interactions on Desktop
+   * 3D Luxury Tilt & Specular Lighting Micro-Interactions on Desktop (Subpages & Flanked Cards)
    */
   initCardInteractions() {
     if (this.reducedMotion || window.innerWidth < 1024) return;
 
-    const cards = document.querySelectorAll('.luxury-card, .project-card, .service-tile, .scrolly-glass-card');
+    const cards = document.querySelectorAll('.luxury-card, .project-card, .scrolly-glass-card');
 
     cards.forEach(card => {
       let bounds = null;
@@ -134,8 +144,8 @@ class AnimationEngine {
         currentX += (targetX - currentX) * 0.15;
         currentY += (targetY - currentY) * 0.15;
 
-        const tiltX = (currentY * -6).toFixed(2);
-        const tiltY = (currentX * 6).toFixed(2);
+        const tiltX = (currentY * -5).toFixed(2);
+        const tiltY = (currentX * 5).toFixed(2);
 
         card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-2px)`;
 
@@ -146,7 +156,7 @@ class AnimationEngine {
         }
       };
 
-      card.addEventListener('mouseenter', (e) => {
+      card.addEventListener('mouseenter', () => {
         bounds = card.getBoundingClientRect();
       });
 
@@ -158,7 +168,6 @@ class AnimationEngine {
         targetX = Math.max(-0.5, Math.min(0.5, x));
         targetY = Math.max(-0.5, Math.min(0.5, y));
 
-        // Specular gold shine position
         const shineX = Math.round((x + 0.5) * 100);
         const shineY = Math.round((y + 0.5) * 100);
         card.style.setProperty('--mouse-x', `${shineX}%`);

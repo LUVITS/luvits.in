@@ -4,6 +4,7 @@
  * Hardware-Accelerated ImageBitmap Pipeline, Dynamic Viewport (100dvh)
  * Continuous Cross-Fading Story Beats (Zero Blank Dead Zones)
  * Progressive Lazy Frame Streamer (Peak LCP + Bandwidth Optimization)
+ * Flanked Editorial Layout (Zero Center Obstruction)
  * ==========================================================================
  */
 
@@ -28,9 +29,11 @@ class HighPerformanceScrollyEngine {
     this.loadedCount = 0;
     this.currentRenderedIndex = -1;
 
-    // Physics interpolation state
-    this.targetProgress = 0;
-    this.currentProgress = 0;
+    // Support instant test progress (e.g. ?progress=0.3)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialP = urlParams.has('progress') ? parseFloat(urlParams.get('progress')) : 0;
+    this.targetProgress = isNaN(initialP) ? 0 : Math.max(0, Math.min(1, initialP));
+    this.currentProgress = this.targetProgress;
     this.isRendering = false;
 
     // Cached viewport & canvas dimensions
@@ -38,26 +41,19 @@ class HighPerformanceScrollyEngine {
     this.canvasHeight = 0;
     this.dpr = 1;
 
-    this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Seamless, overlapping story beat ranges (Zero empty dead zones during scroll)
+    // Story beat active scroll ranges (Seamless, overlapping cross-fading)
     this.beatRanges = [
-      { start: 0.00, end: 0.22 }, // Beat 1: Intro (Left Flank)
-      { start: 0.20, end: 0.48 }, // Beat 2: Services (Split Flanks)
-      { start: 0.46, end: 0.72 }, // Beat 3: Portfolio (Left Flank)
-      { start: 0.70, end: 0.88 }, // Beat 4: LUV.AI (Right Flank)
-      { start: 0.86, end: 0.985 } // Beat 5: Finale (Left Flank, fades before footer arrives)
+      { start: 0.00, end: 0.20 }, // Beat 1: Intro (Left Flank)
+      { start: 0.18, end: 0.44 }, // Beat 2: Services (Split Flanks - Left & Right)
+      { start: 0.42, end: 0.68 }, // Beat 3: Portfolio (Left Flank)
+      { start: 0.66, end: 0.86 }, // Beat 4: LUV.AI (Right Flank)
+      { start: 0.84, end: 0.985 } // Beat 5: Finale (Left Flank, fades before footer arrives)
     ];
 
     this.renderLoopBound = this.renderLoop.bind(this);
 
     this.initViewportMetrics();
-
-    if (!this.reducedMotion) {
-      this.init();
-    } else {
-      this.initReducedMotion();
-    }
+    this.init();
   }
 
   pad(num, size) {
@@ -110,11 +106,31 @@ class HighPerformanceScrollyEngine {
       this.onScroll();
     }, { passive: true });
 
-    // Activate initial beat & position
-    if (this.beats.length > 0) {
-      this.beats[0].classList.add('is-active');
+    // Activate initial state
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('beat')) {
+      const beatNum = parseInt(urlParams.get('beat'), 10);
+      const beatMidPoints = { 1: 0.0, 2: 0.30, 3: 0.55, 4: 0.76, 5: 0.92 };
+      const p = beatMidPoints[beatNum] !== undefined ? beatMidPoints[beatNum] : 0;
+      this.targetProgress = p;
+      this.currentProgress = p;
+      const targetIdx = Math.min(this.frameCount - 1, Math.round(p * (this.frameCount - 1)));
+      this.currentRenderedIndex = targetIdx;
+
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = this.getFrameUrl(this.startFrame + targetIdx);
+      img.onload = () => {
+        this.frames[targetIdx] = img;
+        this.canvas.classList.add('loaded');
+        this.drawFrame(targetIdx);
+        this.updateStoryBeats(p);
+      };
+    } else {
+      const targetIndex = Math.min(this.frameCount - 1, Math.round(this.currentProgress * (this.frameCount - 1)));
+      this.currentRenderedIndex = targetIndex;
+      this.updateStoryBeats(this.currentProgress);
     }
-    this.onScroll();
   }
 
   handleResize() {
@@ -153,14 +169,18 @@ class HighPerformanceScrollyEngine {
     // Phase 1: High Priority Instant LCP Frame 0 (website_004.webp)
     await this.loadSingleFrame(0, this.getFrameUrl(this.startFrame), supportsBitmap);
 
-    // Phase 2: Preload initial scroll buffer (first 16 frames)
-    for (let i = 1; i <= 16 && i < this.frameCount; i++) {
-      this.loadSingleFrame(i, this.getFrameUrl(this.startFrame + i), supportsBitmap);
+    // If initial progress requested a specific frame, load that target frame immediately
+    const targetIdx = Math.min(this.frameCount - 1, Math.round(this.currentProgress * (this.frameCount - 1)));
+    if (targetIdx > 0) {
+      await this.loadSingleFrame(targetIdx, this.getFrameUrl(this.startFrame + targetIdx), supportsBitmap);
     }
+
+    // Phase 2: Preload initial scroll buffer around active frame
+    this.prioritizeFramesAround(targetIdx);
 
     // Phase 3: Background Idle Streamer
     const idleStreamer = () => {
-      let nextIndex = 17;
+      let nextIndex = 1;
       const streamChunk = () => {
         const batchSize = 6;
         let count = 0;
@@ -192,12 +212,12 @@ class HighPerformanceScrollyEngine {
   }
 
   /**
-   * On-demand frame streaming around current target index (target ± 12 frames)
+   * On-demand frame streaming around current target index (target ± 14 frames)
    */
   prioritizeFramesAround(centerIndex) {
     const supportsBitmap = typeof window.createImageBitmap === 'function';
-    const start = Math.max(0, centerIndex - 6);
-    const end = Math.min(this.frameCount - 1, centerIndex + 14);
+    const start = Math.max(0, centerIndex - 8);
+    const end = Math.min(this.frameCount - 1, centerIndex + 16);
 
     for (let i = start; i <= end; i++) {
       if (!this.frames[i] && !this.pendingFrames.has(i)) {
@@ -221,7 +241,7 @@ class HighPerformanceScrollyEngine {
           this.pendingFrames.delete(index);
           if (index === 0 || index === this.currentRenderedIndex) {
             this.canvas.classList.add('loaded');
-            this.drawFrame(index);
+            this.drawFrame(this.currentRenderedIndex >= 0 ? this.currentRenderedIndex : 0);
           }
           return;
         }
@@ -243,7 +263,7 @@ class HighPerformanceScrollyEngine {
         this.pendingFrames.delete(index);
         if (index === 0 || index === this.currentRenderedIndex) {
           this.canvas.classList.add('loaded');
-          this.drawFrame(index);
+          this.drawFrame(this.currentRenderedIndex >= 0 ? this.currentRenderedIndex : 0);
         }
         return;
       } catch (e) {}
@@ -255,26 +275,13 @@ class HighPerformanceScrollyEngine {
       this.pendingFrames.delete(index);
       if (index === 0 || index === this.currentRenderedIndex) {
         this.canvas.classList.add('loaded');
-        this.drawFrame(index);
+        this.drawFrame(this.currentRenderedIndex >= 0 ? this.currentRenderedIndex : 0);
       }
     };
 
     img.onerror = () => {
       this.pendingFrames.delete(index);
     };
-  }
-
-  initReducedMotion() {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = this.getFrameUrl(this.startFrame);
-    img.onload = () => {
-      this.frames[0] = img;
-      this.canvas.classList.add('loaded');
-      this.handleResize();
-      this.drawFrame(0);
-    };
-    this.beats.forEach(b => b.classList.add('is-active'));
   }
 
   onScroll() {
@@ -299,7 +306,7 @@ class HighPerformanceScrollyEngine {
   }
 
   renderLoop() {
-    // Responsive physics easing factor
+    // Physics easing factor
     const diff = this.targetProgress - this.currentProgress;
 
     if (Math.abs(diff) < 0.0002) {
@@ -349,6 +356,11 @@ class HighPerformanceScrollyEngine {
           break;
         }
       }
+    }
+
+    // Fallback to frame 0 if no nearby frame loaded yet
+    if (!frame && this.frames[0]) {
+      frame = this.frames[0];
     }
 
     if (!frame) return;

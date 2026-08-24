@@ -1,7 +1,7 @@
 /* ==========================================================================
    LUVITS - CINEMATIC SCROLLYTELLING STYLES (60 FPS GPU-ACCELERATED)
    Flanking Editorial Layout (Never overlaps character's face/head in any mode)
-   Seamless Desktop, Tablet, and Mobile Dynamic Viewport Framing
+   Flanked Desktop Left/Right Columns + Mobile Bottom Dock
    ========================================================================== */
 
 /* Seamless deep black theme for the home page */
@@ -88,7 +88,7 @@ body.home-page .footer-bottom {
 }
 
 /* ==========================================================================
-   1. FIXED BACKGROUND CANVAS STAGE (GPU Hardware-Accelerated & Dynamic Viewport)
+   1. FIXED BACKGROUND CANVAS STAGE (GPU Hardware-Accelerated)
    ========================================================================== */
 .scrolly-background-stage {
   position: fixed;
@@ -115,7 +115,7 @@ body.home-page .footer-bottom {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 1; /* Instant visibility for zero blank flash */
+  opacity: 1;
   transform: translate3d(0, 0, 0);
   will-change: contents;
 }
@@ -159,34 +159,28 @@ body.home-page .footer-bottom {
   max-height: 100dvh;
   z-index: 2;
   pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate3d(0, 0, 0);
   box-sizing: border-box;
 }
 
 /* ==========================================================================
-   3. STORY BEATS (Flanked Positioning — Clear View of Central Figure)
+   3. STORY BEATS (Flanked Editorial Layout — Zero Center Obstruction)
    ========================================================================== */
 .story-beat {
   position: absolute;
   opacity: 0;
   visibility: hidden;
-  transform: translate3d(0, 16px, 0);
-  transition:
-    opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0.42s ease;
   pointer-events: none;
   z-index: 3;
   will-change: opacity, transform;
+  transition:
+    opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.38s ease;
 }
 
 .story-beat.is-active {
   opacity: 1;
   visibility: visible;
-  transform: translate3d(0, 0, 0);
   pointer-events: auto;
 }
 
@@ -221,10 +215,10 @@ body.home-page .footer-bottom {
    BEAT 1: INTRO (Hero - Left Flank)
    -------------------------------------------------------------------------- */
 .beat-intro {
-  left: clamp(2rem, 5vw, 6rem);
-  top: 52%;
+  left: clamp(24px, 5vw, 80px);
+  top: 50%;
   transform: translateY(-50%) translate3d(0, 16px, 0);
-  max-width: 480px;
+  width: min(480px, 36vw);
   text-align: left;
 }
 
@@ -261,18 +255,16 @@ body.home-page .footer-bottom {
 }
 
 .scrolly-scroll-indicator {
-  position: absolute;
-  bottom: 4vh;
-  left: clamp(2rem, 5vw, 6rem);
-  display: flex;
+  margin-top: 18px;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold-light);
-  opacity: 0.8;
+  opacity: 0.85;
   animation: scrollyPulse 2.4s ease-in-out infinite;
 }
 
@@ -295,29 +287,41 @@ body.home-page .footer-bottom {
    BEAT 2: SERVICES (Split Flanking Layout - Left & Right Columns)
    -------------------------------------------------------------------------- */
 .beat-services {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 clamp(2rem, 4.5vw, 5rem) 7vh clamp(2rem, 4.5vw, 5rem);
-  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  pointer-events: none;
+  transform: translate3d(0, 16px, 0);
+}
+
+.beat-services.is-active {
+  transform: translate3d(0, 0, 0);
 }
 
 .beat-services-left {
-  max-width: 360px;
-  text-align: left;
+  position: absolute;
+  left: clamp(24px, 5vw, 80px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(380px, 32vw);
   display: flex;
   flex-direction: column;
   gap: 12px;
+  pointer-events: auto;
 }
 
 .beat-services-right {
-  max-width: 360px;
-  text-align: left;
+  position: absolute;
+  right: clamp(24px, 5vw, 80px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(380px, 32vw);
   display: flex;
   flex-direction: column;
   gap: 12px;
+  pointer-events: auto;
 }
 
 .beat-services .service-tile {
@@ -340,10 +344,10 @@ body.home-page .footer-bottom {
    BEAT 3: PORTFOLIO (Left Flank)
    -------------------------------------------------------------------------- */
 .beat-portfolio {
-  left: clamp(2rem, 5vw, 6rem);
-  top: 52%;
+  left: clamp(24px, 5vw, 80px);
+  top: 50%;
   transform: translateY(-50%) translate3d(0, 16px, 0);
-  max-width: 440px;
+  width: min(440px, 34vw);
   text-align: left;
 }
 
@@ -392,10 +396,10 @@ body.home-page .footer-bottom {
    BEAT 4: LUV.AI (Right Flank)
    -------------------------------------------------------------------------- */
 .beat-ai {
-  right: clamp(2rem, 5vw, 6rem);
-  top: 52%;
+  right: clamp(24px, 5vw, 80px);
+  top: 50%;
   transform: translateY(-50%) translate3d(0, 16px, 0);
-  max-width: 440px;
+  width: min(440px, 34vw);
   text-align: left;
 }
 
@@ -436,10 +440,10 @@ body.home-page .footer-bottom {
    BEAT 5: FINALE (Left Flank)
    -------------------------------------------------------------------------- */
 .beat-finale {
-  left: clamp(2rem, 5vw, 6rem);
-  top: 52%;
+  left: clamp(24px, 5vw, 80px);
+  top: 50%;
   transform: translateY(-50%) translate3d(0, 16px, 0);
-  max-width: 480px;
+  width: min(480px, 36vw);
   text-align: left;
 }
 
@@ -472,23 +476,23 @@ body.home-page .footer-bottom {
   .beat-portfolio,
   .beat-ai,
   .beat-finale {
-    max-width: 380px;
-    left: 3.5vw;
-    top: 54%;
+    width: min(360px, 38vw);
+    left: 24px;
   }
 
   .beat-ai {
-    right: 3.5vw;
+    right: 24px;
     left: auto;
   }
 
-  .beat-services {
-    padding: 0 3.5vw 6vh 3.5vw;
+  .beat-services-left {
+    left: 24px;
+    width: min(320px, 36vw);
   }
 
-  .beat-services-left,
   .beat-services-right {
-    max-width: 320px;
+    right: 24px;
+    width: min(320px, 36vw);
   }
 }
 
@@ -520,12 +524,8 @@ body.home-page .footer-bottom {
     margin-inline: auto !important;
     top: auto !important;
     bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
-    max-height: min(44dvh, 320px) !important;
     transform: translateY(12px) translate3d(0, 0, 0) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    box-sizing: border-box !important;
+    max-height: min(44dvh, 320px) !important;
     pointer-events: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
@@ -558,15 +558,24 @@ body.home-page .footer-bottom {
   }
 
   .beat-services {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    align-items: stretch !important;
-    padding: 0 !important;
+    position: absolute !important;
+    inset: auto !important;
+    left: 16px !important;
+    right: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    top: auto !important;
+    width: calc(100vw - 32px) !important;
+    max-width: 440px !important;
+    margin-inline: auto !important;
+    max-height: min(44dvh, 320px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
   .beat-services-left {
-    max-width: 100% !important;
+    position: static !important;
+    width: 100% !important;
+    transform: none !important;
     gap: 6px !important;
   }
 
@@ -574,59 +583,37 @@ body.home-page .footer-bottom {
     display: none !important;
   }
 
+  .beat-services .service-tile {
+    padding: 10px 14px !important;
+  }
+
+  .beat-services .service-tile-title {
+    font-size: 0.92rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .beat-services .service-tile-desc {
+    font-size: 0.76rem !important;
+    line-height: 1.3 !important;
+  }
+
   .beat-intro .hero-actions {
     display: flex !important;
     flex-direction: row !important;
-    gap: 8px !important;
+    gap: 6px !important;
     width: 100% !important;
-    flex-wrap: wrap !important;
   }
 
   .beat-intro .hero-actions .btn {
-    flex: 1 1 calc(50% - 4px) !important;
-    min-width: 130px !important;
-    min-height: 42px !important;
-    font-size: 0.80rem !important;
-    padding: 8px 12px !important;
+    flex: 1 1 50% !important;
+    min-width: 0 !important;
+    min-height: 36px !important;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.02em !important;
+    padding: 6px 4px !important;
     text-align: center !important;
-  }
-}
-
-/* ==========================================================================
-   6. REDUCED MOTION PREFERENCE
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-  .scrolly-background-stage {
-    position: static;
-    height: 50vh;
-  }
-
-  .scrolly-scroll-track {
-    height: auto;
-  }
-
-  .scrolly-overlay-viewport {
-    position: static;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xl);
-    padding: var(--space-2xl) 5vw;
-  }
-
-  .story-beat {
-    position: static;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    pointer-events: auto !important;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .beat-services {
-    flex-direction: column;
-    gap: var(--space-md);
-    padding: 0;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
   }
 }
