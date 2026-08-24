@@ -1,7 +1,7 @@
 /* ==========================================================================
    LUVITS - CINEMATIC SCROLLYTELLING STYLES (60 FPS GPU-ACCELERATED)
    Flanking Editorial Layout (Never overlaps character's face/head in any mode)
-   Max Height on Mobile & Desktop is strictly below the shirt collar
+   Seamless Desktop, Tablet, and Mobile Dynamic Viewport Framing
    ========================================================================== */
 
 /* Seamless deep black theme for the home page */
@@ -47,10 +47,10 @@ body.home-page .footer-grid {
 }
 
 body.home-page .footer-grid > div {
-  background: rgba(8, 8, 12, 0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(212, 175, 55, 0.16);
+  background: rgba(8, 8, 12, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.18);
   border-radius: var(--radius-md);
   padding: var(--space-md) var(--space-lg);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -58,15 +58,15 @@ body.home-page .footer-grid > div {
 }
 
 body.home-page .footer-grid > div:hover {
-  border-color: rgba(212, 175, 55, 0.35);
+  border-color: rgba(212, 175, 55, 0.4);
   transform: translateY(-2px);
 }
 
 body.home-page .footer-bottom {
-  background: rgba(6, 6, 8, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(6, 6, 8, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: var(--space-sm) var(--space-lg);
 }
@@ -104,7 +104,7 @@ body.home-page .footer-bottom {
   pointer-events: none;
   overflow: hidden;
   background-color: #000000;
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   will-change: transform;
 }
@@ -115,8 +115,8 @@ body.home-page .footer-bottom {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 1; /* Instant visibility to prevent any blank screen */
-  transform: translateZ(0);
+  opacity: 1; /* Instant visibility for zero blank flash */
+  transform: translate3d(0, 0, 0);
   will-change: contents;
 }
 
@@ -133,7 +133,7 @@ body.home-page .footer-bottom {
     linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, transparent 15%, transparent 82%, rgba(0, 0, 0, 0.95) 100%);
   pointer-events: none;
   z-index: 1;
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* ==========================================================================
@@ -147,7 +147,7 @@ body.home-page .footer-bottom {
   pointer-events: none;
 }
 
-/* Fixed Overlay Viewport for Story Beats (Auto-adapts to collapsing address bars) */
+/* Fixed Overlay Viewport for Story Beats */
 .scrolly-overlay-viewport {
   position: fixed;
   inset: 0;
@@ -162,22 +162,22 @@ body.home-page .footer-bottom {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
   box-sizing: border-box;
 }
 
 /* ==========================================================================
-   3. STORY BEATS (Strictly Flanked / Lower Half - Never reaches above collar)
+   3. STORY BEATS (Flanked Positioning — Clear View of Central Figure)
    ========================================================================== */
 .story-beat {
   position: absolute;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px) translateZ(0);
+  transform: translate3d(0, 16px, 0);
   transition:
-    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0.45s ease;
+    opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.42s ease;
   pointer-events: none;
   z-index: 3;
   will-change: opacity, transform;
@@ -186,22 +186,22 @@ body.home-page .footer-bottom {
 .story-beat.is-active {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) translateZ(0);
+  transform: translate3d(0, 0, 0);
   pointer-events: auto;
 }
 
-/* Glassmorphism Luxury Styling for Cards (GPU-Optimized & Compact with Shadow Bordering) */
+/* Glassmorphism Luxury Styling for Cards */
 .scrolly-glass-card {
-  background: rgba(8, 8, 12, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: rgba(8, 8, 12, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 175, 55, 0.22);
   border-radius: 14px;
   box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.85),
               0 0 0 1px rgba(212, 175, 55, 0.12),
               inset 0 1px 0 rgba(255, 255, 255, 0.1);
   padding: 20px 24px;
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
   contain: paint;
   transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -209,27 +209,27 @@ body.home-page .footer-bottom {
 }
 
 .scrolly-glass-card:hover {
-  border-color: rgba(212, 175, 55, 0.45);
+  border-color: rgba(212, 175, 55, 0.5);
   box-shadow: 0 24px 52px -6px rgba(0, 0, 0, 0.92),
               0 0 0 1px rgba(212, 175, 55, 0.35),
-              0 0 24px rgba(212, 175, 55, 0.18),
-              inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  transform: translateY(-3px) translateZ(0);
+              0 0 24px rgba(212, 175, 55, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px) translate3d(0, 0, 0);
 }
 
 /* --------------------------------------------------------------------------
-   BEAT 1: INTRO (Hero - Left Flank, strictly below upper collar level)
+   BEAT 1: INTRO (Hero - Left Flank)
    -------------------------------------------------------------------------- */
 .beat-intro {
-  left: 5vw;
-  top: 54%;
-  transform: translateY(-40%) translateZ(0);
-  max-width: 460px;
+  left: clamp(2rem, 5vw, 6rem);
+  top: 52%;
+  transform: translateY(-50%) translate3d(0, 16px, 0);
+  max-width: 480px;
   text-align: left;
 }
 
 .beat-intro.is-active {
-  transform: translateY(-44%) translateZ(0);
+  transform: translateY(-50%) translate3d(0, 0, 0);
 }
 
 .beat-intro .hero-headline {
@@ -253,17 +253,17 @@ body.home-page .footer-bottom {
 }
 
 .beat-intro .hero-actions .btn {
-  padding: 8px 18px;
+  padding: 10px 20px;
   font-size: 0.82rem;
   letter-spacing: 0.06em;
   font-weight: 700;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .scrolly-scroll-indicator {
   position: absolute;
   bottom: 4vh;
-  left: 5vw;
+  left: clamp(2rem, 5vw, 6rem);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -282,31 +282,17 @@ body.home-page .footer-bottom {
 }
 
 @keyframes scrollyBounce {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(5px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
 }
 
 @keyframes scrollyPulse {
-
-  0%,
-  100% {
-    opacity: 0.5;
-  }
-
-  50% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
 /* --------------------------------------------------------------------------
-   BEAT 2: SERVICES (Split Flanking Layout - Left & Right Lower Columns)
+   BEAT 2: SERVICES (Split Flanking Layout - Left & Right Columns)
    -------------------------------------------------------------------------- */
 .beat-services {
   width: 100%;
@@ -314,7 +300,7 @@ body.home-page .footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0 4.5vw 8vh 4.5vw;
+  padding: 0 clamp(2rem, 4.5vw, 5rem) 7vh clamp(2rem, 4.5vw, 5rem);
   box-sizing: border-box;
 }
 
@@ -335,7 +321,7 @@ body.home-page .footer-bottom {
 }
 
 .beat-services .service-tile {
-  padding: 12px 18px;
+  padding: 14px 18px;
 }
 
 .beat-services .service-tile-title {
@@ -351,18 +337,18 @@ body.home-page .footer-bottom {
 }
 
 /* --------------------------------------------------------------------------
-   BEAT 3: PORTFOLIO (Left Flank - Lower Half)
+   BEAT 3: PORTFOLIO (Left Flank)
    -------------------------------------------------------------------------- */
 .beat-portfolio {
-  left: 5vw;
-  top: 54%;
-  transform: translateY(-40%) translateZ(0);
-  max-width: 420px;
+  left: clamp(2rem, 5vw, 6rem);
+  top: 52%;
+  transform: translateY(-50%) translate3d(0, 16px, 0);
+  max-width: 440px;
   text-align: left;
 }
 
 .beat-portfolio.is-active {
-  transform: translateY(-44%) translateZ(0);
+  transform: translateY(-50%) translate3d(0, 0, 0);
 }
 
 .portfolio-cards-stack {
@@ -377,7 +363,7 @@ body.home-page .footer-bottom {
   justify-content: space-between;
   align-items: center;
   padding: 10px 14px;
-  background: rgba(12, 12, 16, 0.75);
+  background: rgba(12, 12, 16, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -385,10 +371,10 @@ body.home-page .footer-bottom {
 }
 
 .portfolio-item-card:hover {
-  border-color: rgba(212, 175, 55, 0.4);
-  background: rgba(24, 24, 30, 0.92);
+  border-color: rgba(212, 175, 55, 0.45);
+  background: rgba(24, 24, 30, 0.95);
   transform: translateX(4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 12px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 12px rgba(212, 175, 55, 0.2);
 }
 
 .portfolio-item-card h4 {
@@ -403,24 +389,24 @@ body.home-page .footer-bottom {
 }
 
 /* --------------------------------------------------------------------------
-   BEAT 4: LUV.AI (Right Flank - Lower Half)
+   BEAT 4: LUV.AI (Right Flank)
    -------------------------------------------------------------------------- */
 .beat-ai {
-  right: 5vw;
-  top: 54%;
-  transform: translateY(-40%) translateZ(0);
-  max-width: 420px;
+  right: clamp(2rem, 5vw, 6rem);
+  top: 52%;
+  transform: translateY(-50%) translate3d(0, 16px, 0);
+  max-width: 440px;
   text-align: left;
 }
 
 .beat-ai.is-active {
-  transform: translateY(-44%) translateZ(0);
+  transform: translateY(-50%) translate3d(0, 0, 0);
 }
 
 .beat-ai .scrolly-glass-card {
-  border-color: rgba(138, 43, 226, 0.25);
-  background: rgba(12, 8, 20, 0.82);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(138, 43, 226, 0.08);
+  border-color: rgba(138, 43, 226, 0.3);
+  background: rgba(12, 8, 20, 0.86);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(138, 43, 226, 0.12);
 }
 
 .ai-prompts-stack {
@@ -436,7 +422,7 @@ body.home-page .footer-bottom {
   gap: 8px;
   padding: 8px 12px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(138, 43, 226, 0.18);
+  border: 1px solid rgba(138, 43, 226, 0.22);
   border-radius: 8px;
   font-size: 0.78rem;
   color: var(--text-secondary);
@@ -447,23 +433,23 @@ body.home-page .footer-bottom {
 }
 
 /* --------------------------------------------------------------------------
-   BEAT 5: FINALE (Left Flank - Lower Half, perfectly clears footer)
+   BEAT 5: FINALE (Left Flank)
    -------------------------------------------------------------------------- */
 .beat-finale {
-  left: 5vw;
-  top: 54%;
-  transform: translateY(-40%) translateZ(0);
+  left: clamp(2rem, 5vw, 6rem);
+  top: 52%;
+  transform: translateY(-50%) translate3d(0, 16px, 0);
   max-width: 480px;
   text-align: left;
 }
 
 .beat-finale.is-active {
-  transform: translateY(-44%) translateZ(0);
+  transform: translateY(-50%) translate3d(0, 0, 0);
 }
 
 .beat-finale .scrolly-glass-card {
-  padding: 20px 24px;
-  border-color: rgba(212, 175, 55, 0.28);
+  padding: 22px 26px;
+  border-color: rgba(212, 175, 55, 0.32);
 }
 
 .beat-finale .cta-headline {
@@ -482,120 +468,33 @@ body.home-page .footer-bottom {
    4. TABLET ADAPTATIONS (769px to 1024px)
    ========================================================================== */
 @media (max-width: 1024px) {
-
   .beat-intro,
   .beat-portfolio,
   .beat-ai,
   .beat-finale {
-    max-width: 360px;
-    left: 4vw;
-    top: 56%;
+    max-width: 380px;
+    left: 3.5vw;
+    top: 54%;
   }
 
   .beat-ai {
-    right: 4vw;
+    right: 3.5vw;
     left: auto;
   }
 
   .beat-services {
-    padding: 0 4vw 6vh 4vw;
+    padding: 0 3.5vw 6vh 3.5vw;
   }
 
   .beat-services-left,
   .beat-services-right {
-    max-width: 300px;
+    max-width: 320px;
   }
 }
 
 /* ==========================================================================
-   5. MOBILE NAVIGATION BAR & HEADER (Max width 992px)
-   ========================================================================== */
-@media (max-width: 992px) {
-  .site-header {
-    height: 60px !important;
-    background: rgba(4, 4, 6, 0.75) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.12) !important;
-    padding-inline: 16px !important;
-  }
-
-  .site-header.is-scrolled {
-    background: rgba(4, 4, 6, 0.92) !important;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7) !important;
-  }
-
-  .header-inner {
-    padding: 0 !important;
-    height: 100% !important;
-    align-items: center !important;
-  }
-
-  .brand {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    gap: 1px !important;
-  }
-
-  .brand-title {
-    font-size: 1.35rem !important;
-    letter-spacing: 0.12em !important;
-    line-height: 1 !important;
-  }
-
-  .nav-toggle {
-    width: 40px !important;
-    height: 40px !important;
-    padding: 8px !important;
-    border-radius: 8px !important;
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(212, 175, 55, 0.22) !important;
-  }
-
-  .hamburger-bar {
-    width: 20px !important;
-    height: 2px !important;
-    background: #e4e4e7 !important;
-    margin-block: 2px !important;
-  }
-
-  .nav-menu {
-    top: 60px !important;
-    height: calc(100dvh - 60px) !important;
-    background: rgba(6, 6, 8, 0.98) !important;
-    backdrop-filter: blur(28px) !important;
-    -webkit-backdrop-filter: blur(28px) !important;
-    border-top: 1px solid rgba(212, 175, 55, 0.15) !important;
-    padding: 20px 20px calc(24px + env(safe-area-inset-bottom, 0px)) 20px !important;
-    gap: 4px !important;
-    display: flex !important;
-  }
-
-  .nav-link {
-    font-size: 0.95rem !important;
-    padding: 10px 14px !important;
-    min-height: 44px !important;
-    border-radius: 8px !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
-  }
-
-  .nav-link.is-active,
-  .nav-link:hover {
-    background: rgba(212, 175, 55, 0.1) !important;
-    color: #f1d77a !important;
-  }
-
-  .nav-drawer-footer {
-    margin-top: auto !important;
-    padding-top: 16px !important;
-    border-top: 1px solid rgba(212, 175, 55, 0.15) !important;
-  }
-}
-
-/* ==========================================================================
-   6. MOBILE ULTRA-OPTIMIZED (Max width 768px)
-   Dynamic Viewport (100dvh) — Zero Bottom Clipping & Crystal Clear Readability
+   5. MOBILE ULTRA-OPTIMIZED (Max width 768px)
+   Dynamic Viewport (100dvh) — Bottom Anchored Cards & Clear Visibility
    ========================================================================== */
 @media (max-width: 768px) {
   .scrolly-scroll-track {
@@ -612,7 +511,7 @@ body.home-page .footer-bottom {
     pointer-events: none !important;
   }
 
-  /* Anchor ALL story beats strictly inside the visible lower dynamic viewport */
+  /* Anchor ALL story beats inside the lower visible dynamic viewport */
   .story-beat {
     left: 16px !important;
     right: 16px !important;
@@ -622,7 +521,7 @@ body.home-page .footer-bottom {
     top: auto !important;
     bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
     max-height: min(44dvh, 320px) !important;
-    transform: translateY(12px) translateZ(0) !important;
+    transform: translateY(12px) translate3d(0, 0, 0) !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
@@ -634,13 +533,12 @@ body.home-page .footer-bottom {
   }
 
   .story-beat.is-active {
-    transform: translateY(0) translateZ(0) !important;
+    transform: translateY(0) translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
 
-  /* Premium Luxury Glass Card Styling */
   .scrolly-glass-card {
     padding: clamp(12px, 3vw, 16px) clamp(14px, 3.5vw, 18px) !important;
     background: rgba(8, 8, 12, 0.94) !important;
@@ -655,87 +553,25 @@ body.home-page .footer-bottom {
     box-sizing: border-box !important;
   }
 
-  /* Clear, Elegant Typography for Mobile */
-  .eyebrow {
-    font-size: 0.72rem !important;
-    letter-spacing: 0.14em !important;
-    font-weight: 700 !important;
-    color: #f1d77a !important;
-    margin-bottom: 4px !important;
+  .scrolly-scroll-indicator {
+    display: none !important;
   }
 
-  .section-title {
-    font-size: clamp(1.20rem, 4.5vw, 1.45rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-    margin-top: 2px !important;
-    color: #FFFFFF !important;
+  .beat-services {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: stretch !important;
+    padding: 0 !important;
   }
 
-  .gold-line {
-    width: 36px !important;
-    margin-block: 4px 8px !important;
-    height: 2px !important;
-  }
-
-  /* Comfortable, Tap-Friendly Mobile Buttons */
-  .btn,
-  .btn-gold,
-  .btn-outline {
-    font-size: 0.82rem !important;
-    padding: 10px 16px !important;
-    letter-spacing: 0.04em !important;
-    height: auto !important;
-    min-height: 42px !important;
-    border-radius: 8px !important;
-    font-weight: 700 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+  .beat-services-left {
+    max-width: 100% !important;
     gap: 6px !important;
-    text-decoration: none !important;
-    cursor: pointer !important;
   }
 
-  /* ------------------------------------------------------------------------
-     BEAT 1 MOBILE (Welcome to LUVITS Hero Card)
-     ------------------------------------------------------------------------ */
-  .beat-intro .scrolly-glass-card {
-    padding: 14px 18px !important;
-  }
-
-  .beat-intro .hero-eyebrow {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 4px !important;
-    font-size: 0.72rem !important;
-    letter-spacing: 0.16em !important;
-    font-weight: 700 !important;
-    color: #f1d77a !important;
-    margin-bottom: 4px !important;
-  }
-
-  .beat-intro .hero-headline {
-    font-size: clamp(1.25rem, 4.8vw, 1.55rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.18 !important;
-    letter-spacing: 0.01em !important;
-    margin-bottom: 4px !important;
-    color: #FFFFFF !important;
-  }
-
-  .beat-intro .hero-gold-line {
-    width: 36px !important;
-    height: 2px !important;
-    margin-block: 4px 8px !important;
-    background: linear-gradient(90deg, #d4af37, transparent) !important;
-  }
-
-  .beat-intro .hero-lede {
-    font-size: clamp(0.82rem, 2.5vw, 0.90rem) !important;
-    color: #d4d4d8 !important;
-    line-height: 1.45 !important;
-    margin-block: 0 10px !important;
+  .beat-services-right {
+    display: none !important;
   }
 
   .beat-intro .hero-actions {
@@ -752,163 +588,12 @@ body.home-page .footer-bottom {
     min-height: 42px !important;
     font-size: 0.80rem !important;
     padding: 8px 12px !important;
-    white-space: normal !important;
     text-align: center !important;
-  }
-
-  .scrolly-scroll-indicator {
-    display: none !important;
-  }
-
-  /* ------------------------------------------------------------------------
-     BEAT 2 MOBILE (Services)
-     ------------------------------------------------------------------------ */
-  .beat-services {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    align-items: stretch !important;
-    padding: 0 !important;
-  }
-
-  .beat-services-left {
-    max-width: 100% !important;
-    gap: 6px !important;
-  }
-
-  .beat-services-left .scrolly-glass-card:first-child {
-    padding: 10px 14px !important;
-  }
-
-  .beat-services-left .scrolly-glass-card:first-child p {
-    font-size: 0.82rem !important;
-    line-height: 1.35 !important;
-    color: #d4d4d8 !important;
-  }
-
-  .beat-services .service-tile {
-    padding: 8px 12px !important;
-  }
-
-  .beat-services .service-tile-title {
-    font-size: 0.90rem !important;
-    margin-bottom: 2px !important;
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
-  }
-
-  .beat-services .service-tile-desc {
-    font-size: 0.78rem !important;
-    line-height: 1.3 !important;
-    color: #a1a1aa !important;
-  }
-
-  .beat-services-right {
-    display: none !important;
-  }
-
-  /* ------------------------------------------------------------------------
-     BEAT 3 MOBILE (Portfolio)
-     ------------------------------------------------------------------------ */
-  .portfolio-cards-stack {
-    gap: 6px !important;
-    margin-block: 6px 10px !important;
-  }
-
-  .portfolio-item-card {
-    padding: 8px 12px !important;
-    min-height: 38px !important;
-  }
-
-  .portfolio-item-card h4 {
-    font-size: 0.88rem !important;
-    color: #FFFFFF !important;
-  }
-
-  .portfolio-item-card span {
-    font-size: 0.75rem !important;
-    color: #a1a1aa !important;
-  }
-
-  /* ------------------------------------------------------------------------
-     BEAT 4 MOBILE (LUV.AI)
-     ------------------------------------------------------------------------ */
-  .beat-ai .scrolly-glass-card p {
-    font-size: 0.82rem !important;
-    line-height: 1.35 !important;
-    margin-top: 4px !important;
-    color: #d4d4d8 !important;
-  }
-
-  .ai-prompts-stack {
-    gap: 6px !important;
-    margin-block: 8px !important;
-  }
-
-  .ai-prompt-chip {
-    padding: 8px 12px !important;
-    font-size: 0.78rem !important;
-    gap: 6px !important;
-    min-height: 36px !important;
-  }
-
-  .ai-prompt-chip .chip-icon {
-    font-size: 0.85rem !important;
-  }
-
-  /* ------------------------------------------------------------------------
-     BEAT 5 MOBILE (Finale)
-     ------------------------------------------------------------------------ */
-  .beat-finale .scrolly-glass-card {
-    padding: 14px 18px !important;
-  }
-
-  .beat-finale .cta-headline {
-    font-size: clamp(1.20rem, 4.5vw, 1.45rem) !important;
-    line-height: 1.2 !important;
-    margin-block: 2px 6px !important;
-    color: #FFFFFF !important;
-  }
-
-  .beat-finale .cta-sub {
-    font-size: 0.82rem !important;
-    line-height: 1.4 !important;
-    color: #d4d4d8 !important;
-    margin-bottom: 10px !important;
-  }
-}
-
-/* Extra Small Screen Adaptations (320px to 380px: iPhone SE & Compact Devices) */
-@media (max-width: 380px) {
-  .scrolly-glass-card {
-    padding: 10px 12px !important;
-    border-radius: 12px !important;
-  }
-
-  .section-title {
-    font-size: 1.15rem !important;
-  }
-
-  .beat-intro .hero-headline {
-    font-size: 1.20rem !important;
-  }
-
-  .beat-intro .hero-lede {
-    font-size: 0.78rem !important;
-    margin-bottom: 8px !important;
-  }
-
-  .btn,
-  .btn-gold,
-  .btn-outline {
-    font-size: 0.78rem !important;
-    padding: 8px 10px !important;
-    min-height: 38px !important;
   }
 }
 
 /* ==========================================================================
-   7. REDUCED MOTION PREFERENCE
+   6. REDUCED MOTION PREFERENCE
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .scrolly-background-stage {

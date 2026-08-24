@@ -1,8 +1,9 @@
 /**
  * ==========================================================================
- * LUVITS - 60 FPS ULTRA-PERFORMANCE SCROLLYTELLING ENGINE
+ * LUVITS - 60 FPS ULTRA-PERFORMANCE SCROLLYTELLING & LAZY-STREAMING ENGINE
  * Hardware-Accelerated ImageBitmap Pipeline, Dynamic Viewport (100dvh)
- * Universal Mobile/Desktop Responsive Framing & Fail-Safe Asset Loading
+ * Continuous Cross-Fading Story Beats (Zero Blank Dead Zones)
+ * Progressive Lazy Frame Streamer (Peak LCP + Bandwidth Optimization)
  * ==========================================================================
  */
 
@@ -23,6 +24,7 @@ class HighPerformanceScrollyEngine {
     
     // Cache for pre-decoded ImageBitmaps or HTMLImageElements
     this.frames = new Array(this.frameCount);
+    this.pendingFrames = new Set();
     this.loadedCount = 0;
     this.currentRenderedIndex = -1;
 
@@ -38,13 +40,13 @@ class HighPerformanceScrollyEngine {
 
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Story beat active scroll ranges (Leaves smooth clearance before footer)
+    // Seamless, overlapping story beat ranges (Zero empty dead zones during scroll)
     this.beatRanges = [
-      { start: 0.00, end: 0.18 }, // Beat 1: Intro (Left Flank)
-      { start: 0.22, end: 0.45 }, // Beat 2: Services (Split Flanks)
-      { start: 0.48, end: 0.70 }, // Beat 3: Portfolio (Left Flank)
-      { start: 0.73, end: 0.88 }, // Beat 4: LUV.AI (Right Flank)
-      { start: 0.90, end: 0.975 } // Beat 5: Finale (Left Flank, fades before footer arrives)
+      { start: 0.00, end: 0.22 }, // Beat 1: Intro (Left Flank)
+      { start: 0.20, end: 0.48 }, // Beat 2: Services (Split Flanks)
+      { start: 0.46, end: 0.72 }, // Beat 3: Portfolio (Left Flank)
+      { start: 0.70, end: 0.88 }, // Beat 4: LUV.AI (Right Flank)
+      { start: 0.86, end: 0.985 } // Beat 5: Finale (Left Flank, fades before footer arrives)
     ];
 
     this.renderLoopBound = this.renderLoop.bind(this);
@@ -87,7 +89,7 @@ class HighPerformanceScrollyEngine {
 
   init() {
     this.handleResize();
-    this.preloadAllFrames();
+    this.preloadInitialStream();
 
     const debouncedResize = () => {
       clearTimeout(this.resizeTimer);
@@ -108,7 +110,10 @@ class HighPerformanceScrollyEngine {
       this.onScroll();
     }, { passive: true });
 
-    // Initial position trigger
+    // Activate initial beat & position
+    if (this.beats.length > 0) {
+      this.beats[0].classList.add('is-active');
+    }
     this.onScroll();
   }
 
@@ -138,89 +143,73 @@ class HighPerformanceScrollyEngine {
     }
   }
 
-  async preloadAllFrames() {
+  /**
+   * Progressive Lazy Loading: Loads initial viewport buffer first,
+   * then streams frames on-demand based on user scroll position.
+   */
+  async preloadInitialStream() {
     const supportsBitmap = typeof window.createImageBitmap === 'function';
 
-    // Priority 1: Load and decode Frame 0 (website_004.webp) immediately for peak LCP
-    const firstFrameSrc = this.getFrameUrl(this.startFrame);
-    
-    // Fail-safe immediate HTMLImage element
-    const fallbackImg = new Image();
-    fallbackImg.crossOrigin = 'anonymous';
-    fallbackImg.decoding = 'async';
-    fallbackImg.src = firstFrameSrc;
-    fallbackImg.onload = () => {
-      if (!this.frames[0]) {
-        this.frames[0] = fallbackImg;
-        this.loadedCount++;
-        this.canvas.classList.add('loaded');
-        this.drawFrame(0);
-      }
-    };
+    // Phase 1: High Priority Instant LCP Frame 0 (website_004.webp)
+    await this.loadSingleFrame(0, this.getFrameUrl(this.startFrame), supportsBitmap);
 
-    try {
-      if (supportsBitmap) {
-        const res = await fetch(firstFrameSrc);
-        if (res.ok) {
-          const blob = await res.blob();
-          const bmp = await createImageBitmap(blob);
-          this.frames[0] = bmp;
-          this.loadedCount++;
-          this.canvas.classList.add('loaded');
-          this.drawFrame(0);
-        }
-      } else {
-        if (fallbackImg.decode) {
-          await fallbackImg.decode();
-          this.frames[0] = fallbackImg;
-          this.loadedCount++;
-          this.canvas.classList.add('loaded');
-          this.drawFrame(0);
-        }
-      }
-    } catch (e) {
-      // Fallback img handles it via onload
+    // Phase 2: Preload initial scroll buffer (first 16 frames)
+    for (let i = 1; i <= 16 && i < this.frameCount; i++) {
+      this.loadSingleFrame(i, this.getFrameUrl(this.startFrame + i), supportsBitmap);
     }
 
-    // Priority 2: Progressive batched loading for remaining 236 WebP frames
-    const loadQueue = [];
-    for (let i = 1; i < this.frameCount; i++) {
-      const frameNum = this.startFrame + i;
-      loadQueue.push({ index: i, src: this.getFrameUrl(frameNum) });
-    }
+    // Phase 3: Background Idle Streamer
+    const idleStreamer = () => {
+      let nextIndex = 17;
+      const streamChunk = () => {
+        const batchSize = 6;
+        let count = 0;
+        while (nextIndex < this.frameCount && count < batchSize) {
+          if (!this.frames[nextIndex] && !this.pendingFrames.has(nextIndex)) {
+            this.loadSingleFrame(nextIndex, this.getFrameUrl(this.startFrame + nextIndex), supportsBitmap);
+            count++;
+          }
+          nextIndex++;
+        }
 
-    // Process initial scroll buffer (first 24 frames) with high priority
-    const immediateBuffer = loadQueue.splice(0, 24);
-    immediateBuffer.forEach(item => this.loadSingleFrame(item.index, item.src, supportsBitmap));
-
-    // Process remainder with throttled queue
-    const processRemaining = () => {
-      const concurrency = 8;
-      let active = 0;
-      let currentIndex = 0;
-
-      const next = () => {
-        while (active < concurrency && currentIndex < loadQueue.length) {
-          const item = loadQueue[currentIndex++];
-          active++;
-          this.loadSingleFrame(item.index, item.src, supportsBitmap).finally(() => {
-            active--;
-            next();
-          });
+        if (nextIndex < this.frameCount) {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(streamChunk, { timeout: 1500 });
+          } else {
+            setTimeout(streamChunk, 100);
+          }
         }
       };
 
-      next();
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(streamChunk, { timeout: 1000 });
+      } else {
+        setTimeout(streamChunk, 150);
+      }
     };
 
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => processRemaining(), { timeout: 1200 });
-    } else {
-      setTimeout(processRemaining, 60);
+    idleStreamer();
+  }
+
+  /**
+   * On-demand frame streaming around current target index (target ± 12 frames)
+   */
+  prioritizeFramesAround(centerIndex) {
+    const supportsBitmap = typeof window.createImageBitmap === 'function';
+    const start = Math.max(0, centerIndex - 6);
+    const end = Math.min(this.frameCount - 1, centerIndex + 14);
+
+    for (let i = start; i <= end; i++) {
+      if (!this.frames[i] && !this.pendingFrames.has(i)) {
+        this.loadSingleFrame(i, this.getFrameUrl(this.startFrame + i), supportsBitmap);
+      }
     }
   }
 
   async loadSingleFrame(index, src, supportsBitmap) {
+    if (this.frames[index] || this.pendingFrames.has(index)) return;
+    this.pendingFrames.add(index);
+
     try {
       if (supportsBitmap) {
         const res = await fetch(src);
@@ -229,30 +218,32 @@ class HighPerformanceScrollyEngine {
           const bmp = await createImageBitmap(blob);
           this.frames[index] = bmp;
           this.loadedCount++;
-          if (index === 0 && !this.canvas.classList.contains('loaded')) {
+          this.pendingFrames.delete(index);
+          if (index === 0 || index === this.currentRenderedIndex) {
             this.canvas.classList.add('loaded');
-            this.drawFrame(0);
+            this.drawFrame(index);
           }
           return;
         }
       }
     } catch (e) {
-      // Fall through to Image fallback
+      // Fallback to Image element
     }
 
-    // Reliable fallback for Image element
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.decoding = 'async';
     img.src = src;
+
     if (img.decode) {
       try {
         await img.decode();
         this.frames[index] = img;
         this.loadedCount++;
-        if (index === 0 && !this.canvas.classList.contains('loaded')) {
+        this.pendingFrames.delete(index);
+        if (index === 0 || index === this.currentRenderedIndex) {
           this.canvas.classList.add('loaded');
-          this.drawFrame(0);
+          this.drawFrame(index);
         }
         return;
       } catch (e) {}
@@ -261,10 +252,15 @@ class HighPerformanceScrollyEngine {
     img.onload = () => {
       this.frames[index] = img;
       this.loadedCount++;
-      if (index === 0 && !this.canvas.classList.contains('loaded')) {
+      this.pendingFrames.delete(index);
+      if (index === 0 || index === this.currentRenderedIndex) {
         this.canvas.classList.add('loaded');
-        this.drawFrame(0);
+        this.drawFrame(index);
       }
+    };
+
+    img.onerror = () => {
+      this.pendingFrames.delete(index);
     };
   }
 
@@ -303,20 +299,23 @@ class HighPerformanceScrollyEngine {
   }
 
   renderLoop() {
-    // Highly responsive physics easing (0.28 factor eliminates dragging latency)
+    // Responsive physics easing factor
     const diff = this.targetProgress - this.currentProgress;
 
-    if (Math.abs(diff) < 0.0003) {
+    if (Math.abs(diff) < 0.0002) {
       this.currentProgress = this.targetProgress;
     } else {
-      this.currentProgress += diff * 0.28;
+      this.currentProgress += diff * 0.24;
     }
 
-    // Direct, ultra-fast frame mapping
+    // Direct frame mapping
     const targetIndex = Math.min(
       this.frameCount - 1,
       Math.max(0, Math.round(this.currentProgress * (this.frameCount - 1)))
     );
+
+    // Prioritize loading frames surrounding active scroll window
+    this.prioritizeFramesAround(targetIndex);
 
     if (targetIndex !== this.currentRenderedIndex) {
       this.currentRenderedIndex = targetIndex;
@@ -326,7 +325,7 @@ class HighPerformanceScrollyEngine {
     this.updateStoryBeats(this.currentProgress);
 
     // Continue loop if still interpolating, otherwise sleep to save GPU cycles
-    if (Math.abs(this.targetProgress - this.currentProgress) >= 0.0003) {
+    if (Math.abs(this.targetProgress - this.currentProgress) >= 0.0002) {
       requestAnimationFrame(this.renderLoopBound);
     } else {
       this.isRendering = false;
@@ -364,17 +363,17 @@ class HighPerformanceScrollyEngine {
     let drawW, drawH, offX, offY;
 
     if (isMobile) {
-      // Mobile: Scale character so head & upper torso are framed in upper 60% above the glass cards
-      const targetH = ch * 0.68;
+      // Mobile: Scale character so upper body sits above lower bottom cards
+      const targetH = ch * 0.70;
       const scale = targetH / fh;
       drawW = Math.round(fw * scale);
       drawH = Math.round(fh * scale);
       offX = Math.round((cw - drawW) * 0.5);
-      offY = Math.round(48 * this.dpr);
+      offY = Math.round(44 * this.dpr);
     } else {
-      // Desktop / Widescreen: Scale so head & feather sit safely below header with full character visibility
-      const headerOffset = Math.round(62 * this.dpr);
-      const availableH = ch - headerOffset - Math.round(16 * this.dpr);
+      // Desktop / Widescreen: Scale character safely below header with central alignment
+      const headerOffset = Math.round(64 * this.dpr);
+      const availableH = ch - headerOffset - Math.round(18 * this.dpr);
       const availableW = cw;
 
       const scale = Math.min(availableW / fw, availableH / fh);
@@ -388,7 +387,7 @@ class HighPerformanceScrollyEngine {
     this.ctx.fillStyle = '#000000';
     this.ctx.fillRect(0, 0, cw, ch);
 
-    // Direct GPU texture blit (0ms CPU decode time with ImageBitmap)
+    // Direct GPU texture blit
     this.ctx.drawImage(frame, offX, offY, drawW, drawH);
   }
 
@@ -400,8 +399,8 @@ class HighPerformanceScrollyEngine {
       : document.documentElement.scrollHeight - viewportH;
     const currentY = window.scrollY || window.pageYOffset;
     
-    // When user scrolls near or into the footer, fade out all fixed overlay cards
-    const isOverFooter = scrollMax > 0 && currentY >= (scrollMax - 40);
+    // When user scrolls near the footer, cleanly fade out all fixed overlay cards
+    const isOverFooter = scrollMax > 0 && currentY >= (scrollMax - 30);
 
     for (let i = 0; i < this.beats.length; i++) {
       const beat = this.beats[i];

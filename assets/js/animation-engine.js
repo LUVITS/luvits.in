@@ -1,119 +1,63 @@
 /**
  * ==========================================================================
- * LUVITS - ANIME.JS ANIMATION ENGINE & MOTION UTILITIES
- * Aesthetic: 90% Static Luxury + 10% Intelligent Micro-interactions
- * Universal Fallback & 60fps GPU acceleration
+ * LUVITS - ZERO-DEPENDENCY ULTRA-PERFORMANCE ANIMATION ENGINE
+ * Hardware-Accelerated 60fps GPU Pipeline, Staggered Reveals & Micro-Interactions
+ * Built with native Web Animations API + IntersectionObserver (Zero external CDN)
  * ==========================================================================
  */
 
-let animeLib = null;
-
-// Asynchronously load Anime.js without blocking module initialization
-import('https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.es.js')
-  .then(module => {
-    animeLib = module.default;
-  })
-  .catch(err => {
-    console.warn('Anime.js CDN not reachable, using CSS motion fallback.', err);
-  });
-
 class AnimationEngine {
-
   constructor() {
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.hasWaapi = typeof Element !== 'undefined' && 'animate' in Element.prototype;
+    this.activeCard = null;
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        this.initScrollObserver();
-        this.initCardInteractions();
-      });
+      document.addEventListener('DOMContentLoaded', () => this.boot());
     } else {
-      this.initScrollObserver();
-      this.initCardInteractions();
+      this.boot();
     }
   }
 
-  /**
-   * Hero Entrance Timeline Orchestration
-   * @param {Object} elements - Hero elements to orchestrate
-   */
-  playHeroSequence({ eyebrow, heading, goldLine, lede, ctas, visual }) {
-    const elements = [eyebrow, heading, goldLine, lede, ctas, visual].filter(Boolean);
+  boot() {
+    this.initScrollObserver();
+    this.initHeroEntrance();
+    this.initCardInteractions();
+    this.initCounters();
+    this.initHeaderParallax();
+  }
 
-    if (this.reducedMotion || !animeLib) {
-      elements.forEach(el => {
+  /**
+   * Staggered Hero Sequence for Top-of-Page Section
+   */
+  initHeroEntrance() {
+    if (this.reducedMotion) {
+      document.querySelectorAll('.hero-headline, .section-header h1, .section-subtitle, .hero-actions').forEach(el => {
         el.style.opacity = '1';
         el.style.transform = 'none';
       });
       return;
     }
 
-    const tl = animeLib.timeline({
-      easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-      duration: 1000
-    });
-
-    if (eyebrow) {
-      tl.add({
-        targets: eyebrow,
-        opacity: [0, 1],
-        translateY: [20, 0],
-        duration: 700
+    const heroSections = document.querySelectorAll('.section-header, .page-hero, .hero-section');
+    heroSections.forEach(hero => {
+      const items = hero.querySelectorAll('.eyebrow, h1, .gold-line, .section-subtitle, p, .hero-actions');
+      items.forEach((item, index) => {
+        item.style.setProperty('--stagger-delay', `${index * 90}ms`);
+        item.classList.add('anime-reveal');
+        // Trigger reveal after a microtick
+        requestAnimationFrame(() => {
+          setTimeout(() => item.classList.add('is-visible'), 40 + index * 80);
+        });
       });
-    }
-
-    if (heading) {
-      tl.add({
-        targets: heading,
-        opacity: [0, 1],
-        translateY: [30, 0],
-        duration: 900
-      }, '-=500');
-    }
-
-    if (goldLine) {
-      tl.add({
-        targets: goldLine,
-        width: ['0px', '60px'],
-        opacity: [0, 1],
-        duration: 600
-      }, '-=600');
-    }
-
-    if (lede) {
-      tl.add({
-        targets: lede,
-        opacity: [0, 1],
-        translateY: [20, 0],
-        duration: 800
-      }, '-=500');
-    }
-
-    if (ctas) {
-      tl.add({
-        targets: ctas,
-        opacity: [0, 1],
-        translateY: [15, 0],
-        duration: 700
-      }, '-=600');
-    }
-
-    if (visual) {
-      tl.add({
-        targets: visual,
-        opacity: [0, 1],
-        scale: [0.94, 1],
-        duration: 1100
-      }, '-=800');
-
-      this.startSubtleBreathing(visual);
-    }
+    });
   }
 
   /**
-   * Scroll Observer for Staggered Section & Standalone Reveals
+   * High-Performance IntersectionObserver for Scroll-Triggered Reveals
    */
   initScrollObserver() {
-    const allAnimables = document.querySelectorAll('.anime-reveal, .anime-clip, .anime-scale');
+    const allAnimables = document.querySelectorAll('.anime-reveal, .anime-clip, .anime-scale, .luxury-card:not(.no-auto-reveal), .project-card, .service-tile, .stat-card');
 
     if (this.reducedMotion || !('IntersectionObserver' in window)) {
       allAnimables.forEach(el => el.classList.add('is-visible'));
@@ -124,157 +68,181 @@ class AnimationEngine {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const target = entry.target;
-          if (target.hasAttribute('data-anime-section')) {
-            this.animateSection(target);
+          
+          if (target.hasAttribute('data-anime-section') || target.hasAttribute('data-anime-stagger')) {
+            this.animateStaggerGroup(target);
           } else {
-            this.animateElement(target);
+            this.revealElement(target);
           }
+          
           observer.unobserve(target);
         }
       });
-    }, { threshold: 0.08 });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    });
 
-    const sections = document.querySelectorAll('[data-anime-section]');
-    if (sections.length > 0) {
-      sections.forEach(sec => observer.observe(sec));
-    }
+    // Observe dedicated sections
+    const sections = document.querySelectorAll('[data-anime-section], [data-anime-stagger], .grid-2, .grid-3, .grid-4');
+    sections.forEach(sec => observer.observe(sec));
 
+    // Observe standalone animable elements
     allAnimables.forEach(el => {
-      if (!el.closest('[data-anime-section]')) {
+      if (!el.closest('[data-anime-section]') && !el.closest('[data-anime-stagger]')) {
         observer.observe(el);
       }
     });
   }
 
   /**
-   * Animate a section when scrolled into view
+   * Staggered animation for grid items or section children
    */
-  animateSection(section) {
-    const reveals = section.querySelectorAll('.anime-reveal:not(.is-visible)');
-    if (reveals.length > 0) {
-      reveals.forEach(r => r.classList.add('is-visible'));
-      if (animeLib && !this.reducedMotion) {
-        animeLib({
-          targets: reveals,
-          opacity: [0, 1],
-          translateY: [24, 0],
-          delay: animeLib.stagger(90),
-          duration: 750,
-          easing: 'cubicBezier(0.16, 1, 0.3, 1)'
-        });
-      }
-    }
-
-    const clips = section.querySelectorAll('.anime-clip:not(.is-visible)');
-    if (clips.length > 0) {
-      clips.forEach(c => c.classList.add('is-visible'));
-      if (animeLib && !this.reducedMotion) {
-        animeLib({
-          targets: clips,
-          clipPath: ['inset(0 100% 0 0)', 'inset(0 0% 0 0)'],
-          duration: 900,
-          delay: animeLib.stagger(100),
-          easing: 'easeInOutQuad'
-        });
-      }
-    }
-
-    const scales = section.querySelectorAll('.anime-scale:not(.is-visible)');
-    if (scales.length > 0) {
-      scales.forEach(s => s.classList.add('is-visible'));
-      if (animeLib && !this.reducedMotion) {
-        animeLib({
-          targets: scales,
-          opacity: [0, 1],
-          scale: [0.94, 1],
-          delay: animeLib.stagger(80),
-          duration: 650,
-          easing: 'easeOutCubic'
-        });
-      }
-    }
+  animateStaggerGroup(container) {
+    const children = container.querySelectorAll('.anime-reveal, .anime-scale, .anime-clip, .luxury-card, .project-card, .service-tile');
+    
+    children.forEach((child, index) => {
+      child.style.setProperty('--stagger-delay', `${index * 70}ms`);
+      child.classList.add('is-visible');
+    });
   }
 
   /**
-   * Animate a single standalone element when scrolled into view
+   * Reveal a single element smoothly
    */
-  animateElement(el) {
+  revealElement(el) {
     el.classList.add('is-visible');
-    if (!animeLib || this.reducedMotion) return;
-
-    if (el.classList.contains('anime-reveal')) {
-      animeLib({
-        targets: el,
-        opacity: [0, 1],
-        translateY: [24, 0],
-        duration: 750,
-        easing: 'cubicBezier(0.16, 1, 0.3, 1)'
-      });
-    } else if (el.classList.contains('anime-clip')) {
-      animeLib({
-        targets: el,
-        clipPath: ['inset(0 100% 0 0)', 'inset(0 0% 0 0)'],
-        duration: 900,
-        easing: 'easeInOutQuad'
-      });
-    } else if (el.classList.contains('anime-scale')) {
-      animeLib({
-        targets: el,
-        opacity: [0, 1],
-        scale: [0.94, 1],
-        duration: 650,
-        easing: 'easeOutCubic'
-      });
-    }
   }
 
   /**
-   * Interactive hover micro-interactions for luxury cards
+   * 3D Luxury Tilt & Specular Lighting Micro-Interactions on Desktop
    */
   initCardInteractions() {
-    if (this.reducedMotion) return;
+    if (this.reducedMotion || window.innerWidth < 1024) return;
 
-    const luxuryCards = document.querySelectorAll('.luxury-card');
-    luxuryCards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        if (animeLib) {
-          animeLib({
-            targets: card,
-            scale: 1.015,
-            duration: 300,
-            easing: 'easeOutQuad'
-          });
+    const cards = document.querySelectorAll('.luxury-card, .project-card, .service-tile, .scrolly-glass-card');
+
+    cards.forEach(card => {
+      let bounds = null;
+      let rafId = null;
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
+
+      const updateMotion = () => {
+        currentX += (targetX - currentX) * 0.15;
+        currentY += (targetY - currentY) * 0.15;
+
+        const tiltX = (currentY * -6).toFixed(2);
+        const tiltY = (currentX * 6).toFixed(2);
+
+        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-2px)`;
+
+        if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
+          rafId = requestAnimationFrame(updateMotion);
+        } else {
+          rafId = null;
+        }
+      };
+
+      card.addEventListener('mouseenter', (e) => {
+        bounds = card.getBoundingClientRect();
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        if (!bounds) bounds = card.getBoundingClientRect();
+        const x = (e.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (e.clientY - bounds.top) / bounds.height - 0.5;
+
+        targetX = Math.max(-0.5, Math.min(0.5, x));
+        targetY = Math.max(-0.5, Math.min(0.5, y));
+
+        // Specular gold shine position
+        const shineX = Math.round((x + 0.5) * 100);
+        const shineY = Math.round((y + 0.5) * 100);
+        card.style.setProperty('--mouse-x', `${shineX}%`);
+        card.style.setProperty('--mouse-y', `${shineY}%`);
+
+        if (!rafId) {
+          rafId = requestAnimationFrame(updateMotion);
         }
       });
+
       card.addEventListener('mouseleave', () => {
-        if (animeLib) {
-          animeLib({
-            targets: card,
-            scale: 1.0,
-            duration: 300,
-            easing: 'easeOutQuad'
-          });
+        targetX = 0;
+        targetY = 0;
+        bounds = null;
+        if (!rafId) {
+          rafId = requestAnimationFrame(updateMotion);
         }
+        card.style.transform = '';
       });
     });
   }
 
   /**
-   * Continuous subtle breathing motion for hero visual
+   * Smooth number counter animation
    */
-  startSubtleBreathing(element) {
-    if (this.reducedMotion || !element || !animeLib) return;
-    animeLib({
-      targets: element,
-      translateY: [-6, 6],
-      opacity: [0.96, 1],
-      duration: 4500,
-      direction: 'alternate',
-      loop: true,
-      easing: 'easeInOutSine'
-    });
+  initCounters() {
+    const counters = document.querySelectorAll('[data-counter-target]');
+    if (counters.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-counter-target'), 10) || 0;
+          const suffix = el.getAttribute('data-counter-suffix') || '';
+          const prefix = el.getAttribute('data-counter-prefix') || '';
+          const duration = 1200;
+          const start = performance.now();
+
+          const step = (now) => {
+            const progress = Math.min(1, (now - start) / duration);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(target * easeOut);
+            el.textContent = `${prefix}${current}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            }
+          };
+
+          requestAnimationFrame(step);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    counters.forEach(c => observer.observe(c));
+  }
+
+  /**
+   * Subtle header parallax and glassmorphic state on scroll
+   */
+  initHeaderParallax() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (lastScrollY > 30) {
+            header.classList.add('is-scrolled');
+          } else {
+            header.classList.remove('is-scrolled');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
   }
 }
 
 export const animationEngine = new AnimationEngine();
-
